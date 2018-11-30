@@ -1,4 +1,4 @@
-package com.gj.vo;
+package com.sist.gj.vo;
 
 public class ReviewVO {
 	private String review_no      ; /*리뷰no 	*/ 
