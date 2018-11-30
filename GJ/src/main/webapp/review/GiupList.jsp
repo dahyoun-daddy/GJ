@@ -38,13 +38,13 @@
                         <a class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="jasoTest2.jsp">채용정보</a>
+                        <a class="nav-link" href="GiupReview.jsp">채용정보</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link">기업정보 </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="jasoTest3.jsp">자기소개서 <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="ReviewUpdate.jsp">자기소개서 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">...님 로그인중</a>
