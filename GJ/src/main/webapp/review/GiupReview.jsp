@@ -77,7 +77,12 @@
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
-
+				<div style="border: 1px solid gold; height:40px; float: left; width: 10%;">
+				</div>
+				<div style="border: 1px solid red; height:40px; float: left; width: 90%;">
+				 <span style="font-size: 1.5em; font-weight: bold; color: green;"></span>
+				</div>
+				
 				<div style="border: 1px solid gold; height:40px; float: left; width: 10%;">
 				</div>
 				<div style="border: 1px solid red; height:40px; float: left; width: 90%;">
