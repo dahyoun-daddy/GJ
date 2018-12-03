@@ -102,13 +102,18 @@
 				  <label style="float: right; margin-right: 10%;"></label>
 				</div>
 				
-				<div style="float: right; height:150px; width: 70%;">
+				<div style="float: right; height:150px; width: 21%;">
+				</div>
+				
+				<div style="float: left; height:150px; width: 49%;">
 				   <h6>과한 허구의 내용을 작성했을 시 발생하는 갈등 및 충돌은 책임지지 않습니다. 또한 신고가 들어왔을 시 관리자의 판단 후 사전 통보 없이 리뷰가 삭제 될 수 있습니다. 동의하십니까?</h6>
 				   <div style="float: right;">
 					  <input type = "radio" name = "gender" value = "남자" checked = "checked">예    
 	      			  <input type = "radio" name = "gender" value = "여자">아니요
       			  </div>
 				</div>
+				
+				
 				
 				<div style="text-align: center; height:50px; width: 100%;">
 				    <button type="button" class="btn btn-danger btn-sm">면접리뷰 등록하기</button>
