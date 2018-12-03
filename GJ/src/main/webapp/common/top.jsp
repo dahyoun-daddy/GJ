@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title> ||Good Job|| 신입 개발자를 위한 구인구직</title>
+    <title> || Good Job || 신입 개발자를 위한 구인구직</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
@@ -18,6 +18,13 @@
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/css/main.css">
     
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&amp;subset=korean" rel="stylesheet">
+	<style>
+		p, label, button, form, li
+		{
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+	</style>
 </head>
 <body>
 	<!--Navbar -->
