@@ -142,8 +142,9 @@
 							    </div><br/>
 						    
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
+						    	
 						    	<div class="form-group text-right">
-									<button id="addBtn" class="btn btn-success btn-sm">추가</button>
+									<button type="button" id="addBtn" class="btn btn-success btn-sm">추가</button>
 						        </div>	
 						        
 						    	<div class="form-group" id="addDiv">
@@ -167,6 +168,8 @@
 									    	<input type="text" class="form-control" id="lcs_score" name="lcs_score"></textarea>
 								    	</div>
 									</div>
+									<div style="float:left;"><input type=text style="border:none; width: 1000px;" value="-----------------------------------------------------------------------------------------"/></div>
+								
 								</div>
 						    
 						    </div>
@@ -198,15 +201,18 @@
 	    				tmpHtml += "<label for='lcs_score"+fileNumber+"' class='col-sm-10 control-label' style='float: left;'><strong>성적</strong></label>";
 	    				tmpHtml += "<div class='col-sm-7' style='float: left;'>";
 	    				tmpHtml += "<input type='text' class='form-control' id='lcs_score"+fileNumber+"' name='lcs_score"+fileNumber+"'></textarea>";
-	    				tmpHtml += "</div></div><button  class='btnDel btn btn-danger btn-sm'>삭제</button>";
-				
+	    				tmpHtml += "</div></div><button type='button' class='btnDel btn btn-danger btn-sm' style='float:right;'>삭제</button>";
+						tmpHtml += "<div style='float:left;'><input type=text style='border:none; width: 1000px;' value='-----------------------------------------------------------------------------------------'/></div>";
 				
 	    			console.log("tmpHtml\n"+tmpHtml);  
 	    			$("#addDiv").append(tmpHtml);
 	    			fileNumber++;
 	    			
 	    			$(".btnDel").on("click",function(){
+	    				$(this).prev().prev().prev().remove();
+	    				$(this).prev().prev().remove();
 	    				$(this).prev().remove();
+	    				$(this).next().remove();
 	    				$(this).remove();
 	    			});
 	    			
