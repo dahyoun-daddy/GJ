@@ -49,6 +49,54 @@
 	  border-color: transparent transparent transparent #A9F5A9;
 	}
 	
+	#smallBtn {
+	   border: 0px solid #000000;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   padding: 10.5px 21px;
+	   -webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	   border-radius: 2px;
+	   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   text-shadow: #000000 0 1px 0;
+	   color: #ffffff;
+	   font-size: 13px;
+	   text-decoration: none;
+	   vertical-align: middle;
+	   width:130px;
+	   }
+	#smallBtn:hover {
+	   border: 0px solid #000000;
+	   text-shadow: #000000 0 1px 0;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   color: #A9F5A9;
+	   }
+	#smallBtn:active {
+	   text-shadow: #000000 0 1px 0;
+	   border: 0px solid #000000;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   color: #A9F5A9;
+	   }
+	
 	#profimg{
 		border: 1px solid black;
 		width:15%;
@@ -57,10 +105,12 @@
 		float: left;
 	}
 	#profcontext{
-		border: 1px solid red;
 		width: 88%;
 		float: left;
 		padding: 15px;
+	}
+	input:focus {
+	  outline: none;
 	}
 	
 	
@@ -88,7 +138,7 @@
 				    	</div>
 			    	</div>
 			    	
-			    	<div style=" float: left; height: auto; width: 80%; border: 1px solid green;" align="left">
+			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 			    		<h5 style="color: orange" align="center"><strong>나의 이력서</strong></h5>
 				    	<div style="float: left; width: 110%; height: auto; padding:10px;" align="center">
@@ -139,7 +189,7 @@
 						    	<strong style="color: #045FB4; font-size: 130%">보유한 기술</strong>
 						    	<div class="col-sm-10">
 								    <textarea class="form-control" id="tech" rows="1" placeholder="사용 가능한 기술을 나열해 주세요 ex) JAVA, C++, JSP, MariaDB, PHP 등"></textarea>
-							    </div><br/>
+							    </div><br/><br/>
 						    
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	
@@ -168,15 +218,75 @@
 									    	<input type="text" class="form-control" id="lcs_score" name="lcs_score"></textarea>
 								    	</div>
 									</div>
-									<div style="float:left;"><input type=text style="border:none; width: 1000px;" value="-----------------------------------------------------------------------------------------"/></div>
+									<div style="float:left;"><input type=text style="border:none; width: 1000px;" value="------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"/></div>
 								
 								</div>
+								<div style="float: left;"><br/>
+								위 사항들은 이력서에 포함되는 내용으로, 기업 열람 동의 시 기업에게 보여지게 되는 내용입니다.<br/>
+								이하 아래의 자기소개서도 기업에게 보여지며, 자기소개서만 따로 게시판에 등록하여 유저들에게 조언을 얻을 수 있습니다.
+								
+								
+								<br/><br/><strong style="color: #045FB4; font-size: 130%">자기소개서</strong><br/>
+								</div>
+								 <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+					            	<colgroup>
+				  						<col width="20%"/>
+				  						<col width="80%"/>
+				  					</colgroup>
+					            	<tbody>
+					            		<tr>
+					            			<th>제목</th>
+					            			<td><input type="text" class="form-control col-lg-8 col-md-12" placeholder="제목"></td>
+					            		</tr>
+					            		<tr>
+					            			<th>성장과정</th>
+					            			<td> <textarea class="form-control" id="message" name="message" placeholder="성장과정" rows="5"></textarea></td>
+					            		</tr>
+					            		<tr>
+					            			<th>성장과정</th>
+					            			<td><textarea class="form-control" id="message" name="message" placeholder="성장과정" rows="5"></textarea></td>
+					            		</tr>
+					            		<tr>
+					            			<th>학교생활</th>
+					            			<td><textarea class="form-control" id="message" name="message" placeholder="학교생활" rows="5"></textarea></td>
+					            		</tr>
+					            		<tr>
+					            			<th>성격장단점</th>
+					            			<td><textarea class="form-control" id="message" name="message" placeholder="성격장단점" rows="5"></textarea></td>
+					            		</tr>
+					            		<tr>
+					            			<th>지원동기</th>
+					            			<td><textarea class="form-control" id="message" name="message" placeholder="지원동기" rows="5"></textarea></td>
+					            		</tr>
+					            	</tbody>
+					            </table>
+					            <div>
+					            	<strong>내 이력서 및 개인정보를 기업이 열람할 수 있게 하고, 기업이 연락할 수 있음에 동의합니다.</strong>
+					            	<div style="text-align: right;">
+						            	<label class="radio-inline">
+						            		<input type="radio" name="resumeOpen" id="resumeOpenY" value="1"> 예
+						            	</label>
+						            	<label class="radio-inline">
+						            		<input type="radio" name="resumeOpen" id="resumeOpenN" value="2"> 아니오
+						            	</label>
+					            	</div><br/>
+					            	<strong>내 자기소개서를 자기소개서 게시판에 게시하여 유저들의 첨삭을 받겠습니다.</strong>
+					            	<div style="text-align: right;">
+						            	<label class="radio-inline">
+						            		<input type="radio" name="cvOpen" id="cvOpenY" value="1"> 예
+						            	</label>
+						            	<label class="radio-inline">
+						            		<input type="radio" name="cvOpen" id="cvOpenN" value="2"> 아니오
+						            	</label>
+					            	</div>
+					            </div>
 						    
 						    </div>
-					    	
-					    	
 			    	</form>
-				    		
+				    	<div style="float: left;">
+				    		<input id="smallBtn" type="button" value="이력서 저장" onclick="">
+				    	</div>	
+				    	
 				    	</div>
 			    	</div>
 		          </div>
@@ -202,7 +312,7 @@
 	    				tmpHtml += "<div class='col-sm-7' style='float: left;'>";
 	    				tmpHtml += "<input type='text' class='form-control' id='lcs_score"+fileNumber+"' name='lcs_score"+fileNumber+"'></textarea>";
 	    				tmpHtml += "</div></div><button type='button' class='btnDel btn btn-danger btn-sm' style='float:right;'>삭제</button>";
-						tmpHtml += "<div style='float:left;'><input type=text style='border:none; width: 1000px;' value='-----------------------------------------------------------------------------------------'/></div>";
+						tmpHtml += "<div style='float:left;'><input type=text style='border:none; width: 1000px;' value='------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'/></div>";
 				
 	    			console.log("tmpHtml\n"+tmpHtml);  
 	    			$("#addDiv").append(tmpHtml);
