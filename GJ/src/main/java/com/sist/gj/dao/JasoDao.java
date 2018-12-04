@@ -11,7 +11,6 @@ import com.sist.gj.vo.SearchVO;
 
 public interface JasoDao {
 	int update(JasoVO jasoVO) throws SQLException;
-	void deleteAll() throws SQLException;
 	int delete(JasoVO jasoVO) throws SQLException;
 	//추가
 	int add(JasoVO jasoVO);
