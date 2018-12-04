@@ -93,4 +93,19 @@
 		    sysdate
 		);
 	</insert>
+	
+	<update id="update" parameterType="JasoVO">
+		UPDATE usercl
+		SET
+		    cl_title = #{clTitle},
+		    cl_sungjang = #{clSungjang},
+		    cl_sang = #{clSang},
+		    cl_jangdan = #{clJangdan},
+		    cl_jiwon = #{clJiwon},
+		    cl_check = #{clCheck},
+		    mod_id = #{modId},
+		    mod_dt = sysdate
+		WHERE
+		    cl_no = #{clNo};
+	</update>
 </mapper>
