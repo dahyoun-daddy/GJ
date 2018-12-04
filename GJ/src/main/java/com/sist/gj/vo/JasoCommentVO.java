@@ -9,11 +9,12 @@ public class JasoCommentVO extends DTO {
 	private String regDt; //등록일
 	private String modId; //수정자
 	private String modDt; //수정일
+	private String clNo; //자소서 넘버
 	
 	public JasoCommentVO() {}
 	
 	public JasoCommentVO(int no, int totalCnt, String commentNo, String userId, String commentBody, String commentDate,
-			String regId, String regDt, String modId, String modDt) {
+			String regId, String regDt, String modId, String modDt, String clNo) {
 		super(no, totalCnt);
 		this.commentNo = commentNo;
 		this.userId = userId;
@@ -23,13 +24,26 @@ public class JasoCommentVO extends DTO {
 		this.regDt = regDt;
 		this.modId = modId;
 		this.modDt = modDt;
+		this.clNo = clNo;
 	}
+
 	@Override
 	public String toString() {
 		return "JasoCommentVO [commentNo=" + commentNo + ", userId=" + userId + ", commentBody=" + commentBody
 				+ ", commentDate=" + commentDate + ", regId=" + regId + ", regDt=" + regDt + ", modId=" + modId
-				+ ", modDt=" + modDt + "]";
+				+ ", modDt=" + modDt + ", clNo=" + clNo + "]";
 	}
+
+
+
+	public String getClNo() {
+		return clNo;
+	}
+
+	public void setClNo(String clNo) {
+		this.clNo = clNo;
+	}
+
 	public String getCommentNo() {
 		return commentNo;
 	}
