@@ -38,7 +38,6 @@ github<br>
   <li>Fiddler</li>
 </ul>
 <br>
-
 <h2>적용 기술 및 사용 라이브러리</h2>
 <ul>
   <li>Servlet 3.1.x</li>
