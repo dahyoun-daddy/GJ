@@ -150,30 +150,30 @@
 					    		</div><br/>
 	    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
-					    			<label for="su_nm" class="col-sm-4 control-label" style="float: left; display: inline; "><strong>이름</strong></label>
+					    			<label for="su_nm" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="su_nm" name="su_nm"></textarea>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="su_pho" class="col-sm-4 control-label" style="float: left;"><strong>전화번호</strong></label>
+					    			<label for="su_pho" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="su_pho" name="su_pho"></textarea>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="su_mail" class="col-sm-4 control-label" style="float: left;"><strong>이메일</strong></label>
+					    			<label for="su_mail" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="su_mail" name="su_mail"></textarea>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-									<label for="grade" class="col-sm-4 control-label" style="float: left;"><strong>최종학력</strong></label>
-									<div class="col-sm-7" style="float: left;">
-										<select class="form-control" name="grade" id="grade" style="width:210px;">
+									<label for="grade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력&nbsp;&nbsp;&nbsp;</strong></label>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-7" style="float: left;">
+										<select class="form-control" name="grade" id="grade" style="width:190px;">
 											<option value="1">고졸</option>
 											<option value="2">초대졸예정</option>
 											<option value="3">초대졸</option>
@@ -224,9 +224,8 @@
 								<div style="float: left;"><br/>
 								위 사항들은 이력서에 포함되는 내용으로, 기업 열람 동의 시 기업에게 보여지게 되는 내용입니다.<br/>
 								이하 아래의 자기소개서도 기업에게 보여지며, 자기소개서만 따로 게시판에 등록하여 유저들에게 조언을 얻을 수 있습니다.
-								
-								
-								<br/><br/><strong style="color: #045FB4; font-size: 130%">자기소개서</strong><br/>
+								<br/><br/>
+								<strong style="color: #045FB4; font-size: 130%">자기소개서<br/></strong>
 								</div>
 								 <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
 					            	<colgroup>
@@ -278,13 +277,14 @@
 						            	<label class="radio-inline">
 						            		<input type="radio" name="cvOpen" id="cvOpenN" value="2"> 아니오
 						            	</label>
-					            	</div>
+					            	</div><br/><br/>
 					            </div>
-						    
+					            <h6 style="color:red;">저장하기 버튼을 클릭하지 않으면, 수정된 정보가 저장되지 않습니다. 변경 사항이 있다면 꼭 저장하기 버튼을 눌러주십시오.<br/><br/></h6>
 						    </div>
 			    	</form>
-				    	<div style="float: left;">
-				    		<input id="smallBtn" type="button" value="이력서 저장" onclick="">
+				    	<div style="margin: 50px;">
+				    		<input id="smallBtn" type="button" value="저장하기"
+				    		       onclick="">
 				    	</div>	
 				    	
 				    	</div>

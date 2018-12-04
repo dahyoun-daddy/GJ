@@ -116,7 +116,6 @@
 	}
 	
 	#profcontext{
-		border: 1px solid red;
 		width:100%;
 		float: left;
 		padding: 15px;
