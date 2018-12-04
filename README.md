@@ -18,5 +18,5 @@
 | |	발표	|	
 
 테이블 구조<br>
-file:///home/sist/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C/exerd.JPG<br>
+<br>
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
