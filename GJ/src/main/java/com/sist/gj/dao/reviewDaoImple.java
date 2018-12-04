@@ -10,7 +10,7 @@ public class reviewDaoImple implements reviewDao {
 
 	@Override
 	public int update(ReviewVO reviewVO) throws SQLException {
-		// TODO Auto-generated method stub 되겠지?
+		// TODO Auto-generated method stub 되겠지??
 		return 0;
 	}
 
