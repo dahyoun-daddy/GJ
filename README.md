@@ -1,3 +1,4 @@
+<h2>팀 구성</h2>
 조장 : 우서호 <br>
 조원 : 김준혁 김지혜 김지훈 이주영 <br>
 
@@ -21,7 +22,7 @@
 ![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
 <br>
 <br>
-<h2>Repository</h2><br>
+<h2>Repository</h2>
 github<br>
 
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
