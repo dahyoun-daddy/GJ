@@ -1,6 +1,6 @@
 package com.sist.gj.vo;
 
-public class JasoVO{
+public class JasoVO extends DTO{
 	private String clNo; //자소서 넘버
 	private String clTitle; //자소서 제목
 	private String clSungjang; //자소서 성장과정
