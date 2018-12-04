@@ -14,8 +14,6 @@ public interface JasoDao {
 	int delete(JasoVO jasoVO) throws SQLException;
 	//추가
 	int add(JasoVO jasoVO);
-
-	List<JasoVO> selectAll() throws ClassNotFoundException, SQLException;
 	
 	List<JasoVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 

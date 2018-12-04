@@ -27,12 +27,6 @@ public class JasoDaoImple implements JasoDao {
 	}
 
 	@Override
-	public List<JasoVO> selectAll() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<JasoVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
