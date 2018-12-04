@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.review">
+    <sql id="reviewColumns">
+	    review_no,     
+		user_nick,     
+		review_complain,
+		review_title,   
+		review_body,    
+		review_date,    
+		review_point,   
+		reg_id,         
+		reg_dt          
+    </sql>
+    
+    
+    <!-- select list -->
+    <select id="do_retrieve" parameterType="SearchVO" resultType="ReviewVO"  >
+		SELECT X.*,Y.*
+		  FROM(
+		SELECT T.review_no,              
+				T.user_nick,      
+				T.review_complain,
+				T.review_title,                    
+				T.review_body,    
+				T.review_date,    
+				T.review_point,   
+				T.reg_id,                                 
+				T.reg_dt          
+		  FROM(                                          
+			SELECT hr.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY reg_dt desc ) AS rnum       
+			  FROM Review hr
+		  )T
+		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM Review
+		)Y      
+    </select>
+    
+    
+    <!-- 전체 조회 -->
+    <select id="getAll" resultType="ReviewVO">
+	    SELECT <include refid="reviewColumns"/>
+	      FROM Review
+	     ORDER BY reg_id    
+    </select>
+    
+    
+	<!-- 단건 조회 -->
+	<select id="get" 
+	  parameterType="ReviewVO"
+	  resultType="ReviewVO"	  >
+	 SELECT                                    
+	     <include refid="reviewColumns"/>                       
+	 FROM Review                             
+	 WHERE reg_id = #{regId}                            	
+	
+	</select>
+	
+	
+	<!-- 삭제 -->
+	<delete id="delete"  parameterType="ReviewVO"  >
+		DELETE FROM Review 
+		WHERE review_no = #{reviewNo}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="update"  parameterType="ReviewVO" >
+		 UPDATE Review          
+	        review_complain  = #{reviewComplain}      
+	       ,review_title  = #{reviewTitle}      
+	       ,review_body   = #{reviewBody}       
+	       ,review_date     = #{reviewDate}      
+	       ,review_point = #{reviewPoint}      
+	       ,mod_id     = #{modId}      
+	       ,mod_dt    = SYSDATE
+	    WHERE U_ID    = #{userId}            
+	</update>
+	
+	
+	<!-- 등록 -->
+	<insert id="add"  parameterType="ReviewVO" >
+		 INSERT INTO Review (
+			  review_no,
+		  	  user_nick,
+		     review_complain,              
+		     review_title,              
+		     review_body,          
+		     review_date,           
+		     review_point,                      
+		     reg_id,             
+		     reg_dt             
+		 ) VALUES (  
+		     #{reviewNo},
+		     #{userNick},             
+		     #{reviewComplain},                 
+		     #{reviewTitle} ,                 
+		     #{reviewBody},                 
+		     SYSDATE                 
+		     #{reviewPoint},                 
+		     #{regId},                                 
+		     SYSDATE            
+		 )                      	
+	</insert>
+	
+</mapper>
