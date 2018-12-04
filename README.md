@@ -37,4 +37,25 @@ github<br>
   <li>Spring STS</li>
   <li>Fiddler</li>
 </ul>
+<br>
+
+<h2>적용 기술 및 사용 라이브러리</h2>
+<ul>
+  <li>Servlet 3.1.x</li>
+  <li>JSP 2.3.x</li>
+  <li>JSTL 1.2.x</li>
+  <li>Oracle 11g Release 2 (11.2) Standard SQL</li>
+  <li>HTML5</li>
+  <li>CSS3</li>
+  <li>JavaScript (ECMA-262 ECMAScript)</li>
+  <li>jQuery 3.3.x</li>
+  <li>Bootstrap 4.0.x</li>
+  <li>JUNIT 4.12</li>
+  <li>Mybatis 3.4.6</li>
+  <li>Gson 2.8.0</li>
+  <li>Ojdbc6 11.2.x</li>
+  <li>Aspectj 1.6.10</li>
+  <li>Spring-test 4.2.5.RELEASE</li>
+</ul>
+<br>
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
