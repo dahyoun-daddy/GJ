@@ -9,6 +9,7 @@
   	</settings>
 	<typeAliases>
   		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/> 
+  		<typeAlias alias="JasoCommentVO" type="com.sist.gj.vo.JasoCommentVO"/> 
   		<typeAlias alias="SearchVO" type="com.sist.gj.vo.SearchVO"/> 
   	</typeAliases> 
   </configuration>
