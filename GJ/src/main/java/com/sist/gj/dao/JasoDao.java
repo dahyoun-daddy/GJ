@@ -23,4 +23,5 @@ public interface JasoDao {
 	//조회
 	JasoVO select(JasoVO jasoVO) throws ClassNotFoundException, SQLException;
 
+	
 }
