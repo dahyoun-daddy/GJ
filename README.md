@@ -27,17 +27,14 @@
 <h2>Repository</h2>
 github<br>
 
-<h2>개발 환경 및 </h2>
+<h2>개발 환경 및 개발 툴</h2>
 <ul>
   <li>Java SE 8 (Oracle JDK 1.8.x)</li>
+  <li>Oracle Database 11g Release 2</li>
+  <li>Apache Tomcat (8.5.x)</li>
+  <li>Git</li>
+  <li>GitHub</li>
+  <li>Spring STS</li>
+  <li>Fiddler</li>
 </ul>
-
-Oracle Database 11g Release 2
-Apache Tomcat (8.5.x)
-Git
-GitHub
-Spring STS
-Fiddler
-
-
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
