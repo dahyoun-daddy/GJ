@@ -15,7 +15,7 @@
 		           T.reg_dt,
 		           T.mod_id,
 		           T.mod_dt, 
-		           T.cl_no,
+		           T.cl_no, 
 		           T.no
 		      FROM
 		    (
