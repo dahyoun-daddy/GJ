@@ -128,7 +128,7 @@
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
-				    	<h5 style="color: orange" align="center"><strong>지원자 확인하기</strong></h5>
+				    	<h5 style="color: orange" align="center"><strong>오픈된 이력서 열람하기</strong></h5>
 					    	<br/>
 					    	<div class="container">
 								<form>
@@ -184,15 +184,21 @@
 								  		<tbody>
 								  			<tr>
 								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">우서호</td>
-								  				<td class="text-center">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
-								  				<td class="text-center">2018/11/23</td>
+								  				<td class="text-center">이주영</td>
+								  				<td class="text-center">열심히 하겠습니다</td>
+								  				<td class="text-center">대졸</td>
 								  			</tr>	
 								  			<tr>
 								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">김준혁</td>
-								  				<td class="text-center">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
-								  				<td class="text-center">2018/11/20</td>
+								  				<td class="text-center">김지혜</td>
+								  				<td class="text-center">자기소개서입니다</td>
+								  				<td class="text-center">대졸</td>
+								  			</tr>
+								  			<tr>
+								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
+								  				<td class="text-center">김지훈</td>
+								  				<td class="text-center">준비된 신입 개발자입니다</td>
+								  				<td class="text-center">대졸</td>
 								  			</tr>
 								  		</tbody>
 								  	</table>
