@@ -18,8 +18,10 @@
 | 12/23 |	12/24 |	12/25 |	12/26 |	12/27 |	12/28	| 12/29 |
 | |	발표	|	
 <br>
-테이블 구조<br>
+<h2>테이블 구조</h2>
+
 ![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
+
 <br>
 <br>
 <h2>Repository</h2>
