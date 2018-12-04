@@ -8,7 +8,6 @@ import com.sist.gj.vo.SearchVO;
 
 public class JasoDaoImple implements JasoDao {
 
-	
 	@Override
 	public int update(JasoVO jasoVO) throws SQLException {
 		// TODO Auto-generated method stub
