@@ -12,7 +12,7 @@
   				<when test="20 == search_Div">
   					hr.name LIKE '%'||#{search_Word}||'%'
   				</when>
-  				<when test="30 == search_Div">
+  				<when test="30 == search_Div"> 
   					hr.email LIKE '%'||#{search_Word}||'%'
   				</when>
   				<otherwise>
