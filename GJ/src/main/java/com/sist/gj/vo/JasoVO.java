@@ -13,6 +13,7 @@ public class JasoVO extends DTO{
 	private String modId; //수정자
 	private String modDt; //수정일
 
+	
 	public JasoVO() {}
 	
 	public JasoVO(String clNo, String clTitle, String clSungjang, String clSang, String clJangdan, String clJiwon,

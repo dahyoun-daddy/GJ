@@ -52,4 +52,45 @@
 		    <include refid="searchText"/>
 		) Y
 	</select>
+	
+	<select id="select" parameterType="JasoVO" resultType="JasoVO">
+		SELECT cl_no,
+			 	cl_title,
+		    	cl_sungjang,
+		    	cl_sang,
+		    	cl_jangdan,
+		    	cl_jiwon,
+		    	cl_check
+		  FROM UserCl
+		WHERE cl_no = #{clNo};
+	</select>
+	
+	<delete id="delete" parameterType="JasoVO">
+		DELETE FROM usercl
+		WHERE cl_no = #{clNo};
+	</delete>
+	
+	<insert id="add" parameterType="JasoVO">
+		INSERT INTO usercl (
+		    cl_no,
+		    cl_title,
+		    cl_sungjang,
+		    cl_sang,
+		    cl_jangdan,
+		    cl_jiwon,
+		    cl_check,
+		    reg_id,
+		    reg_dt
+		) VALUES (
+		    #{clNo},
+		    #{clTitle},
+		    #{clSungjang},
+		    #{clSang},
+		    #{clJangdan},
+		    #{clJiwon},
+		    #{clCheck},
+		    #{regId},
+		    sysdate
+		);
+	</insert>
 </mapper>
