@@ -8,6 +8,7 @@
   		<setting name="mapUnderscoreToCamelCase" value="true"/>
   	</settings>
 	<typeAliases>
-  		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/>
+  		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/> 
+  		<typeAlias alias="SearchVO" type="com.sist.gj.vo.SearchVO"/> 
   	</typeAliases> 
   </configuration>

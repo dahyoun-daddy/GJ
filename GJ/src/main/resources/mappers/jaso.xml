@@ -3,6 +3,53 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.gj.mappers.jaso">
-	<select id="">
+	<sql id="searchText">
+		<where>
+  			<choose>
+  				<when test="10 == search_Div">
+  					hr.u_id LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<when test="20 == search_Div">
+  					hr.name LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<when test="30 == search_Div">
+  					hr.email LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
+  		</where>
+	</sql>
+
+	<select id="doRetrieve" parameterType="SearchVO" resultType="JasoVO">
+		SELECT X.*, Y.*
+		  FROM
+		(
+		    SELECT T.cl_no,
+		           T.cl_title,
+		           T.cl_sungjang,
+		           T.cl_sang,
+		           T.cl_jangdan,
+		           T.cl_jiwon,
+		           T.cl_check,
+		           T.reg_id,
+		           T.reg_dt,
+		           T.rnum AS no
+		      FROM
+		    (
+		        SELECT C.*,
+		               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+		          FROM usercl C
+		  		 <include refid="searchText"/>
+		    ) T
+		    WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1)
+			   AND (#{page_size} * (#{page_num}-1)+ #{page_size})
+		) X
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) AS total_cnt
+		      FROM usercl
+		    <include refid="searchText"/>
+		) Y
 	</select>
 </mapper>

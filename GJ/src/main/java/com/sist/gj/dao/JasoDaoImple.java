@@ -33,7 +33,7 @@ public class JasoDaoImple implements JasoDao {
 	}
 
 	@Override
-	public List<JasoVO> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+	public List<JasoVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

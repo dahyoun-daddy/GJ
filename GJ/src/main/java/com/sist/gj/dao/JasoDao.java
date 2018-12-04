@@ -17,7 +17,7 @@ public interface JasoDao {
 
 	List<JasoVO> selectAll() throws ClassNotFoundException, SQLException;
 	
-	List<JasoVO> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+	List<JasoVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 
 	//조회
 	JasoVO select(JasoVO jasoVO) throws ClassNotFoundException, SQLException;
