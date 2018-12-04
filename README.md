@@ -21,7 +21,7 @@
 ![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
 <br>
 <br>
-Repository<br>
+<h2>Repository</h2><br>
 github<br>
 
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
