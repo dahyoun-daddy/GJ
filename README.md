@@ -16,8 +16,12 @@
 | | 소스코딩	 | 소스코딩	|  테스트 및 발표자료작성 | 테스트 및 발표자료작성 | 테스트 및 발표자료작성 | |
 | 12/23 |	12/24 |	12/25 |	12/26 |	12/27 |	12/28	| 12/29 |
 | |	발표	|	
-
+<br>
 테이블 구조<br>
 ![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
 <br>
+<br>
+Repository<br>
+github<br>
+
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
