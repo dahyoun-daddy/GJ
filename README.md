@@ -18,5 +18,6 @@
 | |	발표	|	
 
 테이블 구조<br>
+![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
 <br>
 수정할 사항이 있다면 수정한 뒤 하단의 Commit changes 작성해주세요
