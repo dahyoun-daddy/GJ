@@ -25,7 +25,7 @@ public class JasoDaoImple implements JasoDao {
 	
 	@Override
 	public int update(JasoVO jasoVO) throws SQLException {
-		String statement = NAMESPACE+".add";
+		String statement = NAMESPACE+".update";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+jasoVO);
 		int flag = sqlSession.update(statement, jasoVO);
@@ -36,7 +36,7 @@ public class JasoDaoImple implements JasoDao {
 
 	@Override
 	public int delete(JasoVO jasoVO) throws SQLException {
-		String statement = NAMESPACE+".add";
+		String statement = NAMESPACE+".delete";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+jasoVO);
 		int flag = sqlSession.delete(statement, jasoVO);
