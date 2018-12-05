@@ -12,12 +12,8 @@ import com.sist.gj.vo.SearchVO;
 public interface JasoDao {
 	int update(JasoVO jasoVO) throws SQLException;
 	int delete(JasoVO jasoVO) throws SQLException;
-	//추가
 	int add(JasoVO jasoVO);
-	
 	List<JasoVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
-
-	//조회
 	JasoVO select(JasoVO jasoVO) throws ClassNotFoundException, SQLException;
 
 	

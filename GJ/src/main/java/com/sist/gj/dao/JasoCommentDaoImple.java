@@ -40,9 +40,9 @@ public class JasoCommentDaoImple implements JasoCommentDao {
 		int flag = sqlSession.delete(statement, jasoCVO);
 		log.debug("result : "+flag);
 				
-		return flag;
+		return flag; 
 	}
-
+ 
 	@Override
 	public int add(JasoCommentVO jasoCVO) {
 		String statement = NAMESPACE+".add";
