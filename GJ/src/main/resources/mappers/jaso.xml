@@ -6,14 +6,14 @@
 	<sql id="searchText">
 		<where>
   			<choose>
-  				<when test="10 == search_Div">
-  					hr.u_id LIKE '%'||#{search_Word}||'%'
+  				<when test="10 == searchDiv">
+  					hr.u_id LIKE '%'||#{searchWord}||'%'
   				</when>
-  				<when test="20 == search_Div">
-  					hr.name LIKE '%'||#{search_Word}||'%'
+  				<when test="20 == searchDiv">
+  					hr.name LIKE '%'||#{searchWord}||'%'
   				</when>
-  				<when test="30 == search_Div"> 
-  					hr.email LIKE '%'||#{search_Word}||'%'
+  				<when test="30 == searchDiv"> 
+  					hr.email LIKE '%'||#{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -42,8 +42,8 @@
 		          FROM usercl C
 		  		 <include refid="searchText"/>
 		    ) T
-		    WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1)
-			   AND (#{page_size} * (#{page_num}-1)+ #{page_size})
+		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+			   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
 		) X
 		NATURAL JOIN
 		(
