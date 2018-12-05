@@ -42,7 +42,7 @@ public class JasoCommentDaoImple implements JasoCommentDao {
 				
 		return flag; 
 	}
-
+ 
 	@Override
 	public int add(JasoCommentVO jasoCVO) {
 		String statement = NAMESPACE+".add";
