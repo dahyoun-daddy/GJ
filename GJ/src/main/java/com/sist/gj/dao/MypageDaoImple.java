@@ -6,8 +6,10 @@ import java.util.List;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.DTO;
+import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
+import com.sist.gj.vo.SearchVO;
 
 public class MypageDaoImple implements MypageDao {
 
@@ -48,7 +50,7 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public List<CvFormVO> retrieveCv() throws ClassNotFoundException, SQLException {
+	public List<CvFormVO> retrieveCv(SearchVO searchVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -72,7 +74,7 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public List<ApplyVO> retrieveApply() throws ClassNotFoundException, SQLException {
+	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -107,4 +109,5 @@ public class MypageDaoImple implements MypageDao {
 		return 0;
 	}
 
+	
 }

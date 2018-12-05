@@ -4,4 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.gj.mappers.userMypage">
 
+	<insert id="addCv" parameterType="CvFormVO">
+		
+	</insert>
+
 </mapper>

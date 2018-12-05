@@ -174,12 +174,11 @@
 									<label for="grade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력&nbsp;&nbsp;&nbsp;</strong></label>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-7" style="float: left;">
 										<select class="form-control" name="grade" id="grade" style="width:190px;">
-											<option value="1">고졸</option>
-											<option value="2">초대졸예정</option>
+											<option value="1">고졸이하</option>
+											<option value="2">고졸</option>
 											<option value="3">초대졸</option>
-											<option value="4">대졸예정</option>
-											<option value="5">대졸</option>
-											<option value="6">석박사이상</option>
+											<option value="4">대졸</option>
+											<option value="5">대졸이상</option>
 										</select>
 									</div>
 								</div>
