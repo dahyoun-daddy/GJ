@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.jaso">
+	<select id="code" parameterType="CodeVO">
+		SELECT t2.cd_id
+		      ,t2.cd_nm
+		      ,t2.cd_ord
+		      ,t1.cm_id
+		  FROM codem t1 join coded t2
+		    ON t1.cm_id = t2.cm_id
+		 WHERE t2.cd_use = 1
+		   AND t2.cm_id = #{cmId}
+		 ORDER BY t2.cm_id
+		         ,t2.cd_id
+		         ,t2.cd_ord
+	</select>
+</mapper>
