@@ -8,6 +8,10 @@
   		<setting name="mapUnderscoreToCamelCase" value="true"/>
   	</settings>
 	<typeAliases>
+		<typeAlias alias="ApplyVO" type="com.sist.gj.vo.ApplyVO"/>
+		<typeAlias alias="CvFormVO" type="com.sist.gj.vo.CvFormVO"/>
+		<typeAlias alias="LicenseVO" type="com.sist.gj.vo.LicenseVO"/>
+		<typeAlias alias="PictureVO" type="com.sist.gj.vo.PictureVO"/>
   		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/> 
   		<typeAlias alias="JasoCommentVO" type="com.sist.gj.vo.JasoCommentVO"/> 
   		<typeAlias alias="ReviewVO" type="com.sist.gj.vo.ReviewVO"/>

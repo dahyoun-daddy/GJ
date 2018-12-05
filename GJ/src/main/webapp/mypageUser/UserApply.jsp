@@ -127,13 +127,36 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원 현황</strong></h5>
 					    	<br/>
-					    	<div class="table-responsive" align="center">
+					    	<div class="row" style="float: right;">
+							  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							  					<div class="form-group" >
+							  						<div style="float: left; width: 25%;">
+							  						<select name="search_Div" id="search_Div" class="form-control input-sm">
+							  							<option value="1">10</option>
+							  							<option value="2">20</option>
+							  							<option value="3">50</option>
+							  						</select>
+							  						</div>
+							  						<div style="float: left; width: 33%;">
+							  							<select name="search_Div" id="search_Div" class="form-control input-sm">
+							  							<option value="1">기업명</option>
+							  							<option value="2">채용제목</option>
+							  						</select>
+							  						</div>
+							  						<div style="float: left; width: 41%;">
+							  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+							  						</div>
+							  					</div>
+							  		  		</div>
+							  		  		<div class="form-group">
+							  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+							  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">지원취소</button>
+							  				</div>
+							  			</div>
+									</form>
+					    	<div class="table-responsive" align="center" style="float:left;">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 								
-								<div align="right">
-							  		<input id="smallBtn" type="button" value="지원 취소하기" onclick="">
-							  	</div>
-							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
 								  			<col width="5%" style="background-color: #FFFFFF;"/>
@@ -173,7 +196,7 @@
 				    		
 				    	</div>
 		          </div>
-		     </div>
+		      </div>
 	
 		
 		 </section>
