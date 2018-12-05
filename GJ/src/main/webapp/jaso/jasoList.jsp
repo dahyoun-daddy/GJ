@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +58,22 @@
 		  		</tr>
 		  		</thead>
 		  		<tbody>
-		  			<tr>
-		  				<td class="text-center">이모티콘</td>
-		  				<td class="text-left">진짜잘쓴 자소서</td>
-		  				<td class="text-center">오늘</td>
-		  			</tr>	
+		  			<c:choose>
+  						<c:when test="${list.size()>0}">
+  							<c:forEach var="jasoVO" items="${list}">
+  								<tr>
+  									<td class="text-center"><c:out value="${jasoVO.regId}"/></td>
+  									<td class="text-left"><c:out value="${jasoVO.clTitle}"/></td>
+  									<td class="text-center"><c:out value="${jasoVO.regDt}"/></td>
+  								</tr>
+  							</c:forEach>
+  						</c:when>
+ 	 					<c:otherwise>
+ 	 						<tr>
+ 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+ 	 						</tr>
+  						</c:otherwise>
+  					</c:choose>
 		  		</tbody>
 		  	</table>
 	  	</div>

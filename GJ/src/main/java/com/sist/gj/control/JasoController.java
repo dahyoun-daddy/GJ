@@ -45,6 +45,7 @@ public class JasoController {
 		}
 		
 		List<JasoVO> list = jasoSvc.doRetrieve(invo);
+		log.info("list size : "+list.size());
 		model.addAttribute("list",list);
 		
 		return VIEW_NAME;
