@@ -114,19 +114,13 @@
 		text-align: left;
 	}
 	
-	#profcontext{
-		width:100%;
-		float: left;
-		padding: 15px;
-		text-align: left;
-	}
-	
 	
 	
 </style>
 <% 
-	String nickname = "초보개발자";
-	String openResume = "있습니다";
+	String compName = "쌍용교육센터";
+	String hireCount = "2";
+	String empCount = "15";
 
 %>
 </head>
@@ -141,67 +135,45 @@
 		          	<div style=" float: left; height: 900px; width: 12%; padding:10px;" align="right">
 				    	<div style=" height: 20%;" align="right">
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserMyInfo.jsp'">나의 정보</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyInfo.jsp'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserResume.jsp'">이력서</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserApply.jsp'">지원 현황</button>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompHireStt.jsp'">지원자 확인하기</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
 				    	</div>
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
-				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
+				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-weight: bold;" align="center">
 				    		
 				    		<div id ="profimg">
-				    			이미지 불러오기
+				    		이미지 불러오기
 				    		</div>
 				    		<div id ="profmain">
-					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
-					    		내가 작성한 이력서를 기업이 열람 및 연락 가능하게끔 하는 것은<br/>[이력서]메뉴에서 변경 가능합니다.
-				    		</div>
+				    		<br/>
+				    		기업명 <a style="color: orange;"><%=compName %></a><br/>
+				    		현재 올린 구인 공고 <a style="color: orange;"><%=hireCount %></a> 건이며 현재 지원자 수는 <a style="color: orange;"><%=empCount %></a> 명입니다.<br/><br/>
 				    		
-				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
-						    	<input type="hidden" name="work_div" id="work_div"> 
-					     	  	
-					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="test@test.com">
-					        		<br><br>
-	
-					      		<label><b>닉네임</b></label>
-						        <input type="text" name="user_nickname" placeholder="닉네임임다">
-						        	<br><br>
-						        	
-						       	<label><b>성함</b></label>
-						        <input type="text" name="user_name" placeholder="김이름">
-						        	<br><br>
-						        	
-						        <label><b>전화번호</b></label>
-						        <input type="text" name="user_phone" placeholder="ex) 010-0000-0000">
-						       		<br><br>
-						       		
-						       	<label><b>주소</b></label> 
-						        <input type="text" name="user_address" placeholder="서울 특별시 어찌고 저찌고">
-						       		<br><br>
-						       		
-						      	
-					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
+				    		<input id="smallBtn" type="button" value="정보 수정하기" 
+	                   			   onclick="location='CompMyInfo.jsp'; return false;">
+				    		<input id="smallBtn" type="button" value="탈퇴하기" 
+	                   			   onclick="location='CompSignOut.jsp'; return false;">
 				    		
 				    		</div>
-					    	
+				    		
 				    	</div>
 			    	</div>
 		          </div>
 		     </div>
 	
-		
 		 </section>
-
     
     
 </body>

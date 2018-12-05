@@ -7,7 +7,10 @@
   	<settings>
   		<setting name="mapUnderscoreToCamelCase" value="true"/>
   	</settings>
-<!--   	<typeAliases>
-  		<typeAlias alias="UserVO" type="com.sist.sh.user.domain.UserVO"/>
-  	</typeAliases> -->
+	<typeAliases>
+  		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/> 
+  		<typeAlias alias="JasoCommentVO" type="com.sist.gj.vo.JasoCommentVO"/> 
+  		<typeAlias alias="ReviewVO" type="com.sist.gj.vo.ReviewVO"/>
+  		<typeAlias alias="SearchVO" type="com.sist.gj.vo.SearchVO"/> 
+  	</typeAliases> 
   </configuration>

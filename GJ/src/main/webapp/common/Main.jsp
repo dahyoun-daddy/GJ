@@ -9,7 +9,11 @@
 	<jsp:include page="top.jsp" flush="false"></jsp:include>
 	<br><br>
 	<!-- 메인화면 -->
-	<div style="border: 1px solid white; float: left; width: 36%;">
+	<div style=text-align:center>
+		<img src="../resources/images/gj_logo_black.png" alt="nav-logo" style="float:center">
+	</div>
+		<br><br><br>
+	<div style="border: 1px solid white; float: left; width: 36%; float: 40%">
 	</div>
 	<div class="btn-group btn-group-lg" role="group" aria-label="...">
 		<form style="text-align:center;" class="form-inline" >
@@ -22,7 +26,7 @@
 			</div>
 			&nbsp;&nbsp;
 		  <div class="input-group input-group-lg">
-		    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="검색어">
+		    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="검색어를 입력하세요">
 		  	&nbsp;&nbsp;
 		  </div>
 		  <div class="btn-group btn-group-lg">
@@ -31,7 +35,6 @@
 		</form>
     </div>
     
-	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

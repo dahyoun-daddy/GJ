@@ -49,6 +49,54 @@
 	  border-color: transparent transparent transparent #A9F5A9;
 	}
 	
+	#smallBtn {
+	   border: 0px solid #000000;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   padding: 10.5px 21px;
+	   -webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	   border-radius: 2px;
+	   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+	   text-shadow: #000000 0 1px 0;
+	   color: #ffffff;
+	   font-size: 13px;
+	   text-decoration: none;
+	   vertical-align: middle;
+	   width:130px;
+	   }
+	#smallBtn:hover {
+	   border: 0px solid #000000;
+	   text-shadow: #000000 0 1px 0;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   color: #A9F5A9;
+	   }
+	#smallBtn:active {
+	   text-shadow: #000000 0 1px 0;
+	   border: 0px solid #000000;
+	   background: #000000;
+	   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+	   background: -webkit-linear-gradient(top, #000000, #000000);
+	   background: -moz-linear-gradient(top, #000000, #000000);
+	   background: -ms-linear-gradient(top, #000000, #000000);
+	   background: -o-linear-gradient(top, #000000, #000000);
+	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
+	   color: #A9F5A9;
+	   }
+	
 	
 	
 </style>
@@ -77,22 +125,72 @@
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
-				    	<div style="float: left; width: 33%; height: auto; padding:10px;" align="center">
-				    		
-					    	
-					    	
-					    	
-					    	
+				    	<h5 style="color: orange" align="center"><strong>지원 현황</strong></h5>
+					    	<br/>
+					    	<div class="table-responsive" align="center">
+								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
+								
+								<div align="right">
+							  		<input id="smallBtn" type="button" value="지원 취소하기" onclick="">
+							  	</div>
+							  	
+								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
+								  		<colgroup>
+								  			<col width="5%" style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
+								  			<col width="60%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
+								  		<thead class="bg-primary">
+								  		<tr>
+								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+								  			<th class="text-center" style="background-color: #FACC2E;">기업명</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
+								  		</tr>
+								  		</thead>
+								  		<tbody>
+								  			<tr>
+								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
+								  				<td class="text-center">쌍용교육센터</td>
+								  				<td class="text-left">[쌍용강북교육센터]  매니저 정직원 채용 </td>
+								  				<td class="text-center">오늘</td>
+								  			</tr>	
+								  			<tr>
+								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
+								  				<td class="text-center">우아한 형제</td>
+								  				<td class="text-left">[하반기 공채] 신입 개발자 본사 정직원... </td>
+								  				<td class="text-center">2018/11/20</td>
+								  			</tr>
+								  		</tbody>
+								  	</table>
+							  	</div>
+							  	<div class="dorm-inline text-center">
+							  		1
+							  	</div>
+							  	
+						  	</div>
 				    		
 				    	</div>
-			    	</div>
 		          </div>
 		     </div>
 	
 		
 		 </section>
     
+    <script type="text/javascript">
     
+	     //check 전체 선택
+	    function checkAll(){
+	   	 if($("#checkAll").is(':checked') == true  ){
+	   		 $("input[name='check']").prop("checked",true);
+	   	 }else{
+	   		 $("input[name='check']").prop("checked",false);
+	   	 }
+	   	   
+	    }
+	     
+    </script>
     
 </body>
 </html>

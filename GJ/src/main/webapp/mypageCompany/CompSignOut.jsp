@@ -98,29 +98,7 @@
 	   color: #A9F5A9;
 	   }
 	
-	#profimg{
-		border: 1px solid black;
-		width:15%;
-		height:200px;
-		float: left;
-		padding: 15px;
-	}
-	
-	#profmain{
-		width:85%;
-		height:200px;
-		float: left;
-		padding: 15px;
-		text-align: left;
-	}
-	
-	#profcontext{
-		width:100%;
-		float: left;
-		padding: 15px;
-		text-align: left;
-	}
-	
+
 	
 	
 </style>
@@ -141,67 +119,53 @@
 		          	<div style=" float: left; height: 900px; width: 12%; padding:10px;" align="right">
 				    	<div style=" height: 20%;" align="right">
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserMyInfo.jsp'">나의 정보</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyInfo.jsp'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserResume.jsp'">이력서</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserApply.jsp'">지원 현황</button>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompHireStt.jsp'">지원자 확인하기</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
 				    	</div>
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
-				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
+				    	<div style="float: left; width: 120%; height: auto; padding:10px;" align="center">
+				    		<h5><strong>탈퇴하기</strong></h5><br/><br/>
 				    		
-				    		<div id ="profimg">
-				    			이미지 불러오기
-				    		</div>
-				    		<div id ="profmain">
-					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
-					    		내가 작성한 이력서를 기업이 열람 및 연락 가능하게끔 하는 것은<br/>[이력서]메뉴에서 변경 가능합니다.
-				    		</div>
+				    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
+							<input type="hidden" name="workDiv" id="workDiv" />
+						   
+						   	<div class="form-group" style="display: inline-block;" >
+								<label for="su_id" style="float:left; margin-right: 10px;"><strong>이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+								<input type="text" name="su_id" id="su_id" maxlength="320" 
+								       style="float:left; margin-right: 10px;"><br/>			                   
+							</div><br/>
+							
+							<div class="form-group" style="display: inline-block;">
+								<label for="su_pw" style="float:left; margin-right: 10px;"><strong>비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+								<input type="password" name="su_pw" id="su_pw" maxlength="20"
+								       style="float:left; margin-right: 10px;"><br/><br/>
+							</div>
+							
+							<div class="col;" style="color:orange; font-size:75%;">탈퇴하면 기존에 등록된 모든 정보들은 전부 파기되어 복구가 불가합니다.<br/>또한 작성한 리뷰 및 자기소개서 글은 무통보 삭제될 수 있습니다.<br/><br/></div>	
+						    <input id="smallBtn" type="button" value="탈퇴하기" onclick="javascript:do_delete();" />  
+						
+						</form>
 				    		
-				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
-						    	<input type="hidden" name="work_div" id="work_div"> 
-					     	  	
-					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="test@test.com">
-					        		<br><br>
-	
-					      		<label><b>닉네임</b></label>
-						        <input type="text" name="user_nickname" placeholder="닉네임임다">
-						        	<br><br>
-						        	
-						       	<label><b>성함</b></label>
-						        <input type="text" name="user_name" placeholder="김이름">
-						        	<br><br>
-						        	
-						        <label><b>전화번호</b></label>
-						        <input type="text" name="user_phone" placeholder="ex) 010-0000-0000">
-						       		<br><br>
-						       		
-						       	<label><b>주소</b></label> 
-						        <input type="text" name="user_address" placeholder="서울 특별시 어찌고 저찌고">
-						       		<br><br>
-						       		
-						      	
-					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
+				    	
 				    		
-				    		</div>
-					    	
 				    	</div>
 			    	</div>
 		          </div>
 		     </div>
 	
-		
 		 </section>
-
     
     
 </body>

@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="../resources/css/main.css">
     
 <style>
-
 	#bubble-float-right:{
 	  display: inline-block;
 	  position: relative;
@@ -98,37 +97,9 @@
 	   color: #A9F5A9;
 	   }
 	
-	#profimg{
-		border: 1px solid black;
-		width:15%;
-		height:200px;
-		float: left;
-		padding: 15px;
-	}
-	
-	#profmain{
-		width:85%;
-		height:200px;
-		float: left;
-		padding: 15px;
-		text-align: left;
-	}
-	
-	#profcontext{
-		width:100%;
-		float: left;
-		padding: 15px;
-		text-align: left;
-	}
-	
 	
 	
 </style>
-<% 
-	String nickname = "초보개발자";
-	String openResume = "있습니다";
-
-%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -141,68 +112,83 @@
 		          	<div style=" float: left; height: 900px; width: 12%; padding:10px;" align="right">
 				    	<div style=" height: 20%;" align="right">
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserMyInfo.jsp'">나의 정보</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyInfo.jsp'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserResume.jsp'">이력서</button><br/><br/>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
-					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserApply.jsp'">지원 현황</button>
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompHireStt.jsp'">지원자 확인하기</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
 				    	</div>
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
-				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
+				    	<h5 style="color: orange" align="center"><strong>채용 관리하기</strong></h5>
+					    	<br/>
+					    	<div class="table-responsive" align="center">
+								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
+								
+								<div align="right" style="margin:10px; font-size:70%;">
+									각 공고는 채용 마감일 이전에는 삭제가 불가하며, 수정은 가능합니다.&nbsp;&nbsp;&nbsp;
+							  		<input id="smallBtn" type="button" value="등록하기" onclick="location='../hirelist/HireCreate.jsp'">
+							  	</div>
+							  	
+								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
+								  		<colgroup>
+								  			<col width="40%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="10%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  		</colgroup>
+								  		<thead class="bg-primary">
+								  		<tr>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">채용제목</th>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">근무지</th>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">연봉</th>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">최종학력</th>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">마감일</th>
+								  		</tr>
+								  		</thead>
+								  		<tbody>
+								  			<tr>
+								  				<td class="text-left">[하반기 공채] 개발자 본사 인턴 모집 </td>
+								  				<td class="text-center">서울</td>
+								  				<td class="text-center">회사내규</td>
+								  				<td class="text-center">초대졸</td>
+								  				<td class="text-center">2018/12/20</td>
+								  			</tr>	
+								  			<tr>
+								  				<td class="text-left">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
+								  				<td class="text-center">서울</td>
+								  				<td class="text-center">2500~3000</td>
+								  				<td class="text-center">초대졸</td>
+								  				<td class="text-center">2018/12/20</td>
+								  			</tr>
+								  		</tbody>
+								  	</table>
+							  	</div>
+							  	<div class="dorm-inline text-center">
+							  		1
+							  	</div>
+							  	
+						  	</div>
 				    		
-				    		<div id ="profimg">
-				    			이미지 불러오기
-				    		</div>
-				    		<div id ="profmain">
-					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
-					    		내가 작성한 이력서를 기업이 열람 및 연락 가능하게끔 하는 것은<br/>[이력서]메뉴에서 변경 가능합니다.
-				    		</div>
-				    		
-				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
-						    	<input type="hidden" name="work_div" id="work_div"> 
-					     	  	
-					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="test@test.com">
-					        		<br><br>
-	
-					      		<label><b>닉네임</b></label>
-						        <input type="text" name="user_nickname" placeholder="닉네임임다">
-						        	<br><br>
-						        	
-						       	<label><b>성함</b></label>
-						        <input type="text" name="user_name" placeholder="김이름">
-						        	<br><br>
-						        	
-						        <label><b>전화번호</b></label>
-						        <input type="text" name="user_phone" placeholder="ex) 010-0000-0000">
-						       		<br><br>
-						       		
-						       	<label><b>주소</b></label> 
-						        <input type="text" name="user_address" placeholder="서울 특별시 어찌고 저찌고">
-						       		<br><br>
-						       		
-						      	
-					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
-				    		
-				    		</div>
-					    	
 				    	</div>
-			    	</div>
 		          </div>
 		     </div>
 	
 		
 		 </section>
-
     
+    <script type="text/javascript">
+	     
+    </script>
     
 </body>
 </html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.jasocomment">
+	<select id="select" parameterType="JasoVO" resultType="JasoCommentVO">
+		SELECT X.*, Y.*
+		  FROM 
+		(
+		    SELECT T.comment_no,
+		           T.user_id,
+		           T.comment_body,
+		           T.comment_date,
+		           T.reg_id,
+		           T.reg_dt,
+		           T.mod_id,
+		           T.mod_dt, 
+		           T.cl_no, 
+		           T.no
+		      FROM
+		    (
+		        SELECT C.*
+		              ,ROW_NUMBER() OVER(ORDER BY REG_DT) AS no
+		        FROM ClComment C
+		    ) T
+		    
+		) X
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) AS total_cnt
+		      FROM ClComment
+		      
+		)Y
+	</select>
+	
+	<insert id="add" parameterType="JasoCommentVO">
+		INSERT INTO clcomment (
+		    comment_no,
+		    user_id,
+		    comment_body,
+		    comment_date,
+		    reg_id,
+		    reg_dt,
+		    cl_no
+		) VALUES (
+		    #{commentNo},
+		    #{userId},
+		    #{commentBody},
+		    #{commentDate},
+		    #{regId},
+		    #{regDt},
+		    #{clNo}
+		);
+	</insert>
+	
+	<update id="update" parameterType="JasoCommentVO">
+		UPDATE clcomment
+		SET
+		    comment_body = #{commentBody},
+		    comment_date = sysdate,
+		    mod_id = #{regId},
+		    mod_dt = sysdate
+		WHERE
+		    comment_no = #{commentNo};
+	</update>
+	
+	<delete id="delete" parameterType="JasoCommentVO">
+		DELETE FROM clcomment
+		WHERE
+		    comment_no = #{commentNo};
+	</delete>
+</mapper>
