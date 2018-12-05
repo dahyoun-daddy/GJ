@@ -130,13 +130,41 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원자 확인하기</strong></h5>
 					    	<br/>
+			    	    	<div class="container">
+							<input type="hidden" name="page_num" id="page_num">
+				    	    	<div class="row" style="float: right;">
+					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					  					<div class="form-group" >
+					  						<div style="float: left; width: 25%;">
+					  						<select name="search_Div" id="search_Div" class="form-control input-sm">
+					  							<option value="1">10</option>
+					  							<option value="2">20</option>
+					  							<option value="3">50</option>
+					  						</select>
+					  						</div>
+					  						<div style="float: left; width: 33%;">
+					  							<select name="search_Div" id="search_Div" class="form-control input-sm">
+					  							<option value="1">지원자명</option>
+					  							<option value="2">채용제목</option>
+					  						</select>
+					  						</div>
+					  						<div style="float: left; width: 41%;">
+					  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+					  						</div>
+					  					</div>
+					  		  		</div>
+					  		  		<div class="form-group">
+					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+					  				</div>
+								</div>
+					    	
 					    	<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 								
-								<div align="right" style="margin:10px; font-size:70%;">
-									삭제된 지원자의 이력서는 열람이 불가합니다.&nbsp;&nbsp;&nbsp;
-							  		<input id="smallBtn" type="button" value="삭제하기" onclick="">
-							  	</div>
+<!-- 								<div align="right" style="margin:10px; font-size:70%;"> -->
+<!-- 									삭제된 지원자의 이력서는 열람이 불가합니다.&nbsp;&nbsp;&nbsp; -->
+<!-- 							  		<input id="smallBtn" type="button" value="삭제하기" onclick=""> -->
+<!-- 							  	</div> -->
 							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>

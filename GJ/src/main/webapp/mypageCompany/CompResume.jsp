@@ -131,35 +131,32 @@
 				    	<h5 style="color: orange" align="center"><strong>오픈된 이력서 열람하기</strong></h5>
 					    	<br/>
 					    	<div class="container">
-								<form>
-									<input type="hidden" name="page_num" id="page_num">
-							  		<!-- --검색영역 -->
-							  			<div class="row" style="float: right;">
-							  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							  					<div class="form-group" >
-							  						<div style="float: left; width: 25%;">
-							  						<select name="search_Div" id="search_Div" class="form-control input-sm">
-							  							<option value="10">10</option>
-							  							<option value="20">20</option>
-							  							<option value="50">50</option>
-							  						</select>
-							  						</div>
-							  						<div style="float: left; width: 33%;">
-							  							<select name="search_Div" id="search_Div" class="form-control input-sm">
-							  							<option value="10">제목</option>
-							  							<option value="20">작성자</option>
-							  						</select>
-							  						</div>
-							  						<div style="float: left; width: 41%;">
-							  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
-							  						</div>
-							  					</div>
-							  		  		</div>
-							  		  		<div class="form-group">
-							  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
-							  				</div>
-							  			</div>
-									</form>
+							<input type="hidden" name="page_num" id="page_num">
+				    	    	<div class="row" style="float: right;">
+					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					  					<div class="form-group" >
+					  						<div style="float: left; width: 25%;">
+					  						<select name="search_Div" id="search_Div" class="form-control input-sm">
+					  							<option value="1">10</option>
+					  							<option value="2">20</option>
+					  							<option value="3">50</option>
+					  						</select>
+					  						</div>
+					  						<div style="float: left; width: 33%;">
+					  							<select name="search_Div" id="search_Div" class="form-control input-sm">
+					  							<option value="1">이름</option>
+					  							<option value="2">최종학력</option>
+					  							<option value="3">자기소개서 제목</option>
+					  						</select>
+					  						</div>
+					  						<div style="float: left; width: 41%;">
+					  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+					  						</div>
+					  					</div>
+					  		  		</div>
+					  		  		<div class="form-group">
+					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+					  				</div>
 								</div>
 		
 					    	<div class="table-responsive" align="center">
@@ -168,34 +165,29 @@
 							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
-								  			<col width="5%" style="background-color: #FFFFFF; font-size: 80%;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  			<col width="60%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  			<col width="20%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
-								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
 								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">이름</th>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">자소서 제목</th>
+								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">자기소개서 제목</th>
 								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">최종학력</th>
 								  		</tr>
 								  		</thead>
 								  		<tbody>
 								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
 								  				<td class="text-center">이주영</td>
 								  				<td class="text-center">열심히 하겠습니다</td>
 								  				<td class="text-center">대졸</td>
 								  			</tr>	
 								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
 								  				<td class="text-center">김지혜</td>
 								  				<td class="text-center">자기소개서입니다</td>
 								  				<td class="text-center">대졸</td>
 								  			</tr>
 								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
 								  				<td class="text-center">김지훈</td>
 								  				<td class="text-center">준비된 신입 개발자입니다</td>
 								  				<td class="text-center">대졸</td>
