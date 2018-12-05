@@ -131,9 +131,8 @@
 				    	<h5 style="color: orange" align="center"><strong>오픈된 이력서 열람하기</strong></h5>
 					    	<br/>
 					    	<div class="container">
-								<form>
-									<input type="hidden" name="page_num" id="page_num">
-							  					    	    	<div class="row" style="float: right;">
+							<input type="hidden" name="page_num" id="page_num">
+				    	    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					  					<div class="form-group" >
 					  						<div style="float: left; width: 25%;">
@@ -158,8 +157,6 @@
 					  		  		<div class="form-group">
 					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
 					  				</div>
-					  			</div>
-									</form>
 								</div>
 		
 					    	<div class="table-responsive" align="center">

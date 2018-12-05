@@ -130,7 +130,9 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원자 확인하기</strong></h5>
 					    	<br/>
-			    	    	<div class="row" style="float: right;">
+			    	    	<div class="container">
+							<input type="hidden" name="page_num" id="page_num">
+				    	    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					  					<div class="form-group" >
 					  						<div style="float: left; width: 25%;">
@@ -153,9 +155,8 @@
 					  		  		</div>
 					  		  		<div class="form-group">
 					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
-					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">삭제</button>
 					  				</div>
-					  			</div>
+								</div>
 					    	
 					    	<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
