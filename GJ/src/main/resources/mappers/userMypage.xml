@@ -193,7 +193,7 @@
 	</select>
 	
 	
-	<update id="updateApply" parameterType="ApplyVO">
+	<update id="updateApply" parameterType="ApplyVO"> 
 		UPDATE hireapply
 		SET
 		    apply_check = 0
