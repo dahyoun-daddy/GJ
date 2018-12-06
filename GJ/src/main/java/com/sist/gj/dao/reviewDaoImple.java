@@ -6,7 +6,7 @@ import java.util.List;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 
-public class reviewDaoImple implements reviewDao {
+public class reviewDaoImple implements ReviewDao {
 
 	@Override
 	public int update(ReviewVO reviewVO) throws SQLException {

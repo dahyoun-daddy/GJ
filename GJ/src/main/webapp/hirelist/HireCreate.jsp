@@ -86,7 +86,7 @@
 	    <div class="col-sm-10">
 	      <input type="text" class="form-control" id="salary" placeholder="연봉을 입력하세요">
 	    </div>
-	  </div>
+	  </div>  
 	  <div class="form-group">
 	    <label for="degree" class="col-sm-2 control-label">최종학력</label>
 	    <div class="col-sm-10">

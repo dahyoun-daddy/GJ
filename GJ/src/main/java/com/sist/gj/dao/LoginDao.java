@@ -9,7 +9,7 @@ import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 
 
-public interface reviewDao {
+public interface LoginDao {
 	int update(ReviewVO reviewVO) throws SQLException;
 	
 	void deleteAll() throws SQLException;

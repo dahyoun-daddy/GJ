@@ -147,9 +147,9 @@
 					    		
 					    		<div id ="profimg" style="margin: 10px;" >
 					    		이미지 불러오기
-					    		<div style="float:left; font-size:70%">
-					    		이미지는 나의 정보에서 변경 가능합니다
-					    		</div>
+						    		<div style="float:left; font-size:70%">
+						    		이미지는 나의 정보에서 변경 가능합니다
+						    		</div>
 					    		</div><br/>
 	    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
@@ -194,6 +194,7 @@
 							    </div><br/><br/>
 						    
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
+						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.
 						    	
 						    	<div class="form-group text-right">
 									<button type="button" id="addBtn" class="btn btn-success btn-sm">추가</button>

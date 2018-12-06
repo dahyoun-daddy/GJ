@@ -144,12 +144,11 @@
 				    	<div style="float: left; width: 110%; height: auto; padding:10px;" align="center">
 					    	<div id="profcontext" style="text-align: center;">
 					    		
-					    		
 					    		<div id ="profimg" style="margin: 10px;" >
 					    		이미지 불러오기
-					    		<div style="float:left; font-size:70%">
-					    		이미지는 나의 정보에서 변경 가능합니다
-					    		</div>
+						    		<div style="float:left; font-size:70%">
+						    		이미지는 나의 정보에서 변경 가능합니다
+						    		</div>
 					    		</div><br/>
 	    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
@@ -174,8 +173,8 @@
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-									<label for="grade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력&nbsp;&nbsp;&nbsp;</strong></label>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-7" style="float: left;">
+									<label for="grade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력</strong></label>
+									<div class="col-sm-7" style="float: left;">
 										<select class="form-control" name="grade" id="grade" style="width:190px;">
 											<option value="1">고졸이하</option>
 											<option value="2">고졸</option>
@@ -195,41 +194,44 @@
 						    
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	
-						    	<div class="form-group text-right">
-									<button type="button" id="addBtn" class="btn btn-success btn-sm">추가</button>
-						        </div>	
-						        
-						    	<div class="form-group" id="addDiv">
-							    	<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_nm" class="col-sm-10 control-label" style="float: left;"><strong>자격증 이름/ 어학 시험 이름</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_nm" name="lcs_nm"></textarea>
-								    	</div>
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_dt" class="col-sm-10 control-label" style="float: left;"><strong>취득일</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_dt" name="lcs_dt"></textarea>
-								    	</div>
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_score" class="col-sm-10 control-label" style="float: left;"><strong>성적</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_score" name="lcs_score"></textarea>
-								    	</div>
-									</div>
-									<div style="float:left;"><input type=text style="border:none; width: 1000px;" value="------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"/></div>
+						    	<div class="table-responsive" align="center">
+								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center" style="float:left;">
 								
-								</div>
-								<div style="float: left;"><br/>
-								위 사항들은 이력서에 포함되는 내용으로, 기업 열람 동의 시 기업에게 보여지게 되는 내용입니다.<br/>
-								이하 아래의 자기소개서도 기업에게 보여지며, 자기소개서만 따로 게시판에 등록하여 유저들에게 조언을 얻을 수 있습니다.
+							  	
+								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
+								  		<colgroup>
+								  			<col width="50%"style="background-color: #FFFFFF;"/>
+								  			<col width="25%"style="background-color: #FFFFFF;"/>
+								  			<col width="25%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
+								  		<thead class="bg-primary">
+								  		<tr>
+								  			<th class="text-center" style="background-color: #FACC2E;">자격증/어학 시험 이름</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">취득일</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">성적</th>
+								  		</tr>
+								  		</thead>
+								  		<tbody>
+								  			<tr>
+								  				<td class="text-center">정보처리기사</td>
+								  				<td class="text-center">2018/11/16</td>
+								  				<td class="text-center"></td>
+								  			</tr>	
+								  			<tr>
+								  				<td class="text-center">TOEIC</td>
+								  				<td class="text-center">2016/11/01</td>
+								  				<td class="text-center">990</td>
+								  			</tr>
+								  		</tbody>
+								  	</table>
+							  	</div>
+							  	
 								<br/><br/>
-								<strong style="color: #045FB4; font-size: 130%">자기소개서<br/></strong>
 								</div>
-								 <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+								<div style="float:left;">
+									<strong style="color: #045FB4; font-size: 130%">자기소개서<br/></strong>
+								</div>
+								<table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
 					            	<colgroup>
 				  						<col width="20%"/>
 				  						<col width="80%"/>
