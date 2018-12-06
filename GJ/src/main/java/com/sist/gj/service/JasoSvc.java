@@ -8,6 +8,7 @@ import com.sist.gj.vo.SearchVO;
 
 public interface JasoSvc {
 	int update(JasoVO jasoVO) throws SQLException;
+	int merge(JasoVO jasoVO) throws SQLException;
 	int delete(JasoVO jasoVO) throws SQLException;
 	//추가
 	int add(JasoVO jasoVO);

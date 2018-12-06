@@ -42,4 +42,9 @@ public class JasoSvcImple implements JasoSvc {
 		return jasoDao.select(jasoVO);
 	}
 
+	@Override
+	public int merge(JasoVO jasoVO) throws SQLException {
+		return jasoDao.merge(jasoVO);
+	}
+
 }

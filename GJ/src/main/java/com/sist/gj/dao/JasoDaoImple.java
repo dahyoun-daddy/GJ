@@ -78,4 +78,15 @@ public class JasoDaoImple implements JasoDao {
 		return outVO;
 	}
 
+	@Override
+	public int merge(JasoVO jasoVO) throws SQLException {
+		String statement = NAMESPACE+".merge";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+jasoVO);
+		int flag = sqlSession.insert(statement, jasoVO);
+		log.debug("result : "+flag);
+				
+		return flag;
+	}
+
 }
