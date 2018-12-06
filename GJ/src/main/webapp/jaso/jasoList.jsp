@@ -62,7 +62,7 @@
   						<c:when test="${list.size()>0}">
   							<c:forEach var="jasoVO" items="${list}">
   								<tr>
-  									<td class="text-center"><c:out value="${jasoVO.regId}"/></td>
+  									<td class="text-center"><c:out value="${jasoVO.userNick}"/></td>
   									<td class="text-left"><c:out value="${jasoVO.clTitle}"/></td>
   									<td class="text-center"><c:out value="${jasoVO.regDt}"/></td>
   								</tr>

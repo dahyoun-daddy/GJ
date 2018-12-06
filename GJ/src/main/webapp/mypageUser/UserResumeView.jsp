@@ -281,12 +281,12 @@
 						            	</label>
 					            	</div><br/><br/>
 					            </div>
-					            <h6 style="color:red;">저장하기 버튼을 클릭하지 않으면, 수정된 정보가 저장되지 않습니다. 변경 사항이 있다면 꼭 저장하기 버튼을 눌러주십시오.<br/><br/></h6>
+					            <h6 style="color:red;">변경할 사항이 있다면 수정하기 버튼을 누른 후 수정해 주십시오.<br/>단, 기업에 지원했을 경우 보여지는 이력서는 최근 변경된 이력서이며, 변경 전의 이력서를 기업이 열람했을 수 있습니다.<br/></h6>
 						    </div>
 			    	</form>
 				    	<div style="margin: 50px;">
-				    		<input id="smallBtn" type="button" value="저장하기"
-				    		       onclick="location='UserResumeView.jsp'">
+				    		<input id="smallBtn" type="button" value="수정하기"
+				    		       onclick="location='UserResume.jsp'">
 				    	</div>	
 				    	
 				    	</div>

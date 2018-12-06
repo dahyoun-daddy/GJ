@@ -22,35 +22,46 @@
 	</sql>
 
 	<select id="doRetrieve" parameterType="SearchVO" resultType="JasoVO">
-		SELECT X.*, Y.*
+		SELECT A.*,B.user_nick
 		  FROM
-		(
-		    SELECT T.cl_no,
-		           T.cl_title,
-		           T.cl_sungjang,
-		           T.cl_sang,
-		           T.cl_jangdan,
-		           T.cl_jiwon,
-		           T.cl_check,
-		           T.reg_id,
-		           T.reg_dt,
-		           T.rnum AS no
-		      FROM
 		    (
-		        SELECT C.*,
-		               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
-		          FROM usercl C
-		  		 <include refid="searchText"/>
-		    ) T
-		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-			   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-		) X
-		NATURAL JOIN
-		(
-		    SELECT COUNT(*) AS total_cnt
-		      FROM usercl
-		    <include refid="searchText"/>
-		) Y
+		        SELECT X.*, Y.*
+				  FROM
+				(
+				    SELECT T.cl_no,
+				           T.cl_title,
+				           T.cl_sungjang,
+				           T.cl_sang,
+				           T.cl_jangdan,
+				           T.cl_jiwon,
+				           T.cl_check,
+				           T.reg_id,
+				           DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+        							,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
+				           T.rnum AS no
+				      FROM
+				    (
+				        SELECT C.*,
+				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+				          FROM usercl C
+		                <include refid="searchText"/>
+				    ) T
+		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+					   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+				) X
+				NATURAL JOIN
+				(
+				    SELECT COUNT(*) AS total_cnt
+				      FROM usercl
+		            <include refid="searchText"/>
+				) Y
+		    ) A,
+		    (
+		        SELECT user_id
+		              ,user_nick
+		          FROM users
+		    ) B
+		WHERE A.reg_id = B.user_id
 	</select>
 	
 	<select id="select" parameterType="JasoVO" resultType="JasoVO">

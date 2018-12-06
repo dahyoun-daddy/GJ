@@ -12,13 +12,13 @@ public class JasoVO extends DTO{
 	private String regDt; //등록일
 	private String modId; //수정자
 	private String modDt; //수정일
-
+	private String userNick;
 	
 	public JasoVO() {}
 	
-	public JasoVO(String clNo, String clTitle, String clSungjang, String clSang, String clJangdan, String clJiwon,
-			int clCheck, String regId, String regDt, String modId, String modDt) {
-		super();
+	public JasoVO(int no, int totalCnt, String clNo, String clTitle, String clSungjang, String clSang, String clJangdan,
+			String clJiwon, int clCheck, String regId, String regDt, String modId, String modDt, String userNick) {
+		super(no, totalCnt);
 		this.clNo = clNo;
 		this.clTitle = clTitle;
 		this.clSungjang = clSungjang;
@@ -30,15 +30,26 @@ public class JasoVO extends DTO{
 		this.regDt = regDt;
 		this.modId = modId;
 		this.modDt = modDt;
+		this.userNick = userNick;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "JasoVO [clNo=" + clNo + ", clTitle=" + clTitle + ", clSungjang=" + clSungjang + ", clSang=" + clSang
 				+ ", clJangdan=" + clJangdan + ", clJiwon=" + clJiwon + ", clCheck=" + clCheck + ", regId=" + regId
-				+ ", regDt=" + regDt + ", modId=" + modId + ", modDt=" + modDt + "]";
+				+ ", regDt=" + regDt + ", modId=" + modId + ", modDt=" + modDt + ", userNick=" + userNick + "]";
 	}
-	
+
+
+
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
 	public String getClNo() {
 		return clNo;
 	}

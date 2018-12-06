@@ -4,4 +4,111 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.gj.mappers.userMypage">
 
+	<sql id="searchText">
+		<where>
+  			<choose>
+  				<when test="10 == searchDiv">
+  					hr.u_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="20 == searchDiv">
+  					hr.name LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="30 == searchDiv"> 
+  					hr.email LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
+  		</where>
+	</sql>
+	
+	<!-- 기업 마이페이지 오픈된 이력서 리스트 -->
+	<select id="retrieveCv" parameterType="SearchVO" resultType="CvFormVO">
+		SELECT X.*, Y.*
+		  FROM
+		(
+		    SELECT T.reg_id,
+		           T.cv_date,
+		           T.cv_grade,
+		           T.cv_check,
+		           T.reg_dt,
+                  T.mod_id,
+                  T.mod_dt,
+		           T.rnum AS no
+		      FROM
+		    (
+		        SELECT C.*,
+		               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+		          FROM usercv C
+		  		 <include refid="searchText"/>
+		    ) T
+		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+			   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+		) X
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) AS total_cnt
+		      FROM usercv
+		    <include refid="searchText"/>
+		) Y
+	</select>
+
+	<insert id="addCv" parameterType="CvFormVO">
+		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt) VALUES (
+		     #{reg_id},
+            sysdate,
+            #{cv_grade},
+            #{cv_check},
+            sysdate
+            );
+	</insert>
+	
+	<update id="updateCv" parameterType="CvFormVO">
+		UPDATE usercv
+		SET
+		    cv_date  = sysdate ,
+		    cv_grade = #{cv_grade},
+		    cv_check = #{cv_check},
+		    mod_dt   = sysdate
+		WHERE
+		    reg_id = #{reg_id} ;
+	</update>
+	
+	<select id="selectCv" parameterType="CvFormVO" resultType="CvFormVO">
+		SELECT reg_id, cv_date, cv_grade, cv_check, reg_dt, mod_id, mod_dt
+		FROM usercv
+		WHERE reg_id = #{reg_id} ;
+	</select>
+	
+	<insert id="addLic" parameterType="LicenseVO">
+		INSERT INTO userlicense (
+		    lic_no,
+		    lic_name,
+		    lic_date,
+		    lic_score,
+		    reg_id
+		) VALUES (
+		    #{lic_no},
+		    #{lic_name},
+		    #{lic_date},
+		    #{lic_score},
+		    #{reg_id}
+		);
+	</insert>
+	
+	<update id="updateLic" parameterType="LicenseVO">
+		UPDATE userlicense
+		SET
+		    lic_name  = #{lic_name},
+		    lic_date  = #{lic_date},
+		    lic_score = #{lic_score}
+		WHERE
+		    lic_no = #{lic_no};
+	</update>
+	
+	<delete id="deleteLic" parameterType="LicenseVO">
+		DELETE FROM userlicense
+		WHERE lic_no = #{lic_no};
+	</delete>
+
 </mapper>

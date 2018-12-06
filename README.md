@@ -20,7 +20,7 @@
 <br>
 <h2>테이블 구조</h2>
 
-![exerd](https://user-images.githubusercontent.com/45252191/49428302-03eb6800-f7e9-11e8-9be1-d4c18be19af5.JPG)
+![default](https://user-images.githubusercontent.com/45252191/49501029-56925600-f8b5-11e8-95cc-949192f08f02.PNG)
 
 <br>
 <br>
