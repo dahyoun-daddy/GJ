@@ -67,7 +67,7 @@ public class JasoDaoTest {
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<JasoVO> list = jasoDao.doRetrieve(searchVO);
 		LOG.info("size : "+list.size()+""); 
-		LOG.info("list : "+list);
+		LOG.info("list : "+list); 
 		assertThat(list.size(),is(not(0)));
 	}
 	
