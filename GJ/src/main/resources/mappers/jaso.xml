@@ -36,7 +36,8 @@
 				           T.cl_jiwon,
 				           T.cl_check,
 				           T.reg_id,
-				           T.reg_dt,
+				           DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+        							,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
 				           T.rnum AS no
 				      FROM
 				    (
