@@ -13,9 +13,8 @@ public class JasoCommentVO extends DTO {
 	
 	public JasoCommentVO() {}
 	
-	public JasoCommentVO(int no, int totalCnt, String commentNo, String userId, String commentBody, String commentDate,
+	public JasoCommentVO( String commentNo, String userId, String commentBody, String commentDate,
 			String regId, String regDt, String modId, String modDt, String clNo) {
-		super(no, totalCnt);
 		this.commentNo = commentNo;
 		this.userId = userId;
 		this.commentBody = commentBody;
