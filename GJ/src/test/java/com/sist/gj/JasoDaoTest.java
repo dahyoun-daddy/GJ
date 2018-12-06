@@ -43,7 +43,7 @@ public class JasoDaoTest {
 		inVo3 = new JasoVO("2018120616215000003","테스트제목3","테스트성장3","테스트학교3","테스트성격3","테스트지원동기3"
 					,1,"boondll@hanmail.net","20181206",null,null,null);
 		
-		searchVO = new SearchVO(10,1,"","");
+		searchVO = new SearchVO(10,1,"",""); 
 		LOG.info("context : "+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc : "+mockMvc);
