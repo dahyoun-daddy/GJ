@@ -13,6 +13,10 @@ public class RandomNum {
 		time +=cd.get(Calendar.HOUR_OF_DAY);
 		time +=cd.get(Calendar.MINUTE);
 		time +=cd.get(Calendar.SECOND);
+		
+		double random = Math.random();
+		int number = (int)(random*10000)+1;
+		time += number;
 		return time;
 	}
 }
