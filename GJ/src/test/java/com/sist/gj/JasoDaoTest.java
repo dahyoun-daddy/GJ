@@ -76,7 +76,7 @@ public class JasoDaoTest {
 		assertThat(flag,is(1));
 	}
 	
-	@Test
+	@Test 
 	public void select() throws ClassNotFoundException, SQLException {
 		JasoVO result = jasoDao.select(inVo1);
 		assertThat(result.getClNo(),is("2018120616215000001"));
