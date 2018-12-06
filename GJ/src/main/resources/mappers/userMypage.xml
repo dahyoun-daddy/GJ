@@ -207,6 +207,26 @@
 	</delete>
 	
 	
+	<update id="updateUser" parameterType="UserVO"> 
+		UPDATE users
+		SET
+		     user_passwd = #{user_passwd},
+		     user_nick = #{user_nick},
+		     user_name = #{user_name},
+		     user_add = #{user_add},
+		     user_passq = #{user_passq},
+		     user_passa = #{user_passa},
+		     user_phone = #{user_phone},
+		     enter_salay = #{enter_salay},
+		     enter_cnt = #{enter_cnt},
+		     enter_hiredate = #{enter_hiredate},
+		     mod_id = #{user_id},
+		     mod_dt = #{mod_dt}
+		WHERE
+		     user_id = #{user_id} ;
+	</update>
+	
+	
 	
 
 </mapper>
