@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.hire">
+	<sql id="searchWord">
+		<where>
+  			<choose>
+  				<when test="10 == search_Word">
+  					hr.u_id LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<when test="20 == search_Word">
+  					hr.name LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<when test="30 == search_Word"> 
+  					hr.email LIKE '%'||#{search_Word}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
+  		</where>
+	</sql>
+	
+	<select id="select" parameterType="HireVO" resultType="HireVO">
+		SELECT
+		    hire_no,
+		    hire_title,
+		    hire_body,
+		    user_id,
+		    hire_date,
+		    hire_deadline,
+		    hire_add,
+		    hire_salary,
+		    hire_edu
+		FROM
+		    hireinfo
+		WHERE hire_no = #{hireNo};
+	</select>
+	
+	<select id="selectAll" parameterType="HireVO" resultType="HireVO">
+		SELECT
+		    hire_no,
+		    hire_title,
+		    hire_body,
+		    user_id,
+		    hire_date,
+		    hire_deadline,
+		    hire_add,
+		    hire_salary,
+		    hire_edu
+		FROM
+		    hireinfo;
+	</select>
+	
+	<insert id="create" parameterType="HireVO">
+		INSERT INTO hireinfo (
+		    hire_no,
+		    hire_title,
+		    hire_body,
+		    user_id,
+		    hire_date,
+		    hire_deadline,
+		    hire_add,
+		    hire_salary,
+		    hire_edu,
+		    reg_id,
+		    reg_dt,
+		    mod_id,
+		    mod_dt
+		) VALUES (
+		    #{hire_no}, 
+		    #{hire_title}, 
+		    #{hire_body}, 
+		    #{user_id},
+		    #{hire_date}, 
+		    #{hire_deadline}, 
+		    #{hire_add}, 
+		    #{hire_salary}, 
+		    #{hire_edu}, 
+		    #{user_id}, 
+		    sysdate, 
+		    #{user_id}, 
+		    sysdate
+		);
+	</insert>
+	
+	<update id="update" parameterType="HireVO">
+		UPDATE hireinfo
+		   SET hire_title = #{hireNo}, 
+				 hire_body = #{hireBody},       
+				 hire_date = #{hireDate},       
+				 hire_deadline = #{hireDeadline},   
+				 hire_add = #{hireAdd},        
+				 hire_salary = #{hireSalary}, 
+				 hire_edu = #{hireEdu},       
+				 mod_id = #{modId},        
+				 mod_dt = sysdate  
+			WHERE
+			    hire_no = #{hireNo};
+	</update>
+
+</mapper>
