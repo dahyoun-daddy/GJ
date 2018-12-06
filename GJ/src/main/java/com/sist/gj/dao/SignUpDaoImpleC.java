@@ -104,12 +104,24 @@ public class SignUpDaoImpleC implements SignUpDao {
 
 	@Override
 	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
-		  Connection connection = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      
-	     
-	      
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public List<UserVO> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
+//		  Connection connection = null;
+//	      PreparedStatement pstmt = null;
+//	      ResultSet rs = null;
+//	      
+//	     
+//	      
 //	      try {
 //	         StringBuilder sb = new StringBuilder();
 //	         
@@ -126,4 +138,4 @@ public class SignUpDaoImpleC implements SignUpDao {
 //		return null;
 //	}
 //
-//}
+}

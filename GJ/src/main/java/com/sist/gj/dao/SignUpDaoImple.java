@@ -98,26 +98,32 @@ public class SignUpDaoImple implements SignUpDao {
 
 	@Override
 	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
-		  Connection connection = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      
-	     
-	      
-	      try {
-	         StringBuilder sb = new StringBuilder();
-	         
-	         sb.append("SELECT userId      \n");
-	         sb.append("  FROM users        \n");
-	         sb.append(" WHERE userId = ?  \n");
-	         
-	      }catch(SQLException sql) {  
-	    	  sql.printStackTrace();
-	      }
-	      
-	      
-	      
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+//	@Override
+//	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
+//		  Connection connection = null;
+//	      PreparedStatement pstmt = null;
+//	      ResultSet rs = null;
+//	      
+//	     
+//	      
+//	      try {
+//	         StringBuilder sb = new StringBuilder();
+//	         
+//	         sb.append("SELECT userId      \n");
+//	         sb.append("  FROM users        \n");
+//	         sb.append(" WHERE userId = ?  \n");
+//	         
+//	      }catch(SQLException sql) {  
+//	    	  sql.printStackTrace();
+//	      }
+//	      
+//	      
+//	      
+//		return null;
+//	}
 
 }

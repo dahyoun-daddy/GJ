@@ -65,20 +65,15 @@
 	</select>
 	
 	<select id="select" parameterType="JasoVO" resultType="JasoVO">
-		SELECT cl_no,
-			 	cl_title,
-		    	cl_sungjang,
-		    	cl_sang,
-		    	cl_jangdan,
-		    	cl_jiwon,
-		    	cl_check
-		  FROM UserCl
-		WHERE cl_no = #{clNo};
+		SELECT cl_no, cl_title, cl_sungjang, cl_sang,cl_jangdan, cl_jiwon, cl_check, B.user_nick
+		 FROM usercl A, users B
+		WHERE cl_no = #{clNo}
+		  AND A.reg_id = B.user_id
 	</select>
 	
 	<delete id="delete" parameterType="JasoVO">
 		DELETE FROM usercl
-		WHERE cl_no = #{clNo};
+		WHERE cl_no = #{clNo}
 	</delete>
 	
 	<update id="merge" parameterType="JasoVO">
@@ -106,7 +101,7 @@
 		           T1.mod_dt = sysdate
 		WHEN NOT MATCHED THEN
 		    INSERT (T1.cl_no, T1.cl_title, T1.cl_sungjang, T1.cl_sang, T1.cl_jangdan, T1.cl_jiwon, T1.cl_check, T1.reg_id, T1.reg_dt) 
-		    VALUES (T2.cl_no, T2.cl_title, T2.cl_sungjang, T2.cl_sang, T2.cl_jangdan, T2.cl_jiwon, T2.cl_check, T2.reg_id, sysdate);
+		    VALUES (T2.cl_no, T2.cl_title, T2.cl_sungjang, T2.cl_sang, T2.cl_jangdan, T2.cl_jiwon, T2.cl_check, T2.reg_id, sysdate)
 	</update>
 	
 	<insert id="add" parameterType="JasoVO">
@@ -145,6 +140,6 @@
 		    mod_id = #{modId},
 		    mod_dt = sysdate
 		WHERE
-		    cl_no = #{clNo};
+		    cl_no = #{clNo}
 	</update>
 </mapper>
