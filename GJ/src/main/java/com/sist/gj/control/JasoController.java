@@ -1,8 +1,12 @@
 package com.sist.gj.control;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,7 @@ public class JasoController {
 	@Autowired
 	private JasoCommentSvc jasoCSvc;
 	
-	@RequestMapping(value="/jaso/jaso.do")
+	@RequestMapping(value="/jaso/jasoList.do")
 	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
@@ -48,6 +52,30 @@ public class JasoController {
 		log.info("list size : "+list.size());
 		model.addAttribute("list",list);
 		
+		return VIEW_NAME;
+	}
+	
+	@RequestMapping(value="/jaso/jasoUpdate.do")
+	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================update=======================");
+		log.info("invo" + invo);
+		
+		Calendar cd = Calendar.getInstance();
+		log.info("시간 : "+cd.get(Calendar.YEAR)+""+(cd.get(Calendar.MONTH)+1)+""+cd.get(Calendar.DATE)+""+cd.get(Calendar.HOUR_OF_DAY)+""+cd.get(Calendar.MINUTE)+""+cd.get(Calendar.SECOND));
+		//+""+cd.MONTH+""+cd.DATE
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+		
+		flag = jasoSvc.add(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","등록 되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","등록 실패.");
+		}
 		return VIEW_NAME;
 	}
 }

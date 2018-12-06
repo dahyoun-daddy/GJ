@@ -28,6 +28,7 @@ public class JasoSvcImple implements JasoSvc {
 
 	@Override
 	public int add(JasoVO jasoVO) {
+		
 		return jasoDao.add(jasoVO);
 	}
 
