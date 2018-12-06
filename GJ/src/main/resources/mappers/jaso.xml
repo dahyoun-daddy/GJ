@@ -81,6 +81,34 @@
 		WHERE cl_no = #{clNo};
 	</delete>
 	
+	<update id="merge" parameterType="JasoVO">
+		MERGE INTO usercl T1
+		USING (
+		   SELECT #{clNo} AS cl_no,
+		          #{clTitle} AS cl_title,
+		          #{clSungjang} AS cl_sungjang,
+		          #{clSang} AS cl_sang,
+		          #{clJangdan} AS cl_jangdan,
+		          #{clJiwon} AS cl_jiwon,
+		          #{clCheck} AS cl_check,
+		          #{regId} AS reg_id
+		     FROM dual
+		)T2
+		ON (T1.cl_no = T2.cl_no)
+		WHEN MATCHED THEN
+		    UPDATE SET T1.cl_title = T2.cl_title,
+		           T1.cl_sungjang = T2.cl_sungjang,
+		           T1.cl_sang = T2.cl_sang,
+		           T1.cl_jangdan = T2.cl_jangdan,
+		           T1.cl_jiwon = T2.cl_jiwon,
+		           T1.cl_check = T2.cl_check,
+		           T1.mod_id = T2.reg_id,
+		           T1.mod_dt = sysdate
+		WHEN NOT MATCHED THEN
+		    INSERT (T1.cl_no, T1.cl_title, T1.cl_sungjang, T1.cl_sang, T1.cl_jangdan, T1.cl_jiwon, T1.cl_check, T1.reg_id, T1.reg_dt) 
+		    VALUES (T2.cl_no, T2.cl_title, T2.cl_sungjang, T2.cl_sang, T2.cl_jangdan, T2.cl_jiwon, T2.cl_check, T2.reg_id, sysdate);
+	</update>
+	
 	<insert id="add" parameterType="JasoVO">
 		INSERT INTO usercl (
 		    cl_no,

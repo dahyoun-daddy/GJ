@@ -67,7 +67,7 @@ public class JasoController {
 		
 		JSONObject object = new JSONObject();
 		
-		flag = jasoSvc.add(invo);
+		flag = jasoSvc.merge(invo);
 		
 		if(flag > 0) {
 			object.put("flag",flag);
