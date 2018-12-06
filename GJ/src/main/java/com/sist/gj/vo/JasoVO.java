@@ -16,9 +16,8 @@ public class JasoVO extends DTO{
 	
 	public JasoVO() {}
 	
-	public JasoVO(int no, int totalCnt, String clNo, String clTitle, String clSungjang, String clSang, String clJangdan,
+	public JasoVO(String clNo, String clTitle, String clSungjang, String clSang, String clJangdan,
 			String clJiwon, int clCheck, String regId, String regDt, String modId, String modDt, String userNick) {
-		super(no, totalCnt);
 		this.clNo = clNo;
 		this.clTitle = clTitle;
 		this.clSungjang = clSungjang;
