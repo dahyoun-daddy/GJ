@@ -65,7 +65,7 @@ public interface MypageDao {
 	List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 	//입사지원 취소
-	int deletePic(ApplyVO applyVO) throws SQLException;
+	int deleteApply(ApplyVO applyVO) throws SQLException;
 	
 	
 	// (UserVO 생겼을 때 대체하기)

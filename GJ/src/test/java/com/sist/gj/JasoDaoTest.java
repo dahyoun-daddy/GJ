@@ -1,6 +1,14 @@
 package com.sist.gj;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+
+import java.sql.SQLException;
+import java.util.List;
+
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,5 +56,29 @@ public class JasoDaoTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc : "+mockMvc);
 		LOG.info("jasoDao : "+jasoDao);
+	}
+	
+	@Test
+	public void Test() {
+		assertThat(inVo1.getClNo(),is("2018120616215000001"));
+	}
+	
+	@Test
+	public void doRetrieve() throws ClassNotFoundException, SQLException {
+		List<JasoVO> list = jasoDao.doRetrieve(searchVO);
+		LOG.info(list.size()+"");
+		assertThat(list.size(),is(not(0)));
+	}
+	
+	@Test
+	public void merge() throws SQLException {
+		int flag = jasoDao.merge(inVo1);
+		assertThat(flag,is(1));
+	}
+	
+	@Test 
+	public void select() throws ClassNotFoundException, SQLException {
+		JasoVO result = jasoDao.select(inVo1);
+		assertThat(result.getClNo(),is("2018120616215000001"));
 	}
 }
