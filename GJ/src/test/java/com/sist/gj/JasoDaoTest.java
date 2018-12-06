@@ -66,14 +66,17 @@ public class JasoDaoTest {
 	@Test
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<JasoVO> list = jasoDao.doRetrieve(searchVO);
-		LOG.info(list.size()+"");
+		LOG.info("size : "+list.size()+"");
+		LOG.info("list : "+list);
 		assertThat(list.size(),is(not(0)));
 	}
 	
 	@Test
 	public void merge() throws SQLException {
 		int flag = jasoDao.merge(inVo1);
-		assertThat(flag,is(1));
+		assertThat(flag,is(1)); 
+		int deleteflag = jasoDao.delete(inVo1);
+		assertThat(deleteflag,is(1));
 	}
 	
 	@Test 
