@@ -37,6 +37,6 @@ public interface ReviewSvc {
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 */
-	ReviewVO get(ReviewVO reviewVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	ReviewVO select(ReviewVO reviewVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 
 }
