@@ -10,6 +10,7 @@ import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserVO;
 
 public class MypageDaoImple implements MypageDao {
 
@@ -87,9 +88,21 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
+	public int addApply(ApplyVO liceapplyVOnseVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
 	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public int updateApply(ApplyVO applyVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -99,25 +112,25 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public CvFormVO selectUserInfo(DTO DTO) throws ClassNotFoundException, SQLException {
+	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CvFormVO selectCompInfo(DTO DTO) throws ClassNotFoundException, SQLException {
+	public UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int deleteUser(DTO DTO) throws SQLException {
+	public int deleteUser(UserVO DTO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateUSer(DTO DTO) throws SQLException {
+	public int updateUSer(UserVO DTO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

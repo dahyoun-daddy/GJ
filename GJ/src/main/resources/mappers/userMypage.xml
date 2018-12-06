@@ -22,6 +22,9 @@
   		</where>
 	</sql>
 	
+	<!-- 사진, 회원정보수정, 회원탈퇴는 추후 구현 예정 -->
+	
+	
 	<!-- 기업 마이페이지 오픈된 이력서 리스트 -->
 	<select id="retrieveCv" parameterType="SearchVO" resultType="CvFormVO">
 		SELECT X.*, Y.*
@@ -146,7 +149,23 @@
 		  AND lic_no = #{lic_no}; 
 	</select>
 	
-	<select id="retrieveLic" parameterType="SearchVO" resultType="ApplyVO">
+	<insert id="addApply" parameterType="ApplyVO">
+		INSERT INTO hireapply (
+		    apply_no,
+		    user_id,
+		    apply_date,
+		    hire_no,
+		    apply_check
+		) VALUES (
+		    #{apply_no},
+		    #{user_id},
+		    #{apply_date},
+		    #{hire_no},
+		    '1'
+		);
+	</insert>
+	
+	<select id="retrieveApply" parameterType="SearchVO" resultType="ApplyVO">
 		SELECT X.*, Y.*
 		  FROM
 		(
@@ -173,6 +192,19 @@
 		) Y;
 	</select>
 	
+	
+	<update id="updateApply" parameterType="ApplyVO">
+		UPDATE hireapply
+		SET
+		    apply_check = 0
+		WHERE
+		    apply_no = #{apply_no};
+	</update>
+	
+	<delete id="deleteApply" parameterType="ApplyVO">
+		DELETE FROM hireapply
+		WHERE apply_no = #{apply_no};
+	</delete>
 	
 	
 	
