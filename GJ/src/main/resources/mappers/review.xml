@@ -17,7 +17,7 @@
     
     
     <!-- select list -->
-    <select id="do_retrieve" parameterType="SearchVO" resultType="ReviewVO"  >
+    <select id="doRetrieve" parameterType="SearchVO" resultType="ReviewVO"  >
 		SELECT X.*,Y.*
 		  FROM(
 		SELECT T.review_no,              
