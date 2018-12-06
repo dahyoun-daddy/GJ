@@ -60,6 +60,12 @@ public class MypageDaoImple implements MypageDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int updateLic(LicenseVO licenseVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public int deleteLic(LicenseVO licenseVO) throws SQLException {
@@ -69,6 +75,13 @@ public class MypageDaoImple implements MypageDao {
 
 	@Override
 	public LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@Override
+	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -108,6 +121,7 @@ public class MypageDaoImple implements MypageDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 }

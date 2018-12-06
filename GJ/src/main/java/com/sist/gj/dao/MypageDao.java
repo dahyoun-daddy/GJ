@@ -32,7 +32,7 @@ public interface MypageDao {
 	int deletePic(PictureVO pictureVO) throws SQLException;
 	
 	
-	
+	 
 	//이력서 단건조회
 	CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;
 	
@@ -45,8 +45,11 @@ public interface MypageDao {
 	//기업 마이페이지 오픈된 이력서 리스트
 	List<CvFormVO> retrieveCv(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
-	//자격증 추가 (자격증은 수정은 없고, 수정 시 기존에 있던 파일 삭제 후 다시 추가하는 것으로 한다)
+	//자격증 추가 
 	int addLic(LicenseVO licenseVO);
+	
+	//자격증 삭제
+	int updateLic(LicenseVO licenseVO) throws SQLException;
 	
 	//자격증 삭제
 	int deleteLic(LicenseVO licenseVO) throws SQLException;
@@ -54,6 +57,8 @@ public interface MypageDao {
 	//자격증 단건조회 
 	LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
+	//자격증 리스트 조회
+	List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	
 	//입사지원정보 list 조회
