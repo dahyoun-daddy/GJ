@@ -70,7 +70,7 @@ public class JasoDaoTest {
 		LOG.info("list : "+list); 
 		assertThat(list.size(),is(not(0)));
 	}
-	
+	 
 	@Test
 	public void merge() throws SQLException {
 		int flag = jasoDao.merge(inVo1);
