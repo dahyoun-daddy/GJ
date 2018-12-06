@@ -93,7 +93,7 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public int deletePic(ApplyVO applyVO) throws SQLException {
+	public int deleteApply(ApplyVO applyVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
