@@ -110,20 +110,20 @@ public class SignUpDaoImpleC implements SignUpDao {
 	      
 	     
 	      
-	      try {
-	         StringBuilder sb = new StringBuilder();
-	         
-	         sb.append("SELECT userId      \n");
-	         sb.append("  FROM users        \n");
-	         sb.append(" WHERE userId = ?  \n");
-	         
-	      }catch(SQLException sql) {  
-	    	  sql.printStackTrace();
-	      }
-	      
-	      
-	      
-		return null;
-	}
-
-}
+//	      try {
+//	         StringBuilder sb = new StringBuilder();
+//	         
+//	         sb.append("SELECT userId      \n");
+//	         sb.append("  FROM users        \n");
+//	         sb.append(" WHERE userId = ?  \n");
+//	         
+////	     }catch(SQLException sql) {  
+////	    	  sql.printStackTrace();
+//      }
+//	      
+//	      
+//	      
+//		return null;
+//	}
+//
+//}
