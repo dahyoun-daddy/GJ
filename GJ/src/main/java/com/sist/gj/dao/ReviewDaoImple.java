@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.gj.vo.JasoCommentVO;
+import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 
@@ -70,6 +71,17 @@ public class ReviewDaoImple implements ReviewDao {
 	
 
 	@Override
+	public ReviewVO select(ReviewVO reviewVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".select";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+reviewVO);
+		ReviewVO outVO = sqlSession.selectOne(statement, reviewVO);
+		log.debug("result : "+outVO);
+		
+		return outVO;
+	}
+	
+	@Override
 	public void deleteAll() throws SQLException {
 		// TODO Auto-generated method stub
 
@@ -83,10 +95,5 @@ public class ReviewDaoImple implements ReviewDao {
 
 
 
-	@Override
-	public ReviewVO select(ReviewVO reviewVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
