@@ -74,6 +74,7 @@ public class JasoDaoTest {
 	@Test
 	public void merge() throws SQLException {
 		int flag = jasoDao.merge(inVo1);
+		int flag2 = jasoDao.merge(inVo2);
 		assertThat(flag,is(1)); 
 		int deleteflag = jasoDao.delete(inVo1);
 		assertThat(deleteflag,is(1));
@@ -81,7 +82,8 @@ public class JasoDaoTest {
 	
 	@Test 
 	public void select() throws ClassNotFoundException, SQLException {
-		JasoVO result = jasoDao.select(inVo1);
-		assertThat(result.getClNo(),is("2018120412355500001"));
+		JasoVO result = jasoDao.select(inVo2);
+		LOG.info("result : "+result);
+		assertThat(result.getClNo(),is("2018120616215000002"));
 	}
 }
