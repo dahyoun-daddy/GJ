@@ -10,7 +10,7 @@ import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
-public class SignUpDaoImple implements SignUpDao {
+public class SignUpDaoImpleC implements SignUpDao {
 
 	@Override
 	public int update(UserVO userVO) throws SQLException {
@@ -25,20 +25,23 @@ public class SignUpDaoImple implements SignUpDao {
 	          StringBuilder sb = new StringBuilder();
 	          
 	      sb.append(" INSERT INTO users     ( 	  \n");
-	      sb.append("     userId          ,       \n");
-	      sb.append("     userPasswd      ,       \n");
-	      sb.append("     userNick        ,       \n");
-	      sb.append("     userName        ,       \n");
-	      sb.append("     userPhone	      ,       \n");
-	      sb.append("     userAdd  	      ,       \n");
-	      sb.append("     userPassQ	      ,       \n");
-	      sb.append("     userPassA	      ,       \n");
-	      sb.append("     userPhone	      ,       \n");
-	    //  sb.append("   userLevel	      ,       \n");
-	      sb.append("     regId			  ,       \n");
-	      sb.append("     regDt			  ,       \n");
-	      sb.append("     modId			  ,       \n");
-	      sb.append("     modDt			  ,       \n");
+	      sb.append("     UserId          ,       \n");
+	      sb.append("     UserPasswd      ,       \n");
+	      sb.append("     UserNick        ,       \n");
+	      sb.append("     UserName        ,       \n");
+	      sb.append("     UserPhone	      ,       \n");
+	      sb.append("     UserAdd  	      ,       \n");
+	      sb.append("     Enter_salay     ,       \n");
+	      sb.append("     Enter_cnt	      ,       \n");
+	      sb.append("     Enter_hiredate  ,       \n");
+	      sb.append("     UserPassQ	      ,       \n");
+	      sb.append("     UserPassA	      ,       \n");
+	      sb.append("     UserPhone	      ,       \n");
+	    //  sb.append("   UserLevel	      ,       \n");
+	      sb.append("     RegId			  ,       \n");
+	      sb.append("     RegDt			  ,       \n");
+	      sb.append("     ModId			  ,       \n");
+	      sb.append("     ModDt			  ,       \n");
 	      sb.append("    ) VALUES (               \n");
    		  sb.append("     ?,                      \n");
    		  sb.append("     ?,                      \n");
@@ -62,7 +65,10 @@ public class SignUpDaoImple implements SignUpDao {
    	      pstmt.setString(3, userVO.getUserNick());      
    	      pstmt.setString(4, userVO.getUserName());      
    	      pstmt.setString(5, userVO.getUserPhone());  	  
-   	      pstmt.setString(6, userVO.getUserAdd());    	  
+   	      pstmt.setString(6, userVO.getUserAdd());
+   	      pstmt.setString(6, userVO.getEnterSalay());
+   	      pstmt.setString(6, userVO.getEnterCnt());
+   	      pstmt.setString(6, userVO.getEnterHiredate());
    	      pstmt.setString(7, userVO.getUserPassQ());  	  
    	      pstmt.setString(8, userVO.getUserPassA());  	  
    	      pstmt.setString(9, userVO.getUserPhone());  	  
