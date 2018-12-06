@@ -15,7 +15,7 @@
 			<div class="row">
 			<form action="jasoUpdate.do">
 			    <div class="col-md-12">
-			        <div class="right-side">
+			        <div class="right-side"> 
 			            <h3>자소서 작성</h3>
 			            <br/> 
 			            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
