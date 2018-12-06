@@ -17,7 +17,7 @@
 			    <div class="col-md-12">
 			        <div class="right-side">
 			            <h3>자소서 작성</h3>
-			            <br/>
+			            <br/> 
 			            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
 			            	<colgroup>
 		  						<col width="20%"/>
