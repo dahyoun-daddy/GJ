@@ -7,10 +7,10 @@ public class UserVO {
 	private String  userNick          ;//사용자 닉네임or기업명
 	private String  userName          ;//사용자 이름or대표이름
 	private String  userAdd  	      ;//사용자 주소
-	private String  userPassQ	      ;//비밀번호찾기질문
-	private String  userPassA	      ;//비밀번호찾기답
+	private String  userPassQu	      ;//비밀번호찾기질문
+	private String  userPassAn	      ;//비밀번호찾기답
 	private String  userPhone	      ;//전화번호
-	private int	    userLevel	      ;//계정구분
+	private int	  userLevel	      ;//계정구분
 	private String  enterSalay	      ;//기업 연매출액 
 	private String  enterCnt	      ;//기업 사원수
 	private String  enterHiredate	  ;//기업 설립일
@@ -50,17 +50,17 @@ public class UserVO {
 	public void setUserAdd(String userAdd) {
 		this.userAdd = userAdd;
 	}
-	public String getUserPassQ() {
-		return userPassQ;
+	public String getuserPassQu() {
+		return userPassQu;
 	}
-	public void setUserPassQ(String userPassQ) {
-		this.userPassQ = userPassQ;
+	public void setuserPassQu(String userPassQu) {
+		this.userPassQu = userPassQu;
 	}
-	public String getUserPassA() {
-		return userPassA;
+	public String getuserPassAn() {
+		return userPassAn;
 	}
-	public void setUserPassA(String userPassA) {
-		this.userPassA = userPassA;
+	public void setuserPassAn(String userPassAn) {
+		this.userPassAn = userPassAn;
 	}
 	public String getUserPhone() {
 		return userPhone;
@@ -116,8 +116,8 @@ public class UserVO {
 	public void setModDt(String modDt) {
 		this.modDt = modDt;
 	}
-	public UserVO(String userId, String userPasswd, String userNick, String userName, String userAdd, String userPassQ,
-			String userPassA, String userPhone, int userLevel, String enterSalay, String enterCnt, String enterHiredate,
+	public UserVO(String userId, String userPasswd, String userNick, String userName, String userAdd, String userPassQu,
+			String userPassAn, String userPhone, int userLevel, String enterSalay, String enterCnt, String enterHiredate,
 			String regId, String regDt, String modId, String modDt) {
 		super();
 		this.userId = userId;
@@ -125,8 +125,8 @@ public class UserVO {
 		this.userNick = userNick;
 		this.userName = userName;
 		this.userAdd = userAdd;
-		this.userPassQ = userPassQ;
-		this.userPassA = userPassA;
+		this.userPassQu = userPassQu;
+		this.userPassAn = userPassAn;
 		this.userPhone = userPhone;
 		this.userLevel = userLevel;
 		this.enterSalay = enterSalay;
@@ -153,8 +153,8 @@ public class UserVO {
 		result = prime * result + userLevel;
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		result = prime * result + ((userNick == null) ? 0 : userNick.hashCode());
-		result = prime * result + ((userPassA == null) ? 0 : userPassA.hashCode());
-		result = prime * result + ((userPassQ == null) ? 0 : userPassQ.hashCode());
+		result = prime * result + ((userPassAn == null) ? 0 : userPassAn.hashCode());
+		result = prime * result + ((userPassQu == null) ? 0 : userPassQu.hashCode());
 		result = prime * result + ((userPasswd == null) ? 0 : userPasswd.hashCode());
 		result = prime * result + ((userPhone == null) ? 0 : userPhone.hashCode());
 		return result;
@@ -225,15 +225,15 @@ public class UserVO {
 				return false;
 		} else if (!userNick.equals(other.userNick))
 			return false;
-		if (userPassA == null) {
-			if (other.userPassA != null)
+		if (userPassAn == null) {
+			if (other.userPassAn != null)
 				return false;
-		} else if (!userPassA.equals(other.userPassA))
+		} else if (!userPassAn.equals(other.userPassAn))
 			return false;
-		if (userPassQ == null) {
-			if (other.userPassQ != null)
+		if (userPassQu == null) {
+			if (other.userPassQu != null)
 				return false;
-		} else if (!userPassQ.equals(other.userPassQ))
+		} else if (!userPassQu.equals(other.userPassQu))
 			return false;
 		if (userPasswd == null) {
 			if (other.userPasswd != null)

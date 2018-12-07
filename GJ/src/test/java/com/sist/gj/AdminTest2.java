@@ -29,7 +29,7 @@ import com.sist.gj.vo.UserVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
-public class SignUpTest {
+public class AdminTest2 {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -43,10 +43,10 @@ public class SignUpTest {
 	
 	SearchVO searchVO = null;
 	
-	@Before 
+	@Before
 	public void setUp() {
-		inVo1 = new UserVO("test@company.com","1","1","1","1","1"
-					,"1","01011112222",1,"","","","11@test.com","20181111","","");
+		inVo1 = new UserVO("11@test.com","11","11","11","1","1"
+					,"1","01011112222",1,null,null,null,"11@test.com","20181111",null,null);
 		 
 		searchVO = new SearchVO(10,1,"",""); 
 		LOG.info("context : "+context);
@@ -54,23 +54,12 @@ public class SignUpTest {
 		LOG.info("mockMvc : "+mockMvc);
 		LOG.info("SignUpDao : "+signUpDao);
 	}
-														
+	
 	@Test
 	public void Test() {
 		assertThat(inVo1.getUserId(), is("11@test.com")); 
 	}
-	@Test 
-	public void insert() throws ClassNotFoundException, SQLException {
-		 signUpDao.insert(inVo1);
-
-	}
 	
-	@Test 
-	public void select() throws ClassNotFoundException, SQLException {
-		UserVO result = signUpDao.select(inVo1);
-		LOG.info("result : "+result);
-		assertThat(result.getUserId(),is("11@test.com"));
-	}
+	
 	
 }
-

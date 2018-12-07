@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.AdminMypage">
+
+	
+
+	
+	<!-- 창 -->
+	<select id="selectuser" parameterType="UserVO" resultType="UserVO">
+		SELECT user_name ,
+				user_nick,
+				user_id,
+				user_regdt
+							
+		FROM users
+		
+		WHERE user_id = #{user_id} ;
+	</select>
+	
+	<!-- 상세 -->
+	<select id="userdetail" parameterType="UserVO" resultType="UserVO">
+		SELECT 
+				user_id			 ,
+				user_passwd      ,
+				user_nick        ,
+				user_name        ,
+				user_phone       ,
+				user_add         ,
+				user_passQ       ,
+				user_passA       ,
+				user_enterSalay	 ,
+				user_enterCnt	 ,
+				user_enterHiredat
+											
+		FROM users
+		
+		WHERE user_id = #{user_id} ;
+	</select>
+	
+
+
+	<!-- 수정 -->
+	<update id="updateUC" parameterType="UserVO" >
+		UPDATE users
+		SET
+		    user_passwd  = #{user_passwd},
+		    user_nick  = #{user_nick}, 
+		    user_name = #{user_name},
+		    user_phone = #{user_phone},
+		    user_add = #{user_add},
+		    user_passQ = #{user_passQ},
+		    user_passA = #{user_passA},
+		    user_salay = #{user_salay},
+		    user_cnt = #{user_cnt},
+		    user_hiredate = #{user_hiredate},
+			    
+		WHERE
+		 	    
+		    user_id = #{user_id};
+	</update>
+	
+	<!-- 삭 -->
+	<delete id="deleteUC" parameterType="UserVO">
+		DELETE 
+		
+		FROM User
+		
+		WHERE User_id = #{User_id};
+	</delete>
+   	
+   	<!-- 리뷰 -->
+	<select id="selectreview" parameterType="ReviewVO" resultType="ReviewVO">
+		SELECT 
+					review_title,
+				review_complain
+											
+		FROM	
+				Review
+		
+		WHERE 
+			
+		;
+	</select>
+	
+		<!-- 리뷰 상세-->
+	<select id="reviewdetail" parameterType="ReviewVO" resultType="ReviewVO">
+		SELECT 
+				review_title,
+				review_body
+				
+											
+		FROM 
+			Review
+		
+		WHERE 
+			
+			
+		;
+	</select>
+	
+	<!-- 삭제리뷰 -->
+	<delete id="deleterv" parameterType="ReviewVO">
+		DELETE 
+		
+		FROM User
+		
+		WHERE User_id = #{User_id};
+	</delete>
+	
+	
+
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+</mapper>

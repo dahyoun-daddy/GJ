@@ -10,11 +10,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
+@Repository
 public class SignUpDaoImple implements SignUpDao {
 
 Logger log = LoggerFactory.getLogger(this.getClass());

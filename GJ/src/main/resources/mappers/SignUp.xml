@@ -9,9 +9,9 @@
 	  parameterType="UserVO"
 	  resultType="UserVO"	  >
 	 SELECT                                    
-	     	     UserId    	                 
-	 FROM Users                             
-	 WHERE UserId = #{UserId}                            	
+	     	     user_id    	                 
+	 FROM users                             
+	 WHERE user_id = #{userId}                            	
 	 
 	</select>
 	 
@@ -36,50 +36,46 @@
 	FROM Users
 			
 		WHERE	user_id=#{userId}
-		AND		user_passq=#{userPassQ}
-		AND		user_passa=#{userPassA}
+		AND		user_passq=#{userPassQu}
+		AND		user_passa=#{userPassAn}
 	</select>
 	
 	<!-- 등록 -->
 	<insert id="insert"  parameterType="UserVO" >
-		 INSERT INTO Users (
-			  
-	        User_Id        ,
-	        User_Passwd    ,
-	        User_Nick      ,
-	        User_Name      ,
-	        User_Phone	  ,
-	        User_Add  	  ,
-	        Enter_Salay   ,
-	        Enter_Cnt	  ,
-	        Enter_Hiredate,
-	        User_PassQ	  ,
-	        User_PassA	  ,
-	        User_Phone	  ,
-	        RegId		  ,
-	        RegDt		  ,
-	        ModId		  ,
-	        ModDt			
+		 INSERT INTO users (		  
+	        user_id        ,
+	        user_passwd    ,
+	        user_nick      ,
+	        user_name      ,
+	        user_add  	  ,
+	        user_passqu	  ,
+	        user_passan	  ,
+	        user_phone	  ,
+	        user_level	  ,
+	        enter_salay    ,
+	        enter_cnt	  	  ,
+	        enter_hiredate ,
+	        reg_id		  ,
+	        reg_dt		  ,
+	        mod_id		  ,
+	        mod_dt			
 		 ) VALUES (  
 		     #{userId},
 		     #{userPasswd},             
 		     #{userNick},                 
 		     #{userName} ,                 
-		     #{userPhone},        
-		     #{userAdd}  
-		     #{enterSalay},                 
+		     #{userAdd},  
+		     #{userPassQu},
+		     #{userPassAn},
+		     #{userPhone},
+		      #{userLevel},
+		      #{enterSalay},                 
 		     #{enterCnt},                                 
 		     #{enterHiredate},
-		     #{userPassQ},
-		     #{userPassA},
-		     #{userPhone},
 		     #{regId},
-		     SYSDAYE
+		     SYSDAYE ,
 		     #{modId},
-		     SYSDAYE
-		     
-		     
-		             
+		     SYSDAYE		 	             
 		 )                      	
 	</insert>
 	
