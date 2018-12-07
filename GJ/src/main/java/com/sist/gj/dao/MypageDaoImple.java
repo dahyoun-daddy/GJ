@@ -3,6 +3,12 @@ package com.sist.gj.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.DTO;
@@ -10,129 +16,228 @@ import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserInfoVO;
 import com.sist.gj.vo.UserVO;
 
+@Repository
 public class MypageDaoImple implements MypageDao {
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
+	private final String NAMESPACE = "com.sist.gj.mappers.userMypage";
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	public MypageDaoImple() {}
+	
 	@Override
 	public int addPic(PictureVO pictureVO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updatePic(PictureVO pictureVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".addPic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+pictureVO);
+		int flag = sqlSession.insert(statement, pictureVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public int deletePic(PictureVO pictureVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".deletePic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+pictureVO);
+		int flag = sqlSession.delete(statement, pictureVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE+".selectCv";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+cvFormVO);
+		CvFormVO outVO = sqlSession.selectOne(statement, cvFormVO);
+		log.debug("result : "+outVO);
+		
+		return outVO;
 	}
 
 	@Override
 	public int updateCv(CvFormVO cvFormVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".updateCv";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+cvFormVO);
+		int flag = sqlSession.update(statement, cvFormVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public int addCv(CvFormVO cvFormVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".addCv";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+cvFormVO);
+		int flag = sqlSession.insert(statement, cvFormVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public List<CvFormVO> retrieveCv(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE+".retrieveCv";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<CvFormVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
 	}
 
 	@Override
 	public int addLic(LicenseVO licenseVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".addLic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+licenseVO);
+		int flag = sqlSession.insert(statement, licenseVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 	
 	@Override
 	public int updateLic(LicenseVO licenseVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".updateLic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+licenseVO);
+		int flag = sqlSession.update(statement, licenseVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public int deleteLic(LicenseVO licenseVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".deleteLic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+licenseVO);
+		int flag = sqlSession.delete(statement, licenseVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE+".selectLic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+licenseVO);
+		LicenseVO outVO = sqlSession.selectOne(statement, licenseVO);
+		log.debug("result : "+outVO);
+		
+		return outVO;
 	}
 	
 
 	@Override
-	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".retrieveLic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<LicenseVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
 	}
 
 	@Override
-	public int addApply(ApplyVO liceapplyVOnseVO) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addApply(ApplyVO applyVO) {
+		String statement = NAMESPACE+".addApply";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+applyVO);
+		int flag = sqlSession.insert(statement, applyVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 	
 	@Override
 	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE+".retrieveApply";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<ApplyVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
 	}
 	
 	@Override
 	public int updateApply(ApplyVO applyVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".updateApply";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+applyVO);
+		int flag = sqlSession.update(statement, applyVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
 	public int deleteApply(ApplyVO applyVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = NAMESPACE+".deleteApply";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+applyVO);
+		int flag = sqlSession.delete(statement, applyVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
-	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".selectUserInfo";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userInfoVO);
+		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("result : "+outVO);
+		
+		return outVO;
 	}
 
 	@Override
-	public UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".selectCompInfo";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userInfoVO);
+		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("result : "+outVO);
+		
+		return outVO;
 	}
 
 	@Override
-	public int deleteUser(UserVO DTO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteUser(UserVO userVO) throws SQLException {
+		String statement = NAMESPACE+".deleteUser";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.delete(statement, userVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 	@Override
-	public int updateUSer(UserVO DTO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateUser(UserVO userVO) throws SQLException{
+		String statement = NAMESPACE+".updateUser";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.update(statement, userVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 

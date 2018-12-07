@@ -1,26 +1,17 @@
-package com.sist.gj.dao;
+package com.sist.gj.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.sist.gj.vo.*;
+import com.sist.gj.vo.ApplyVO;
+import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.LicenseVO;
+import com.sist.gj.vo.PictureVO;
+import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserInfoVO;
+import com.sist.gj.vo.UserVO;
 
-public interface MypageDao {
-	
-	/*사진 등록/ 사진 수정/ 사진 삭제
-	 addPic
-	 updatePic
-	 deletePic
-
-	나의 정보 : Users Join > user_nick 
-	 selectUserInfo 기본 구직자마이페이지
-	 selectCompInfo 기본 기업마이페이지
-	 updateUser 정보수정
-	 deleteUser 탈퇴
-
-	지원현황
-	 retrieveApply
-	 deleteApply*/
+public interface MypageSvc {
 	
 	//사진은 수정이 따로 없고 (계정 당 한 사진만 올릴 수 있어서)
 	//사진 수정 시 기존 사진을 삭제하고 추가하는 과정을 거친다
@@ -85,6 +76,6 @@ public interface MypageDao {
 	//회원정보 수정하기 
 	int updateUser(UserVO userVO) throws SQLException;
 	
-	
+		
 
 }
