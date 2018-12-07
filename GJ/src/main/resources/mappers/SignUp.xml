@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.gj.mappers.SignUp">
+    
+	<!-- 단건 조회 -->
+	<select id="select" 
+	  parameterType="UserVO"
+	  resultType="UserVO"	  >
+	 SELECT                                    
+	     	     UserId    	                 
+	 FROM Users                             
+	 WHERE UserId = #{UserId}                            	
+	 
+	</select>
+	 
+	<!-- id -->
+	<select id="findId" 
+	  parameterType="UserVO"
+	  resultType="UserVO"	  >
+	SELECT 
+		UserId
+	FROM Users
+			
+		WHERE	user_name=#{userName}
+		AND		user_phone=#{userPhone}
+	</select>
+			<!-- pw-->
+	<select id="findPw" 
+	  parameterType="UserVO"
+	  resultType="UserVO"	  >
+	SELECT 
+		user_passwd
+	
+	FROM Users
+			
+		WHERE	user_id=#{userId}
+		AND		user_passq=#{userPassQ}
+		AND		user_passa=#{userPassA}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insert"  parameterType="UserVO" >
+		 INSERT INTO Users (
+			  
+	        User_Id        ,
+	        User_Passwd    ,
+	        User_Nick      ,
+	        User_Name      ,
+	        User_Phone	  ,
+	        User_Add  	  ,
+	        Enter_Salay   ,
+	        Enter_Cnt	  ,
+	        Enter_Hiredate,
+	        User_PassQ	  ,
+	        User_PassA	  ,
+	        User_Phone	  ,
+	        RegId		  ,
+	        RegDt		  ,
+	        ModId		  ,
+	        ModDt			
+		 ) VALUES (  
+		     #{userId},
+		     #{userPasswd},             
+		     #{userNick},                 
+		     #{userName} ,                 
+		     #{userPhone},        
+		     #{userAdd}  
+		     #{enterSalay},                 
+		     #{enterCnt},                                 
+		     #{enterHiredate},
+		     #{userPassQ},
+		     #{userPassA},
+		     #{userPhone},
+		     #{regId},
+		     SYSDAYE
+		     #{modId},
+		     SYSDAYE
+		     
+		     
+		             
+		 )                      	
+	</insert>
+	
+</mapper>
