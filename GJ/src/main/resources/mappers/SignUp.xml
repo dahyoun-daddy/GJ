@@ -26,6 +26,8 @@
 		WHERE	user_name=#{userName}
 		AND		user_phone=#{userPhone}
 	</select>
+	
+	
 			<!-- pw-->
 	<select id="findPw" 
 	  parameterType="UserVO"
@@ -42,40 +44,40 @@
 	
 	<!-- 등록 -->
 	<insert id="insert"  parameterType="UserVO" >
-		 INSERT INTO users (		  
-	        user_id        ,
-	        user_passwd    ,
-	        user_nick      ,
-	        user_name      ,
-	        user_add  	  ,
-	        user_passqu	  ,
-	        user_passan	  ,
-	        user_phone	  ,
-	        user_level	  ,
-	        enter_salay    ,
-	        enter_cnt	  	  ,
-	        enter_hiredate ,
-	        reg_id		  ,
-	        reg_dt		  ,
-	        mod_id		  ,
+		 INSERT INTO users(		  
+	        user_id,
+	        user_passwd,
+	        user_nick,
+	        user_name,
+	        user_add,
+	        user_passq,
+	        user_passa,
+	        user_phone,
+	        user_level,
+	        enter_salay,
+	        enter_cnt,
+	        enter_hiredate,
+	        reg_id,
+	        reg_dt,
+	        mod_id,
 	        mod_dt			
-		 ) VALUES (  
+		 ) VALUES(  
 		     #{userId},
 		     #{userPasswd},             
 		     #{userNick},                 
-		     #{userName} ,                 
+		     #{userName},                 
 		     #{userAdd},  
 		     #{userPassQu},
 		     #{userPassAn},
 		     #{userPhone},
-		      #{userLevel},
-		      #{enterSalay},                 
+		     #{userLevel},
+		     #{enterSalay},                 
 		     #{enterCnt},                                 
 		     #{enterHiredate},
 		     #{regId},
-		     SYSDAYE ,
+		     SYSDATE,
 		     #{modId},
-		     SYSDAYE		 	             
+		     SYSDATE		 	             
 		 )                      	
 	</insert>
 	

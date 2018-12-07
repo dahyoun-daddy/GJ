@@ -12,13 +12,16 @@ public class UserVO {
 	private String  userPhone	      ;//전화번호
 	private int	  userLevel	      ;//계정구분
 	private String  enterSalay	      ;//기업 연매출액 
-	private String  enterCnt	      ;//기업 사원수
+	private String  enterCnt	         ;//기업 사원수
 	private String  enterHiredate	  ;//기업 설립일
 	private String  regId			  ;//등록자
 	private String  regDt			  ;//등록일
 	private String  modId			  ;//수정자
 	private String  modDt			  ;//수정일
 	
+	public UserVO() {
+		
+	};
 	
 	public String getUserId() {
 		return userId;
