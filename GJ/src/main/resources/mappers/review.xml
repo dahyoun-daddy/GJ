@@ -34,8 +34,8 @@
 				  ,ROW_NUMBER() OVER(ORDER BY reg_dt desc ) AS rnum       
 			  FROM Review hr
 		  )T
-		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
-		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		  WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1) 
+		    AND (#{pageSize} * (#{pageNum}-1)+#{pageSize})
 		)X    
 		NATURAL JOIN
 		(
@@ -54,7 +54,7 @@
     
     
 	<!-- 단건 조회 -->
-	<select id="get" 
+	<select id="select" 
 	  parameterType="ReviewVO"
 	  resultType="ReviewVO"	  >
 	 SELECT                                    
@@ -74,14 +74,14 @@
 	<!-- 수정 -->
 	<update id="update"  parameterType="ReviewVO" >
 		 UPDATE Review          
-	        review_complain  = #{reviewComplain}      
+	        SET review_complain  = #{reviewComplain}      
 	       ,review_title  = #{reviewTitle}      
 	       ,review_body   = #{reviewBody}       
-	       ,review_date     = #{reviewDate}      
+	       ,review_date     = SYSDATE      
 	       ,review_point = #{reviewPoint}      
-	       ,mod_id     = #{modId}      
+	       ,mod_id     = #{regId}      
 	       ,mod_dt    = SYSDATE
-	    WHERE U_ID    = #{userId}            
+	    WHERE reg_id    = #{regId}            
 	</update>
 	
 	
@@ -103,7 +103,7 @@
 		     #{reviewComplain},                 
 		     #{reviewTitle} ,                 
 		     #{reviewBody},                 
-		     SYSDATE                 
+		     SYSDATE,                 
 		     #{reviewPoint},                 
 		     #{regId},                                 
 		     SYSDATE            
