@@ -10,6 +10,7 @@ public class JasoCommentVO extends DTO {
 	private String modId; //수정자
 	private String modDt; //수정일
 	private String clNo; //자소서 넘버
+	private String userNick;
 	
 	public JasoCommentVO() {}
 	
@@ -34,6 +35,14 @@ public class JasoCommentVO extends DTO {
 	}
 
 
+	
+	public String getUserNick() {
+		return userNick;
+	}
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
 
 	public String getClNo() {
 		return clNo;

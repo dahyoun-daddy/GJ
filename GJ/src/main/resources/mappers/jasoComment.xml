@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.gj.mappers.jasocomment">
-	<select id="select" parameterType="JasoVO" resultType="JasoCommentVO">
+<mapper namespace="com.sist.gj.mappers.jasoComment">
+	<select id="doRetrieve" parameterType="JasoVO" resultType="JasoCommentVO">
 		SELECT A.*,B.user_nick
 		  FROM 
 		(
@@ -44,6 +44,30 @@
 		WHERE A.user_id = B.user_id
 	</select>
 	
+	<update id="merge" parameterType="JasoCommentVO">
+		MERGE INTO clcomment T1
+	    USING (
+	        SELECT #{commentNo} AS comment_no,
+	               #{userId} AS user_id,
+	               #{commentBody} AS comment_body,
+	               #{commentDate} AS comment_date,
+	               #{regId} AS reg_id,
+	               #{clNo} AS cl_no
+	          FROM dual
+	    )T2
+	    ON (T1.comment_no = T2.comment_no)
+	    WHEN MATCHED THEN
+	     UPDATE SET T1.user_id = T2.user_id,
+	                T1.comment_body = T2.comment_body,
+	                T1.comment_date = sysdate,
+	                T1.mod_id = T2.user_id,
+	                T1.mod_dt = sysdate,
+	                T1.cl_no = T2.cl_no
+	    WHEN NOT MATCHED THEN
+	        INSERT (T1.comment_no, T1.user_id, T1.comment_body, T1.comment_date, T1.reg_id, T1.reg_dt, T1.cl_no)
+	        VALUES (T2.comment_no, T2.user_id, T2.comment_body, sysdate, T2.reg_id, sysdate, T2.cl_no)
+	</update>
+	
 	<insert id="add" parameterType="JasoCommentVO">
 		INSERT INTO clcomment (
 		    comment_no,
@@ -61,7 +85,7 @@
 		    #{regId},
 		    #{regDt},
 		    #{clNo}
-		);
+		)
 	</insert>
 	
 	<update id="update" parameterType="JasoCommentVO">

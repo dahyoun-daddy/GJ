@@ -65,4 +65,15 @@ public class JasoCommentDaoImple implements JasoCommentDao {
 		return list;
 	}
 
+	@Override
+	public int merge(JasoCommentVO jasoCVO) throws SQLException {
+		String statement = NAMESPACE+".merge";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+jasoCVO);
+		int flag = sqlSession.update(statement, jasoCVO);
+		log.debug("result : "+flag);
+				
+		return flag;
+	}
+
 }

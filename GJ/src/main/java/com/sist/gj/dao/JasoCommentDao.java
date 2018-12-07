@@ -10,6 +10,7 @@ import com.sist.gj.vo.SearchVO;
 public interface JasoCommentDao {
 	int update(JasoCommentVO jasoCVO) throws SQLException;
 	int delete(JasoCommentVO jasoCVO) throws SQLException;
+	int merge(JasoCommentVO jasoCVO) throws SQLException;
 	int add(JasoCommentVO jasoCVO);
 	List<JasoCommentVO> doRetrieve(JasoVO jasoCVO) throws ClassNotFoundException, SQLException;
 }

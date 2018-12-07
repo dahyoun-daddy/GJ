@@ -36,4 +36,9 @@ public class JasoCommentSvcImple implements JasoCommentSvc {
 		return jasoCDao.doRetrieve(jasoCVO);
 	}
 
+	@Override
+	public int merge(JasoCommentVO jasoCVO) throws SQLException {
+		return jasoCDao.merge(jasoCVO);
+	}
+
 }
