@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.gj.mappers.hire">
+<mapper namespace="com.sist.gj.mappers.Hire">
 	<sql id="searchWord">
 		<where>
   			<choose>
@@ -21,37 +21,6 @@
   		</where>
 	</sql>
 	
-	<select id="select" parameterType="HireVO" resultType="HireVO">
-		SELECT
-		    hire_no,
-		    hire_title,
-		    hire_body,
-		    user_id,
-		    hire_date,
-		    hire_deadline,
-		    hire_add,
-		    hire_salary,
-		    hire_edu
-		FROM
-		    hireinfo
-		WHERE hire_no = #{hireNo};
-	</select>
-	
-	<select id="selectAll" parameterType="HireVO" resultType="HireVO">
-		SELECT
-		    hire_no,
-		    hire_title,
-		    hire_body,
-		    user_id,
-		    hire_date,
-		    hire_deadline,
-		    hire_add,
-		    hire_salary,
-		    hire_edu
-		FROM
-		    hireinfo;
-	</select>
-	
 	<insert id="create" parameterType="HireVO">
 		INSERT INTO hireinfo (
 		    hire_no,
@@ -68,21 +37,37 @@
 		    mod_id,
 		    mod_dt
 		) VALUES (
-		    #{hire_no}, 
-		    #{hire_title}, 
-		    #{hire_body}, 
-		    #{user_id},
-		    #{hire_date}, 
-		    #{hire_deadline}, 
-		    #{hire_add}, 
-		    #{hire_salary}, 
-		    #{hire_edu}, 
-		    #{user_id}, 
+		    #{hireNo}, 
+		    #{hireTitle}, 
+		    #{hireBody}, 
+		    #{userId},
+		    #{hireDate}, 
+		    #{hireDeadline}, 
+		    #{hireAdd}, 
+		    #{hireSalary}, 
+		    #{hireEdu}, 
+		    #{userId}, 
 		    sysdate, 
-		    #{user_id}, 
+		    #{userId}, 
 		    sysdate
-		);
+		)
 	</insert>
+	
+	<select id="read" parameterType="HireVO" resultType="HireVO">
+		SELECT
+		    hire_no,
+		    hire_title,
+		    hire_body,
+		    user_id,
+		    hire_date,
+		    hire_deadline,
+		    hire_add,
+		    hire_salary,
+		    hire_edu
+		FROM
+		    hireinfo
+		WHERE hire_no = #{hireNo}
+	</select>
 	
 	<update id="update" parameterType="HireVO">
 		UPDATE hireinfo
@@ -96,7 +81,22 @@
 				 mod_id = #{modId},        
 				 mod_dt = sysdate  
 			WHERE
-			    hire_no = #{hireNo};
+			    hire_no = #{hireNo}
 	</update>
-
+	
+	<select id="search" parameterType="HireVO" resultType="HireVO">
+		SELECT
+		    hire_no,
+		    hire_title,
+		    hire_body,
+		    user_id,
+		    hire_date,
+		    hire_deadline,
+		    hire_add,
+		    hire_salary,
+		    hire_edu
+		FROM
+		    hireinfo
+	</select>
+	
 </mapper>

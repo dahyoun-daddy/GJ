@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.sist.gj.vo.HireVO;
+import com.sist.gj.vo.SearchVO;
 
 public interface HireDao {
 	
@@ -16,8 +17,9 @@ public interface HireDao {
 	//마감기한이 지나거나 채용이 완료된 경우는 별도로 표기
 
 	//전체조회
-	List<HireVO> selectAll() throws Exception;
+	List<HireVO> search(SearchVO searchVO) throws Exception;
+	
 	//조회
-	List<HireVO> select(HireVO hireVO) throws Exception;
+	HireVO read(HireVO hireVO) throws Exception;
 	
 }
