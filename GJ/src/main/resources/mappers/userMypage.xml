@@ -33,20 +33,20 @@
 			    reg_id,
 			    reg_dt
 			) VALUES (
-			    #{user_id},
-			    #{p_fl_nm},
-			    #{p_sv_nm},
-			    #{p_fl_pt},
-			    #{p_fl_tp},
-			    #{p_fl_sz},
-			    #{reg_id},
+			    #{userId},
+			    #{pFlNm},
+			    #{pSvNm},
+			    #{pFlPt},
+			    #{pFlTp},
+			    #{pFlSz},
+			    #{regId},
 			    sysdate
-			);
+			)
 	</insert>
 	
 	<delete id="deletePic" parameterType="PictureVO">
 		DELETE FROM profile
-		WHERE user_id = #{user_id};
+		WHERE user_id = #{userId}
 	</delete>
 	
 	
@@ -83,29 +83,30 @@
 
 	<insert id="addCv" parameterType="CvFormVO">
 		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt) VALUES (
-		    #{reg_id},
+		    #{regId},
             sysdate,
-            #{cv_grade},
-            #{cv_check},
+            #{cvGrade},
+            #{cvCheck},
             sysdate
-            );
+            )
 	</insert>
 	
 	<update id="updateCv" parameterType="CvFormVO">
 		UPDATE usercv
 		SET
 		    cv_date  = sysdate ,
-		    cv_grade = #{cv_grade},
-		    cv_check = #{cv_check},
+		    cv_grade = #{cvGrade},
+		    cv_check = #{cvCheck},
+		    mod_id   = #{regId},
 		    mod_dt   = sysdate
 		WHERE
-		    reg_id = #{reg_id} ;
+		    reg_id = #{regId} 
 	</update>
 	
 	<select id="selectCv" parameterType="CvFormVO" resultType="CvFormVO">
 		SELECT reg_id, cv_date, cv_grade, cv_check, reg_dt, mod_id, mod_dt
 		FROM usercv
-		WHERE reg_id = #{reg_id} ;
+		WHERE reg_id = #{regId} 
 	</select>
 	
 	<insert id="addLic" parameterType="LicenseVO">
@@ -116,27 +117,27 @@
 		    lic_score,
 		    reg_id
 		) VALUES (
-		    #{lic_no},
-		    #{lic_name},
-		    #{lic_date},
-		    #{lic_score},
-		    #{reg_id}
-		);
+		    #{licNo},
+		    #{licName},
+		    #{licDate},
+		    #{licScore},
+		    #{regId}
+		)
 	</insert>
 	
 	<update id="updateLic" parameterType="LicenseVO">
 		UPDATE userlicense
 		SET
-		    lic_name  = #{lic_name},
-		    lic_date  = #{lic_date},
-		    lic_score = #{lic_score}
+		    lic_name  = #{licName},
+		    lic_date  = #{licDate},
+		    lic_score = #{licScore}
 		WHERE
-		    lic_no = #{lic_no};
+		    lic_no = #{licNo}
 	</update>
 	
 	<delete id="deleteLic" parameterType="LicenseVO">
 		DELETE FROM userlicense
-		WHERE lic_no = #{lic_no};
+		WHERE lic_no = #{licNo}
 	</delete>
 	
 	<select id="retrieveLic" parameterType="SearchVO" resultType="LicenseVO">
@@ -164,14 +165,14 @@
 		    SELECT COUNT(*) AS total_cnt
 		      FROM USERLICENSE
 		      <include refid="searchText"/>
-		) Y;
+		) Y
 	</select>
 	
 	<select id="selectLic" parameterType="SearchVO" resultType="SearchVO">
 		SELECT *
 		FROM userlicense
-		WHERE reg_id = #{reg_id}
-		  AND lic_no = #{lic_no}; 
+		WHERE reg_id = #{regId}
+		  AND lic_no = #{licNo} 
 	</select>
 	
 	<insert id="addApply" parameterType="ApplyVO">
@@ -182,12 +183,12 @@
 		    hire_no,
 		    apply_check
 		) VALUES (
-		    #{apply_no},
-		    #{user_id},
-		    #{apply_date},
-		    #{hire_no},
+		    #{applyNo},
+		    #{userId},
+		    #{applyDate},
+		    #{hireNo},
 		    '1'
-		);
+		)
 	</insert>
 	
 	<select id="retrieveApply" parameterType="SearchVO" resultType="ApplyVO">
@@ -214,7 +215,7 @@
 		    SELECT COUNT(*) AS total_cnt
 		      FROM HIREAPPLY
 		      <include refid="searchText"/>
-		) Y;
+		) Y
 	</select>
 	
 	
@@ -223,38 +224,38 @@
 		SET
 		    apply_check = 0
 		WHERE
-		    apply_no = #{apply_no};
+		    apply_no = #{applyNo}
 	</update>
 	
 	<delete id="deleteApply" parameterType="ApplyVO">
 		DELETE FROM hireapply
-		WHERE apply_no = #{apply_no};
+		WHERE apply_no = #{applyNo}
 	</delete>
 	
 	
 	<update id="updateUser" parameterType="UserVO"> 
 		UPDATE users
 		SET
-		     user_passwd = #{user_passwd},
-		     user_nick = #{user_nick},
-		     user_name = #{user_name},
-		     user_add = #{user_add},
-		     user_passq = #{user_passq},
-		     user_passa = #{user_passa},
-		     user_phone = #{user_phone},
-		     enter_salay = #{enter_salay},
-		     enter_cnt = #{enter_cnt},
-		     enter_hiredate = #{enter_hiredate},
-		     mod_id = #{user_id},
-		     mod_dt = #{mod_dt}
+		     user_passwd = #{userPasswd},
+		     user_nick = #{userNick},
+		     user_name = #{userName},
+		     user_add = #{userAdd},
+		     user_passq = #{userPassq},
+		     user_passa = #{userPassa},
+		     user_phone = #{userPhone},
+		     enter_salay = #{enterSalay},
+		     enter_cnt = #{enterCnt},
+		     enter_hiredate = #{enterHiredate},
+		     mod_id = #{userId},
+		     mod_dt = #{modDt}
 		WHERE
-		     user_id = #{user_id} ;
+		     user_id = #{userId} 
 	</update>
 	
 	<delete id="deleteUser" parameterType="UserVO">
 		DELETE FROM users
-		 WHERE user_id     = #{user_id}
-		   AND user_passwd = #{user_passwd};
+		 WHERE user_id     = #{userId}
+		   AND user_passwd = #{userPasswd}
 	</delete>
 	
 <!-- 	private String userId; //email -->
@@ -262,21 +263,21 @@
 <!-- 	private int cvCheck; //resume open chk -->
 <!-- 	private int hireCount; //count the company's hireInfo -->
 	
-	<select id="selectUserInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+	<select id="selectUserInfo" parameterType="UserVO" resultType="UserVO">
 		SELECT t1.user_nick as user_nick ,
 		       t2.cv_check as cv_check
 		  FROM users t1, usercv t2
 		 WHERE t1.user_id = t2.reg_id
-		   AND t1.user_id = #{user_id};
+		   AND t1.user_id = #{userId}
 	</select>
 	
-	<select id="selectCompInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+	<select id="selectCompInfo" parameterType="UserVO" resultType="UserVO">
 		SELECT t1.user_nick as user_nick,
 		       count(t2.hire_no) as hire_count
 		  FROM users t1, hireinfo t2
 		 WHERE t1.user_id = t2.user_id
-		   AND t1.user_id = #{user_id}
-		 GROUP BY t1.user_nick;
+		   AND t1.user_id = #{userId}
+		 GROUP BY t1.user_nick
 	</select>
 	
 	

@@ -16,7 +16,6 @@ import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
-import com.sist.gj.vo.UserInfoVO;
 import com.sist.gj.vo.UserVO;
 
 @Repository
@@ -197,22 +196,22 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectUserInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userInfoVO);
-		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("param : "+userVO);
+		UserVO outVO = sqlSession.selectOne(statement, userVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
 	}
 
 	@Override
-	public UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectCompInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userInfoVO);
-		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("param : "+userVO);
+		UserVO outVO = sqlSession.selectOne(statement, userVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
