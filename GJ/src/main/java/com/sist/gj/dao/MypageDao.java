@@ -57,7 +57,7 @@ public interface MypageDao {
 	LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	//자격증 리스트 조회
-	List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
+	List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 	
 	//입사지원정보 추가
@@ -74,10 +74,10 @@ public interface MypageDao {
 	
 	
 	//기본 구직자마이페이지
-	UserVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
+	UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
 	
 	//기본 기업마이페이지
-	UserVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
+	UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
 	
 	//탈퇴하기
 	int deleteUser(UserVO userVO) throws SQLException;

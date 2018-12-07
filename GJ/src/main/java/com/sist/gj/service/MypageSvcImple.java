@@ -73,8 +73,8 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.retrieveLic(licenseVO);
+	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveLic(searchVO);
 	}
 
 	@Override
@@ -98,12 +98,12 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public UserVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
 		return mypageDao.selectUserInfo(userInfoVO);
 	}
 
 	@Override
-	public UserVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
 		return mypageDao.selectCompInfo(userInfoVO); 
 	}
 
