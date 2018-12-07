@@ -22,12 +22,11 @@ public interface MypageDao {
 	 retrieveApply
 	 deleteApply*/
 	
+	//사진은 수정이 따로 없고 (계정 당 한 사진만 올릴 수 있어서)
+	//사진 수정 시 기존 사진을 삭제하고 추가하는 과정을 거친다
 	//사진 추가
 	int addPic(PictureVO pictureVO);
-	
-	//사진 수정
-	int updatePic(PictureVO pictureVO) throws SQLException;
-	
+
 	//사진 삭제 
 	int deletePic(PictureVO pictureVO) throws SQLException;
 	
@@ -75,7 +74,7 @@ public interface MypageDao {
 	
 	
 	//기본 구직자마이페이지
-	UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException;
+	UserVO selectUserInfo(UserVO userVO, CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;
 	
 	//기본 기업마이페이지
 	UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException;

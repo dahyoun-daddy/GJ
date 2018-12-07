@@ -21,12 +21,6 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public int updatePic(PictureVO pictureVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int deletePic(PictureVO pictureVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
@@ -112,7 +106,7 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
+	public UserVO selectUserInfo(UserVO userVO, CvFormVO cvFormVO) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

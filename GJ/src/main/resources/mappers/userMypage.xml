@@ -22,7 +22,32 @@
   		</where>
 	</sql>
 	
-	<!-- 사진, 회원정보수정, 회원탈퇴는 추후 구현 예정 -->
+	<insert id="addPic" parameterType="PictureVO">
+		INSERT INTO profile (
+			    user_id,
+			    p_fl_nm,
+			    p_sv_nm,
+			    p_fl_pt,
+			    p_fl_tp,
+			    p_fl_sz,
+			    reg_id,
+			    reg_dt
+			) VALUES (
+			    #{user_id},
+			    #{p_fl_nm},
+			    #{p_sv_nm},
+			    #{p_fl_pt},
+			    #{p_fl_tp},
+			    #{p_fl_sz},
+			    #{reg_id},
+			    sysdate
+			);
+	</insert>
+	
+	<delete id="deletePic" parameterType="PictureVO">
+		DELETE FROM profile
+		WHERE user_id = #{user_id};
+	</delete>
 	
 	
 	<!-- 기업 마이페이지 오픈된 이력서 리스트 -->
@@ -58,7 +83,7 @@
 
 	<insert id="addCv" parameterType="CvFormVO">
 		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt) VALUES (
-		     #{reg_id},
+		    #{reg_id},
             sysdate,
             #{cv_grade},
             #{cv_check},
@@ -226,6 +251,33 @@
 		     user_id = #{user_id} ;
 	</update>
 	
+	<delete id="deleteUser" parameterType="UserVO">
+		DELETE FROM users
+		 WHERE user_id     = #{user_id}
+		   AND user_passwd = #{user_passwd};
+	</delete>
+	
+<!-- 	private String userId; //email -->
+<!-- 	private String userNick; //nickname -->
+<!-- 	private int cvCheck; //resume open chk -->
+<!-- 	private int hireCount; //count the company's hireInfo -->
+	
+	<select id="selectUserInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+		SELECT t1.user_nick as user_nick ,
+		       t2.cv_check as cv_check
+		  FROM users t1, usercv t2
+		 WHERE t1.user_id = t2.reg_id
+		   AND t1.user_id = #{user_id};
+	</select>
+	
+	<select id="selectCompInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+		SELECT t1.user_nick as user_nick,
+		       count(t2.hire_no) as hire_count
+		  FROM users t1, hireinfo t2
+		 WHERE t1.user_id = t2.user_id
+		   AND t1.user_id = #{user_id}
+		 GROUP BY t1.user_nick;
+	</select>
 	
 	
 

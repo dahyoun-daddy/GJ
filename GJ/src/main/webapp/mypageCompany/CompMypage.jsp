@@ -120,7 +120,6 @@
 <% 
 	String compName = "쌍용교육센터";
 	String hireCount = "2";
-	String empCount = "15";
 
 %>
 </head>
@@ -159,7 +158,7 @@
 				    		<div id ="profmain">
 				    		<br/>
 				    		기업명 <a style="color: orange;"><%=compName %></a><br/>
-				    		현재 올린 구인 공고 <a style="color: orange;"><%=hireCount %></a> 건이며 현재 지원자 수는 <a style="color: orange;"><%=empCount %></a> 명입니다.<br/><br/>
+				    		현재 올린 구인 공고 <a style="color: orange;"><%=hireCount %></a> 건 입니다.<br/><br/>
 				    		
 				    		<input id="smallBtn" type="button" value="정보 수정하기" 
 	                   			   onclick="location='CompMyInfo.jsp'; return false;">

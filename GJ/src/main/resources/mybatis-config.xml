@@ -19,5 +19,6 @@
   		<typeAlias alias="CodeVO" type="com.sist.gj.vo.CodeVO"/>
   		<typeAlias alias="HireVO" type="com.sist.gj.vo.HireVO"/>
   		<typeAlias alias="UserVO" type="com.sist.gj.vo.UserVO"/>
+  		<typeAlias alias="UserInfoVO" type="com.sist.gj.vo.UserInfoVO"/>
   	</typeAliases> 
   </configuration>
