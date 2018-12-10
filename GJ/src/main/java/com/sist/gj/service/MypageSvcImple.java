@@ -73,8 +73,8 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.retrieveLic(searchVO);
+	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveLic(licenseVO);
 	}
 
 	@Override

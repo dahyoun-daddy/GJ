@@ -149,7 +149,7 @@ public class MypageTest {
 		assertThat(result.getLicNo(),is("3"));
 		
 		//list retrieve
-		List<LicenseVO> list = mypageDao.retrieveLic(searchVO);
+		List<LicenseVO> list = mypageDao.retrieveLic(inLic3);
 		LOG.info("size : "+list.size()+""); 
 		LOG.info("list : "+list); 
 		assertThat(list.size(),is(not(0)));
@@ -158,7 +158,7 @@ public class MypageTest {
 		mypageDao.deleteLic(inLic1);
 		mypageDao.deleteLic(inLic2);
 		mypageDao.deleteLic(inLic3);
-		List<LicenseVO> list2 = mypageDao.retrieveLic(searchVO);
+		List<LicenseVO> list2 = mypageDao.retrieveLic(inLic3);
 		assertThat(list2.size() , is(0));
 		
 	}
@@ -189,7 +189,7 @@ public class MypageTest {
 		mypageDao.deleteApply(inApply1);
 		mypageDao.deleteApply(inApply2);
 		mypageDao.deleteApply(inApply3);
-		List<LicenseVO> list2 = mypageDao.retrieveLic(searchVO);
+		List<ApplyVO> list2 = mypageDao.retrieveApply(searchVO);
 		assertThat(list2.size() , is(0));
 		
 	}
