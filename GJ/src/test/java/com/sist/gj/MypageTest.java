@@ -27,6 +27,7 @@ import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 
@@ -55,7 +56,8 @@ public class MypageTest {
 	ApplyVO inApply3 = null;
 	UserVO inUser1 = null;
 	UserVO inUser2 = null;
-//	UserVO inUser3 = null;
+	UserMPViewVO user = null;
+	UserMPViewVO company = null;
 	SearchVO searchVO = null;
 	
 	@Before
@@ -73,7 +75,9 @@ public class MypageTest {
 		inApply3 = new ApplyVO("3","boondll@hanmail.net", "2018/12/01","3","1");
 		inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1","010-1212-1212",1,"","","","will@delete.com","18/12/10","","");
 		inUser2 = new UserVO("boondll@hanmail.net","password","nickname","name","address","2","답변수정","010-1111-1111",1,"","","","boondll@hanmail.net","18/12/10","","");
-//		inUser3 = new UserVO();
+
+		user = new UserMPViewVO();
+		company = new UserMPViewVO();
 		
 		searchVO = new SearchVO(10,1,"",""); 
 		LOG.info("context : "+context);
@@ -84,7 +88,6 @@ public class MypageTest {
 	
 	
 	@Test
-	@Ignore
 	public void addnDeletePic() throws SQLException {
 		int flag1 = mypageDao.addPic(inPic1);
 		assertThat(flag1,is(1));
@@ -93,7 +96,6 @@ public class MypageTest {
 	}//picture
 	
 	@Test
-	@Ignore
 	public void cvFormTest() throws SQLException, ClassNotFoundException {
 		//add
 		int flagAdd1 = mypageDao.addCv(inCv1);
@@ -126,7 +128,6 @@ public class MypageTest {
 	}//resume
 	
 	@Test
-	@Ignore
 	public void licenseTest() throws SQLException, ClassNotFoundException {
 		//add
 		int flagAdd1 = mypageDao.addLic(inLic1);
@@ -163,7 +164,6 @@ public class MypageTest {
 	}
 	
 	@Test
-	@Ignore
 	public void applyTest() throws SQLException, ClassNotFoundException {
 		//add
 		int flagAdd1 = mypageDao.addApply(inApply1);
@@ -194,22 +194,25 @@ public class MypageTest {
 		
 	}
 	
+	
+	//inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1",
+	//                     "010-1212-1212",1,"","","",
+	//                     "will@delete.com","18/12/10","","");
+	//DB에 넣은 뒤 수행하기
 	@Test
 	@Ignore
-	//inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1","010-1212-1212",1,"","","","will@delete.com","18/12/10","","");
-	//DB에 넣은 뒤 수행하기
 	public void userDelete() throws SQLException {
 		int flag = mypageDao.deleteUser(inUser1);
 		assertThat(flag, is(1));
 	}
 	
 	@Test
-	@Ignore
 	public void userUpdate() throws Exception {
 		inUser2.setModId("boondll@hanmail.net");
 		inUser2.setModDt("18/12/10");
 		inUser2.setuserPassAn("ANSWER!!");
 		LOG.info("inUser2:"+inUser2.toString());
+		LOG.info("inUser2 userId:"+inUser2.getUserId());
 		int flagUpdate = mypageDao.updateUser(inUser2);
 		assertThat(flagUpdate, is(1));
 		
@@ -217,10 +220,20 @@ public class MypageTest {
 	
 	@Test
 	public void selectUser() throws Exception {
-		
-		UserVO result = mypageDao.selectUserInfo(inUser1);
+		user.setUserId("boondll@hanmail.net");
+		UserMPViewVO result = mypageDao.selectUserInfo(user);
 		LOG.info("result : "+result);
-		assertThat(result.getUserId(),is("boondll@hanmail.net"));
+		assertThat(result.getUserNick(),is("nickname"));
+		assertThat(result.getCvCheck(),is(1));
+	}
+	
+	@Test
+	public void selectComp() throws Exception {
+		company.setUserId("test@company.com");
+		UserMPViewVO result = mypageDao.selectCompInfo(company);
+		LOG.info("result : "+result);
+		assertThat(result.getUserNick(),is("1"));
+		assertThat(result.getHireCount(),is(3));
 	}
 
 }
