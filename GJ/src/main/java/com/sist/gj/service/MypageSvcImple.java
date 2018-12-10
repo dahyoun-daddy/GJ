@@ -13,6 +13,7 @@ import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Service
@@ -97,13 +98,13 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.selectUserInfo(userVO);
+	public UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.selectUserInfo(userViewVO);
 	}
 
 	@Override
-	public UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.selectCompInfo(userVO); 
+	public UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.selectCompInfo(userViewVO); 
 	}
 
 	@Override

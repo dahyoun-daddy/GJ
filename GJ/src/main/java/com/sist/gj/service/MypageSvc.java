@@ -8,6 +8,7 @@ import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 public interface MypageSvc {
@@ -65,10 +66,10 @@ public interface MypageSvc {
 	
 	
 	//기본 구직자마이페이지
-	UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//기본 기업마이페이지
-	UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//탈퇴하기
 	int deleteUser(UserVO userVO) throws SQLException;

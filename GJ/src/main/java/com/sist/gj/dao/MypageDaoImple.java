@@ -14,6 +14,7 @@ import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Repository
@@ -194,22 +195,22 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
+	public UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectUserInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userVO);
-		UserVO outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("param : "+userViewVO);
+		UserMPViewVO outVO = sqlSession.selectOne(statement, userViewVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
 	}
 
 	@Override
-	public UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException {
+	public UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectCompInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userVO);
-		UserVO outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("param : "+userViewVO);
+		UserMPViewVO outVO = sqlSession.selectOne(statement, userViewVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;

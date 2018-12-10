@@ -75,10 +75,10 @@ public interface MypageDao {
 	
 	
 	//기본 구직자마이페이지
-	UserVO selectUserInfo(UserVO userVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//기본 기업마이페이지
-	UserVO selectCompInfo(UserVO userVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//탈퇴하기
 	int deleteUser(UserVO userVO) throws SQLException;

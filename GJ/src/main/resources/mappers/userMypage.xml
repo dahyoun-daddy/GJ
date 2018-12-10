@@ -245,8 +245,8 @@
 		     user_nick = #{userNick},
 		     user_name = #{userName},
 		     user_add = #{userAdd},
-		     user_passq = #{userPassq},
-		     user_passa = #{userPassa},
+		     user_passq = #{userPassQu},
+		     user_passa = #{userPassAn},
 		     user_phone = #{userPhone},
 		     enter_salay = #{enterSalay},
 		     enter_cnt = #{enterCnt},
@@ -268,15 +268,16 @@
 <!-- 	private int cvCheck; //resume open chk -->
 <!-- 	private int hireCount; //count the company's hireInfo -->
 	
-	<select id="selectUserInfo" parameterType="UserVO" resultType="UserVO">
-		SELECT t1.user_nick as user_nick ,
+	<select id="selectUserInfo" parameterType="UserMPViewVO" resultType="UserMPViewVO">
+		SELECT t1.user_id as user_id ,
+			   t1.user_nick as user_nick ,
 		       t2.cv_check as cv_check
 		  FROM users t1, usercv t2
 		 WHERE t1.user_id = t2.reg_id
 		   AND t1.user_id = #{userId}
 	</select>
 	
-	<select id="selectCompInfo" parameterType="UserVO" resultType="UserVO">
+	<select id="selectCompInfo" parameterType="UserMPViewVO" resultType="UserMPViewVO">
 		SELECT t1.user_nick as user_nick,
 		       count(t2.hire_no) as hire_count
 		  FROM users t1, hireinfo t2
