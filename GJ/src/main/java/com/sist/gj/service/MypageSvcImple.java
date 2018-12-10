@@ -116,4 +116,9 @@ public class MypageSvcImple implements MypageSvc {
 		return mypageDao.updateUser(userVO);
 	}
 
+	@Override
+	public int deleteCvAll() throws SQLException {
+		return mypageDao.deleteCvAll();
+	}
+
 }

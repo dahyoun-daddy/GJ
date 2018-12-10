@@ -30,7 +30,8 @@ public interface MypageDao {
 	//사진 삭제 
 	int deletePic(PictureVO pictureVO) throws SQLException;
 	
-	
+	//이력서 전체 삭제
+	int deleteCvAll() throws SQLException;
 	 
 	//이력서 단건조회
 	CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;

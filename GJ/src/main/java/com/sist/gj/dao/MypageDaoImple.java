@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
-import com.sist.gj.vo.DTO;
-import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
@@ -236,6 +234,15 @@ public class MypageDaoImple implements MypageDao {
 		int flag = sqlSession.update(statement, userVO);
 		log.debug("result : "+flag);
 				
+		return flag;
+	}
+
+	@Override
+	public int deleteCvAll() throws SQLException {
+		String statement = NAMESPACE+".deleteCvAll";
+		log.debug("sql statement : "+statement);
+		int flag = sqlSession.update(statement);
+		log.debug("result : "+flag);
 		return flag;
 	}
 

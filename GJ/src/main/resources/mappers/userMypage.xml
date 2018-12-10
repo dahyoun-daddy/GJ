@@ -50,6 +50,11 @@
 	</delete>
 	
 	
+	<delete id="deleteCvAll">
+		DELETE FROM usercv
+	</delete>
+	
+	
 	<!-- 기업 마이페이지 오픈된 이력서 리스트 -->
 	<select id="retrieveCv" parameterType="SearchVO" resultType="CvFormVO">
 		SELECT X.*, Y.*
