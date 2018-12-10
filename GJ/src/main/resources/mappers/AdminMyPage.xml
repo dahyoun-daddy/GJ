@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.gj.mappers.AdminMypage">
+<mapper namespace="com.sist.gj.mappers.AdminMyPage">
 
 	<sql id="searchText">
 		<where>
@@ -23,7 +23,7 @@
 	</sql>
 
 	
-	<!-- 창 조회-->
+	<!-- 유저 전체조회 -->
 	<select id="selectuser" parameterType="UserVO" resultType="UserVO">
 		  
 		        SELECT X.*, Y.*
@@ -32,7 +32,7 @@
 				    SELECT T.user_name,
 				           T.user_nick,
 				           T.user_id,
-				           TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
+				           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
 				           T.rnum AS no
 				      FROM
 				    (
@@ -53,24 +53,24 @@
 		
 	</select>
 
-	<!-- 상세 -->
+	<!-- 유저 상세조회-->
 	<select id="userdetail" parameterType="UserVO" resultType="UserVO">
 		SELECT 
-				user_id			 ,
+				user_id	    	 ,
 				user_passwd      ,
 				user_nick        ,
 				user_name        ,
 				user_phone       ,
 				user_add         ,
-				user_enterSalay	 ,
-				user_enterCnt	 ,
-				user_enterHiredat
+				enter_Salay	   ,
+				enter_Cnt	       ,
+				enter_Hiredate   ,
 				user_passQ       ,
-				user_passA       ,
+				user_passA       
 													
 		FROM users
 		
-		WHERE user_id = #{user_id} ;
+		WHERE user_id = #{userId} 
 	</select>
 	
 	
@@ -80,29 +80,29 @@
 	<update id="updateUC" parameterType="UserVO" >
 		UPDATE users
 		SET
-		    user_passwd  = #{user_passwd},
-		    user_nick  = #{user_nick}, 
-		    user_name = #{user_name},
-		    user_phone = #{user_phone},
-		    user_add = #{user_add},
-		    user_passQ = #{user_passQ},
-		    user_passA = #{user_passA},
-		    user_salay = #{user_salay},
-		    user_cnt = #{user_cnt},
-		    user_hiredate = #{user_hiredate},
+		    user_passwd  = #{userPasswd},
+		    user_nick  = #{userNick}, 
+		    user_name = #{userName},
+		    user_phone = #{userPhone},
+		    user_add = #{userAdd},
+		    user_passQ = #{userPassQu},
+		    user_passA = #{userPassAn},
+		    enter_salay = #{enterSalay},
+		    enter_Cnt = #{enterCnt},
+		    enter_Hiredate = #{enterHiredate}
 			    
 		WHERE
 		 	    
-		    user_id = #{user_id};
+		    user_id = #{userId}
 	</update>
 	
 	<!-- 삭제 -->
 	<delete id="deleteUC" parameterType="UserVO">
 		DELETE 
 		
-		FROM User
+		FROM Users
 		
-		WHERE User_id = #{User_id};
+		WHERE User_id = #{userId}
 	</delete>
    	
  

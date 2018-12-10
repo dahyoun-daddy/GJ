@@ -35,7 +35,7 @@ public class AdminTest2 {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private WebApplicationContext context;
+	private WebApplicationContext context; 
 	
 	@Autowired
 	private AdminPageDao adminPageDao;
@@ -47,7 +47,7 @@ public class AdminTest2 {
 	
 	@Before 
 	public void setUp() {
-		inVo1 = new UserVO("11@test.com","11","11","11","1","1"
+		inVo1 = new UserVO("11@test.com","1","1","1","1","1"
 					,"1","01011112222",1,null,null,null,"11@test.com","20181111",null,null);
 		 
 		searchVO = new SearchVO(10,1,"",""); 
@@ -70,6 +70,19 @@ public class AdminTest2 {
 		assertThat(list.size(),is(not(0)));
 		
 	}
+	
+	@Test
+	public void merge() throws SQLException, ClassNotFoundException {
+		UserVO userVO = adminPageDao.select(inVo1);
+		LOG.info("merge result = "+userVO);
+		assertThat(userVO.getUserId(),is("11@test.com"));
+		int updateUCflag = adminPageDao.updateUC(inVo1);
+		assertThat(updateUCflag,is(1));
+		int deleteUCflag = adminPageDao.deleteUC(inVo1);
+		assertThat(deleteUCflag,is(1));
+		
+	}
+	
 	
 	
 }

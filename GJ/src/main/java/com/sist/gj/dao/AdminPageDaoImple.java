@@ -39,7 +39,7 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 
 	UserVO outVO = null;
 		
-		String statement = NAMESPACE+".select";
+		String statement = NAMESPACE+".userdetail";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+userVO);
 		outVO = sqlSession.selectOne(statement, userVO);
