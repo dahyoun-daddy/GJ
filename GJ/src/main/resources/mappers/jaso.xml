@@ -7,13 +7,10 @@
 		<where>
   			<choose>
   				<when test="10 == searchDiv">
-  					hr.u_id LIKE '%'||#{searchWord}||'%'
+  					C.cl_title LIKE '%'||#{searchWord}||'%'
   				</when>
   				<when test="20 == searchDiv">
-  					hr.name LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="30 == searchDiv"> 
-  					hr.email LIKE '%'||#{searchWord}||'%'
+  					C.reg_id LIKE '%'||#{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -52,7 +49,7 @@
 				NATURAL JOIN
 				(
 				    SELECT COUNT(*) AS total_cnt
-				      FROM usercl
+				      FROM usercl C
 		            <include refid="searchText"/>
 				) Y
 		    ) A,
