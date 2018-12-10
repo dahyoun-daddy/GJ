@@ -53,8 +53,8 @@ public class MypageTest {
 	ApplyVO inApply1 = null;
 	ApplyVO inApply2 = null;
 	ApplyVO inApply3 = null;
-//	UserVO inUser1 = null;
-//	UserVO inUser2 = null;
+	UserVO inUser1 = null;
+	UserVO inUser2 = null;
 //	UserVO inUser3 = null;
 	SearchVO searchVO = null;
 	
@@ -68,11 +68,11 @@ public class MypageTest {
 		inLic1 = new LicenseVO("1","정보처리기사","2018/11/16","","boondll@hanmail.net");
 	    inLic2 = new LicenseVO("2","TOEIC","2016/10/16","830","boondll@hanmail.net");
 		inLic3 = new LicenseVO("3","OPic","2016/07/16","IM2","boondll@hanmail.net");
-		inApply1 = new ApplyVO();
-		inApply2 = new ApplyVO();
-		inApply3 = new ApplyVO();
-//		inUser1 = new UserVO();
-//		inUser2 = new UserVO();
+		inApply1 = new ApplyVO("1","boondll@hanmail.net", "2018/12/01","1","1");
+		inApply2 = new ApplyVO("2","boondll@hanmail.net", "2018/12/01","2","1");
+		inApply3 = new ApplyVO("3","boondll@hanmail.net", "2018/12/01","3","1");
+		inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1","010-1212-1212",1,"","","","will@delete.com","18/12/10","","");
+		inUser2 = new UserVO("boondll@hanmail.net","password","nickname","name","address","2","답변수정","010-1111-1111",1,"","","","boondll@hanmail.net","18/12/10","","");
 //		inUser3 = new UserVO();
 		
 		searchVO = new SearchVO(10,1,"",""); 
@@ -126,6 +126,7 @@ public class MypageTest {
 	}//resume
 	
 	@Test
+	@Ignore
 	public void licenseTest() throws SQLException, ClassNotFoundException {
 		//add
 		int flagAdd1 = mypageDao.addLic(inLic1);
@@ -139,6 +140,7 @@ public class MypageTest {
 		inLic1.setLicScore("합격");
 		int flagUpdate = mypageDao.updateLic(inLic1);
 		assertThat(flagUpdate,is(1));
+		LOG.info("inLic3:"+inLic3);
 		
 		//select
 		LicenseVO result = mypageDao.selectLic(inLic3);
@@ -159,6 +161,66 @@ public class MypageTest {
 		assertThat(list2.size() , is(0));
 		
 	}
-
+	
+	@Test
+	@Ignore
+	public void applyTest() throws SQLException, ClassNotFoundException {
+		//add
+		int flagAdd1 = mypageDao.addApply(inApply1);
+		int flagAdd2 = mypageDao.addApply(inApply2);
+		int flagAdd3 = mypageDao.addApply(inApply3);
+		assertThat(flagAdd1,is(1));
+		assertThat(flagAdd2,is(1));
+		assertThat(flagAdd3,is(1));
+		
+		//update
+		inApply1.setApplyCheck("0");
+		int flagUpdate = mypageDao.updateApply(inApply1);
+		assertThat(flagUpdate,is(1));
+		LOG.info("inApply1:"+inApply1);
+		
+		//list retrieve
+		List<ApplyVO> list = mypageDao.retrieveApply(searchVO);
+		LOG.info("size : "+list.size()+""); 
+		LOG.info("list : "+list); 
+		assertThat(list.size(),is(not(0)));
+		
+		//delete All
+		mypageDao.deleteApply(inApply1);
+		mypageDao.deleteApply(inApply2);
+		mypageDao.deleteApply(inApply3);
+		List<LicenseVO> list2 = mypageDao.retrieveLic(searchVO);
+		assertThat(list2.size() , is(0));
+		
+	}
+	
+	@Test
+	@Ignore
+	//inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1","010-1212-1212",1,"","","","will@delete.com","18/12/10","","");
+	//DB에 넣은 뒤 수행하기
+	public void userDelete() throws SQLException {
+		int flag = mypageDao.deleteUser(inUser1);
+		assertThat(flag, is(1));
+	}
+	
+	@Test
+	@Ignore
+	public void userUpdate() throws Exception {
+		inUser2.setModId("boondll@hanmail.net");
+		inUser2.setModDt("18/12/10");
+		inUser2.setuserPassAn("ANSWER!!");
+		LOG.info("inUser2:"+inUser2.toString());
+		int flagUpdate = mypageDao.updateUser(inUser2);
+		assertThat(flagUpdate, is(1));
+		
+	}
+	
+	@Test
+	public void selectUser() throws Exception {
+		
+		UserVO result = mypageDao.selectUserInfo(inUser1);
+		LOG.info("result : "+result);
+		assertThat(result.getUserId(),is("boondll@hanmail.net"));
+	}
 
 }

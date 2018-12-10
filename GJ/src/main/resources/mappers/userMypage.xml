@@ -173,8 +173,8 @@
 		) Y
 	</select>
 	
-	<select id="selectLic" parameterType="SearchVO" resultType="SearchVO">
-		SELECT *
+	<select id="selectLic" parameterType="SearchVO" resultType="LicenseVO">
+		SELECT lic_no, lic_name, lic_date, lic_score, reg_id
 		FROM userlicense
 		WHERE reg_id = #{regId}
 		  AND lic_no = #{licNo} 
@@ -227,7 +227,7 @@
 	<update id="updateApply" parameterType="ApplyVO"> 
 		UPDATE hireapply
 		SET
-		    apply_check = 0
+		    apply_check = #{applyCheck}
 		WHERE
 		    apply_no = #{applyNo}
 	</update>
