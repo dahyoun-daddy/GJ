@@ -56,7 +56,7 @@ public class AdminTest2 {
 		LOG.info("mockMvc : "+mockMvc);
 		LOG.info("SignUpDao : "+adminPageDao);
 	}
-	
+	 
 	@Test
 	public void Test() { 
 		assertThat(inVo1.getUserId(), is("11@test.com")); 
