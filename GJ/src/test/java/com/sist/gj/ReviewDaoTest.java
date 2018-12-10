@@ -70,7 +70,6 @@ public class ReviewDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<ReviewVO> list = reviewDao.doRetrieve(searchVO);
 		LOG.info("size : "+list.size()+""); 
