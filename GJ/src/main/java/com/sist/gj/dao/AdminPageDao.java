@@ -8,15 +8,15 @@ import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.ReviewVO;
+import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
 public interface AdminPageDao {
 	
 	
 	
-	//등록
-		int insert(UserVO userVO) throws SQLException;
 	
+	 
 	//조회
 	UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException;
 	
@@ -28,19 +28,10 @@ public interface AdminPageDao {
 
 				
 		//유 리스트 조회
-		List<UserVO> retrieveLic(UserVO userVO) throws ClassNotFoundException, SQLException;
+		List<UserVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		
-		//리뷰 삭제
-		int deleteRV(ReviewVO reviewVO) throws SQLException;
-		
-		//조회
-		ReviewVO select(ReviewVO reviewVO) throws ClassNotFoundException, SQLException;
-		
-		//리뷰 조회
-		List<UserVO> retrieveLic(ReviewVO reviewVO) throws ClassNotFoundException, SQLException;
 	
 }

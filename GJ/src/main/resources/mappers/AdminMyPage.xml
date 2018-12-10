@@ -4,21 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.gj.mappers.AdminMypage">
 
-	
+	<sql id="searchText">
+		<where>
+  			<choose>
+  				<when test="10 == searchDiv">
+  					hr.u_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="20 == searchDiv">
+  					hr.name LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="30 == searchDiv"> 
+  					hr.email LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
+  		</where>
+	</sql>
 
 	
-	<!-- 창 -->
+	<!-- 창 조회-->
 	<select id="selectuser" parameterType="UserVO" resultType="UserVO">
-		SELECT user_name ,
-				user_nick,
-				user_id,
-				user_regdt
-							
-		FROM users
+		  
+		        SELECT X.*, Y.*
+				  FROM
+				( 
+				    SELECT T.user_name,
+				           T.user_nick,
+				           T.user_id,
+				           TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
+				           T.rnum AS no
+				      FROM
+				    (
+				        SELECT C.*,
+				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+				          FROM users C
+		                <include refid="searchText"/>
+				    ) T
+		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+					   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+				) X
+					NATURAL JOIN
+				(
+				    SELECT COUNT(*) AS total_cnt
+				      FROM users
+				      <include refid="searchText"/>
+				)Y
 		
-		WHERE user_id = #{user_id} ;
 	</select>
-	
+
 	<!-- 상세 -->
 	<select id="userdetail" parameterType="UserVO" resultType="UserVO">
 		SELECT 
@@ -28,16 +62,17 @@
 				user_name        ,
 				user_phone       ,
 				user_add         ,
-				user_passQ       ,
-				user_passA       ,
 				user_enterSalay	 ,
 				user_enterCnt	 ,
 				user_enterHiredat
-											
+				user_passQ       ,
+				user_passA       ,
+													
 		FROM users
 		
 		WHERE user_id = #{user_id} ;
 	</select>
+	
 	
 
 
@@ -61,7 +96,7 @@
 		    user_id = #{user_id};
 	</update>
 	
-	<!-- 삭 -->
+	<!-- 삭제 -->
 	<delete id="deleteUC" parameterType="UserVO">
 		DELETE 
 		
@@ -70,56 +105,7 @@
 		WHERE User_id = #{User_id};
 	</delete>
    	
-   	<!-- 리뷰 -->
-	<select id="selectreview" parameterType="ReviewVO" resultType="ReviewVO">
-		SELECT 
-					review_title,
-				review_complain
-											
-		FROM	
-				Review
-		
-		WHERE 
-			
-		;
-	</select>
-	
-		<!-- 리뷰 상세-->
-	<select id="reviewdetail" parameterType="ReviewVO" resultType="ReviewVO">
-		SELECT 
-				review_title,
-				review_body
-				
-											
-		FROM 
-			Review
-		
-		WHERE 
-			
-			
-		;
-	</select>
-	
-	<!-- 삭제리뷰 -->
-	<delete id="deleterv" parameterType="ReviewVO">
-		DELETE 
-		
-		FROM User
-		
-		WHERE User_id = #{User_id};
-	</delete>
-	
-	
-
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
+ 
    	
    	
    	

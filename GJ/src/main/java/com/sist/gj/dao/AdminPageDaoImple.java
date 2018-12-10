@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sist.gj.vo.JasoCommentVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
@@ -31,54 +32,61 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public int insert(UserVO userVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	UserVO outVO = null;
+		
+		String statement = NAMESPACE+".select";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+		
+	}	
+	
 
 	@Override
 	public int updateUC(UserVO userVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		UserVO outVO = null;
+		
+		String statement = NAMESPACE+".updateUC";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.update(statement, userVO);
+		log.debug("result : "+flag);
+		
+		return flag;
 	}
 
 	@Override
 	public int deleteUC(UserVO userVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		UserVO outVO = null;
+		
+		String statement = NAMESPACE+".deleteUC";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.delete(statement, userVO);
+		log.debug("result : "+flag);
+		
+		return flag;
+	}
+ 
+	@Override
+	public List<UserVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".selectuser";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<UserVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
 	}
 
-	@Override
-	public List<UserVO> retrieveLic(UserVO userVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int deleteRV(ReviewVO reviewVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ReviewVO select(ReviewVO reviewVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserVO> retrieveLic(ReviewVO reviewVO) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 
 	
 

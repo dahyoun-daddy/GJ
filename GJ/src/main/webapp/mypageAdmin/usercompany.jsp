@@ -1,5 +1,87 @@
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="com.sist.gj.vo.SearchVO"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+
+	String context = request.getContextPath();//context path
+
+	
+
+	String page_size ="10";//page_size
+
+	String page_num  ="1";//page_num
+
+	String search_div ="";//검색구분
+
+	String search_word="";//검색어
+
+	
+
+	int totalCnt      =0;
+
+	int bottomCount   =10;
+
+    
+
+	SearchVO vo =  (SearchVO)request.getAttribute("param");
+
+	//out.print("vo:"+vo);
+
+		if(null !=vo ){
+
+		search_div  = StringUtill.nvl(vo.getSearchDiv(), "");  
+
+		search_word = StringUtill.nvl(vo.getSearchWord(), ""); 
+
+		page_size   = StringUtill.nvl(vo.getPageSize(), "10"); 
+
+		page_num   = StringUtill.nvl(vo.getPageNum(), "1"); 
+
+	}else{ 
+
+		search_div  = StringUtill.nvl(request.getParameter("search_div"), ""); 
+
+		search_word = StringUtill.nvl(request.getParameter("search_word"), "");
+
+		page_size = StringUtill.nvl(request.getParameter("page_size"), "10");
+
+		page_num = StringUtill.nvl(request.getParameter("page_num"), "1");
+
+	}
+		
+
+		int oPageSize = Integer.parseInt(page_size);
+
+		int oPageNum  = Integer.parseInt(page_num);
+
+		
+
+		String iTotalCnt = (null == request.getAttribute("total_cnt"))?"0":request.getAttribute("total_cnt").toString();
+
+		totalCnt = Integer.parseInt(iTotalCnt);
+
+		
+
+		List<CodeVO> code_page = (null == request.getAttribute("code_page"))
+
+				     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
+
+		
+	
+
+	
+	
+	
+%>	
+
+
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,6 +165,8 @@
 				</div>					
     	</div>
     	</div>
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  	
+    	
     	
     <!--// 검색영역----------------------------------------------------->
    
