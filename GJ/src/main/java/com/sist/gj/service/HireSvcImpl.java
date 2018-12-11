@@ -40,8 +40,8 @@ public class HireSvcImpl implements HireSvc {
 	}
 
 	@Override
-	public List<JasoVO> doRetrieve(SearchVO searchVO) throws Exception {
-		return null;
+	public List<HireVO> search(SearchVO searchVO) throws Exception {
+		return hireDao.search;
 	}
 
 }
