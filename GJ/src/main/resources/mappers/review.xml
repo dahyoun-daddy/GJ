@@ -33,6 +33,7 @@
 			SELECT hr.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY reg_dt desc ) AS rnum       
 			  FROM Review hr
+			 WHERE user_nick = #{searchWord}
 		  )T
 		  WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1) 
 		    AND (#{pageSize} * (#{pageNum}-1)+#{pageSize})
@@ -60,7 +61,7 @@
 	 SELECT                                    
 	     <include refid="reviewColumns"/>                       
 	 FROM Review                             
-	 WHERE reg_id = #{regId}                            	
+	 WHERE review_no = #{reviewNo}                            	
 	
 	</select>
 	
@@ -81,7 +82,7 @@
 	       ,review_point = #{reviewPoint}      
 	       ,mod_id     = #{regId}      
 	       ,mod_dt    = SYSDATE
-	    WHERE reg_id    = #{regId}            
+	    WHERE review_no = #{reviewNo}           
 	</update>
 	
 	
