@@ -49,7 +49,7 @@ public class ReviewDaoTest {
 		inVo2 = new ReviewVO("2","기업2","3","제목","내용","","4","준혁1","",null,null);
 		inVo3 = new ReviewVO("3","기업3","3","제목","내용","","4","준혁2","",null,null);
 		
-		searchVO = new SearchVO(10,1,"",""); 
+		searchVO = new SearchVO(10,1,"기업1",""); 
 		LOG.info("context : "+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc : "+mockMvc);
@@ -70,7 +70,6 @@ public class ReviewDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<ReviewVO> list = reviewDao.doRetrieve(searchVO);
 		LOG.info("size : "+list.size()+""); 
@@ -80,15 +79,25 @@ public class ReviewDaoTest {
 	
 	@Test
 	@Ignore
-	public void delete() throws ClassNotFoundException, SQLException {
-		reviewDao.delete(inVo1);
-		reviewDao.delete(inVo2);
+	public void select() throws ClassNotFoundException, SQLException {
+		ReviewVO result = reviewDao.select(inVo3);
+		LOG.info("result : "+result);
+		assertThat(result.getReviewNo(),is("3"));
 	}
 	
 	@Test
+	@Ignore
 	public void update() throws ClassNotFoundException, SQLException {
 		inVo3.setReviewPoint("10");
 		reviewDao.update(inVo3);
+	}
+	
+	@Test
+	@Ignore
+	public void delete() throws ClassNotFoundException, SQLException {
+		reviewDao.delete(inVo1);
+		reviewDao.delete(inVo2);
+		reviewDao.delete(inVo3);
 	}
 	
 	 
@@ -101,10 +110,5 @@ public class ReviewDaoTest {
 //		assertThat(deleteflag,is(1));
 //	}
 	
-	@Test 
-	public void select() throws ClassNotFoundException, SQLException {
-		ReviewVO result = reviewDao.select(inVo3);
-		LOG.info("result : "+result);
-		assertThat(result.getReviewNo(),is("3"));
-	}
+
 }
