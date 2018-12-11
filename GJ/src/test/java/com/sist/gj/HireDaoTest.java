@@ -48,7 +48,7 @@ public class HireDaoTest {
 	
 	@Before
 	public void setUp() {
-		inVo1 = new HireVO(7,"보승소프트 신입공채","보승소프트 신입공채","보승소프트"
+		inVo1 = new HireVO(15,"보승소프트 신입공채","보승소프트 신입공채","보승소프트"
 				,"20181212","20181212","창원시","3000","학력무관","보승소프트",null,"보승소프트",null);
 		inVo2 = new HireVO();
 		inVo3 = new HireVO();
@@ -71,19 +71,19 @@ public class HireDaoTest {
 	
 	@Test
 	public void create() throws Exception{
-		inVo1 = new HireVO(7,"보승소프트 신입공채","보승소프트 신입공채","보승소프트"
-				,"20181212","20181212","창원시","3000","학력무관","보승소프트",null,"보승소프트",null);
 		int flag = hireDao.create(inVo1);
 		assertThat(flag,is(1));
 	}
 	
 	@Test 
 	public void read() throws Exception {
-		HireVO result = hireDao.read(inVo1);
-		assertThat(result.getHireNo(),is(1));
+		int result = hireDao.read(inVo1);
+		LOG.info("result : "+result);
+		assertThat(inVo1.getHireNo(),is(1));
 	}
 	
 	@Test
+	@Ignore
 	public void update() throws Exception {
 		inVo1.setHireTitle("수정됨");
 		int flag = hireDao.update(inVo1);
@@ -98,7 +98,11 @@ public class HireDaoTest {
 		assertThat(list.size(),is(not(0)));
 	}
 	
-	
+	@Test
+	public void delete() throws Exception {
+		int flag = hireDao.delete(inVo1);
+		assertThat(flag, is(1));
+	}
 	
 	
 	
