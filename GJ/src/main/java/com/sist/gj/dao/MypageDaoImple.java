@@ -163,7 +163,7 @@ public class MypageDaoImple implements MypageDao {
 	
 	@Override
 	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		String statement = NAMESPACE+".retrieveApplyComp";
+		String statement = NAMESPACE+".retrieveApply";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+searchVO);
 		List<ApplyVO> list = sqlSession.selectList(statement, searchVO);

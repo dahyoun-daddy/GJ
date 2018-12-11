@@ -70,9 +70,9 @@ public class MypageTest {
 		inLic1 = new LicenseVO("1","정보처리기사","2018/11/16","","boondll@hanmail.net");
 	    inLic2 = new LicenseVO("2","TOEIC","2016/10/16","830","boondll@hanmail.net");
 		inLic3 = new LicenseVO("3","OPic","2016/07/16","IM2","boondll@hanmail.net");
-		inApply1 = new ApplyVO("1","boondll@hanmail.net", "2018/12/01","1","1");
-		inApply2 = new ApplyVO("2","boondll@hanmail.net", "2018/12/01","2","1");
-		inApply3 = new ApplyVO("3","boondll@hanmail.net", "2018/12/01","3","1");
+//		inApply1 = new ApplyVO("1","boondll@hanmail.net", "2018/12/01","1","1");
+//		inApply2 = new ApplyVO("2","boondll@hanmail.net", "2018/12/01","2","1");
+//		inApply3 = new ApplyVO("3","boondll@hanmail.net", "2018/12/01","3","1");
 		inUser1 = new UserVO("will@delete.com","1","1","1","1","1","1","010-1212-1212",1,"","","","will@delete.com","18/12/10","","");
 		inUser2 = new UserVO("boondll@hanmail.net","password","nickname","name","address","2","답변수정","010-1111-1111",1,"","","","boondll@hanmail.net","18/12/10","","");
 

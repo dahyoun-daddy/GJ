@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.sist.gj.vo.SearchVO"%>
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,6 +106,45 @@
 	
 	
 </style>
+<% 
+	String context = request.getContextPath();//context path
+	
+	String page_size ="10";//page_size
+	String page_num  ="1";//page_num
+	String search_div ="";//검색구분
+	String search_word="";//검색어
+	
+	int totalCnt      =0;
+	int bottomCount   =10;
+    
+	SearchVO vo =  (SearchVO)request.getAttribute("param");
+	//out.print("vo:"+vo);
+	
+	if(null !=vo ){
+		search_div  = StringUtill.nvl(vo.getSearchDiv(), ""); 
+		search_word = StringUtill.nvl(vo.getSearchWord(), ""); 
+		page_size   = StringUtill.nvl(vo.getPageSize(), "10"); 
+		page_num   = StringUtill.nvl(vo.getPageNum(), "1"); 
+	}else{ 
+		search_div  = StringUtill.nvl(request.getParameter("search_div"), ""); 
+		search_word = StringUtill.nvl(request.getParameter("search_word"), "");
+		page_size = StringUtill.nvl(request.getParameter("page_size"), "10");
+		page_num = StringUtill.nvl(request.getParameter("page_num"), "1");
+	}
+	
+
+	
+	int oPageSize = Integer.parseInt(page_size);
+	int oPageNum  = Integer.parseInt(page_num);
+	
+	String iTotalCnt = (null == request.getAttribute("total_cnt"))?"0":request.getAttribute("total_cnt").toString();
+	totalCnt = Integer.parseInt(iTotalCnt);
+	
+	List<CodeVO> code_page = (null == request.getAttribute("code_page"))
+			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
+	
+	
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -127,33 +172,41 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원 현황</strong></h5>
 					    	<br/>
+					    	<form action="#">
+							<input type="hidden" name="page_num" id="page_num">
+							<!-- --검색영역 -->
 					    	<div class="row" style="float: right;">
-							  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							  					<div class="form-group" >
-							  						<div style="float: left; width: 25%;">
-							  						<select name="search_Div" id="search_Div" class="form-control input-sm">
-							  							<option value="1">10</option>
-							  							<option value="2">20</option>
-							  							<option value="3">50</option>
-							  						</select>
-							  						</div>
-							  						<div style="float: left; width: 33%;">
-							  							<select name="search_Div" id="search_Div" class="form-control input-sm">
-							  							<option value="1">기업명</option>
-							  							<option value="2">채용제목</option>
-							  						</select>
-							  						</div>
-							  						<div style="float: left; width: 41%;">
-							  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
-							  						</div>
-							  					</div>
-							  		  		</div>
-							  		  		<div class="form-group">
-							  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
-							  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">지원취소</button>
-							  				</div>
-							  			</div>
-									</form>
+					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					  					<div class="form-group" >
+					  						<div style="float: left; width: 25%;">
+						  						<select name="page_size" id="page_size" class="form-control input-sm">
+						  							<option value="10">10</option>
+						  							<option value="20">20</option>
+						  							<option value="50">50</option>
+						  						</select>
+					  						</div>
+					  						<div style="float: left; width: 33%;">
+					  							<select name="search_div" id="search_div" class="form-control input-sm">
+					  							<option value="" >::전체::</option>
+					  							<option value="1" <%if(search_div.equals("1"))out.print("selected='selected'"); %> >기업명</option>
+					  							<option value="3" <%if(search_div.equals("3"))out.print("selected='selected'"); %> >채용제목</option>
+					  						</select>
+					  						</div>
+					  						<div style="float: left; width: 41%;">
+					  							<input type="text" name="search_word" id="search_word" class="form-control input-sm" placeholder="검색어"/>
+					  						</div>
+					  					</div>
+					  		  		</div>
+					  		  		<div class="form-group">
+					  					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
+					  					<button type="button" class="btn btn-default btn-sm" onclick="cancelApply();">지원취소</button>
+					  				</div>
+				  				</div>
+				  				</form>
+				  				
+							<!--// 검색영역----------------------------------------------------->
+							
+							<!-- Grid영역 -->
 					    	<div class="table-responsive" align="center" style="float:left;">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 								
@@ -173,26 +226,35 @@
 								  		</tr>
 								  		</thead>
 								  		<tbody>
-								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">쌍용교육센터</td>
-								  				<td class="text-left">[쌍용강북교육센터]  매니저 정직원 채용 </td>
-								  				<td class="text-center">오늘</td>
-								  			</tr>	
-								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">우아한 형제</td>
-								  				<td class="text-left">[하반기 공채] 신입 개발자 본사 정직원... </td>
-								  				<td class="text-center">2018/11/20</td>
-								  			</tr>
+								  			<c:choose>
+								  				<c:when test="${list.size()>0}">
+								  					<c:forEach var="applyVO" items="${list}">
+								  					<tr>
+								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
+										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
+										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
+		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
+		 								  			</tr>
+								  					</c:forEach>
+								  				</c:when>
+			  				 	 					<c:otherwise>
+							 	 						<tr>
+							 	 							<td class="text-center" colspan="99">지원한 정보가 없습니다.</td>
+							 	 						</tr>
+							  						</c:otherwise>
+								  			</c:choose>
+								  		
 								  		</tbody>
 								  	</table>
 							  	</div>
-							  	<div class="dorm-inline text-center">
-							  		1
-							  	</div>
-							  	
+							  	<!--// Grid영역 ---------------------------------------------------->
 						  	</div>
+						  	<!--pagenation ---------------------------------------------------->
+						  	<div class="dorm-inline text-center">
+						  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "UserApply.do", "search_page") %>
+						  	</div>
+						  	<!--// pagenation영역 ----------------------------------------------->
+							  	
 				    		
 				    	</div>
 		          </div>
@@ -209,8 +271,23 @@
 	   		 $("input[name='check']").prop("checked",true);
 	   	 }else{
 	   		 $("input[name='check']").prop("checked",false);
-	   	 }
-	   	   
+	   	 } 
+	    }//checkAll()
+	    
+	    function search_page(url,page_num){
+        	 alert(url+":search_page:"+page_num);
+        	 var frm = document.frm;
+        	 frm.page_num.value = page_num;
+        	 frm.action = url;
+        	 frm.submit();
+        	 
+         }
+	    
+	    function doSearch(){
+	    	var frm = document.frm;
+	    	frm.page_num.value = 1;
+	    	frm.action="UserApply.do";
+	    	frm.submit();
 	    }
 	     
     </script>

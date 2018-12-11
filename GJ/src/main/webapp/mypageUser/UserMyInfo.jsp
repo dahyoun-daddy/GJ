@@ -125,8 +125,7 @@
 	
 </style>
 <% 
-	String nickname = "초보개발자";
-	String openResume = "있습니다";
+	String context = request.getContextPath();//context path
 
 %>
 </head>

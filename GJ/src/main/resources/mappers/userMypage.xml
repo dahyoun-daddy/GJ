@@ -71,7 +71,18 @@
 		SELECT X.*, Y.*
 		  FROM
 		(
-		    SELECT T.*,
+		    SELECT T.reg_id,
+		           DECODE(TO_CHAR(T.cv_date,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+    						,TO_CHAR(T.cv_date,'HH24:mm:SS'),TO_CHAR(T.cv_date,'YYYY/MM/DD')) AS cv_date,
+                   T.cv_grade,
+                   T.cv_check,
+				   DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+        					,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt
+                   T.mod_id,
+				   DECODE(TO_CHAR(T.mod_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+        					,TO_CHAR(T.mod_dt,'HH24:mm:SS'),TO_CHAR(T.mod_dt,'YYYY/MM/DD')) AS mod_dt
+                   T.user_nick,
+                   T.user_name,
 		           T.rnum AS no
 		      FROM
 		    (
@@ -225,8 +236,8 @@
                    AND C.user_id = E.user_id
 		    ) T
 		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-		   		  <include refid="searchApply"/>
 			  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+		   		  <include refid="searchApply"/>
 		) X
 		NATURAL JOIN
 		(
