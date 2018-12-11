@@ -38,7 +38,7 @@ public class CodeDaoTest {
 	private MockMvc mockMvc;
 	
 	CodeVO codeVO = null;
-	 
+	
 	@Before
 	public void setUp() {
 		codeVO = new CodeVO("JASO_SEARCH","1","작성자","1","1","ADMIN","18/12/05","ADMIN","18/12/05");

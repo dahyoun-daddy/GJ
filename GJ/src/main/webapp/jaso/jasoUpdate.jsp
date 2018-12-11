@@ -54,7 +54,7 @@
 			            </table>
 			        </div>
 			    </div>
-			    <button class="btn btn-primary" type="button" id="doUpdate">등록/수정</button>
+			    <button class="btn btn-primary" type="submit" id="doUpdate">등록/수정</button>
 			</form>
 			</div>
 		</div>
@@ -81,12 +81,12 @@
    		         	"clCheck":1
    		         },
    		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-   		         	var parseData = $.parseJSON(data);
+   		         	/* var parseData = $.parseJSON(data);
    		         	if(parseData.flag == "1"){
    		         		alert(parseData.msg);
    		         	}else{
    		         		alert(parseData.msg);
-   		         	}
+   		         	} */
    		         },
    		         complete: function(data){//무조건 수행
    		          
