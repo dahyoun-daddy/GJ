@@ -63,9 +63,15 @@ public class JasoController {
 		List<JasoVO> list = jasoSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
 		
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
+		
 		model.addAttribute("code_Page",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
-		
+		model.addAttribute("total_cnt",totalCnt);
 		return VIEW_NAME;
 	}
 	

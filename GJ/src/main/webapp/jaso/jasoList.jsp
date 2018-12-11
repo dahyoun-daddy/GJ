@@ -39,8 +39,8 @@
 	<br/>
 	<br/>
 	<div class="container">
-		<form>
-		<input type="hidden" name="page_num" id="page_num">
+		<form name="frm" id="frm" method="get">
+		<input type="hidden" name="pageNum" id="pageNum">
   		<!-- --검색영역 -->
   			<div class="row" style="float: right;">
   		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -61,7 +61,7 @@
   					</div>
   		  		</div>
   		  		<div class="form-group">
-  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+  					<button type="button" class="btn btn-default btn-sm" onclick="searchPage();">조회</button>
   					<button type="button" class="btn btn-default btn-sm" id="doSave" >등록</button>
   				</div>
   			</div>
@@ -103,12 +103,19 @@
 		  	</table>
 	  	</div> 
 	  	<div class="dorm-inline text-center">
-	  		1
+	  		<%=StringUtill.renderPaging(totalCnt, oPage_num, oPageSize, bottomCount, "jasoList.do", "searchPage") %>
 	  	</div>
   	</div>
   	<!-- Grid영역종료 -->
 	<script type="text/javascript">
-		
+		function searchPage(url,page_num){
+			alert("url : "+url+" page_num : "+page_num);
+			var frm = document.frm;
+			frm.pageNum.value = page_num;
+			frm.action = url;
+			frm.submit();
+		}	
+	
 		$(document).ready(function(){
 			//alert("ready");
 			$("#doSave").on("click",function(){
