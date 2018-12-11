@@ -41,7 +41,7 @@ public class HireSvcImpl implements HireSvc {
 
 	@Override
 	public List<HireVO> search(SearchVO searchVO) throws Exception {
-		return hireDao.search;
+		return hireDao.search(searchVO);
 	}
 
 }
