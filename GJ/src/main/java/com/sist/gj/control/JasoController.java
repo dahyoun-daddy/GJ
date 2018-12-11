@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.JasoCommentSvc;
 import com.sist.gj.service.JasoSvc;
@@ -55,7 +57,8 @@ public class JasoController {
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value="/jaso/jasoUpdate.do")
+	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
+	@ResponseBody
 	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
 		log.info("=====================update=======================");
 		log.info("invo" + invo);
@@ -65,8 +68,12 @@ public class JasoController {
 		JSONObject object = new JSONObject();
 		
 		//String loginId = req.getParameter("userId");
-		String loginId = "컨트롤러ID";
+		
+		//----------------------------------------------------------------
+		//<-- 세션값으로 아이디값 받기 -->
+		String loginId = "boondll@hanmail.net";
 		invo.setRegId(loginId);
+		//----------------------------------------------------------------
 		
 		flag = jasoSvc.merge(invo);
 		
@@ -77,6 +84,9 @@ public class JasoController {
 			object.put("flag",flag);
 			object.put("msg","등록 실패.");
 		}
-		return VIEW_NAME;
+		
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
 	}
 }

@@ -37,7 +37,7 @@
   		  		</div>
   		  		<div class="form-group">
   					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
-  					<button type="button" class="btn btn-default btn-sm" id="do_save" >등록</button>
+  					<button type="button" class="btn btn-default btn-sm" id="doSave" >등록</button>
   				</div>
   			</div>
 		</form>
@@ -82,6 +82,15 @@
 	  	</div>
   	</div>
   	<!-- Grid영역종료 -->
-	
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+			//alert("ready");
+			$("#doSave").on("click",function(){
+				//alert("ready");
+				location.href = "jasoUpdate.jsp";
+			});
+		});
+	</script>
 </body>
 </html>

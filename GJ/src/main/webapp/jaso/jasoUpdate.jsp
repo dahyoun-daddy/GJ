@@ -18,6 +18,7 @@
 			        <div class="right-side"> 
 			            <h3>자소서 작성</h3>
 			            <br/> 
+			            <input type="hidden" id="userId" name="userId" value="${userId}"/>
 			            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
 			            	<colgroup>
 		  						<col width="20%"/>
@@ -54,12 +55,20 @@
 			            </table>
 			        </div>
 			    </div>
-			    <button class="btn btn-primary" type="submit" id="doUpdate">등록/수정</button>
+			    <button class="btn btn-primary" type="button" id="doUpdate">등록/수정</button>
+			</form>
+			<form id="frm" name="frm">
 			</form>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+		function doSearch(){
+			var frm = document.frm;
+			frm.action="jasoList.do";
+			frm.submit();
+		}
+	
 		$(document).ready(function(){
 			//alert("ready");
 			$("#doUpdate").on("click",function(){
@@ -81,12 +90,13 @@
    		         	"clCheck":1
    		         },
    		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-   		         	/* var parseData = $.parseJSON(data);
+   		         	var parseData = $.parseJSON(data);
    		         	if(parseData.flag == "1"){
    		         		alert(parseData.msg);
+   		         		doSearch();
    		         	}else{
    		         		alert(parseData.msg);
-   		         	} */
+   		         	}
    		         },
    		         complete: function(data){//무조건 수행
    		          
