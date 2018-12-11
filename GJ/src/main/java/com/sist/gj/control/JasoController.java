@@ -73,7 +73,7 @@ public class JasoController {
 		//<-- 세션값으로 아이디값 받기 -->
 		String loginId = "boondll@hanmail.net";
 		invo.setRegId(loginId);
-		//----------------------------------------------------------------
+		
 		
 		flag = jasoSvc.merge(invo);
 		
