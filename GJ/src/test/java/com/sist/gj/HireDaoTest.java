@@ -103,7 +103,6 @@ public class HireDaoTest {
 		int flag = hireDao.delete(inVo1);
 		assertThat(flag, is(1));
 	}
-	
-	
+
 	
 }
