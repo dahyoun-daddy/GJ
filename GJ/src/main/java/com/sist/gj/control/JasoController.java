@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.JasoCommentSvc;
 import com.sist.gj.service.JasoSvc;
+import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
 
@@ -30,6 +32,9 @@ public class JasoController {
 	
 	@Autowired
 	private JasoSvc jasoSvc;
+	@Autowired
+	private CodeSvc codeSvc;
+	
 	@Autowired
 	private JasoCommentSvc jasoCSvc;
 	
@@ -50,10 +55,23 @@ public class JasoController {
 			invo.setSearchDiv("");
 		}
 		
+		CodeVO codePage = new CodeVO();
+		codePage.setCmId("JASO_SEARCH");
+		
+		
+		
 		List<JasoVO> list = jasoSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
-		model.addAttribute("list",list);
 		
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
+		
+		model.addAttribute("code_Page",codeSvc.doRetrieve(codePage));
+		model.addAttribute("list",list);
+		model.addAttribute("total_cnt",totalCnt);
 		return VIEW_NAME;
 	}
 	
