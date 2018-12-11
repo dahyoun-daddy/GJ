@@ -4,22 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.gj.mappers.userMypage">
 
-	<sql id="searchText">
-		<where>
-  			<choose>
-  				<when test="10 == searchDiv">
-  					hr.u_id LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="20 == searchDiv">
-  					hr.name LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="30 == searchDiv"> 
-  					hr.email LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<otherwise>
-  				</otherwise>
-  			</choose>
-  		</where>
+	<sql id="searchCv">
+		<choose>
+			<when test="1 == searchDiv">
+				AND D.user_name LIKE '%'||#{searchWord}||'%'
+			</when>
+			<when test="2 == searchDiv">
+				AND C.cv_grade LIKE '%'||#{searchWord}||'%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<sql id="searchApply">
+		<choose>
+			<when test="1 == searchDiv">
+				AND T.comp_nick LIKE '%'||#{searchWord}||'%'
+			</when>
+			<when test="2 == searchDiv">
+				AND T.user_name LIKE '%'||#{searchWord}||'%'
+			</when>
+			<when test="3 == searchDiv">
+				AND T.hire_title LIKE '%'||#{searchWord}||'%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<insert id="addPic" parameterType="PictureVO">
@@ -33,20 +44,25 @@
 			    reg_id,
 			    reg_dt
 			) VALUES (
-			    #{user_id},
-			    #{p_fl_nm},
-			    #{p_sv_nm},
-			    #{p_fl_pt},
-			    #{p_fl_tp},
-			    #{p_fl_sz},
-			    #{reg_id},
+			    #{userId},
+			    #{pFlNm},
+			    #{pSvNm},
+			    #{pFlPt},
+			    #{pFlTp},
+			    #{pFlSz},
+			    #{regId},
 			    sysdate
-			);
+			)
 	</insert>
 	
 	<delete id="deletePic" parameterType="PictureVO">
 		DELETE FROM profile
-		WHERE user_id = #{user_id};
+		WHERE user_id = #{userId}
+	</delete>
+	
+	<!-- Test 위한 쿼리문. 실제로는 사용하지 않음 -->
+	<delete id="deleteCvAll">
+		DELETE FROM usercv
 	</delete>
 	
 	
@@ -55,57 +71,58 @@
 		SELECT X.*, Y.*
 		  FROM
 		(
-		    SELECT T.reg_id,
-		           T.cv_date,
-		           T.cv_grade,
-		           T.cv_check,
-		           T.reg_dt,
-                   T.mod_id,
-                   T.mod_dt,
+		    SELECT T.*,
 		           T.rnum AS no
 		      FROM
 		    (
 		        SELECT C.*,
-		               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
-		          FROM usercv C
-		  		 <include refid="searchText"/>
-		    ) T
-		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-			  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-		) X
-		NATURAL JOIN
-		(
-		    SELECT COUNT(*) AS total_cnt
-		      FROM usercv
-		    <include refid="searchText"/>
-		) Y
+		               D.user_nick as user_nick,
+		               D.user_name as user_name,
+		               ROW_NUMBER() OVER(ORDER BY C.reg_dt DESC) AS rnum
+		          FROM usercv C, users D
+		         WHERE C.reg_id = D.user_id
+		           AND C.cv_check = 1
+				  		<include refid="searchCv"/>
+				    ) T
+				    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+					  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+			) X
+			NATURAL JOIN
+			(
+			    SELECT COUNT(*) AS total_cnt
+			      FROM usercv C, users D
+			     WHERE C.reg_id = D.user_id
+			       AND C.cv_check = 1
+			        <include refid="searchCv"/>
+			) Y;
 	</select>
 
 	<insert id="addCv" parameterType="CvFormVO">
 		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt) VALUES (
-		    #{reg_id},
+		    #{regId},
             sysdate,
-            #{cv_grade},
-            #{cv_check},
+            #{cvGrade},
+            #{cvCheck},
             sysdate
-            );
+            )
 	</insert>
 	
 	<update id="updateCv" parameterType="CvFormVO">
 		UPDATE usercv
 		SET
 		    cv_date  = sysdate ,
-		    cv_grade = #{cv_grade},
-		    cv_check = #{cv_check},
+		    cv_grade = #{cvGrade},
+		    cv_check = #{cvCheck},
+		    mod_id   = #{regId},
 		    mod_dt   = sysdate
 		WHERE
-		    reg_id = #{reg_id} ;
+		    reg_id = #{regId} 
 	</update>
 	
 	<select id="selectCv" parameterType="CvFormVO" resultType="CvFormVO">
 		SELECT reg_id, cv_date, cv_grade, cv_check, reg_dt, mod_id, mod_dt
 		FROM usercv
-		WHERE reg_id = #{reg_id} ;
+		WHERE reg_id = #{regId} 
 	</select>
 	
 	<insert id="addLic" parameterType="LicenseVO">
@@ -116,27 +133,27 @@
 		    lic_score,
 		    reg_id
 		) VALUES (
-		    #{lic_no},
-		    #{lic_name},
-		    #{lic_date},
-		    #{lic_score},
-		    #{reg_id}
-		);
+		    #{licNo},
+		    #{licName},
+		    #{licDate},
+		    #{licScore},
+		    #{regId}
+		)
 	</insert>
 	
 	<update id="updateLic" parameterType="LicenseVO">
 		UPDATE userlicense
 		SET
-		    lic_name  = #{lic_name},
-		    lic_date  = #{lic_date},
-		    lic_score = #{lic_score}
+		    lic_name  = #{licName},
+		    lic_date  = #{licDate},
+		    lic_score = #{licScore}
 		WHERE
-		    lic_no = #{lic_no};
+		    lic_no = #{licNo}
 	</update>
 	
 	<delete id="deleteLic" parameterType="LicenseVO">
 		DELETE FROM userlicense
-		WHERE lic_no = #{lic_no};
+		WHERE lic_no = #{licNo}
 	</delete>
 	
 	<select id="retrieveLic" parameterType="SearchVO" resultType="LicenseVO">
@@ -154,24 +171,21 @@
 		        SELECT C.*,
 		               ROW_NUMBER() OVER(ORDER BY LIC_DATE DESC) AS rnum
 		          FROM USERLICENSE C
+		         WHERE C.reg_id = #{regId}
 		    ) T
-		   WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-		     AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-		     <include refid="searchText"/>
 		) X
 		NATURAL JOIN
 		(
 		    SELECT COUNT(*) AS total_cnt
 		      FROM USERLICENSE
-		      <include refid="searchText"/>
-		) Y;
+		) Y
 	</select>
 	
-	<select id="selectLic" parameterType="SearchVO" resultType="SearchVO">
-		SELECT *
+	<select id="selectLic" parameterType="SearchVO" resultType="LicenseVO">
+		SELECT lic_no, lic_name, lic_date, lic_score, reg_id
 		FROM userlicense
-		WHERE reg_id = #{reg_id}
-		  AND lic_no = #{lic_no}; 
+		WHERE reg_id = #{regId}
+		  AND lic_no = #{licNo} 
 	</select>
 	
 	<insert id="addApply" parameterType="ApplyVO">
@@ -182,79 +196,86 @@
 		    hire_no,
 		    apply_check
 		) VALUES (
-		    #{apply_no},
-		    #{user_id},
-		    #{apply_date},
-		    #{hire_no},
+		    #{applyNo},
+		    #{userId},
+		    #{applyDate},
+		    #{hireNo},
 		    '1'
-		);
+		)
 	</insert>
 	
 	<select id="retrieveApply" parameterType="SearchVO" resultType="ApplyVO">
 		SELECT X.*, Y.*
 		  FROM
 		(
-		    SELECT T.APPLY_NO,
-		           T.USER_ID,
-		           T.APPLY_DATE,
-		           T.HIRE_NO,
+		    SELECT T.*,
 		           T.rnum AS no
 		      FROM
 		    (
 		        SELECT C.*,
+                       D.hire_title as hire_title,
+                       D.user_id AS comp_id,
+                      (SELECT U.user_nick 
+                         FROM USERS U 
+                        WHERE D.user_id = U.user_id) as comp_nick,
+                       E.user_name as user_name,
 		               ROW_NUMBER() OVER(ORDER BY APPLY_DATE) AS rnum
-		          FROM HIREAPPLY C
+		          FROM HIREAPPLY C, HIREINFO D, USERS E
+                 WHERE C.hire_no = D.hire_no
+                   AND C.user_id = E.user_id
 		    ) T
-		     WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-		     AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-		     <include refid="searchText"/>
+		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+		   		  <include refid="searchApply"/>
+			  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
 		) X
 		NATURAL JOIN
 		(
 		    SELECT COUNT(*) AS total_cnt
-		      FROM HIREAPPLY
-		      <include refid="searchText"/>
-		) Y;
+              FROM HIREAPPLY C, HIREINFO D, USERS E
+             WHERE C.hire_no = D.hire_no
+               AND C.user_id = E.user_id
+		      <include refid="searchApply"/>
+		) Y
 	</select>
 	
 	
 	<update id="updateApply" parameterType="ApplyVO"> 
 		UPDATE hireapply
 		SET
-		    apply_check = 0
+		    apply_check = #{applyCheck}
 		WHERE
-		    apply_no = #{apply_no};
+		    apply_no = #{applyNo}
 	</update>
 	
 	<delete id="deleteApply" parameterType="ApplyVO">
 		DELETE FROM hireapply
-		WHERE apply_no = #{apply_no};
+		WHERE apply_no = #{applyNo}
 	</delete>
 	
 	
 	<update id="updateUser" parameterType="UserVO"> 
 		UPDATE users
 		SET
-		     user_passwd = #{user_passwd},
-		     user_nick = #{user_nick},
-		     user_name = #{user_name},
-		     user_add = #{user_add},
-		     user_passq = #{user_passq},
-		     user_passa = #{user_passa},
-		     user_phone = #{user_phone},
-		     enter_salay = #{enter_salay},
-		     enter_cnt = #{enter_cnt},
-		     enter_hiredate = #{enter_hiredate},
-		     mod_id = #{user_id},
-		     mod_dt = #{mod_dt}
+		     user_passwd = #{userPasswd},
+		     user_nick = #{userNick},
+		     user_name = #{userName},
+		     user_add = #{userAdd},
+		     user_passq = #{userPassQu},
+		     user_passa = #{userPassAn},
+		     user_phone = #{userPhone},
+		     enter_salay = #{enterSalay},
+		     enter_cnt = #{enterCnt},
+		     enter_hiredate = #{enterHiredate},
+		     mod_id = #{userId},
+		     mod_dt = #{modDt}
 		WHERE
-		     user_id = #{user_id} ;
+		     user_id = #{userId} 
 	</update>
 	
 	<delete id="deleteUser" parameterType="UserVO">
 		DELETE FROM users
-		 WHERE user_id     = #{user_id}
-		   AND user_passwd = #{user_passwd};
+		 WHERE user_id     = #{userId}
+		   AND user_passwd = #{userPasswd}
 	</delete>
 	
 <!-- 	private String userId; //email -->
@@ -262,21 +283,22 @@
 <!-- 	private int cvCheck; //resume open chk -->
 <!-- 	private int hireCount; //count the company's hireInfo -->
 	
-	<select id="selectUserInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
-		SELECT t1.user_nick as user_nick ,
+	<select id="selectUserInfo" parameterType="UserMPViewVO" resultType="UserMPViewVO">
+		SELECT t1.user_id as user_id ,
+			   t1.user_nick as user_nick ,
 		       t2.cv_check as cv_check
 		  FROM users t1, usercv t2
 		 WHERE t1.user_id = t2.reg_id
-		   AND t1.user_id = #{user_id};
+		   AND t1.user_id = #{userId}
 	</select>
 	
-	<select id="selectCompInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+	<select id="selectCompInfo" parameterType="UserMPViewVO" resultType="UserMPViewVO">
 		SELECT t1.user_nick as user_nick,
 		       count(t2.hire_no) as hire_count
 		  FROM users t1, hireinfo t2
 		 WHERE t1.user_id = t2.user_id
-		   AND t1.user_id = #{user_id}
-		 GROUP BY t1.user_nick;
+		   AND t1.user_id = #{userId}
+		 GROUP BY t1.user_nick
 	</select>
 	
 	

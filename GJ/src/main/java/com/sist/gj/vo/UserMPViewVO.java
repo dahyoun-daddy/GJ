@@ -1,18 +1,30 @@
 package com.sist.gj.vo;
 
-public class UserInfoVO extends DTO{
-
-	//Table Join 시 필요한 것들 (마이페이지에 이용)
-	private String userId; //email
-	private String userNick; //nickname
-	private int cvCheck; //resume open chk
-	private int hireCount; //count the company's hireInfo
+public class UserMPViewVO extends DTO {
 	
-	public UserInfoVO() {}
+	//Mypage 에 사용되는 vo
+	private String userId; //userID
+	private String userNick; //userNick
+	private int cvCheck; //resume open or not
+	private int hireCount; //company's own hireApply count
+	
+	public UserMPViewVO() {}
+
+	
+	
+	public UserMPViewVO(String userId, String userNick, int cvCheck, int hireCount) {
+		super();
+		this.userId = userId;
+		this.userNick = userNick;
+		this.cvCheck = cvCheck;
+		this.hireCount = hireCount;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "UserInfoVO [userId=" + userId + ", userNick=" + userNick + ", cvCheck=" + cvCheck + ", hireCount="
+		return "UserMPViewVO [userId=" + userId + ", userNick=" + userNick + ", cvCheck=" + cvCheck + ", hireCount="
 				+ hireCount + "]";
 	}
 
@@ -47,6 +59,7 @@ public class UserInfoVO extends DTO{
 	public void setHireCount(int hireCount) {
 		this.hireCount = hireCount;
 	}
-
 	
+	
+
 }

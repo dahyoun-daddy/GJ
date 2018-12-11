@@ -11,12 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
-import com.sist.gj.vo.DTO;
-import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
-import com.sist.gj.vo.UserInfoVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Repository
@@ -142,11 +140,11 @@ public class MypageDaoImple implements MypageDao {
 	
 
 	@Override
-	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".retrieveLic";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+searchVO);
-		List<LicenseVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("param : "+licenseVO);
+		List<LicenseVO> list = sqlSession.selectList(statement, licenseVO);
 		log.debug("result : "+list);
 		
 		return list;
@@ -165,7 +163,7 @@ public class MypageDaoImple implements MypageDao {
 	
 	@Override
 	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		String statement = NAMESPACE+".retrieveApply";
+		String statement = NAMESPACE+".retrieveApplyComp";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+searchVO);
 		List<ApplyVO> list = sqlSession.selectList(statement, searchVO);
@@ -197,22 +195,22 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectUserInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userInfoVO);
-		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("param : "+userViewVO);
+		UserMPViewVO outVO = sqlSession.selectOne(statement, userViewVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
 	}
 
 	@Override
-	public UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
+	public UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".selectCompInfo";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+userInfoVO);
-		UserInfoVO outVO = sqlSession.selectOne(statement, userInfoVO);
+		log.debug("param : "+userViewVO);
+		UserMPViewVO outVO = sqlSession.selectOne(statement, userViewVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
@@ -237,6 +235,15 @@ public class MypageDaoImple implements MypageDao {
 		int flag = sqlSession.update(statement, userVO);
 		log.debug("result : "+flag);
 				
+		return flag;
+	}
+
+	@Override
+	public int deleteCvAll() throws SQLException {
+		String statement = NAMESPACE+".deleteCvAll";
+		log.debug("sql statement : "+statement);
+		int flag = sqlSession.update(statement);
+		log.debug("result : "+flag);
 		return flag;
 	}
 

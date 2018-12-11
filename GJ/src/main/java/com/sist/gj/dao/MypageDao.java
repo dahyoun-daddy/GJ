@@ -30,7 +30,8 @@ public interface MypageDao {
 	//사진 삭제 
 	int deletePic(PictureVO pictureVO) throws SQLException;
 	
-	
+	//이력서 전체 삭제
+	int deleteCvAll() throws SQLException;
 	 
 	//이력서 단건조회
 	CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;
@@ -57,13 +58,13 @@ public interface MypageDao {
 	LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	//자격증 리스트 조회
-	List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+	List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	
 	//입사지원정보 추가
 	int addApply(ApplyVO applyVO);
 	
-	//입사지원정보 list 조회
+	//입사지원정보 list 조회 (기업이)
 	List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 	//입사지원 수정 
@@ -74,10 +75,10 @@ public interface MypageDao {
 	
 	
 	//기본 구직자마이페이지
-	UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//기본 기업마이페이지
-	UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException;
+	UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException;
 	
 	//탈퇴하기
 	int deleteUser(UserVO userVO) throws SQLException;

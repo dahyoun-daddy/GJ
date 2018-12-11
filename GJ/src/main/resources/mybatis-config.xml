@@ -6,6 +6,7 @@
   <configuration>
   	<settings>
   		<setting name="mapUnderscoreToCamelCase" value="true"/>
+  		<setting name="jdbcTypeForNull" value="NULL" />
   	</settings>
 	<typeAliases>
 		<typeAlias alias="ApplyVO" type="com.sist.gj.vo.ApplyVO"/>
@@ -19,6 +20,6 @@
   		<typeAlias alias="CodeVO" type="com.sist.gj.vo.CodeVO"/>
   		<typeAlias alias="HireVO" type="com.sist.gj.vo.HireVO"/>
   		<typeAlias alias="UserVO" type="com.sist.gj.vo.UserVO"/>
-  		<typeAlias alias="UserInfoVO" type="com.sist.gj.vo.UserInfoVO"/>
+  		<typeAlias alias="UserMPViewVO" type="com.sist.gj.vo.UserMPViewVO"/>
   	</typeAliases> 
   </configuration>

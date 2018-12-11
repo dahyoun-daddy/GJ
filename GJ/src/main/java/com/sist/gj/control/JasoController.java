@@ -60,12 +60,13 @@ public class JasoController {
 		log.info("=====================update=======================");
 		log.info("invo" + invo);
 		
-		Calendar cd = Calendar.getInstance();
-		log.info("시간 : "+cd.get(Calendar.YEAR)+""+(cd.get(Calendar.MONTH)+1)+""+cd.get(Calendar.DATE)+""+cd.get(Calendar.HOUR_OF_DAY)+""+cd.get(Calendar.MINUTE)+""+cd.get(Calendar.SECOND));
-		//+""+cd.MONTH+""+cd.DATE
 		int flag = 0;
 		
 		JSONObject object = new JSONObject();
+		
+		//String loginId = req.getParameter("userId");
+		String loginId = "컨트롤러ID";
+		invo.setRegId(loginId);
 		
 		flag = jasoSvc.merge(invo);
 		

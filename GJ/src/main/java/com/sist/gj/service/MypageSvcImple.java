@@ -13,7 +13,7 @@ import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
-import com.sist.gj.vo.UserInfoVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Service
@@ -73,8 +73,8 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.retrieveLic(searchVO);
+	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveLic(licenseVO);
 	}
 
 	@Override
@@ -98,13 +98,13 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public UserInfoVO selectUserInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.selectUserInfo(userInfoVO);
+	public UserMPViewVO selectUserInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.selectUserInfo(userViewVO);
 	}
 
 	@Override
-	public UserInfoVO selectCompInfo(UserInfoVO userInfoVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.selectCompInfo(userInfoVO); 
+	public UserMPViewVO selectCompInfo(UserMPViewVO userViewVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.selectCompInfo(userViewVO); 
 	}
 
 	@Override
@@ -115,6 +115,11 @@ public class MypageSvcImple implements MypageSvc {
 	@Override
 	public int updateUser(UserVO userVO) throws SQLException {
 		return mypageDao.updateUser(userVO);
+	}
+
+	@Override
+	public int deleteCvAll() throws SQLException {
+		return mypageDao.deleteCvAll();
 	}
 
 }

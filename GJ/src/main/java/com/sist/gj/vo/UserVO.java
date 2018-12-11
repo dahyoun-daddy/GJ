@@ -250,6 +250,15 @@ public class UserVO {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", userPasswd=" + userPasswd + ", userNick=" + userNick + ", userName="
+				+ userName + ", userAdd=" + userAdd + ", userPassQu=" + userPassQu + ", userPassAn=" + userPassAn
+				+ ", userPhone=" + userPhone + ", userLevel=" + userLevel + ", enterSalay=" + enterSalay + ", enterCnt="
+				+ enterCnt + ", enterHiredate=" + enterHiredate + ", regId=" + regId + ", regDt=" + regDt + ", modId="
+				+ modId + ", modDt=" + modDt + "]";
+	}
 	
 	
 	
