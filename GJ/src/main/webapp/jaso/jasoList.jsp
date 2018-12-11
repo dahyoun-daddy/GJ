@@ -76,7 +76,7 @@
   					</c:choose>
 		  		</tbody>
 		  	</table>
-	  	</div>
+	  	</div> 
 	  	<div class="dorm-inline text-center">
 	  		1
 	  	</div>
