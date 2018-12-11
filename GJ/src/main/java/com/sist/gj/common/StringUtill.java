@@ -129,7 +129,7 @@ public class StringUtill {
 	
 	public static String makeSelectBox(List<CodeVO> list,String selectCode,String selectNm,boolean allYN){
 		StringBuilder sb=new StringBuilder();
-		sb.append("<select name='"+selectNm+"'>\n");		
+		sb.append("<select name='"+selectNm+"' class=\"form-control input-sm\">\n");		
 		//전체
 		if(true == allYN){
 			sb.append("<option value=''>::전체::</option> \n");
