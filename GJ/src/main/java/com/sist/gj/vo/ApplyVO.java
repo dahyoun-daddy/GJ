@@ -8,16 +8,25 @@ public class ApplyVO extends DTO {
 	private String applyDate; //지원일(날짜)
 	private String hireNo; //채용no록
 	private String applyCheck; //기업이 지웠을 때 기업에서만 지우게 하고, 구직자 목록에는 그대로 나오도
+	private String hireTitle;
+	private String compId;
+	private String compNick;
+	private String userName;
 	
 	public ApplyVO() {}
 
-	public ApplyVO(String applyNo, String userId, String applyDate, String hireNo, String applyCheck) {
+	public ApplyVO(String applyNo, String userId, String applyDate, String hireNo,
+			String applyCheck, String hireTitle, String compId, String compNick, String userName) {
 		super();
 		this.applyNo = applyNo;
 		this.userId = userId;
 		this.applyDate = applyDate;
 		this.hireNo = hireNo;
 		this.applyCheck = applyCheck;
+		this.hireTitle = hireTitle;
+		this.compId = compId;
+		this.compNick = compNick;
+		this.userName = userName;
 	}
 
 	
@@ -25,7 +34,8 @@ public class ApplyVO extends DTO {
 	@Override
 	public String toString() {
 		return "ApplyVO [applyNo=" + applyNo + ", userId=" + userId + ", applyDate=" + applyDate + ", hireNo=" + hireNo
-				+ ", applyCheck=" + applyCheck + "]";
+				+ ", applyCheck=" + applyCheck + ", hireTitle=" + hireTitle + ", compId=" + compId + ", compNick="
+				+ compNick + ", userName=" + userName + "]";
 	}
 
 	public String getApplyNo() {
@@ -67,6 +77,40 @@ public class ApplyVO extends DTO {
 	public void setApplyCheck(String applyCheck) {
 		this.applyCheck = applyCheck;
 	}
+
+	public String getHireTitle() {
+		return hireTitle;
+	}
+
+	public void setHireTitle(String hireTitle) {
+		this.hireTitle = hireTitle;
+	}
+
+	public String getCompId() {
+		return compId;
+	}
+
+	public void setCompId(String compId) {
+		this.compId = compId;
+	}
+
+	public String getCompNick() {
+		return compNick;
+	}
+
+	public void setCompNick(String compNick) {
+		this.compNick = compNick;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	
 
 	
 }

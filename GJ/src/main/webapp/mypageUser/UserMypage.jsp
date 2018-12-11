@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,7 +120,14 @@
 </style>
 <% 
 	String nickname = "초보개발자";
-	String openResume = "있습니다";
+	int openResume = 1;
+	
+	String opening = null;
+	if(openResume == 1){
+		opening = "있습니다";
+	}else{
+		opening = "없습니다";
+	}
 
 %>
 </head>
@@ -155,7 +163,8 @@
 				    		<div id ="profmain">
 				    		<br/>
 				    		닉네임 <a style="color: orange;"><%=nickname %></a><br/>
-				    		기업이 내 이력서를 보고 연락을 받을 의향이 <a style="color: orange;"><%=openResume %>.</a><br/><br/>
+				    		기업이 내 이력서를 보고 연락을 받을 의향이 <a style="color: orange;"><%=opening %></a>.
+				    		<br/><br/>
 				    		
 				    		<input id="smallBtn" type="button" value="정보 수정하기" 
 	                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
