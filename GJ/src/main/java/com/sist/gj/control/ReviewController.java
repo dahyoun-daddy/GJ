@@ -15,11 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.gj.service.AdminPageSvc;
 import com.sist.gj.service.JasoCommentSvc;
 import com.sist.gj.service.ReviewSvc;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserVO;
 
 @Controller
 public class ReviewController {
@@ -30,8 +32,11 @@ public class ReviewController {
 	@Autowired
 	private ReviewSvc reviewSvc;
 	
+	@Autowired
+	private AdminPageSvc adminPageSvc;
+	
 	@RequestMapping(value="/review/giupReview.do")
-	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String doRetrieve(@ModelAttribute SearchVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
@@ -43,15 +48,21 @@ public class ReviewController {
 		if(null == invo.getSearchDiv()) {
 			invo.setSearchDiv("");
 		}
-		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("");
+		if(null == invo.getSearchWord()) {
+			invo.setSearchWord("");
 		}
 		
 		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
 		model.addAttribute("list",list);
 		
-		return VIEW_NAME;
+		String userId = req.getParameter("userId");
+		UserVO userVO = new UserVO();
+		userVO.setUserNick(userId);
+		UserVO outVO = adminPageSvc.selectCompany(userVO);
+		model.addAttribute("company",outVO);
+		
+		return "review/giupReview";
 	}
 	
 	@RequestMapping(value="/review/giupList.do")
@@ -65,15 +76,15 @@ public class ReviewController {
 			invo.setPageNum(1);
 		}
 		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("10");
+			invo.setSearchDiv("40");
 		}
-		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("");
+		if(null == invo.getSearchWord()) {
+			invo.setSearchWord("2");
 		}
 		
-		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
-		log.info("list size : "+list.size());
-		model.addAttribute("list",list);
+//		List<ReviewVO> list = adminPageSvc.selectCompany(invo);
+//		log.info("list size : "+list.size());
+//		model.addAttribute("list",list);
 		
 		return VIEW_NAME;
 	}
