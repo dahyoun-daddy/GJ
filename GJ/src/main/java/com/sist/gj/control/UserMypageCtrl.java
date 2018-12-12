@@ -32,6 +32,9 @@ public class UserMypageCtrl {
 	
 	private static final String VIEW_NAME_INFO="mypageUser/UserMyInfo";
 	private static final String VIEW_APPLY="mypageUser/UserApply";
+	private static final String VIEW_APPLY_COMP="mypageComp/CompHireStt";
+	
+
 	
 	@Autowired
 	private CodeSvc codeSvc;
@@ -90,6 +93,47 @@ public class UserMypageCtrl {
 		model.addAttribute("param",invo);
 		model.addAttribute("totalCnt",totalCnt);
 		return VIEW_APPLY;
+	}
+	
+	@RequestMapping(value="mypageComp/CompApply.do")
+	public String retrieveApplyComp(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+		log.debug("search : "+invo);
+		
+		if(invo.getPageSize() == 0) {
+			invo.setPageSize(10);
+		}
+		if(invo.getPageNum() == 0){
+			invo.setPageNum(1);
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("MY_COMP_APPLY");
+		
+		CodeVO codePage = new CodeVO();
+		codePage.setCmId("PAGING");
+		
+		List<ApplyVO> list = mypageSvc.retrieveApply(invo);
+		log.info("list size : "+list.size());
+		
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
+		
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
+		model.addAttribute("list",list);
+		model.addAttribute("param",invo);
+		model.addAttribute("totalCnt",totalCnt);
+		
+		return VIEW_APPLY_COMP;
 	}
 	
 	@RequestMapping(value="mypageUser/cancelApply.do",

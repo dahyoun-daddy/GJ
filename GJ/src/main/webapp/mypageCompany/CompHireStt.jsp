@@ -1,21 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
     
 <style>
 	#bubble-float-right:{
@@ -100,6 +92,32 @@
 	
 	
 </style>
+<% 
+	String context = request.getContextPath();
+			
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
+	int totalCnt = 0;
+	int bottomCount = 10;
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -130,84 +148,91 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원자 확인하기</strong></h5>
 					    	<br/>
-			    	    	<div class="container">
-							<input type="hidden" name="page_num" id="page_num">
-				    	    	<div class="row" style="float: right;">
+					    	<form name="frm" id="frm" method="get">
+					    	<input type="hidden" name="pageNum" id="pageNum"/>
+							<!-- --검색영역 -->
+					    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					  					<div class="form-group" >
 					  						<div style="float: left; width: 25%;">
-					  						<select name="search_Div" id="search_Div" class="form-control input-sm">
-					  							<option value="1">10</option>
-					  							<option value="2">20</option>
-					  							<option value="3">50</option>
-					  						</select>
+						  						<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
 					  						</div>
 					  						<div style="float: left; width: 33%;">
-					  							<select name="search_Div" id="search_Div" class="form-control input-sm">
-					  							<option value="1">지원자명</option>
-					  							<option value="2">채용제목</option>
-					  						</select>
+					  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
 					  						</div>
 					  						<div style="float: left; width: 41%;">
-					  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+					  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
 					  						</div>
 					  					</div>
 					  		  		</div>
 					  		  		<div class="form-group">
 					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+					  					<button type="button" class="btn btn-default btn-sm" id="cancelApply">지원자 삭제</button>
 					  				</div>
-								</div>
+				  				</div>
+				  				</form>
+				  				
+							<!--// 검색영역----------------------------------------------------->
 					    	
-					    	<div class="table-responsive" align="center">
+					    	<!-- Grid영역 -->
+					    	<div class="table-responsive" align="center" style="float:left;">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 								
-<!-- 								<div align="right" style="margin:10px; font-size:70%;"> -->
-<!-- 									삭제된 지원자의 이력서는 열람이 불가합니다.&nbsp;&nbsp;&nbsp; -->
-<!-- 							  		<input id="smallBtn" type="button" value="삭제하기" onclick=""> -->
-<!-- 							  	</div> -->
-							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
-								  			<col width="5%" style="background-color: #FFFFFF; font-size: 80%;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
-								  			<col width="60%"style="background-color: #FFFFFF;font-size: 80%;"/>
-								  			<col width="20%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="5%" style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="50%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
 								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">지원자명</th>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">채용제목</th>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">지원일</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">지원 NO</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">기업명</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
 								  		</tr>
 								  		</thead>
 								  		<tbody>
-								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">우서호</td>
-								  				<td class="text-center">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
-								  				<td class="text-center">2018/11/23</td>
-								  			</tr>	
-								  			<tr>
-								  				<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-								  				<td class="text-center">김준혁</td>
-								  				<td class="text-center">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
-								  				<td class="text-center">2018/11/20</td>
-								  			</tr>
+								  			<c:choose>
+								  				<c:when test="${list.size()>0}">
+								  					<c:forEach var="applyVO" items="${list}">
+								  					<tr>
+								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
+								  						<td class="text-center"><c:out value="${applyVO.applyNo}"/></td> 
+										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
+										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
+		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
+		 								  			</tr>
+								  					</c:forEach>
+								  				</c:when>
+			  				 	 					<c:otherwise>
+						 	 						<tr>
+						 	 							<td class="text-center" colspan="99">지원한 정보가 없습니다.</td>
+						 	 						</tr>
+							  						</c:otherwise>
+								  			</c:choose>
+								  		
 								  		</tbody>
 								  	</table>
 							  	</div>
-							  	<div class="dorm-inline text-center">
-							  		1
-							  	</div>
-							  	
+						  	<!--pagenation ---------------------------------------------------->
+						  	<div class="dorm-inline text-center">
+			  			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "UserApply.do", "searchPage") %>
 						  	</div>
+						  	<!--// pagenation영역 ----------------------------------------------->
+						  	
+					  	</div>
+					  	<!--// Grid영역 ---------------------------------------------------->
+						  	
+							  	
 				    		
 				    	</div>
 		          </div>
-		     </div>
-	
-		
+		      </div>
+		      
 		 </section>
     
     <script type="text/javascript">
@@ -220,7 +245,33 @@
 	   		 $("input[name='check']").prop("checked",false);
 	   	 }
 	   	   
-	    }
+}//checkAll()
+	    
+	    function searchPage(url,pageNum){
+			alert("url : "+url+" page_num : "+pageNum);
+			var frm = document.frm;
+			frm.pageNum.value = pageNum;
+			frm.action = url;
+			frm.submit();
+		}	
+	
+		function doSearch(){//검색
+    		var frm = document.frm;
+    		frm.pageNum.value = 1;
+    		frm.action="CompApply.do";
+    		frm.submit();
+    	}
+		
+	    $(document).ready(function(){
+	    	//엔터키 처리
+			$("#searchWord").keydown(function(key) {
+				if (key.keyCode == 13) {
+					doSearch();
+				}
+			});
+	    	
+		});// $(document).ready(function()
+	    
 	     
     </script>
     
