@@ -128,7 +128,7 @@
 	</delete>
    	
  
-   	
+   	 
    	<!-- 기업 전체조회 -->
 	<select id="selectCompany" parameterType="UserVO" resultType="UserVO">
 		  
