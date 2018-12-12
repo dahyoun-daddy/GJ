@@ -63,6 +63,8 @@ public interface MypageSvc {
 	
 	//입사지원 취소
 	int deleteApply(ApplyVO applyVO) throws SQLException;
+	//다중 입사지원 취소
+	int deleteMultiApply(List<ApplyVO> list) throws RuntimeException, SQLException;
 	
 	
 	//기본 구직자마이페이지

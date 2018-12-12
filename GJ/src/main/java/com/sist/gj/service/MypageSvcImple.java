@@ -3,6 +3,8 @@ package com.sist.gj.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.sist.gj.vo.UserVO;
 
 @Service
 public class MypageSvcImple implements MypageSvc {
+	private Logger log = LoggerFactory.getLogger(MypageSvcImple.class);
 
 	@Autowired
 	private MypageDao mypageDao;
@@ -120,6 +123,26 @@ public class MypageSvcImple implements MypageSvc {
 	@Override
 	public int deleteCvAll() throws SQLException {
 		return mypageDao.deleteCvAll();
+	}
+
+	@Override
+	public int deleteMultiApply(List<ApplyVO> list) throws RuntimeException, SQLException {
+		int flag = 0;
+		try {
+			for(ApplyVO vo :list) {
+				flag+=mypageDao.deleteApply(vo);
+			}
+			
+		}catch(RuntimeException e) {
+			log.debug("========================");
+			log.debug("RuntimeException: "+e.getMessage());
+			log.debug("========================");			
+			throw e;
+		}
+		log.debug("========================");
+		log.debug("=flag="+flag);
+		log.debug("========================");
+		return flag;
 	}
 
 }

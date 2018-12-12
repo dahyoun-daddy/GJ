@@ -48,7 +48,7 @@
 
 
  <!-- Application Loggers -->
- <logger name="com.sist.hr">
+ <logger name="com.sist.gj">
   <level value="debug" />
  </logger>
  

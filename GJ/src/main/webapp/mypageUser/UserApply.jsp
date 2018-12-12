@@ -192,13 +192,15 @@
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
 								  			<col width="5%" style="background-color: #FFFFFF;"/>
-								  			<col width="20%"style="background-color: #FFFFFF;"/>
-								  			<col width="60%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="50%"style="background-color: #FFFFFF;"/>
 								  			<col width="15%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
 								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+								  			<th class="text-center" style="background-color: #FACC2E;">지원 NO</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">기업명</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
@@ -209,8 +211,8 @@
 								  				<c:when test="${list.size()>0}">
 								  					<c:forEach var="applyVO" items="${list}">
 								  					<tr>
-								  						<input type="hidden" name="applyNo" id="applyNo" value="${applyVO.applyNo}"/>
 								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
+								  						<td class="text-center"><c:out value="${applyVO.applyNo}"/></td> 
 										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
 										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
@@ -268,12 +270,17 @@
 	    $(document).ready(function(){
 			$("#cancelApply").on("click",function(){
 				
+				var arr = []; //var arr=new Array();
 				
-				var arr = new Array();
-				var obj = null;
-				$("input[name='check']:checked").each(function(i){
-					arr.push($(this).val());
+				$("input[name='check']:checked").each(function(index,row ){
+					var record = $(row).parents("tr");
+					var applyNo = $(record).find("td").eq(1).text();
+					console.log("applyNo="+applyNo);
+					arr.push(applyNo);
 				});
+// 				alert("arrayNo: "+arr);
+				var jsonIdList = JSON.stringify(arr);
+				console.log("jsonIdList="+jsonIdList);
 				
 				if(arr.length == 0){
 					alert("취소할 지원을 선택하세요.")
@@ -282,16 +289,33 @@
 						$.ajax({
 							type : 'POST',
 							url : 'cancelApply.do',
-							data : { arr : arr},
-		                    success: function pageReload(){
-		                   				location.href="UserApply.do"
-	                       			}
-						});
-						arr = new Array();
+							data : {
+								"applyNo_list": jsonIdList
+							},
+							success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+					             var parseData = data;
+				                 console.log("parseData.flag="+parseData.flag);
+				                 console.log("parseData.message="+parseData.message);
+					         	 if(parseData.flag > 0){
+					         		alert(parseData.message);
+					         		searchPage();
+					         	 }else{
+					         		alert(parseData.message);
+					         		
+					         	 }				             
+				            },
+				            complete: function(data){//무조건 수행
+				             
+				            },
+				            error: function(xhr,status,error){
+				             
+				            }
+						});//'cancelApply.do'
+						
 					}else{
 						location.reload(true);
 					}
-				}
+				}//if(arr.length == 0) 
 				
 			});
 		});
