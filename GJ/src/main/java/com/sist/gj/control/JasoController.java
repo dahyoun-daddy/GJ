@@ -55,10 +55,11 @@ public class JasoController {
 			invo.setSearchDiv("");
 		}
 		
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("JASO_SEARCH");
+		
 		CodeVO codePage = new CodeVO();
-		codePage.setCmId("JASO_SEARCH");
-		
-		
+		codePage.setCmId("PAGING");
 		
 		List<JasoVO> list = jasoSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
@@ -69,6 +70,7 @@ public class JasoController {
 			
 		}
 		
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
 		model.addAttribute("param",invo);

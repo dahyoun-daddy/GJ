@@ -6,11 +6,15 @@
 	<sql id="searchText">
 		<where>
   			<choose>
-  				<when test="10 == searchDiv">
+  				<when test="2 == searchDiv">
   					C.cl_title LIKE '%'||#{searchWord}||'%'
   				</when>
-  				<when test="20 == searchDiv">
+  				<when test="1 == searchDiv">
   					C.reg_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="3 == searchDiv">
+  					C.reg_id LIKE '%'||#{searchWord}||'%'
+  					OR C.cl_title LIKE '%'||#{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>

@@ -29,6 +29,7 @@
 	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
 	totalCnt = Integer.parseInt(totalCnts);
 	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 %>
 <head>
@@ -46,14 +47,10 @@
   		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
   					<div class="form-group" > 
   						<div style="float: left; width: 33%;">
-  						<select name="search_Div" id="search_Div" class="form-control input-sm">
-  							<option value="10">10</option>
-  							<option value="20">20</option>
-  							<option value="50">50</option>
-  						</select>
+  							<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
   						</div>
   						<div style="float: left; width: 33%;">
-  							<%=StringUtill.makeSelectBox(codePage, searchDiv, "searchType", false) %>
+  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
   						</div>
   						<div style="float: left; width: 33%;">
   							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
@@ -124,6 +121,13 @@
     	}
 		
 		$(document).ready(function(){
+			//엔터키 처리
+			$("#searchWord").keydown(function(key) {
+				if (key.keyCode == 13) {
+					doSearch();
+				}
+			});
+
 			//alert("ready");
 			$("#doSave").on("click",function(){
 				//alert("ready");
