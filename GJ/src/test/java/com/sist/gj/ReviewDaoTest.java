@@ -49,6 +49,7 @@ public class ReviewDaoTest {
 		inVo2 = new ReviewVO("2","기업2","3","제목","내용","","4","준혁1","",null,null);
 		inVo3 = new ReviewVO("3","기업3","3","제목","내용","","4","준혁2","",null,null);
 		
+		
 		searchVO = new SearchVO(10,1,"기업1",""); 
 		LOG.info("context : "+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
