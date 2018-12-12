@@ -21,6 +21,7 @@ import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.JasoCommentSvc;
 import com.sist.gj.service.JasoSvc;
 import com.sist.gj.vo.CodeVO;
+import com.sist.gj.vo.JasoCommentVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
 
@@ -146,8 +147,9 @@ public class JasoController {
 		inVO.setClNo(clNo);
 		
 		JasoVO outVO = jasoSvc.select(inVO);
+		List<JasoCommentVO> cList = jasoCSvc.doRetrieve(inVO);
 		
-		
+		model.addAttribute("cList",cList);
 		model.addAttribute("clNo", outVO.getClNo());
 		model.addAttribute("clTitle", outVO.getClTitle());
 		model.addAttribute("clSungjang", outVO.getClSungjang());

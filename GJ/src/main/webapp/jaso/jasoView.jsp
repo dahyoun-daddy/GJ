@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,18 +78,23 @@
 			            		</tr>
 			            	</thead>
 			            	<tbody>
-			            		<tr>
-			            			<td>박태건</td>
-			            			<td>진짜못썼네 토토나하시길</td>
-			            			<td>2018-11-28
-			            				<button type="button" class="btn btn-default btn-sm" id="do_save" >삭제</button>
-			            			</td>
-			            		</tr>
-			            		<tr>
-			            			<td>김무혁</td>
-			            			<td>잘쓰셨네요 이정도면 무신사 입사도 가능하곘어요</td>
-			            			<td>2018-11-28</td>
-			            		</tr>
+			            		<c:choose>
+			  						<c:when test="${cList.size()>0}">
+			  							<c:forEach var="jasoCVO" items="${cList}">
+			  								<tr id="${jasoCVO.commentNo}">
+			  									<td class="text-center"><c:out  value="${jasoCVO.userNick}"/></td>
+			  									<td class="text-left"><c:out value="${jasoCVO.commentBody}"/></td>
+			  									<td class="text-center"><c:out value="${jasoCVO.regDt}"/>
+			  									<button type="button" class="btn btn-default btn-sm" id="doCDelete" >삭제</button></td>
+			  								</tr>
+			  							</c:forEach>
+			  						</c:when>
+			 	 					<c:otherwise>
+			 	 						<tr>
+			 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+			 	 						</tr>
+			  						</c:otherwise>
+			  					</c:choose>
 			            	</tbody>
 			            </table>
 			            <form id="contact" method="post" class="form" role="form">
@@ -131,13 +137,12 @@
 	   		         url:"delete.do",
 	   		         dataType:"html",// JSON
 	   		         data:{
-	   		         	"clNo": $("#clNo").val()
+	   		         	"commentNo": $("#commentNo").val()
 	   		         },
 	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	   		         	var parseData = $.parseJSON(data);
 	   		         	if(parseData.flag > 0){
 	   		         		alert(parseData.msg);
-	   		         		doSearch();
 	   		         	}else{
 	   		         		alert(parseData.msg);
 	   		         	}
@@ -149,6 +154,13 @@
 	   		          
 	   		         }
 	   		   	});
+			});
+			
+			$("#doCDelete").on("click",function(){
+				if(false == confirm("삭제 하시겠습니까?")){
+    				return;
+    			}
+				
 			});
 		});
 	</script>
