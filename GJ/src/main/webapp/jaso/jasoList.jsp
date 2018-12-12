@@ -44,7 +44,7 @@
   		<!-- --검색영역 -->
   			<div class="row" style="float: right;">
   		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
-  					<div class="form-group" >
+  					<div class="form-group" > 
   						<div style="float: left; width: 33%;">
   						<select name="search_Div" id="search_Div" class="form-control input-sm">
   							<option value="10">10</option>
