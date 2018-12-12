@@ -40,7 +40,7 @@ public class JasoController {
 	
 	@RequestMapping(value="/jaso/jasoList.do")
 	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
-		log.debug("search : "+invo);
+		log.info("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
 			invo.setPageSize(10);
@@ -69,9 +69,10 @@ public class JasoController {
 			
 		}
 		
-		model.addAttribute("code_Page",codeSvc.doRetrieve(codePage));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
-		model.addAttribute("total_cnt",totalCnt);
+		model.addAttribute("param",invo);
+		model.addAttribute("totalCnt",totalCnt);
 		return VIEW_NAME;
 	}
 	

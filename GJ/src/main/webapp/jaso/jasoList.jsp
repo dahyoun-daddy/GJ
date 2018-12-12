@@ -10,26 +10,26 @@
 <% 
 	String context = request.getContextPath();
 
-	String page_size = "10";
-	String page_num = "1";
-	String search_Div = "";  //검색구분
-	String search_Word = ""; //검색어
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
 	
-	search_Div = StringUtill.nvl(request.getParameter("search_Div"), "");
-	search_Word = StringUtill.nvl(request.getParameter("search_Word"), "");
-	page_size = StringUtill.nvl(request.getParameter("page_size"), "10");
-	page_num = StringUtill.nvl(request.getParameter("page_num"), "1");
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
 	
 	int totalCnt = 0;
 	int bottomCount = 10;
 	
-	int oPageSize = Integer.parseInt(page_size);
-	int oPage_num = Integer.parseInt(page_num);
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
 	
-	String totalCnts = (null == request.getAttribute("total_cnt"))?"10":request.getAttribute("total_cnt").toString();
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
 	totalCnt = Integer.parseInt(totalCnts);
 	
-	List<CodeVO> code_page = (null == request.getAttribute("code_Page"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_Page");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 %>
 <head>
     
@@ -53,15 +53,15 @@
   						</select>
   						</div>
   						<div style="float: left; width: 33%;">
-  							<%=StringUtill.makeSelectBox(code_page, page_size, "page_size", false) %>
+  							<%=StringUtill.makeSelectBox(codePage, searchDiv, "searchType", false) %>
   						</div>
   						<div style="float: left; width: 33%;">
-  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
   						</div>
   					</div>
   		  		</div>
   		  		<div class="form-group">
-  					<button type="button" class="btn btn-default btn-sm" onclick="searchPage();">조회</button>
+  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
   					<button type="button" class="btn btn-default btn-sm" id="doSave" >등록</button>
   				</div>
   			</div>
@@ -103,19 +103,26 @@
 		  	</table>
 	  	</div> 
 	  	<div class="dorm-inline text-center">
-	  		<%=StringUtill.renderPaging(totalCnt, oPage_num, oPageSize, bottomCount, "jasoList.do", "searchPage") %>
+	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "jasoList.do", "searchPage") %>
 	  	</div>
   	</div>
   	<!-- Grid영역종료 -->
 	<script type="text/javascript">
-		function searchPage(url,page_num){
-			alert("url : "+url+" page_num : "+page_num);
+		function searchPage(url,pageNum){
+			alert("url : "+url+" page_num : "+pageNum);
 			var frm = document.frm;
-			frm.pageNum.value = page_num;
+			frm.pageNum.value = pageNum;
 			frm.action = url;
 			frm.submit();
 		}	
 	
+		function doSearch(){
+    		var frm = document.frm;
+    		frm.pageNum.value = 1;
+    		frm.action="jasoList.do";
+    		frm.submit();
+    	}
+		
 		$(document).ready(function(){
 			//alert("ready");
 			$("#doSave").on("click",function(){
