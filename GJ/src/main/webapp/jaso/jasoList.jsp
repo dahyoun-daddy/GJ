@@ -42,6 +42,7 @@
 	<div class="container">
 		<form name="frm" id="frm" method="get">
 		<input type="hidden" name="pageNum" id="pageNum">
+		<input type="hidden" name="selectClNo" id="selectClNo">
   		<!-- --검색영역 -->
   			<div class="row" style="float: right;">
   		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -83,8 +84,8 @@
 		  			<c:choose>
   						<c:when test="${list.size()>0}">
   							<c:forEach var="jasoVO" items="${list}">
-  								<tr>
-  									<td class="text-center"><c:out value="${jasoVO.userNick}"/></td>
+  								<tr id="${jasoVO.clNo}">
+  									<td class="text-center"><c:out  value="${jasoVO.userNick}"/></td>
   									<td class="text-left"><c:out value="${jasoVO.clTitle}"/></td>
   									<td class="text-center"><c:out value="${jasoVO.regDt}"/></td>
   								</tr>
@@ -120,6 +121,13 @@
     		frm.submit();
     	}
 		 
+		function doSelect(clNo){
+			var frm = document.frm;
+    		frm.selectClNo.value = clNo;
+    		frm.action="jasoView.do";
+    		frm.submit();
+		}
+		
 		$(document).ready(function(){
 			//엔터키 처리
 			$("#searchWord").keydown(function(key) {
@@ -128,10 +136,22 @@
 				}
 			});
 
-			//alert("ready");
+			//등록페이지 이동
 			$("#doSave").on("click",function(){
 				//alert("ready");
 				location.href = "jasoUpdate.jsp";
+			});
+			
+			$("#listTable>tbody").on("click","tr",function(){
+				//alert("ready");
+				var clNo = $(this).attr('id');
+    			//alert(clNo);
+    			
+    			if("" == clNo){
+    				return;
+    			}
+    			
+    			doSelect(clNo);
 			});
 		});
 	</script>

@@ -32,6 +32,7 @@ public class JasoController {
 	
 	@Autowired
 	private JasoSvc jasoSvc;
+	
 	@Autowired
 	private CodeSvc codeSvc;
 	
@@ -109,5 +110,72 @@ public class JasoController {
 		String jsonData = object.toJSONString();
 		
 		return jsonData;
+	}
+	
+	@RequestMapping(value="/jaso/delete.do",produces="application/json;charset=utf8")
+	@ResponseBody
+	public String dodelete(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================update=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+		
+		flag = jasoSvc.delete(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","삭제 되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","삭제 실패.");
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
+	}
+	
+	@RequestMapping(value="/jaso/jasoView.do")
+	public String doSelect(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================select=======================");
+		String clNo = req.getParameter("selectClNo");
+		
+		JasoVO inVO = new JasoVO();
+		inVO.setClNo(clNo);
+		
+		JasoVO outVO = jasoSvc.select(inVO);
+		
+		
+		model.addAttribute("clNo", outVO.getClNo());
+		model.addAttribute("clTitle", outVO.getClTitle());
+		model.addAttribute("clSungjang", outVO.getClSungjang());
+		model.addAttribute("clSang", outVO.getClSang());
+		model.addAttribute("clJangdan", outVO.getClJangdan());
+		model.addAttribute("clJiwon", outVO.getClJiwon());
+		model.addAttribute("userNick", outVO.getUserNick());
+		model.addAttribute("regDt", outVO.getRegDt());
+		
+		
+		return "jaso/jasoView";
+	}
+	
+	@RequestMapping(value="/jaso/jasoUpdateMove.do")
+	public String dojasoUpdateMove(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================move=======================");
+		
+		
+		model.addAttribute("clNo", invo.getClNo());
+		model.addAttribute("clTitle", invo.getClTitle());
+		model.addAttribute("clSungjang", invo.getClSungjang());
+		model.addAttribute("clSang", invo.getClSang());
+		model.addAttribute("clJangdan", invo.getClJangdan());
+		model.addAttribute("clJiwon", invo.getClJiwon());
+		model.addAttribute("userNick", invo.getUserNick());
+		model.addAttribute("regDt", invo.getRegDt());
+		
+		
+		return "jaso/jasoUpdate";
 	}
 }

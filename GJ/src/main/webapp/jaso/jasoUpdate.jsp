@@ -18,7 +18,7 @@
 			        <div class="right-side"> 
 			            <h3>자소서 작성</h3>
 			            <br/> 
-			            <input type="hidden" id="userId" name="userId" value="${userId}"/>
+			            <input type="hidden" id="clNo" name="clNo" value="${clNo}"/>
 			            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
 			            	<colgroup>
 		  						<col width="20%"/>
@@ -33,23 +33,23 @@
 			            	<tbody>
 			            		<tr>
 			            			<th>제목</th>
-			            			<td><input type="text" id="jasotitle" name="jasotitle" class="form-control col-lg-8 col-md-12" placeholder="제목"></td>
+			            			<td><input type="text" id="jasotitle" name="jasotitle" class="form-control col-lg-8 col-md-12" value="${clTitle}" placeholder="제목"></td>
 			            		</tr>
 			            		<tr>
 			            			<th>성장과정</th>
-			            			<td><textarea class="form-control" id="grow" name="grow" placeholder="성장과정" rows="5"></textarea></td>
+			            			<td><textarea class="form-control" id="grow" name="grow" placeholder="성장과정" rows="5">${clSungjang}</textarea></td>
 			            		</tr>
 			            		<tr>
 			            			<th>학교생활</th>
-			            			<td><textarea class="form-control" id="school" name="school" placeholder="학교생활" rows="5"></textarea></td>
+			            			<td><textarea class="form-control" id="school" name="school" placeholder="학교생활" rows="5">${clSang}</textarea></td>
 			            		</tr>
 			            		<tr>
 			            			<th>성격장단점</th>
-			            			<td><textarea class="form-control" id="mind" name="mind" placeholder="성격장단점" rows="5"></textarea></td>
+			            			<td><textarea class="form-control" id="mind" name="mind" placeholder="성격장단점" rows="5">${clJangdan}</textarea></td>
 			            		</tr>
 			            		<tr>
 			            			<th>지원동기</th>
-			            			<td><textarea class="form-control" id="apply" name="apply" placeholder="지원동기" rows="5"></textarea></td>
+			            			<td><textarea class="form-control" id="apply" name="apply" placeholder="지원동기" rows="5">${clJiwon}</textarea></td>
 			            		</tr>
 			            	</tbody>
 			            </table>
@@ -82,6 +82,7 @@
    		         url:"jasoUpdate.do",
    		         dataType:"html",// JSON
    		         data:{
+   		        	"clNo":$("#clNo").val() ,
    		         	"clTitle":$("#jasotitle").val(),
    		         	"clSungjang":$("#grow").val(),
    		         	"clSang":$("#school").val(),
