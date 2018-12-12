@@ -24,7 +24,7 @@ public interface MypageSvc {
 	//이력서 전체 삭제
 	int deleteCvAll() throws SQLException;
 	 
-	//이력서 단건조회
+	//이력서 단건조회 
 	CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;
 	
 	//이력서 수정 

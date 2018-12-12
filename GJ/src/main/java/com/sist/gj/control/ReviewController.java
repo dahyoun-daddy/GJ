@@ -14,33 +14,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.JasoCommentSvc;
-import com.sist.gj.service.JasoSvc;
-import com.sist.gj.vo.CodeVO;
+import com.sist.gj.service.ReviewSvc;
 import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 
 @Controller
-public class JasoController {
+public class ReviewController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private static final String VIEW_NAME="jaso/jasoList";
+	private static final String VIEW_NAME="review/giupReview";
 	
 	@Autowired
-	private JasoSvc jasoSvc;
-	@Autowired
-	private CodeSvc codeSvc;
+	private ReviewSvc reviewSvc;
 	
-	@Autowired
-	private JasoCommentSvc jasoCSvc;
-	
-	@RequestMapping(value="/jaso/jasoList.do")
+	@RequestMapping(value="/review/giupReview.do")
 	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
-		log.info("search : "+invo);
+		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
 			invo.setPageSize(10);
@@ -55,32 +47,40 @@ public class JasoController {
 			invo.setSearchDiv("");
 		}
 		
-		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("JASO_SEARCH");
-		
-		CodeVO codePage = new CodeVO();
-		codePage.setCmId("PAGING");
-		
-		List<JasoVO> list = jasoSvc.doRetrieve(invo);
+		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
-		
-		int totalCnt = 0;
-		if(null != list  &&  list.size()>0) {
-			totalCnt = list.get(0).getTotalCnt();
-			
-		}
-		
-		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
-		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
-		model.addAttribute("param",invo);
-		model.addAttribute("totalCnt",totalCnt);
+		
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
-	@ResponseBody
-	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+	@RequestMapping(value="/review/giupList.do")
+	public String doRetrieve2(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+		log.debug("search : "+invo);
+		
+		if(invo.getPageSize() == 0) {
+			invo.setPageSize(10);
+		}
+		if(invo.getPageNum() == 0){
+			invo.setPageNum(1);
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("10");
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		
+		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
+		log.info("list size : "+list.size());
+		model.addAttribute("list",list);
+		
+		return VIEW_NAME;
+	}
+	
+	
+	@RequestMapping(value="/review/reviewUpdate.do")
+	public String doUpdate(@ModelAttribute ReviewVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
 		log.info("=====================update=======================");
 		log.info("invo" + invo);
 		
@@ -89,14 +89,10 @@ public class JasoController {
 		JSONObject object = new JSONObject();
 		
 		//String loginId = req.getParameter("userId");
-		
-		//----------------------------------------------------------------
-		//<-- 세션값으로 아이디값 받기 -->
-		String loginId = "boondll@hanmail.net";
+		String loginId = "기업1";
 		invo.setRegId(loginId);
 		
-		
-		flag = jasoSvc.merge(invo);
+		flag = reviewSvc.update(invo);
 		
 		if(flag > 0) {
 			object.put("flag",flag);
@@ -105,9 +101,6 @@ public class JasoController {
 			object.put("flag",flag);
 			object.put("msg","등록 실패.");
 		}
-		
-		String jsonData = object.toJSONString();
-		
-		return jsonData;
+		return VIEW_NAME;
 	}
 }

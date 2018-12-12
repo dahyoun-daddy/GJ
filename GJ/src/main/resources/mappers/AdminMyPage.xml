@@ -157,6 +157,9 @@
   				<when test="30 == searchDiv"> 
   					user_name LIKE '%'||#{searchWord}||'%'
   				</when>
+  				<when test="40 == searchDiv"> 
+  					user_level LIKE '%'||#{searchWord}||'%'
+  				</when>
   				<otherwise>
   				</otherwise>
 		  			</choose>
@@ -173,11 +176,15 @@
 		  				<when test="10 == searchDiv">
 		  					user_id LIKE '%'||#{searchWord}||'%'
 		  				</when>
-		  				<when test="10 == searchDiv">
+		  				<when test="20 == searchDiv">
 		  					user_nick LIKE '%'||#{searchWord}||'%'
-		  				</when><when test="10 == searchDiv">
+		  				</when>
+		  				<when test="30 == searchDiv">
 		  					user_name LIKE '%'||#{searchWord}||'%'
 		  				</when>
+		  				<when test="40 == searchDiv"> 
+  							user_level LIKE '%'||#{searchWord}||'%'
+  						</when>
 		  				
 		  				<otherwise>
 		  				</otherwise>

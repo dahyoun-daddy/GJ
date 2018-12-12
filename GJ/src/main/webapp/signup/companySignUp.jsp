@@ -98,7 +98,7 @@
 	       		
 	        <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">
 	         <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()">
-	          	<label><b>기업은 관리자의 승인 이후의 이용이 가능합니다 .</b></label> 
+	          	<label><b>   기업은 관리자의 승인 이후의 이용이 가능합니다 .</b></label> 
 	         
      
    				<br>

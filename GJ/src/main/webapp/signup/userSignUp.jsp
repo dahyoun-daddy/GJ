@@ -89,11 +89,15 @@
 	      	<label><b>비밀번호 찾기 답변</b></label> 
 	        <input type="text" name="user_passA" placeholder="10글자 이하 입력">
 	       		<br><br>
-	        <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">
-	         <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()">
-	         
-     
-   				<br>
+	        <!--  <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">-->
+	        <!-- <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()"> >-->
+	         <button class="btn btn-primary" type="button" id="doUpdate">초기화</button>
+			  <button class="btn btn-primary" type="button" id="doUpdate">회원가입</button>
+			<br>
+			
+
+			
+			</script>
       <!--// 구직자 회원가입 폼 -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
