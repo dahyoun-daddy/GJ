@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>login</title>
+     <title>기업 회원가입</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
@@ -49,7 +49,60 @@
             </div>
         </div>
     </nav>
-	
+	 <!--기업 회원가입 폼 -->
+	   		<br><br><br><br>
+	   		<h2>기업 회원가입</h2>
+	   		<br>
+	    	<input type="hidden" name="work_div" id="work_div"> 
+     	  	<label><b>이메일</b></label>
+        	<input type="text" name="user_email" placeholder="이메일을 입력하세요">
+        		<br><br>
+    	 	<label><b>비밀번호</b></label>
+        	<input type="password" name="comp_pw" placeholder="비밀번호 입력 조건">
+        		<br><br>
+     		<label><b>비밀번호 확인</b></label>
+       		<input type="password" name="pw_check"
+              	    placeholder="다시 입력하세요">
+      			<br><br>
+      			<label><b>기업명</b></label>
+	        <input type="text" name="comp_compname" placeholder="기업명을 입력하세요">
+	        	<br><br>
+	       	<label><b>대표성함</b></label>
+	        <input type="text" name="comp_name" placeholder="성함을 입력하세요">
+	        	<br><br>
+	        <label><b>회사 전화번호</b></label>
+	        <input type="text" name="comp_phone" placeholder="ex) 02-0000-0000">
+	       		<br><br>
+	       	<label><b>주소</b></label> 
+	        <input type="text" name="comp_address" placeholder="주소를 입력하세요">
+	       		<br><br>
+	       	<label><b>매출액</b></label> 
+	        <input type="text" name="comp_money" placeholder="ex) 100,000,000">
+	       		<br><br>
+	       	<label><b>설립일</b></label> 
+	        <input type="text" name="comp_date" placeholder="ex) 100,000,000">
+	       		<br><br>
+	      	<label><b>비밀번호 찾기 질문:</b></label>
+	      	<select name="passQ">
+	      	<option value="1">기억에 남는 추억은 ?</option>
+	      	<option value="2">자신의 인생 좌우명은 ?</option>
+	      	<option value="3">자신의 보물 제 1호는 ?</option>
+	      	<option value="4">가장 기억에 남는 선물은 ?</option>
+	      	<option value="5">자신의 가장 소중한 친구 이름은 ?</option>
+	      	<option value="6">다시 태어나면 되고싶은것은 ?</option>
+	      	</select>
+	      	<br><br>
+	      	<label><b>비밀번호 찾기 답변</b></label> 
+	        <input type="text" name="user_passA" placeholder="10글자 이하 입력">
+	       		<br><br>
+	       		
+	        <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">
+	         <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()">
+	          	<label><b>   기업은 관리자의 승인 이후의 이용이 가능합니다 .</b></label> 
+	         
+     
+   				<br>
+      <!--// 구직자 회원가입 폼 -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -58,50 +111,5 @@
     <!-- Custom JavaScript -->
     <script src="../resources/js/animate.js"></script>
     <script src="../resources/js/custom.js"></script>
-    
-    <div id="wrap">
-        <form name="login" method="post" action="../login/userSignUp.jsp" 
-                onsubmit="return checkValue()">
-        	<br><br><br><br><br><br><br><br>
-            <!-- 이미지 추가 -->
-            <img src="../resources/images/GOOD_JOB_LOGO.png">
-            <br><br>
-            
-            <table>
-                <tr>
-                    <td bgcolor="skyblue">아이디</td>
-                    <td><input type="text" name="id" maxlength="50"></td>
-                </tr>
-                <tr>
-                    <td bgcolor="skyblue">비밀번호</td>
-                    <td><input type="password" name="password" maxlength="50"></td>
-                </tr>
-            </table>
-            <br>
-            <input type="submit" value="로그인"/>
-            <input type="button" value="구직자 가입" onclick="goJoinForm()" />
-            <input type="button" value="기업 가입" onclick="goJoinForm()" />
-        </form>
-        
-        <% 
-            // 아이디, 비밀번호가 틀릴경우 화면에 메시지 표시
-            
-            String msg=request.getParameter("msg");
-            
-            if(msg!=null && msg.equals("0")) 
-            {
-                out.println("<br>");
-                out.println("<font color='red' size='5'>비밀번호를 확인해 주세요.</font>");
-            }
-            else if(msg!=null && msg.equals("-1"))
-            {    
-                out.println("<br>");
-                out.println("<font color='red' size='5'>아이디를 확인해 주세요.</font>");
-            }
-        %>    
-    </div>    
-
-
-
 </body>
 </html>

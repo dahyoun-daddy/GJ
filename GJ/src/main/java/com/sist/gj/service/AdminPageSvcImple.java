@@ -4,11 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sist.gj.dao.AdminPageDao;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
-
+@Service
 public class AdminPageSvcImple implements AdminPageSvc {
 
 	@Autowired
