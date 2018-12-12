@@ -1,7 +1,6 @@
 package com.sist.gj.control;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,28 +17,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.CodeSvc;
-import com.sist.gj.service.JasoCommentSvc;
-import com.sist.gj.service.JasoSvc;
+import com.sist.gj.service.MypageSvc;
+import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserVO;
 
 @Controller
-public class JasoController {
+public class UserMypageCtrl {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private static final String VIEW_NAME="jaso/jasoList";
+	private static final String VIEW_NAME_INFO="mypageUser/UserMyInfo";
+	private static final String VIEW_APPLY="mypageUser/UserApply";
 	
-	@Autowired
-	private JasoSvc jasoSvc;
 	@Autowired
 	private CodeSvc codeSvc;
-	
 	@Autowired
-	private JasoCommentSvc jasoCSvc;
+	private MypageSvc mypageSvc;
 	
-	@RequestMapping(value="/jaso/jasoList.do")
-	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+/*	UserSvc 나와야지 수행 가능함
+ *  @Autowired
+	private UserSvc userSvc;
+	
+	@RequestMapping(value="/mypageUser/UserMyInfo.do")
+	public String select(@ModelAttribute UserVO invo, Model model) {
+		log.info("UserVO: "+invo);
+		
+		model.addAttribute("param",invo);
+		
+		
+		return VIEW_NAME_INFO;
+	}*/
+	
+	@RequestMapping(value="mypageUser/UserApply.do")
+	public String retrieveApply(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
@@ -56,11 +68,9 @@ public class JasoController {
 		}
 		
 		CodeVO codePage = new CodeVO();
-		codePage.setCmId("JASO_SEARCH");
+		codePage.setCmId("MY_USER_APPLY");
 		
-		
-		
-		List<JasoVO> list = jasoSvc.doRetrieve(invo);
+		List<ApplyVO> list = mypageSvc.retrieveApply(invo);
 		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
@@ -72,39 +82,43 @@ public class JasoController {
 		model.addAttribute("code_Page",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
 		model.addAttribute("total_cnt",totalCnt);
-		return VIEW_NAME;
+		
+		return VIEW_APPLY;
 	}
 	
-	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
+	@RequestMapping(value="mypageUser/cancelApply.do",produces="application/json;charset=utf8",
+			        method=RequestMethod.POST)
 	@ResponseBody
-	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
-		log.info("=====================update=======================");
+	public String deleteApply(@ModelAttribute ApplyVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================deleteApply=======================");
 		log.info("invo" + invo);
 		
 		int flag = 0;
 		
 		JSONObject object = new JSONObject();
 		
-		//String loginId = req.getParameter("userId");
-		
-		//----------------------------------------------------------------
-		//<-- 세션값으로 아이디값 받기 -->
-		String loginId = "boondll@hanmail.net";
-		invo.setRegId(loginId);
-		
-		
-		flag = jasoSvc.merge(invo);
+		flag = mypageSvc.deleteApply(invo);
 		
 		if(flag > 0) {
 			object.put("flag",flag);
-			object.put("msg","등록 되었습니다.");
+			object.put("msg","지원 취소되었습니다.");
 		}else {
 			object.put("flag",flag);
-			object.put("msg","등록 실패.");
+			object.put("msg","지원 취소 실패.");
 		}
 		
 		String jsonData = object.toJSONString();
 		
 		return jsonData;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

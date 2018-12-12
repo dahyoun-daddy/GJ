@@ -58,14 +58,26 @@ public class HireDaoImpl implements HireDao {
 	}
 
 	@Override
-	public HireVO read(HireVO hireVO) throws Exception {
+	public int read(HireVO hireVO) throws Exception {
 		String statement = NAMESPACE+".read";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+hireVO);
-		HireVO outVO = sqlSession.selectOne(statement, hireVO);
+		int outVO = sqlSession.selectOne(statement, hireVO);
 		log.debug("result : "+outVO);
 		
 		return outVO;
+	}
+
+
+	@Override
+	public int delete(HireVO hireVO) throws SQLException {
+		String statement = NAMESPACE+".delete";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+hireVO);
+		int flag = sqlSession.delete(statement, hireVO);
+		log.debug("result : "+flag);
+				
+		return flag;
 	}
 
 }

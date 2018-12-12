@@ -49,13 +49,13 @@ public interface MypageSvc {
 	LicenseVO selectLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	//자격증 리스트 조회
-	List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+	List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException;
 	
 	
 	//입사지원정보 추가
 	int addApply(ApplyVO applyVO);
 	
-	//입사지원정보 list 조회
+	//입사지원정보 list 조회 (기업이)
 	List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 	//입사지원 수정 

@@ -140,11 +140,11 @@ public class MypageDaoImple implements MypageDao {
 	
 
 	@Override
-	public List<LicenseVO> retrieveLic(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+	public List<LicenseVO> retrieveLic(LicenseVO licenseVO) throws ClassNotFoundException, SQLException {
 		String statement = NAMESPACE+".retrieveLic";
 		log.debug("sql statement : "+statement);
-		log.debug("param : "+searchVO);
-		List<LicenseVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("param : "+licenseVO);
+		List<LicenseVO> list = sqlSession.selectList(statement, licenseVO);
 		log.debug("result : "+list);
 		
 		return list;

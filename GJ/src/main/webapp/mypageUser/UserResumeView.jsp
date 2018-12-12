@@ -184,6 +184,7 @@
 										</select>
 									</div>
 								</div>
+				</form>
 						    </div>	
 						   
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">

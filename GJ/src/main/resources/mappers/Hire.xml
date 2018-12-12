@@ -21,6 +21,40 @@
   		</where>
 	</sql>
 	
+	<select id="search" parameterType="HireVO" resultType="HireVO">
+				SELECT X.*, Y.*
+				  FROM
+				(
+				    SELECT T.hire_no,
+				           T.hire_title,
+				           T.hire_body,
+				           T.user_id,
+				           T.hire_date,
+				           T.hire_deadline,
+				           T.cl_check,
+				           T.reg_id,
+				           DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+        							,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
+				           T.rnum AS no
+				      FROM
+				    (
+				        SELECT C.*,
+				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+				          FROM usercl C
+		                <include refid="searchWord"/>
+				    ) T
+		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+					   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+				) X
+				NATURAL JOIN
+				(
+				    SELECT COUNT(*) AS total_cnt
+				      FROM usercl C
+		            <include refid="searchWord"/>
+				) Y
+
+	</select>
+	
 	<insert id="create" parameterType="HireVO">
 		INSERT INTO hireinfo (
 		    hire_no,
@@ -70,7 +104,7 @@
 	</select>
 	
 	<update id="update" parameterType="HireVO">
-		UPDATE hireinfo
+			UPDATE hireinfo
 		   SET hire_title = #{hireNo}, 
 				 hire_body = #{hireBody},       
 				 hire_date = #{hireDate},       
@@ -84,19 +118,9 @@
 			    hire_no = #{hireNo}
 	</update>
 	
-	<select id="search" parameterType="HireVO" resultType="HireVO">
-		SELECT
-		    hire_no,
-		    hire_title,
-		    hire_body,
-		    user_id,
-		    hire_date,
-		    hire_deadline,
-		    hire_add,
-		    hire_salary,
-		    hire_edu
-		FROM
-		    hireinfo
-	</select>
+	<delete id="delete" parameterType="HireVO">
+		DELETE FROM userinfo
+		WHERE hire_no = #{hireNo}
+	</delete>
 	
 </mapper>

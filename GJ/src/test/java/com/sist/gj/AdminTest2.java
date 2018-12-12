@@ -59,11 +59,13 @@ public class AdminTest2 {
 	}
 	 
 	@Test
+	@Ignore
 	public void Test() { 
 		assertThat(inVo1.getUserId(), is("test5@naver.com")); 
 	}
 	
 	@Test
+	@Ignore
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<UserVO> list = adminPageDao.doRetrieveUser(searchVO);
 		LOG.info("result = "+list);
