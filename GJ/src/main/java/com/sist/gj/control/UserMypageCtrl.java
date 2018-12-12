@@ -69,8 +69,11 @@ public class UserMypageCtrl {
 			invo.setSearchDiv("");
 		}
 		
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("MY_USER_APPLY");
+		
 		CodeVO codePage = new CodeVO();
-		codePage.setCmId("MY_USER_APPLY");
+		codePage.setCmId("PAGING");
 		
 		List<ApplyVO> list = mypageSvc.retrieveApply(invo);
 		log.info("list size : "+list.size());
@@ -81,10 +84,11 @@ public class UserMypageCtrl {
 			
 		}
 		
-		model.addAttribute("code_Page",codeSvc.doRetrieve(codePage));
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
-		model.addAttribute("total_cnt",totalCnt);
-		
+		model.addAttribute("param",invo);
+		model.addAttribute("totalCnt",totalCnt);
 		return VIEW_APPLY;
 	}
 	
