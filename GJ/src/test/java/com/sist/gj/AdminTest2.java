@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -41,30 +42,30 @@ public class AdminTest2 {
 	private AdminPageDao adminPageDao;
 	private MockMvc mockMvc;
 	
-	UserVO inVo1 = null;
+	UserVO inVo1 = null; 
 	
 	SearchVO searchVO = null; 
-	
+	 
 	@Before 
 	public void setUp() {
-		inVo1 = new UserVO("11@test.com","1","1","1","1","1"
+		inVo1 = new UserVO("test5@naver.com","1","1","1","1","1"
 					,"1","01011112222",1,null,null,null,"11@test.com","20181111",null,null);
 		 
 		searchVO = new SearchVO(10,1,"",""); 
 		LOG.info("context : "+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc : "+mockMvc);
-		LOG.info("SignUpDao : "+adminPageDao);
+		LOG.info("adminPageDao : "+adminPageDao);
 	}
 	 
 	@Test
 	public void Test() { 
-		assertThat(inVo1.getUserId(), is("11@test.com")); 
+		assertThat(inVo1.getUserId(), is("test5@naver.com")); 
 	}
 	
 	@Test
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
-		List<UserVO> list = adminPageDao.doRetrieve(searchVO);
+		List<UserVO> list = adminPageDao.doRetrieveUser(searchVO);
 		LOG.info("result = "+list);
 		LOG.info("list size = "+list.size());
 		assertThat(list.size(),is(not(0)));
@@ -72,13 +73,39 @@ public class AdminTest2 {
 	}
 	
 	@Test
+	@Ignore
 	public void merge() throws SQLException, ClassNotFoundException {
-		UserVO userVO = adminPageDao.select(inVo1);
+		UserVO userVO = adminPageDao.selectUser(inVo1);
 		LOG.info("merge result = "+userVO);
-		assertThat(userVO.getUserId(),is("11@test.com"));
-		int updateUCflag = adminPageDao.updateUC(inVo1);
+		assertThat(userVO.getUserId(),is("test1@naver.com"));
+		int updateUCflag = adminPageDao.updateUser(inVo1);
 		assertThat(updateUCflag,is(1));
-		int deleteUCflag = adminPageDao.deleteUC(inVo1);
+		int deleteUCflag = adminPageDao.deleteUser(inVo1);
+		assertThat(deleteUCflag,is(1));
+		
+	}
+	 
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Test
+	public void doRetrieve1() throws ClassNotFoundException, SQLException {
+		List<UserVO> list = adminPageDao.doRetrieveCompany(searchVO);
+		LOG.info("result = "+list);
+		LOG.info("list size = "+list.size());
+		assertThat(list.size(),is(not(0)));
+		
+	}
+	
+
+	@Test
+	
+	public void merge1() throws SQLException, ClassNotFoundException {
+		UserVO userVO = adminPageDao.selectCompany(inVo1);
+		LOG.info("merge result = "+userVO);
+		assertThat(userVO.getUserId(),is("test5@naver.com"));
+		int updateUCflag = adminPageDao.updateCompany(inVo1);
+		assertThat(updateUCflag,is(1));
+		int deleteUCflag = adminPageDao.deleteCompany(inVo1);
 		assertThat(deleteUCflag,is(1));
 		
 	}

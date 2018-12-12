@@ -45,8 +45,8 @@ public class SignUpTest {
 	
 	@Before 
 	public void setUp() {
-		inVo1 = new UserVO("test@company.com","1","1","1","1","1"
-					,"1","01011112222",1,"","","","test@company.com",null,"test@company.com",null);
+		inVo1 = new UserVO("test15@company.com","1","1","1","1","1"
+					,"1","01011112222",1,"","","","test@company.com",null,"test15@company.com",null);
 		 
 		searchVO = new SearchVO(10,1,"",""); 
 		LOG.info("context : "+context);
@@ -57,7 +57,7 @@ public class SignUpTest {
 														
 	@Test
 	public void Test() {
-		assertThat(inVo1.getUserId(), is("test@company.com")); 
+		assertThat(inVo1.getUserId(), is("test15@company.com")); 
 	}
 	@Test 
 	public void insert() throws ClassNotFoundException, SQLException {
@@ -69,7 +69,7 @@ public class SignUpTest {
 	public void select() throws ClassNotFoundException, SQLException {
 		UserVO result = signUpDao.select(inVo1);
 		LOG.info("result : "+result);
-		assertThat(result.getUserId(),is("test@company.com"));
+		assertThat(result.getUserId(),is("test15@company.com"));
 	}
 	
 }

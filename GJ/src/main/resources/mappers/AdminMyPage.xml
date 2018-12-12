@@ -23,8 +23,8 @@
 	</sql>
 
 	
-	<!-- 유저 전체조회 -->
-	<select id="selectuser" parameterType="UserVO" resultType="UserVO">
+	<!-- 구직자 전체조회 -->
+	<select id="selectUser" parameterType="UserVO" resultType="UserVO">
 		  
 		        SELECT X.*, Y.*
 				  FROM
@@ -39,7 +39,21 @@
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
-		                <include refid="searchText"/>
+				          WHERE user_level = 1
+		                
+		                <choose>
+  				<when test="10 == searchDiv">
+  					user_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="20 == searchDiv">
+  					user_nick LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="30 == searchDiv"> 
+  					user_name LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
 				    ) T
 		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 					   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
@@ -48,23 +62,33 @@
 				(
 				    SELECT COUNT(*) AS total_cnt
 				      FROM users
-				      <include refid="searchText"/>
+				      WHERE user_level = 1
+				     <choose>
+  				<when test="10 == searchDiv">
+  					user_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="20 == searchDiv">
+  					user_nick LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="30 == searchDiv"> 
+  					user_name LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
 				)Y
 		
 	</select>
 
-	<!-- 유저 상세조회-->
-	<select id="userdetail" parameterType="UserVO" resultType="UserVO">
+	<!-- 구직자 상세조회-->
+	<select id="userDetail" parameterType="UserVO" resultType="UserVO">
 		SELECT 
 				user_id	    	 ,
 				user_passwd      ,
 				user_nick        ,
 				user_name        ,
 				user_phone       ,
-				user_add         ,
-				enter_Salay	   ,
-				enter_Cnt	       ,
-				enter_Hiredate   ,
+				user_add         ,				
 				user_passQ       ,
 				user_passA       
 													
@@ -77,7 +101,7 @@
 
 
 	<!-- 수정 -->
-	<update id="updateUC" parameterType="UserVO" >
+	<update id="updateUser" parameterType="UserVO" >
 		UPDATE users
 		SET
 		    user_passwd  = #{userPasswd},
@@ -86,10 +110,8 @@
 		    user_phone = #{userPhone},
 		    user_add = #{userAdd},
 		    user_passQ = #{userPassQu},
-		    user_passA = #{userPassAn},
-		    enter_salay = #{enterSalay},
-		    enter_Cnt = #{enterCnt},
-		    enter_Hiredate = #{enterHiredate}
+		    user_passA = #{userPassAn}
+
 			    
 		WHERE
 		 	    
@@ -97,7 +119,7 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="deleteUC" parameterType="UserVO">
+	<delete id="deleteUser" parameterType="UserVO">
 		DELETE 
 		
 		FROM Users
@@ -107,7 +129,114 @@
    	
  
    	
+   	<!-- 기업 전체조회 -->
+	<select id="selectCompany" parameterType="UserVO" resultType="UserVO">
+		  
+		        SELECT X.*, Y.*
+				  FROM
+				( 
+				    SELECT T.user_name,
+				           T.user_nick,
+				           T.user_id,
+				           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
+				           T.user_level,
+				           T.rnum AS no
+				      FROM
+				    (
+				        SELECT C.*,
+				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+				          FROM users C
+				          WHERE user_level = 2 OR user_level = 3
+		                     <choose>
+  				<when test="10 == searchDiv">
+  					user_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="20 == searchDiv">
+  					user_nick LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="30 == searchDiv"> 
+  					user_name LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+		  			</choose>
+						    ) T
+				            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+						) X
+							NATURAL JOIN
+						(
+						    SELECT COUNT(*) AS total_cnt
+						      FROM users
+						        WHERE user_level = 2 OR user_level = 3
+						          <choose>
+		  				<when test="10 == searchDiv">
+		  					user_id LIKE '%'||#{searchWord}||'%'
+		  				</when>
+		  				<when test="10 == searchDiv">
+		  					user_nick LIKE '%'||#{searchWord}||'%'
+		  				</when><when test="10 == searchDiv">
+		  					user_name LIKE '%'||#{searchWord}||'%'
+		  				</when>
+		  				
+		  				<otherwise>
+		  				</otherwise>
+		  			</choose>
+				)Y
+		
+	</select>
+
+	<!-- 기업 상세조회-->
+	<select id="companyDetail" parameterType="UserVO" resultType="UserVO">
+		SELECT 
+				user_id	    	 ,
+				user_passwd      ,
+				user_nick        ,
+				user_name        ,
+				user_phone       ,
+				user_add         ,
+				enter_Salay	   ,
+				enter_Cnt	       ,
+				enter_Hiredate   ,
+				user_passQ       ,
+				user_passA       ,
+				user_level
+				
+													
+		FROM users
+		
+		WHERE user_id = #{userId} 
+	</select>
    	
+   		<!-- 수정 -->
+	<update id="updateCompany" parameterType="UserVO" >
+		UPDATE users
+		SET
+		    user_passwd  = #{userPasswd},
+		    user_nick  = #{userNick}, 
+		    user_name = #{userName},
+		    user_phone = #{userPhone},
+		    user_add = #{userAdd},
+		    enter_Salay	= #{enterSalay} ,  
+		    enter_Cnt	    = #{enterCnt}   ,
+		    enter_Hiredate = #{enterHiredate},   
+		    user_passQ = #{userPassQu},
+		    user_passA = #{userPassAn}
+
+			    
+		WHERE
+		 	    
+		    user_id = #{userId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteCompany" parameterType="UserVO">
+		DELETE 
+		
+		FROM Users
+		
+		WHERE User_id = #{userId}
+	</delete>
    	
    	
    	

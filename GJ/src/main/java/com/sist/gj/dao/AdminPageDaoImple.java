@@ -35,11 +35,11 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 	
 
 	@Override
-	public UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException {
+	public UserVO selectUser(UserVO userVO) throws ClassNotFoundException, SQLException {
 
 	UserVO outVO = null;
 		
-		String statement = NAMESPACE+".userdetail";
+		String statement = NAMESPACE+".userDetail";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+userVO);
 		outVO = sqlSession.selectOne(statement, userVO);
@@ -51,10 +51,10 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 	
 
 	@Override
-	public int updateUC(UserVO userVO) throws SQLException {
+	public int updateUser(UserVO userVO) throws SQLException {
 		UserVO outVO = null;
 		
-		String statement = NAMESPACE+".updateUC";
+		String statement = NAMESPACE+".updateUser";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+userVO);
 		int flag = sqlSession.update(statement, userVO);
@@ -64,10 +64,10 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 	}
 
 	@Override
-	public int deleteUC(UserVO userVO) throws SQLException {
+	public int deleteUser(UserVO userVO) throws SQLException {
 		UserVO outVO = null;
 		
-		String statement = NAMESPACE+".deleteUC";
+		String statement = NAMESPACE+".deleteUser";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+userVO);
 		int flag = sqlSession.delete(statement, userVO);
@@ -77,8 +77,8 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 	}
  
 	@Override
-	public List<UserVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		String statement = NAMESPACE+".selectuser";
+	public List<UserVO> doRetrieveUser(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".selectUser";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+searchVO);
 		List<UserVO> list = sqlSession.selectList(statement, searchVO);
@@ -87,6 +87,61 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 		return list;
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@Override
+	public UserVO selectCompany(UserVO userVO) throws ClassNotFoundException, SQLException {
+
+	UserVO outVO = null;
+		
+		String statement = NAMESPACE+".companyDetail";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+		
+	}	
+	
+
+	@Override
+	public int updateCompany(UserVO userVO) throws SQLException {
+		UserVO outVO = null;
+		
+		String statement = NAMESPACE+".updateCompany";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.update(statement, userVO);
+		log.debug("result : "+flag);
+		
+		return flag;
+	}
+
+	@Override
+	public int deleteCompany(UserVO userVO) throws SQLException {
+		UserVO outVO = null;
+		
+		String statement = NAMESPACE+".deleteCompany";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		int flag = sqlSession.delete(statement, userVO);
+		log.debug("result : "+flag);
+		
+		return flag;
+	}
+ 
+	@Override
+	public List<UserVO> doRetrieveCompany(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".selectCompany";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<UserVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
+	}
 
 	
 

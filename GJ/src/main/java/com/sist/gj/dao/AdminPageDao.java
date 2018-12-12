@@ -17,21 +17,32 @@ public interface AdminPageDao {
 	
 	
 	 
-	//조회
-	UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException;
+	//유저 조회
+	UserVO selectUser(UserVO userVO) throws ClassNotFoundException, SQLException;
 	
 		//유저 수정
-		int updateUC(UserVO userVO) throws SQLException;
+		int updateUser(UserVO userVO) throws SQLException;
 		
 		//유저 삭제 
-		int deleteUC(UserVO userVO) throws SQLException;
+		int deleteUser(UserVO userVO) throws SQLException;
 
 				
-		//유 리스트 조회
-		List<UserVO> doRetrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+		//유저 리스트 조회
+		List<UserVO> doRetrieveUser(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+			//기업 조회
+			UserVO selectCompany(UserVO userVO) throws ClassNotFoundException, SQLException;
 		
+			//기업 수정
+			int updateCompany(UserVO userVO) throws SQLException;
+			
+			//기업 삭제 
+			int deleteCompany(UserVO userVO) throws SQLException;
+
+					
+			//기업 리스트 조회
+			List<UserVO> doRetrieveCompany(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 }
