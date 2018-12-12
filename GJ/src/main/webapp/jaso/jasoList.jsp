@@ -119,7 +119,7 @@
     		frm.action="jasoList.do";
     		frm.submit();
     	}
-		
+		 
 		$(document).ready(function(){
 			//엔터키 처리
 			$("#searchWord").keydown(function(key) {
