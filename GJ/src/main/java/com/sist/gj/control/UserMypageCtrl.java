@@ -32,7 +32,7 @@ public class UserMypageCtrl {
 	
 	private static final String VIEW_NAME_INFO="mypageUser/UserMyInfo";
 	private static final String VIEW_APPLY="mypageUser/UserApply";
-	private static final String VIEW_APPLY_COMP="mypageComp/CompHireStt";
+	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
 	
 
 	
@@ -78,7 +78,7 @@ public class UserMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		List<ApplyVO> list = mypageSvc.retrieveApply(invo);
+		List<ApplyVO> list = mypageSvc.retrieveApplyUser(invo);
 		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
@@ -95,7 +95,7 @@ public class UserMypageCtrl {
 		return VIEW_APPLY;
 	}
 	
-	@RequestMapping(value="mypageComp/CompApply.do")
+	@RequestMapping(value="mypageCompany/CompHireStt.do")
 	public String retrieveApplyComp(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
@@ -118,7 +118,7 @@ public class UserMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		List<ApplyVO> list = mypageSvc.retrieveApply(invo);
+		List<ApplyVO> list = mypageSvc.retrieveApplyComp(invo);
 		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
@@ -165,7 +165,7 @@ public class UserMypageCtrl {
 		
 		if(flag>0) {
 			object.put("flag", flag);
-			object.put("message", "입사 취소되었습니다.\n("+flag+"건 취소 완료.)");
+			object.put("message", "지원 취소되었습니다.\n("+flag+"건 취소 완료.)");
 		}else {
 			object.put("flag", flag);
 			object.put("message", "삭제에 실패했습니다. 다시 시도해 주세요. ^^");			
@@ -179,10 +179,48 @@ public class UserMypageCtrl {
 		return jsonData;
 	}
 	
-	
-	
-	
-	
+	@RequestMapping(value="mypageCompany/deleteEmp.do",
+	        produces="application/json;charset=utf8",
+		        method=RequestMethod.POST)
+	@ResponseBody
+		public String updateApply(HttpServletRequest req, Model model) throws RuntimeException, SQLException{
+		log.info("=====================deleteApply=======================");
+		
+		String noList = req.getParameter("applyNo_list");
+		log.info("noList: "+noList);
+		
+		Gson gson=new Gson();
+		List<String>  listParam = gson.fromJson(noList, List.class);
+		log.info("noList: "+listParam);
+		
+		List<ApplyVO> paramList = new ArrayList<ApplyVO>();
+		for(int i=0;i<listParam.size();i++) {
+			ApplyVO vo =new ApplyVO();
+			vo.setApplyNo(listParam.get(i));
+			
+			paramList.add(vo);
+		}
+		log.info("paramList: "+paramList);
+		
+		int flag = this.mypageSvc.updateMultiApply(paramList);
+		
+		JSONObject object = new JSONObject();
+		
+		if(flag>0) {
+			object.put("flag", flag);
+			object.put("message", "삭제되었습니다.\n("+flag+"건 삭제 완료.)");
+		}else {
+			object.put("flag", flag);
+			object.put("message", "삭제에 실패했습니다. 다시 시도해 주세요. ^^");			
+		}		
+		String jsonData = object.toJSONString();
+		
+		log.info("3========================");
+		log.info("jsonData="+jsonData);
+		log.info("3========================");		
+		
+		return jsonData;
+	}
 	
 	
 	

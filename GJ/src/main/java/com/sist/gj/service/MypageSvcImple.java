@@ -86,8 +86,13 @@ public class MypageSvcImple implements MypageSvc {
 	}
 
 	@Override
-	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		return mypageDao.retrieveApply(searchVO);
+	public List<ApplyVO> retrieveApplyUser(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveApplyUser(searchVO);
+	}
+	
+	@Override
+	public List<ApplyVO> retrieveApplyComp(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveApplyComp(searchVO);
 	}
 
 	@Override
@@ -144,5 +149,27 @@ public class MypageSvcImple implements MypageSvc {
 		log.debug("========================");
 		return flag;
 	}
+
+	@Override
+	public int updateMultiApply(List<ApplyVO> list) throws RuntimeException, SQLException {
+		int flag = 0;
+		try {
+			for(ApplyVO vo :list) {
+				flag+=mypageDao.updateApply(vo);
+			}
+			
+		}catch(RuntimeException e) {
+			log.debug("========================");
+			log.debug("RuntimeException: "+e.getMessage());
+			log.debug("========================");			
+			throw e;
+		}
+		log.debug("========================");
+		log.debug("=flag="+flag);
+		log.debug("========================");
+		return flag;
+	}
+
+
 
 }

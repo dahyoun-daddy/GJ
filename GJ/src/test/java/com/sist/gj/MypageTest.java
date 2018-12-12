@@ -180,7 +180,7 @@ public class MypageTest {
 		LOG.info("inApply1:"+inApply1);
 		
 		//list retrieve
-		List<ApplyVO> list = mypageDao.retrieveApply(searchVO);
+		List<ApplyVO> list = mypageDao.retrieveApplyUser(searchVO);
 		LOG.info("size : "+list.size()+""); 
 		LOG.info("list : "+list); 
 		assertThat(list.size(),is(not(0)));
@@ -189,7 +189,7 @@ public class MypageTest {
 		mypageDao.deleteApply(inApply1);
 		mypageDao.deleteApply(inApply2);
 		mypageDao.deleteApply(inApply3);
-		List<ApplyVO> list2 = mypageDao.retrieveApply(searchVO);
+		List<ApplyVO> list2 = mypageDao.retrieveApplyUser(searchVO);
 		assertThat(list2.size() , is(0));
 		
 	}
