@@ -89,8 +89,8 @@
 				user_name        ,
 				user_phone       ,
 				user_add         ,				
-				user_passQ       ,
-				user_passA       
+				user_pass_Qu       ,
+				user_pass_An       
 													
 		FROM users
 		
@@ -109,8 +109,8 @@
 		    user_name = #{userName},
 		    user_phone = #{userPhone},
 		    user_add = #{userAdd},
-		    user_passQ = #{userPassQu},
-		    user_passA = #{userPassAn}
+		    user_pass_Qu = #{userPassQu},
+		    user_pass_An = #{userPassAn}
 
 			    
 		WHERE
@@ -172,8 +172,8 @@
 				enter_Salay	   ,
 				enter_Cnt	       ,
 				enter_Hiredate   ,
-				user_passQ       ,
-				user_passA       ,
+				user_pass_Qu       ,
+				user_pass_An       ,
 				user_level
 				
 													
@@ -194,8 +194,8 @@
 		    enter_Salay	= #{enterSalay} ,  
 		    enter_Cnt	    = #{enterCnt}   ,
 		    enter_Hiredate = #{enterHiredate},   
-		    user_passQ = #{userPassQu},
-		    user_passA = #{userPassAn}
+		    user_pass_Qu = #{userPassQu},
+		    user_pass_An = #{userPassAn}
 
 			    
 		WHERE

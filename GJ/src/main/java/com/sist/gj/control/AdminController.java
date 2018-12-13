@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -111,6 +112,78 @@ public class AdminController {
 		return VIEW2_NAME;
 	}
 	
+			@RequestMapping(value="/mypageAdmin/userSelect.do",method=RequestMethod.POST
+			        ,produces="application/json;charset=utf8"  
+			)
+		@ResponseBody
+		public String get(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+			String userId = req.getParameter("userId");
+			log.info("2========================");
+			log.info("get=");
+			log.info("2========================");	
+			UserVO userVO=new UserVO();
+			userVO.setUserId(userId);
+			
+			//JSON Convertor
+			UserVO outVO = adminSvc.selectUser(userVO);
+			JSONObject object=new JSONObject();   
+			object.put("userId", outVO.getUserId());
+			object.put("userPasswd", outVO.getUserPasswd());
+			object.put("userNick", outVO.getUserNick());
+			object.put("userName", outVO.getUserName());   
+			object.put("userPhone", outVO.getUserPhone());
+			object.put("userAdd", outVO.getUserAdd());
+			object.put("userPassQu", outVO.getuserPassQu());
+			object.put("userPassAn", outVO.getuserPassAn());
+			 
+			String jsonData = object.toJSONString();
+			
+			log.info("3========================");
+			log.info("jsonData="+jsonData);
+			log.info("3========================");			
+			model.addAttribute("vo", adminSvc.selectUser(userVO));
+			return jsonData;
+			}
+	
+			@RequestMapping(value="/mypageAdmin/companySelect.do",method=RequestMethod.POST
+			        ,produces="application/json;charset=utf8"  
+			)
+		@ResponseBody
+		public String get2(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+			String userId = req.getParameter("userId");
+			log.info("2========================");
+			log.info("get=");
+			log.info("2========================");	
+			UserVO userVO=new UserVO();
+			userVO.setUserId(userId);
+			
+			//JSON Convertor
+			UserVO outVO = adminSvc.selectCompany(userVO);
+			JSONObject object=new JSONObject();    
+			object.put("userId", outVO.getUserId());
+			object.put("userPasswd", outVO.getUserPasswd());
+			object.put("userNick", outVO.getUserNick());
+			object.put("userName", outVO.getUserName());   
+			object.put("userPhone", outVO.getUserPhone());
+			object.put("userAdd", outVO.getUserAdd());
+			object.put("enterSalay", outVO.getEnterSalay());
+			object.put("enterCnt", outVO.getEnterCnt());
+			object.put("enterHiredate", outVO.getEnterHiredate());
+			object.put("UserLevel", outVO.getUserLevel());
+			object.put("userPassQu", outVO.getuserPassQu());
+			object.put("userPassAn", outVO.getuserPassAn());
+			 
+			String jsonData = object.toJSONString();
+			
+			log.info("3========================");
+			log.info("jsonData="+jsonData);
+			log.info("3========================");			
+			model.addAttribute("vo", adminSvc.selectUser(userVO));
+			return jsonData;
+			}
+	
+			
+			
 //	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
 //	@ResponseBody
 //	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{

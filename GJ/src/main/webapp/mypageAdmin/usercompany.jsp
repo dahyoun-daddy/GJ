@@ -227,7 +227,7 @@
 			<div class="form-group">
 			<label class="col-lg-4 control-label">이메일</label>
 			<div  class="col-lg-8">
-			<input type="text" name="regDt" id="regDt" disabled="disabled"
+			<input type="text" name="userId" id="userId" disabled="disabled"
 						   class="form-control input-sm" placeholder="이메일" />						   
 			</div>
 			</div>
@@ -236,7 +236,7 @@
 			<div class="form-group">
 					<label class="col-lg-4 control-label">비밀번호</label>
 					<div  class="col-lg-8">
-						<input type="password" name="name" id="name"
+						<input type="password" name="userPasswd" id="userPasswd"
 						   class="form-control input-sm" placeholder="비밀번호"
 						   maxlength="20" />
 					</div>
@@ -244,7 +244,7 @@
 				<div class="form-group">
 					<label class="col-lg-4 control-label">닉네임</label>
 					<div  class="col-lg-8">
-						<input type="text" name="password" id="password"
+						<input type="text" name="userNick" id="userNick"
 						   class="form-control input-sm" placeholder="닉네임"
 						   maxlength="20" />
 					</div>
@@ -253,7 +253,7 @@
 				<div class="form-group">
 					<label class="col-lg-4 control-label">성함</label>
 					<div  class="col-lg-8">
-						<input type="text" name="login" id="login"
+						<input type="text" name="userName" id="userName"
 						   class="form-control input-sm" placeholder="성함"
 						   maxlength="4" />
 					</div>
@@ -261,7 +261,7 @@
 				<div class="form-group">
 					<label class="col-lg-4 control-label">전화번호</label>
 					<div  class="col-lg-8">
-						<input type="text" name="recommend" id="recommend"
+						<input type="text" name="userPhone" id="userPhone"
 						   class="form-control input-sm" placeholder="전화번호"
 						   maxlength="4" />
 					</div>
@@ -269,7 +269,7 @@
 				<div class="form-group">
 					<label class="col-lg-4 control-label">주소</label>
 					<div  class="col-lg-8">
-						<input type="text" name="email" id="email"
+						<input type="text" name="uerAdd" id="userAdd"
 						   class="form-control input-sm" placeholder="주소"
 						   maxlength="200" />
 					</div>
@@ -291,7 +291,7 @@
 			<div class="form-group">
 					<label class="col-lg-4 control-label">비밀번호 찾기 답변:</label>
 					<div  class="col-lg-8">
-						<input type="text" name="email" id="email"
+						<input type="text" name="userPassAn" id="userPassAn"
 						   class="form-control input-sm" placeholder="비밀번호 찾기 답변"
 						   maxlength="200" />
 					</div>
@@ -302,115 +302,104 @@
 	<!-- //입력 Form영역---- ----------------------------------------------->			
 	<script type="text/javascript">
 	
-	$("#listTable>tbody").on("click","tr",function(){
+	$(document).ready(function(){
+		$("#listTable>tbody").on("click","tr",function(){
 
-		console.log("1 #listTable>tbody");
+			console.log("1 #listTable>tbody");
 
-		
+			
 
-		var tr = $(this);
+			var tr = $(this);
 
-		var td = tr.children();
+			var td = tr.children();
 
-		var userId = td.eq(2).text();
+			var userId = td.eq(3).text();
 
-		console.log("2 userId="+userId);
+			console.log("2 userId="+userId);
 
-		
+			
 
-		if(""==userId)return;
+			if(""==userId)return;
+			
+			//alert("userId"+userId);
+			
 
-		
+	        $.ajax({
 
-        $.ajax({
+	            type:"POST",
 
-            type:"POST",
+	            url:"userSelect.do",
 
-            url:"do_search_one.do",
+	            dataType:"html",// JSON
 
-            dataType:"html",// JSON
+	            data:{
 
-            data:{
+	            "userId": userId
 
-            "userId": userId
+	            },
 
-            },
+	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 
-            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	              var parseData = $.parseJSON(data);
 
-              var parseData = $.parseJSON(data);
 
-              /* console.log("3 parseData.u_id="+parseData.u_id);
 
-              console.log("3 parseData.name="+parseData.name);
+	            
 
-              console.log("3 parseData.password="+parseData.password);
+	              
 
-              console.log("3 parseData.login="+parseData.login);
+	              $("#userId").val(parseData.userId);
 
-              console.log("3 parseData.recommend="+parseData.recommend);
+	              $("#userPasswd").val(parseData.userPasswd);
 
-              console.log("3 parseData.email="+parseData.email);
+	              $("#userNick").val(parseData.userNick);
 
-              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
+	              
+	              $("#userName").val(parseData.userName);
 
-              console.log("3 parseData.regDt="+parseData.regDt); */
+	              $("#userPhone").val(parseData.userPhone);
 
-              
+	              $("#userAdd").val(parseData.userAdd);
 
-              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
+	              $("#userPassQu").val(parseData.userPassQu);
 
-              
+	              $("#userPassAn").val(parseData.userPassAn);
 
-              $("#userId").val(parseData.userId);
+	              
+	              
+ 
+	              $("#userId").prop("disabled",true);              
 
-              $("#userPasswd").val(parseData.userPasswd);
+	            },
 
-              $("#password").val(userNick.userNick);
+	            complete: function(data){//무조건 수행
 
-              
-              $("#userName").val(parseData.userName);
+	             
 
-              $("#userPhone").val(parseData.userPhone);
+	            },
 
-              $("#userAdd").val(parseData.userAdd);
+	            error: function(xhr,status,error){
 
-              $("#userPassQu").val(parseData.userPassQu);
+	             
 
-              $("#userPassAn").val(parseData.userPassAn);
+	            }
 
-              
-              
+	       }); //--ajax
 
-              $("#userId").prop("disabled",true);              
+			
 
-            },
-
-            complete: function(data){//무조건 수행
-
-             
-
-            },
-
-            error: function(xhr,status,error){
-
-             
-
-            }
-
-       }); //--ajax
+		});//--#listTable>tbody
 
 		
 
-	});//--#listTable>tbody
+		
 
+		
+
+	});  
 	
-
 	
-
 	
-
-});  
 	
 	</script>
 
