@@ -21,11 +21,16 @@
 			            <div class="form-group" align="right">
 			            <form id="updateFrm" name="updateFrm">
 			            	<input type="hidden" id="clNo" name="clNo" value="${clNo}">
+			            	<input type="hidden" id="selectClNo" name="selectClNo" value="${clNo}">
 			            	<input type="hidden" id="clTitle" name="clTitle" value="${clTitle}">
 			            	<input type="hidden" id="clSungjang" name="clSungjang" value="${clSungjang}">
 			            	<input type="hidden" id="clSang" name="clSang" value="${clSang}">
 			            	<input type="hidden" id="clJangdan" name="clJangdan" value="${clJangdan}">
 			            	<input type="hidden" id="clJiwon" name="clJiwon" value="${clJiwon}">
+			            	<input type="hidden" id="userNick" name="userNick" value="${userNick}">
+			            	<input type="hidden" id="regDt" name="regDt" value="${regDt}">
+			            	<input type="hidden" id="cList" name="cList" value="${cList}">
+			            	<button type="button" class="btn btn-default btn-sm" onclick="moveList();">목록</button>
 			            	<!------------------------------- 작성자만 보이는 버튼 -------------------------------------- -->
   							<button type="button" class="btn btn-default btn-sm" onclick="doUpdate();">수정</button>
   							<button type="button" class="btn btn-default btn-sm" id="doDelete" >삭제</button>
@@ -97,15 +102,16 @@
 			  					</c:choose>
 			            	</tbody>
 			            </table>
-			            <form id="contact" method="post" class="form" role="form">
-			                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+			            <form id="contact" name="contact" method="post" class="form" role="form">
+			                <textarea class="form-control" id="comment" name="comment" placeholder="Message" rows="5"></textarea>
+			            </form>   
 			                <br/>
 			                <div class="row">
 			                    <div class="col-xs-12 col-md-12 form-group">
-			                        <button class="btn btn-primary" type="submit">댓글달기</button>
+			                        <input type="button" class="btn btn-primary" id="submitC" name="submitC" value="댓글달기"/>
 			                    </div>
 			                </div>
-			            </form>
+			            
 			        </div>
 			    </div>
 			</div>
@@ -113,6 +119,18 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		function moveList(){
+			var frm = document.frm;
+			frm.action="jasoList.do";
+			frm.submit();
+		}
+	
+		function reLoad(){
+			var frm = document.updateFrm;
+			frm.action="jasoView.do";
+			frm.submit();
+		}
+	
 		function doUpdate(){
 			var frm = document.updateFrm;
 			frm.action="jasoUpdateMove.do";
@@ -132,17 +150,19 @@
     				return;
     			}
 				
+				
 				$.ajax({
 	   		         type:"POST",
 	   		         url:"delete.do",
 	   		         dataType:"html",// JSON
 	   		         data:{
-	   		         	"commentNo": $("#commentNo").val()
+	   		         	"clNo": $("#clNo").val()
 	   		         },
 	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	   		         	var parseData = $.parseJSON(data);
 	   		         	if(parseData.flag > 0){
 	   		         		alert(parseData.msg);
+	   		         		doSearch();
 	   		         	}else{
 	   		         		alert(parseData.msg);
 	   		         	}
@@ -160,7 +180,75 @@
 				if(false == confirm("삭제 하시겠습니까?")){
     				return;
     			}
+				var bt = $(this);
+				var td = bt.parents("td");
+				var tr = td.parents("tr");
+				var clcId = tr.attr('id');
+				//alert(clcId);
 				
+				$.ajax({
+	   		         type:"POST",
+	   		         url:"cDelete.do",
+	   		         dataType:"html",// JSON
+	   		         data:{
+	   		         	"commentNo": clcId
+	   		         },
+	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	   		         	var parseData = $.parseJSON(data);
+	   		         	if(parseData.flag > 0){
+	   		         		alert(parseData.msg);
+	   		         		reLoad();
+	   		         	}else{
+	   		         		alert(parseData.msg);
+	   		         	}
+	   		         },
+	   		         complete: function(data){//무조건 수행
+	   		          
+	   		         },
+	   		         error: function(xhr,status,error){
+	   		          
+	   		         }
+	   		   	});
+			});
+			
+			$("#submitC").on("click",function(){
+				//alert("click");
+				var frm = $("#comment").val();
+				//alert(frm);
+				if("" == frm){
+					alert("댓글을 입력해주세요.");
+					return;
+				}
+				
+				$.ajax({
+	   		         type:"POST",
+	   		         url:"cInsert.do",
+	   		         dataType:"html",// JSON
+	   		         data:{
+	   		         	"commentBody": frm,
+	   		         	"clNo":$("#clNo").val() ,
+	   		         	//--------------------------------------
+	   		         	//세션처리
+	   		         	//"userId":userId,
+	   		         	//"regId":userId
+						//--------------------------------------
+	   		         },
+	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	   		         	var parseData = $.parseJSON(data);
+	   		         	if(parseData.flag > 0){
+	   		         		alert(parseData.msg);
+	   		         		reLoad();
+	   		         	}else{
+	   		         		alert(parseData.msg);
+	   		         	}
+	   		         },
+	   		         complete: function(data){//무조건 수행
+	   		          
+	   		         },
+	   		         error: function(xhr,status,error){
+	   		          
+	   		         }
+	   		   	});
 			});
 		});
 	</script>

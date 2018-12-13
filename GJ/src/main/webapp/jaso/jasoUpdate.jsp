@@ -69,6 +69,8 @@
 			frm.submit();
 		}
 	
+		
+		
 		$(document).ready(function(){
 			//alert("ready");
 			$("#doUpdate").on("click",function(){

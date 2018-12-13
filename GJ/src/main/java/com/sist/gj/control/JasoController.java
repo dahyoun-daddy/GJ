@@ -138,6 +138,62 @@ public class JasoController {
 		return jsonData;
 	}
 	
+	@RequestMapping(value="/jaso/cDelete.do",produces="application/json;charset=utf8")
+	@ResponseBody
+	public String docDelete(@ModelAttribute JasoCommentVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================update=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+		
+		flag = jasoCSvc.delete(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","삭제 되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","삭제 실패.");
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
+	}
+	
+	@RequestMapping(value="/jaso/cInsert.do",produces="application/json;charset=utf8")
+	@ResponseBody
+	public String docInsert(@ModelAttribute JasoCommentVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================INSERT=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		//-----------------------------------
+		//아이디 나중에 세션으로 받기
+		invo.setUserId("boondll@hanmail.net");
+		invo.setRegId("boondll@hanmail.net");
+		//-----------------------------------
+		
+		JSONObject object = new JSONObject();
+		
+		flag = jasoCSvc.merge(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","등록 되었습니다."); 
+		}else {
+			object.put("flag",flag);
+			object.put("msg","등록 실패.");
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
+	}
+	
 	@RequestMapping(value="/jaso/jasoView.do")
 	public String doSelect(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
 		log.info("=====================select=======================");
@@ -147,6 +203,7 @@ public class JasoController {
 		inVO.setClNo(clNo);
 		
 		JasoVO outVO = jasoSvc.select(inVO);
+		log.info("final outVO : "+outVO);
 		List<JasoCommentVO> cList = jasoCSvc.doRetrieve(inVO);
 		
 		model.addAttribute("cList",cList);
