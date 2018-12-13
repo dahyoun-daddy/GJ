@@ -2,6 +2,7 @@ package com.sist.gj.control;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +85,13 @@ public class ReviewController {
 		
 		List<UserVO> list = adminPageSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
+		for(Iterator<UserVO> it = list.iterator(); it.hasNext();) {
+			UserVO value = it.next();
+			if(value.getUserLevel() == 3) {
+				it.remove();
+			}
+		}
+		
 		model.addAttribute("list",list);
 		
 		return "review/giupList";

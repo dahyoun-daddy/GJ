@@ -112,8 +112,7 @@
 								<c:choose>
 									<c:when test="${list.size()>0}">
 										<c:forEach var="userVO" items="${list}">
-											<tr>
-												<td class="text-center"><c:out value="${userVO.userId}"></c:out></td>
+											<tr id="${userVO.userId}">
 												<td class="text-center"><c:out value="${userVO.userNick}"></c:out></td>
 											</tr>
 										</c:forEach>
@@ -172,7 +171,6 @@
 	 
 	
 	$(document).ready(function(){
-		$().hide();
 		//엔터키 처리
 		$("#searchWord").keydown(function(key) {
 			if (key.keyCode == 13) {
@@ -183,11 +181,10 @@
 			
 			
 			console.log("1 #listTable>tbody");
-			
-			var tr = $(this);
-			var td = tr.children();
-			var userId = td.eq(0).text();
+
+			var userId = $(this).attr('id');
 			console.log("2 userId="+userId);
+			alert(userId);
 			
 			if(""==userId)return;
 			
