@@ -34,56 +34,15 @@
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 %>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Good Job</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
+
 </head>
 
 <body>
-	<!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark cyan">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-            <img src="../resources/images/gj_logo.png" alt="nav-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">채용정보</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">기업정보 </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link">자기소개서 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">...님 로그인중</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br><br>
 	<!-- 채용정보 목록 -->
-		<div style="text-align: right">
+		<div class="row" style="float: right;">&nbsp;&nbsp;&nbsp;
+		<br><br><br>
 			<form class="form-inline" >
 				<input type="hidden" name="pageNum" id="pageNum">
 				<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
