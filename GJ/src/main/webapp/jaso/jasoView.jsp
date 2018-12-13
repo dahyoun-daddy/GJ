@@ -131,7 +131,7 @@
 			frm.submit();
 		}
 	
-		function doUpdate(){
+		function doUpdate(){ 
 			var frm = document.updateFrm;
 			frm.action="jasoUpdateMove.do";
 			frm.submit();
