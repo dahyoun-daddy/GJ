@@ -3,6 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<% 
+	String context = request.getContextPath();
+%>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,8 +19,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="<%=context %>/resources/css/animate.css">
+    <link rel="stylesheet" href="<%=context %>/resources/css/main.css">
     
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&amp;subset=korean" rel="stylesheet">
 	<style>
@@ -32,8 +35,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark cyan">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-            <img src="../resources/images/gj_logo.png" alt="nav-logo">
+            <img src="<%=context %>/resources/images/gj_logo.png" alt="nav-logo">
             </a>
+            <form id="topFrm" name="topFrm">
+            	<input type="hidden" id="nowLoginId" name="nowLoginId" >
+            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,7 +55,7 @@
                         <a class="nav-link">기업정보 </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">자기소개서 </a>
+                        <a class="nav-link" onclick="moveJasoList()">자기소개서 </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">...님 로그인중</a>
@@ -65,9 +71,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
     <!-- Custom JavaScript -->
-    <script src="../resources/js/animate.js"></script>
-    <script src="../resources/js/custom.js"></script>
-    
+    <script src="<%=context %>/resources/js/animate.js"></script>
+    <script src="<%=context %>/resources/js/custom.js"></script>
+    <script type="text/javascript">
+    	function moveJasoList(){
+    		var frm = document.topFrm;
+    		frm.action="../jaso/jasoList.do";
+    		frm.submit();
+    	}
+    </script>
     
 </body>
 </html>
