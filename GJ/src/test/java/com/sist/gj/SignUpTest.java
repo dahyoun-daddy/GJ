@@ -53,7 +53,7 @@ public class SignUpTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc : "+mockMvc);
 		LOG.info("SignUpDao : "+signUpDao);
-	}
+	} 
 														
 	@Test
 	public void Test() {
