@@ -42,6 +42,7 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM Review
+		   WHERE user_nick = #{searchWord}
 		)Y      
     </select>
     

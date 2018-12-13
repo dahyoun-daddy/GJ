@@ -5,21 +5,21 @@
 <mapper namespace="com.sist.gj.mappers.AdminMyPage">
 
 	<sql id="searchText">
-		<where>
+
   			<choose>
   				<when test="10 == searchDiv">
-  					hr.u_id LIKE '%'||#{searchWord}||'%'
+  				  AND user_id LIKE #{searchWord}||'%'
   				</when>
   				<when test="20 == searchDiv">
-  					hr.name LIKE '%'||#{searchWord}||'%'
+  				  AND user_nick LIKE #{searchWord}||'%'
   				</when>
   				<when test="30 == searchDiv"> 
-  					hr.email LIKE '%'||#{searchWord}||'%'
+  				  AND user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
   			</choose>
-  		</where>
+  	
 	</sql>
 
 	
@@ -42,14 +42,14 @@
 				          WHERE user_level = 1
 		                
 		                <choose>
-  				<when test="10 == searchDiv">
-  					user_id LIKE '%'||#{searchWord}||'%'
+  				<when test="'10' == searchDiv">
+  					user_id LIKE '#{searchWord}||'%'
   				</when>
-  				<when test="20 == searchDiv">
-  					user_nick LIKE '%'||#{searchWord}||'%'
+  				<when test="'20' == searchDiv">
+  					user_nick LIKE #{searchWord}||'%'
   				</when>
-  				<when test="30 == searchDiv"> 
-  					user_name LIKE '%'||#{searchWord}||'%'
+  				<when test="'30' == searchDiv"> 
+  					user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -133,63 +133,30 @@
 	<select id="selectCompany" parameterType="UserVO" resultType="UserVO">
 		  
 		        SELECT X.*, Y.*
-				  FROM
-				( 
+				  FROM( 
 				    SELECT T.user_name,
 				           T.user_nick,
 				           T.user_id,
 				           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
 				           T.user_level,
 				           T.rnum AS no
-				      FROM
-				    (
+				      FROM(
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
 				          WHERE user_level = 2 OR user_level = 3
-		                     <choose>
-  				<when test="10 == searchDiv">
-  					user_id LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="20 == searchDiv">
-  					user_nick LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="30 == searchDiv"> 
-  					user_name LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="40 == searchDiv"> 
-  					user_level LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<otherwise>
-  				</otherwise>
-		  			</choose>
-						    ) T
+		                 	<include refid="searchText"/>
+						    )T
 				            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-						) X
+							)X
 							NATURAL JOIN
-						(
+							(
 						    SELECT COUNT(*) AS total_cnt
 						      FROM users
 						        WHERE user_level = 2 OR user_level = 3
-						          <choose>
-		  				<when test="10 == searchDiv">
-		  					user_id LIKE '%'||#{searchWord}||'%'
-		  				</when>
-		  				<when test="20 == searchDiv">
-		  					user_nick LIKE '%'||#{searchWord}||'%'
-		  				</when>
-		  				<when test="30 == searchDiv">
-		  					user_name LIKE '%'||#{searchWord}||'%'
-		  				</when>
-		  				<when test="40 == searchDiv"> 
-  							user_level LIKE '%'||#{searchWord}||'%'
-  						</when>
-		  				
-		  				<otherwise>
-		  				</otherwise>
-		  			</choose>
-				)Y
+						     <include refid="searchText"/>
+							)Y
 		
 	</select>
 

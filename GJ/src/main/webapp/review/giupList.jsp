@@ -2,45 +2,33 @@
 <%@page import="com.sist.gj.vo.CodeVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
-<%@page import="com.sist.gj.vo.SearchVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String context = request.getContextPath();//context path
+<% 
+	String context = request.getContextPath();
 
-	String page_size = "10";//page_size
-	String page_num = "1";//page_num
-	String search_div = "";//검색구분
-	String search_word = "";//검색어
-
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "20");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
 	int totalCnt = 0;
 	int bottomCount = 10;
-
-	SearchVO vo = (SearchVO) request.getAttribute("param");
-	//out.print("vo:"+vo);
-
-	if (null != vo) {
-		search_div = StringUtill.nvl(vo.getSearchDiv(), "40");
-		search_word = StringUtill.nvl(vo.getSearchWord(), "2");
-		page_size = StringUtill.nvl(vo.getPageSize(), "10");
-		page_num = StringUtill.nvl(vo.getPageNum(), "1");
-	} else {
-		search_div = StringUtill.nvl(request.getParameter("search_div"), "40");
-		search_word = StringUtill.nvl(request.getParameter("search_word"), "2");
-		page_size = StringUtill.nvl(request.getParameter("page_size"), "10");
-		page_num = StringUtill.nvl(request.getParameter("page_num"), "1");
-	}
-
-	int oPageSize = Integer.parseInt(page_size);
-	int oPageNum = Integer.parseInt(page_num);
-
-	String iTotalCnt = (null == request.getAttribute("total_cnt")) ? "0"
-			: request.getAttribute("total_cnt").toString();
-	totalCnt = Integer.parseInt(iTotalCnt);
-
-	List<CodeVO> code_page = (null == request.getAttribute("code_page")) ? new ArrayList<CodeVO>()
-			: (List<CodeVO>) request.getAttribute("code_page");
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 %>
 
 <!DOCTYPE html>
@@ -107,8 +95,8 @@
 			<div class="col-xl-9 col-lg-10 mx-auto">
 				<div class="bg-faded rounded p-5">
 					<div style="float: right;">
-						<input type="text" placeholder="기업 검색하기" maxlength="30">
-						<button type="button" class="btn btn-danger btn-sm">검색</button>
+						<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" placeholder="기업 검색하기" maxlength="30">
+						<button type="button" class="btn btn-danger btn-sm" onclick="doSearch();">검색</button>
 					</div>
 					</br> </br>
 					<div class="table-responsive">
@@ -184,7 +172,16 @@
 	 
 	
 	$(document).ready(function(){
+		$().hide();
+		//엔터키 처리
+		$("#searchWord").keydown(function(key) {
+			if (key.keyCode == 13) {
+				doSearch();
+			}
+		});
 		$("#listTable>tbody").on("click","tr",function(){
+			
+			
 			console.log("1 #listTable>tbody");
 			
 			var tr = $(this);
