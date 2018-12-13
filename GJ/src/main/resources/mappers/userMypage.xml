@@ -215,7 +215,7 @@
 		)
 	</insert>
 	
-	<select id="retrieveApply" parameterType="SearchVO" resultType="ApplyVO">
+	<select id="retrieveApplyUser" parameterType="SearchVO" resultType="ApplyVO">
 		SELECT X.*, Y.*
 		  FROM
 		(
@@ -259,11 +259,56 @@
 		) Y
 	</select>
 	
+	<select id="retrieveApplyComp" parameterType="SearchVO" resultType="ApplyVO">
+		SELECT X.*, Y.*
+		  FROM
+		(
+		    SELECT T.apply_no,
+                   T.user_id,
+                   DECODE(TO_CHAR(T.apply_date,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
+    						,TO_CHAR(T.apply_date,'HH24:mm:SS'),TO_CHAR(T.apply_date,'YYYY/MM/DD')) AS apply_date,
+                   T.hire_no,
+                   T.apply_check,
+                   T.hire_title,
+                   T.comp_id,
+                   T.comp_nick,
+                   T.user_name,
+                   T.rnum
+		      FROM
+		    (
+		        SELECT C.*,
+                       D.hire_title as hire_title,
+                       D.user_id AS comp_id,
+                      (SELECT U.user_nick 
+                         FROM USERS U 
+                        WHERE D.user_id = U.user_id) as comp_nick,
+                       E.user_name as user_name,
+		               ROW_NUMBER() OVER(ORDER BY APPLY_DATE DESC) AS rnum
+		          FROM HIREAPPLY C, HIREINFO D, USERS E
+                 WHERE C.hire_no = D.hire_no
+                   AND C.user_id = E.user_id
+                   AND C.apply_check = 1
+                   <include refid="searchApply"/>
+		    ) T
+		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+			  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+		   		  
+		) X
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) AS total_cnt
+              FROM HIREAPPLY C, HIREINFO D, USERS E
+             WHERE C.hire_no = D.hire_no
+               AND C.user_id = E.user_id
+		      <include refid="searchApply"/>
+		) Y
+	</select>
+	
 	
 	<update id="updateApply" parameterType="ApplyVO"> 
 		UPDATE hireapply
 		SET
-		    apply_check = #{applyCheck}
+		    apply_check = 0
 		WHERE
 		    apply_no = #{applyNo}
 	</update>

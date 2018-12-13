@@ -167,7 +167,7 @@
 					  		  		</div>
 					  		  		<div class="form-group">
 					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
-					  					<button type="button" class="btn btn-default btn-sm" id="cancelApply">지원자 삭제</button>
+					  					<button type="button" class="btn btn-default btn-sm" id="deleteEmp">지원자 삭제</button>
 					  				</div>
 				  				</div>
 				  				</form>
@@ -190,7 +190,7 @@
 								  		<tr>
 								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
 								  			<th class="text-center" style="background-color: #FACC2E;">지원 NO</th>
-								  			<th class="text-center" style="background-color: #FACC2E;">기업명</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">지원자명</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
 								  		</tr>
@@ -202,7 +202,7 @@
 								  					<tr>
 								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
 								  						<td class="text-center"><c:out value="${applyVO.applyNo}"/></td> 
-										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
+										  				<td class="text-center"><c:out value="${applyVO.userName}"/></td> 
 										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
 		 								  			</tr>
@@ -210,7 +210,7 @@
 								  				</c:when>
 			  				 	 					<c:otherwise>
 						 	 						<tr>
-						 	 							<td class="text-center" colspan="99">지원한 정보가 없습니다.</td>
+						 	 							<td class="text-center" colspan="99">지원한 사람이 없습니다.</td>
 						 	 						</tr>
 							  						</c:otherwise>
 								  			</c:choose>
@@ -220,7 +220,7 @@
 							  	</div>
 						  	<!--pagenation ---------------------------------------------------->
 						  	<div class="dorm-inline text-center">
-			  			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "UserApply.do", "searchPage") %>
+			  			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "CompHireStt.do", "searchPage") %>
 						  	</div>
 						  	<!--// pagenation영역 ----------------------------------------------->
 						  	
@@ -258,7 +258,7 @@
 		function doSearch(){//검색
     		var frm = document.frm;
     		frm.pageNum.value = 1;
-    		frm.action="CompApply.do";
+    		frm.action="CompHireStt.do";
     		frm.submit();
     	}
 		
@@ -269,6 +269,56 @@
 					doSearch();
 				}
 			});
+	    	
+			$("#deleteEmp").on("click",function(){
+				
+				var arr = []; //var arr=new Array();
+				
+				$("input[name='check']:checked").each(function(index,row ){
+					var record = $(row).parents("tr");
+					var applyNo = $(record).find("td").eq(1).text();
+					console.log("applyNo="+applyNo);
+					arr.push(applyNo);
+				});
+
+				var jsonIdList = JSON.stringify(arr);
+				console.log("jsonIdList="+jsonIdList);
+				
+				if(arr.length == 0){
+					alert("삭제할 지원자을 선택하세요.")
+				}else{
+					if(confirm('선택된 지원자들의 이력서는 삭제 후 열람 불가합니다. 정말 삭제하시겠습니까? ')==true){
+						$.ajax({
+							type : 'POST',
+							url : 'deleteEmp.do',
+							data : {
+								"applyNo_list": jsonIdList
+							},
+							success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+					             var parseData = data;
+				                 console.log("parseData.flag="+parseData.flag);
+				                 console.log("parseData.message="+parseData.message);
+					         	 if(parseData.flag > 0){
+					         		alert(parseData.message);
+					         		doSearch();
+					         	 }else{
+					         		alert(parseData.message);
+					         		
+					         	 }				             
+				            },
+				            complete: function(data){//무조건 수행
+				             
+				            },
+				            error: function(xhr,status,error){
+				             
+				            }
+						});//'cancelApply.do'
+						
+					}else{
+						location.reload(true);
+					}
+				}//if(arr.length == 0) 
+			});//#cancelApply
 	    	
 		});// $(document).ready(function()
 	    

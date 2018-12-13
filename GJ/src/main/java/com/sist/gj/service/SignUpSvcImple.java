@@ -3,10 +3,12 @@ package com.sist.gj.service;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sist.gj.dao.SignUpDao;
 import com.sist.gj.vo.UserVO;
 
+@Service
 public class SignUpSvcImple implements SignUpSvc {
 
 	@Autowired

@@ -168,23 +168,23 @@
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	
 					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="test@test.com">
+					        	<input type="text" name="user_email" value="${userId}" readOnly>
 					        		<br><br>
 	
 					      		<label><b>닉네임</b></label>
-						        <input type="text" name="user_nickname" placeholder="닉네임임다">
+						        <input type="text" name="user_nickname" value="${userNick}" readOnly>
 						        	<br><br>
 						        	
 						       	<label><b>성함</b></label>
-						        <input type="text" name="user_name" placeholder="김이름">
+						        <input type="text" name="user_name" value="${userName}" readOnly>
 						        	<br><br>
 						        	
 						        <label><b>전화번호</b></label>
-						        <input type="text" name="user_phone" placeholder="ex) 010-0000-0000">
+						        <input type="text" name="user_phone" value="${userPhone}" readOnly>
 						       		<br><br>
 						       		
 						       	<label><b>주소</b></label> 
-						        <input type="text" name="user_address" placeholder="서울 특별시 어찌고 저찌고">
+						        <input type="text" name="user_address" value="${userAdd}" readOnly>
 						       		<br><br>
 						       		
 						      	

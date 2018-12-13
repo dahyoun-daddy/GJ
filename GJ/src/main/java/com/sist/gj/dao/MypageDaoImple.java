@@ -162,8 +162,19 @@ public class MypageDaoImple implements MypageDao {
 	}
 	
 	@Override
-	public List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException {
-		String statement = NAMESPACE+".retrieveApply";
+	public List<ApplyVO> retrieveApplyUser(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".retrieveApplyUser";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<ApplyVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
+	}
+	
+	@Override
+	public List<ApplyVO> retrieveApplyComp(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".retrieveApplyComp";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+searchVO);
 		List<ApplyVO> list = sqlSession.selectList(statement, searchVO);

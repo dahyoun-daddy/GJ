@@ -55,16 +55,22 @@ public interface MypageSvc {
 	//입사지원정보 추가
 	int addApply(ApplyVO applyVO);
 	
-	//입사지원정보 list 조회 (기업이)
-	List<ApplyVO> retrieveApply(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+	//입사지원정보 list 조회
+	List<ApplyVO> retrieveApplyUser(SearchVO searchVO) throws ClassNotFoundException, SQLException;
+
+	//입사지원정보 list 조회
+	List<ApplyVO> retrieveApplyComp(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 	//입사지원 수정 
 	int updateApply(ApplyVO applyVO) throws SQLException;
+	//다중 입사지원 수정 
+	int updateMultiApply(List<ApplyVO> list) throws RuntimeException, SQLException;
 	
 	//입사지원 취소
 	int deleteApply(ApplyVO applyVO) throws SQLException;
 	//다중 입사지원 취소
 	int deleteMultiApply(List<ApplyVO> list) throws RuntimeException, SQLException;
+	
 	
 	
 	//기본 구직자마이페이지
