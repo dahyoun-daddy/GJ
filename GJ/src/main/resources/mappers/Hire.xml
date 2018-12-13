@@ -6,14 +6,11 @@
 	<sql id="searchWord">
 		<where>
   			<choose>
-  				<when test="10 == search_Word">
-  					hr.u_id LIKE '%'||#{search_Word}||'%'
+  				<when test="1 == searchDiv">
+  					hr.u_id LIKE '%'||#{searchWord}||'%'
   				</when>
-  				<when test="20 == search_Word">
-  					hr.name LIKE '%'||#{search_Word}||'%'
-  				</when>
-  				<when test="30 == search_Word"> 
-  					hr.email LIKE '%'||#{search_Word}||'%'
+  				<when test="2 == searchDiv">
+  					hr.name LIKE '%'||#{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -21,7 +18,7 @@
   		</where>
 	</sql>
 	
-	<select id="search" parameterType="HireVO" resultType="HireVO">
+	<select id="search" parameterType="SearchVO" resultType="HireVO">
 				SELECT X.*, Y.*
 				  FROM
 				(
@@ -29,18 +26,18 @@
 				           T.hire_title,
 				           T.hire_body,
 				           T.user_id,
-				           T.hire_date,
-				           T.hire_deadline,
-				           T.cl_check,
+				           TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
+				           TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
+				           T.hire_add,
+				           T.hire_edu,
 				           T.reg_id,
-				           DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
-        							,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt,
+				           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
 				           T.rnum AS no
 				      FROM
 				    (
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
-				          FROM usercl C
+				          FROM hireinfo C
 		                <include refid="searchWord"/>
 				    ) T
 		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -49,7 +46,7 @@
 				NATURAL JOIN
 				(
 				    SELECT COUNT(*) AS total_cnt
-				      FROM usercl C
+				      FROM hireinfo C
 		            <include refid="searchWord"/>
 				) Y
 

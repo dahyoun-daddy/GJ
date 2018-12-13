@@ -1,7 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sist.gj.common.StringUtill"%>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+<% 
+	String context = request.getContextPath();
+
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
+	int totalCnt = 0;
+	int bottomCount = 10;
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+%>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,6 +49,7 @@
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/css/main.css">
 </head>
+
 <body>
 	<!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark cyan">
@@ -53,14 +85,11 @@
 	<!-- 채용정보 목록 -->
 		<div style="text-align: right">
 			<form class="form-inline" >
-				<select class="form-control">
-				  <option>지역</option>
-				  <option>스킬</option>
-				  <option>기타</option>
-				</select>
+				<input type="hidden" name="pageNum" id="pageNum">
+				<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
 				&nbsp;&nbsp;
 			  <div class="form-group">
-			    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="검색어">
+			    <input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
 			  	&nbsp;&nbsp;
 			  </div>
 			  <button type="submit" class="btn btn-default">검색</button>
@@ -70,35 +99,41 @@
 		<table class="table table-striped">
               <thead>
                 <tr>
-                  <th>기업명</th>
-                  <th>채용제목</th>
-                  <th>근무지</th>
-                  <th>연봉</th>
-                  <th>최종학력</th>
-                  <th>등록일</th>
+                  <th class="text-center">기업명</th>
+                  <th class="text-center">채용제목</th>
+                  <th class="text-center">시작일자</th>
+                  <th class="text-center">마감일자</th>
+                  <th class="text-center">근무지</th>
+                  <th class="text-center">학력</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>쌍용교육센터</td>
-                  <td>결원으로 인한 매니저 채용</td>
-                  <td>서울 마포구</td>
-                  <td>내규에따름</td>
-                  <td>초대졸이상</td>
-                  <td>2018/11/11</td>
-                </tr>
-                <tr>
-                  <td>우아한자매들</td>
-                  <td>프런트엔드 개발자 채용</td>
-                  <td>서울 송파구</td>
-                  <td>4000~협의</td>
-                  <td>학력무관</td>
-                  <td>2018/11/12</td>
-                </tr>
+              	<!-- JSTL사용 반복문-->
+              	<c:choose>
+  						<c:when test="${list.size()>0}">
+  							<c:forEach var="hireVO" items="${list}">
+  								<tr id="${HireVO.hireNo}">
+  									<td class="text-center"><c:out  value="${hireVO.userId}"/></td>
+  									<td class="text-center"><c:out  value="${hireVO.hireTitle}"/></td>
+  									<td class="text-center"><c:out  value="${hireVO.hireDate}"/></td>
+  									<td class="text-center"><c:out  value="${hireVO.hireDeadline}"/></td>	
+  									<td class="text-center"><c:out  value="${hireVO.hireAdd}"/></td>	
+  									<td class="text-center"><c:out  value="${hireVO.hireEdu}"/></td>
+  								</tr>
+  							</c:forEach>
+  						</c:when>
+ 	 					<c:otherwise>
+ 	 						<tr>
+ 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+ 	 						</tr>
+  						</c:otherwise>
+  					</c:choose>
               </tbody>
             </table>
             <br><br>
-            <label style="text-align: center">1</label>
+            <div class="dorm-inline text-center">
+			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "jasoList.do", "searchPage") %>
+			  </div>
 	<!--// 채용정보 목록 -->
 	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

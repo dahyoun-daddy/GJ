@@ -150,4 +150,8 @@ public class HireVO {
 		this.modDt = modDt;
 	}
 
+	public int getTotalCnt() {
+		return 0;
+	}
+
 }
