@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
     
 <style>
 
@@ -125,12 +113,8 @@
 	
 	
 </style>
-<% 
-	String nickname = "초보개발자";
-	String openResume = "있습니다";
-
-%>
 </head>
+
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	
@@ -162,53 +146,55 @@
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;"><br/><br/>
+		                   			   onclick="location=''; return false;"><br/><br/>
 					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
 					    		권장 사진 사이즈는 가로103*세로132 픽셀이며<br/>gif, jpg, jpeg 이미지 파일만 등록 가능합니다.
 				    		</div>
 				    		
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
 				    		<div id="profcontext" style="text-align: left;">
-					    		
+				    		<form role="form" id="frmEdit" name="frmEdit" action="infoUpdate.do"
+			  					  method="post" class="form-horizontal">
+					    		<input type="hidden" name="upsert_div" id="upsert_div" value="">
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="이메일을 입력하세요">
+					        	<input type="text" id="user_email" value="${userId}" readOnly>
 					        		<br><br>
 					    	 	<label><b>비밀번호</b></label>
-					        	<input type="password" name="user_pw" placeholder="비밀번호 입력 조건">
+					        	<input type="password" id="user_pw" value="${userPasswd}">
 					        		<br><br>
 					     		<label><b>비밀번호 확인</b></label>
-					       		<input type="password" name="pw_check"
-					              	    placeholder="다시 입력하세요">
+					       		<input type="password" id="pw_check"
+					              	    placeholder="비밀번호를 다시 입력하세요">
 					      			<br><br>
 					      			<label><b>닉네임</b></label>
-						        <input type="text" name="user_nickname" placeholder="닉네임을 입력하세요">
+						        <input type="text" id="user_nickname" value="${userNick}">
 						        	<br><br>
 						       	<label><b>성함</b></label>
-						        <input type="text" name="user_name" placeholder="성함을 입력하세요">
+						        <input type="text" id="user_name" value="${userName}">
 						        	<br><br>
 						        <label><b>전화번호</b></label>
-						        <input type="text" name="user_phone" placeholder="ex) 010-0000-0000">
+						        <input type="text" id="user_phone" value="${userPhone}">
 						       		<br><br>
 						       	<label><b>주소</b></label> 
-						        <input type="text" name="user_address" placeholder="주소를 입력하세요">
+						        <input type="text" id="user_address" value="${userAdd}">
 						       		<br><br>
 						      	<label><b>비밀번호 찾기 질문:</b></label>
-						      	<select name="passQ">
-						      	<option value="1">기억에 남는 추억은 ?</option>
-						      	<option value="2">자신의 인생 좌우명은 ?</option>
-						      	<option value="3">자신의 보물 제 1호는 ?</option>
-						      	<option value="4">가장 기억에 남는 선물은 ?</option>
-						      	<option value="5">자신의 가장 소중한 친구 이름은 ?</option>
-						      	<option value="6">다시 태어나면 되고싶은것은 ?</option>
+						      	<c:set var="opt" value="${userPassQu}" />
+						      	<select id="passQ" name="passQ">
+							      	<option value="1"<c:if test="${opt == '1' }">selected</c:if>>기억에 남는 추억은?</option>
+							      	<option value="2"<c:if test="${opt == '2' }">selected</c:if>>자신의 인생 좌우명은 ?</option>
+							      	<option value="3"<c:if test="${opt == '3' }">selected</c:if>>자신의 보물 제 1호는 ?</option>
+							      	<option value="4"<c:if test="${opt == '4' }">selected</c:if>>가장 기억에 남는 선물은 ?</option>
+							      	<option value="5"<c:if test="${opt == '5' }">selected</c:if>>자신의 가장 소중한 친구 이름은 ?</option>
+							      	<option value="6"<c:if test="${opt == '6' }">selected</c:if>>다시 태어나면 되고싶은것은 ?</option>
 						      	</select>
 						      	<br><br>
 						      	<label><b>비밀번호 찾기 답변</b></label> 
-						        <input type="text" name="user_passA" placeholder="10글자 이하 입력">
+						        <input type="text" id="user_passA" value="${userPassAn}">
 						       	<br><br><br>
-					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
-				    		
+					    		<input id="smallBtn" name="do_update" type="button" value="정보 수정하기">
+				    		</form>
 				    		</div>
 					    	
 				    	</div>
@@ -218,7 +204,53 @@
 	
 		
 		 </section>
+    <script type="text/javascript">
     
+    $(document).ready(function(){
+    	$("input[name='do_update']").on("click",function(){
+			 if(false==confirm("수정 하시겠습니까?"))return;
+			  
+			 var upsert_div = $("#upsert_div").val();
+			 upsert_div = (upsert_div == "")?"updateInfo":"";
+			 console.log("upsert_div:"+upsert_div);
+
+		     $.ajax({
+		         type:"POST",
+		         url:"infoUpdate.do",
+		         dataType:"html",// JSON
+		         data:{
+		         	"upsert_div": upsert_div,
+		         	"userId": $("#user_email").val(),
+		         	"userPasswd": $("#user_pw").val(),
+		         	"userNick": $("#user_nickname").val(),
+		         	"userName": $("#user_name").val(),
+		         	"userAdd": $("#user_address").val(),
+		         	"userPassQu": $("#passQ option:selected").val(),
+		         	"userPassAn": $("#user_passA").val(),
+		         	"userPhone": $("#user_phone").val()
+		         },
+		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+		             var parseData = $.parseJSON(data);
+		         	 if(parseData.flag=="1"){
+		         		 alert(parseData.message);
+		         		location.href="UserMyInfo.do";
+		         	 }else{
+		         		alert(parseData.message);
+		         	 }
+		         },
+		         complete: function(data){//무조건 수행
+		          
+		         },
+		         error: function(xhr,status,error){
+		          
+		         }
+		        });//--ajax					
+			
+			
+		});//--do_update
+    });
+     
+    </script>
     
 </body>
 </html>

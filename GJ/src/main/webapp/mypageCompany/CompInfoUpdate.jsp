@@ -1,22 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
-    
+
 <style>
 
 	#bubble-float-right:{
@@ -138,7 +126,7 @@
 				    	<div style=" height: 20%;" align="right">
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompMyInfo.jsp'">기업 정보</button><br/><br/>
+					    	        onclick="location='CompMyInfo.do'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
 					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
@@ -164,52 +152,58 @@
 				    		
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
 				    		<div id="profcontext" style="text-align: left;">
+				    		<form role="form" id="frmEdit" name="frmEdit" action="infoUpdate.do"
+			  					  method="post" class="form-horizontal">
+					    		<input type="hidden" name="upsert_div" id="upsert_div" value="">
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="이메일을 입력하세요">
+					        	<input type="text" id="user_email" value="${userId}" readOnly>
 					        		<br><br>
 					    	 	<label><b>비밀번호</b></label>
-					        	<input type="password" name="comp_pw" placeholder="비밀번호 입력 조건">
+					        	<input type="password" id="comp_pw" value="${userPasswd}">
 					        		<br><br>
 					     		<label><b>비밀번호 확인</b></label>
-					       		<input type="password" name="pw_check"
-					              	    placeholder="다시 입력하세요">
+					       		<input type="password" id="pw_check"
+					              	    placeholder="비밀번호를 다시 입력하세요">
 					      			<br><br>
 					      			<label><b>기업명</b></label>
-						        <input type="text" name="comp_compname" placeholder="기업명을 입력하세요">
+						        <input type="text" id="comp_compname" value="${userNick}">
 						        	<br><br>
 						       	<label><b>대표성함</b></label>
-						        <input type="text" name="comp_name" placeholder="성함을 입력하세요">
+						        <input type="text" id="comp_name" value="${userName}">
 						        	<br><br>
 						        <label><b>회사 전화번호</b></label>
-						        <input type="text" name="comp_phone" placeholder="ex) 02-0000-0000">
+						        <input type="text" id="comp_phone" value="${userPhone}">
 						       		<br><br>
 						       	<label><b>주소</b></label> 
-						        <input type="text" name="comp_address" placeholder="주소를 입력하세요">
+						        <input type="text" id="comp_address" value="${userAdd}">
 						       		<br><br>
 						       	<label><b>매출액</b></label> 
-						        <input type="text" name="comp_money" placeholder="ex) 100,000,000">
+						        <input type="text" id="comp_money" value="${enterSalay}">
+						       		<br><br>
+						       	<label><b>사원수</b></label> 
+						        <input type="text" id="comp_cnt" value="${enterCnt}">
 						       		<br><br>
 						       	<label><b>설립일</b></label> 
-						        <input type="text" name="comp_date" placeholder="ex) 100,000,000">
+						        <input type="text" id="comp_date" value="${enterHiredate}">
 						       		<br><br>
 						      	<label><b>비밀번호 찾기 질문:</b></label>
-						      	<select name="passQ">
-						      	<option value="1">기억에 남는 추억은 ?</option>
-						      	<option value="2">자신의 인생 좌우명은 ?</option>
-						      	<option value="3">자신의 보물 제 1호는 ?</option>
-						      	<option value="4">가장 기억에 남는 선물은 ?</option>
-						      	<option value="5">자신의 가장 소중한 친구 이름은 ?</option>
-						      	<option value="6">다시 태어나면 되고싶은것은 ?</option>
+						      	<c:set var="opt" value="${userPassQu}" />
+						      	<select id="passQ" name="passQ">
+							      	<option value="1"<c:if test="${opt == '1' }">selected</c:if>>기억에 남는 추억은?</option>
+							      	<option value="2"<c:if test="${opt == '2' }">selected</c:if>>자신의 인생 좌우명은 ?</option>
+							      	<option value="3"<c:if test="${opt == '3' }">selected</c:if>>자신의 보물 제 1호는 ?</option>
+							      	<option value="4"<c:if test="${opt == '4' }">selected</c:if>>가장 기억에 남는 선물은 ?</option>
+							      	<option value="5"<c:if test="${opt == '5' }">selected</c:if>>자신의 가장 소중한 친구 이름은 ?</option>
+							      	<option value="6"<c:if test="${opt == '6' }">selected</c:if>>다시 태어나면 되고싶은것은 ?</option>
 						      	</select>
 						      	<br><br>
 						      	<label><b>비밀번호 찾기 답변</b></label> 
-						        <input type="text" name="user_passA" placeholder="10글자 이하 입력">
+						        <input type="text" id="user_passA" value="${userPassAn}">
 						       		<br><br>
 						      	
-					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='CompInfoUpdate.jsp'; return false;">
-				    		
+					    		<input id="smallBtn" name="do_update" type="button" value="정보 수정하기">
+				    		</form>
 				    		</div>
 					    	
 				    	</div>
@@ -220,7 +214,56 @@
 		
 		 </section>
 
-    
+     <script type="text/javascript">
+     
+	    $(document).ready(function(){
+	    	$("input[name='do_update']").on("click",function(){
+				 if(false==confirm("수정 하시겠습니까?"))return;
+				  
+				 var upsert_div = $("#upsert_div").val();
+				 upsert_div = (upsert_div == "")?"updateInfo":"";
+				 console.log("upsert_div:"+upsert_div);
+	
+			     $.ajax({
+			         type:"POST",
+			         url:"infoUpdate.do",
+			         dataType:"html",// JSON
+			         data:{
+			         	"upsert_div": upsert_div,
+			         	"userId": $("#user_email").val(),
+			         	"userPasswd": $("#comp_pw").val(),
+			         	"userNick": $("#comp_compname").val(),
+			         	"userName": $("#comp_name").val(),
+			         	"userAdd": $("#comp_address").val(),
+			         	"userPassQu": $("#passQ option:selected").val(),
+			         	"userPassAn": $("#user_passA").val(),
+			         	"userPhone": $("#comp_phone").val(),
+			         	"enterSalay": $("#comp_money").val(),
+			         	"enterCnt": $("#comp_cnt").val(),
+			         	"enterHiredate": $("#comp_date").val()
+			         },
+			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+			             var parseData = $.parseJSON(data);
+			         	 if(parseData.flag=="1"){
+			         		 alert(parseData.message);
+			         		location.href="CompMyInfo.do";
+			         	 }else{
+			         		alert(parseData.message);
+			         	 }
+			         },
+			         complete: function(data){//무조건 수행
+			          
+			         },
+			         error: function(xhr,status,error){
+			          
+			         }
+			        });//--ajax					
+				
+				
+			});//--do_update
+	    });
+	     
+    </script>
     
 </body>
 </html>

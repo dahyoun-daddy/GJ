@@ -1,7 +1,10 @@
 package com.sist.gj.control;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +31,13 @@ import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
 @Controller
-public class UserMypageCtrl {
+public class CompMypageCtrl {
+	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private static final String VIEW_INFO_USER="mypageUser/UserMyInfo";
-	private static final String VIEW_UPDATE_USER="mypageUser/UserInfoUpdate";
-	private static final String VIEW_APPLY="mypageUser/UserApply";
+	private static final String VIEW_INFO_COMP="mypageCompany/CompMyInfo";
+	private static final String VIEW_UPDATE_COMP="mypageCompany/CompInfoUpdate";
+	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
 	
 
 	
@@ -44,17 +48,24 @@ public class UserMypageCtrl {
 	@Autowired
 	private SignUpSvc userSvc;
 	
-	@RequestMapping(value="/mypageUser/UserInfoUpdate.do")
-	public String UserInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	@RequestMapping(value="/mypageCompany/CompInfoUpdate.do")
+	public String CompInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================update=======================");
 		
 //		String userId = req.getParameter("selectUserId");
 		
 		UserVO invo = new UserVO();
-		invo.setUserId("boondll@hanmail.net");
+		invo.setUserId("test@company.com");
 		
 		UserVO outvo = userSvc.select(invo);
 		log.info(outvo.toString());
+		
+		String hireDate = outvo.getEnterHiredate();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = transeFormat.parse(hireDate);
+		
+		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+		hireDate = notIncludeTime.format(date);
 		
 		model.addAttribute("userId",outvo.getUserId());
 		model.addAttribute("userPasswd",outvo.getUserPasswd());
@@ -64,17 +75,22 @@ public class UserMypageCtrl {
 		model.addAttribute("userAdd",outvo.getUserAdd());
 		model.addAttribute("userPassQu",outvo.getuserPassQu());
 		model.addAttribute("userPassAn",outvo.getuserPassAn());
+		model.addAttribute("enterSalay",outvo.getEnterSalay());
+		model.addAttribute("enterCnt",outvo.getEnterCnt());
+		model.addAttribute("enterHiredate",hireDate);
 		
-		return VIEW_UPDATE_USER;
+		
+		
+		return VIEW_UPDATE_COMP;
 	}
 	
 	
-	@RequestMapping(value="/mypageUser/infoUpdate.do",
-			        method=RequestMethod.POST,
-	                produces="application/json;charset=utf8"  
+	@RequestMapping(value="/mypageCompany/infoUpdate.do",
+	        method=RequestMethod.POST,
+            produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
-	public String updateInfo(@ModelAttribute UserVO invo, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	public String updateInfoComp(@ModelAttribute UserVO invo, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException, ParseException {
 		String upsert_div = req.getParameter("upsert_div");
 		
 		log.info("2========================");
@@ -86,6 +102,15 @@ public class UserMypageCtrl {
 		
 		//수정		
 		flag = mypageSvc.updateUser(invo);
+		
+		String hireDate = invo.getEnterHiredate();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = transeFormat.parse(hireDate);
+		
+		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+		hireDate = notIncludeTime.format(date);
+		
+		invo.setEnterHiredate(hireDate);
 		 
 		JSONObject object=new JSONObject();
 		
@@ -106,29 +131,39 @@ public class UserMypageCtrl {
 		return jsonData;
 	}	 
 	
-	@RequestMapping(value="/mypageUser/UserMyInfo.do")
-	public String UserInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	
+	@RequestMapping(value="/mypageCompany/CompMyInfo.do")
+	public String CompInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================select=======================");
 		
 //		String userId = req.getParameter("selectUserId");
 		
 		UserVO invo = new UserVO();
-		invo.setUserId("boondll@hanmail.net");
+		invo.setUserId("test@company.com");
 		
 		UserVO outvo = userSvc.select(invo);
+		
+		String hireDate = invo.getEnterHiredate();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = transeFormat.parse(hireDate);
+		
+		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+		hireDate = notIncludeTime.format(date);
 		
 		model.addAttribute("userId",outvo.getUserId());
 		model.addAttribute("userNick",outvo.getUserNick());
 		model.addAttribute("userName",outvo.getUserName());
 		model.addAttribute("userPhone",outvo.getUserPhone());
 		model.addAttribute("userAdd",outvo.getUserAdd());
+		model.addAttribute("enterSalay",outvo.getEnterSalay());
+		model.addAttribute("enterHiredate",hireDate);
 		
-		return VIEW_INFO_USER;
+		return VIEW_INFO_COMP;
 	}
-
 	
-	@RequestMapping(value="mypageUser/UserApply.do")
-	public String retrieveApply(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	
+	@RequestMapping(value="mypageCompany/CompHireStt.do")
+	public String retrieveApplyComp(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
@@ -145,12 +180,12 @@ public class UserMypageCtrl {
 		}
 		
 		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("MY_USER_APPLY");
+		codeSearch.setCmId("MY_COMP_APPLY");
 		
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		List<ApplyVO> list = mypageSvc.retrieveApplyUser(invo);
+		List<ApplyVO> list = mypageSvc.retrieveApplyComp(invo);
 		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
@@ -164,11 +199,11 @@ public class UserMypageCtrl {
 		model.addAttribute("list",list);
 		model.addAttribute("param",invo);
 		model.addAttribute("totalCnt",totalCnt);
-		return VIEW_APPLY;
+		
+		return VIEW_APPLY_COMP;
 	}
 	
-	
-	@RequestMapping(value="mypageUser/cancelApply.do",
+	@RequestMapping(value="mypageCompany/deleteEmp.do",
 			        produces="application/json;charset=utf8",
 			        method=RequestMethod.POST)
 	@ResponseBody
@@ -191,13 +226,13 @@ public class UserMypageCtrl {
 		}
 		log.info("paramList: "+paramList);
 		
-		int flag = this.mypageSvc.deleteMultiApply(paramList);
+		int flag = this.mypageSvc.updateMultiApply(paramList);
 		
 		JSONObject object = new JSONObject();
 		
 		if(flag>0) {
 			object.put("flag", flag);
-			object.put("message", "지원 취소되었습니다.\n("+flag+"건 취소 완료.)");
+			object.put("message", "삭제되었습니다.\n("+flag+"명 삭제 완료.)");
 		}else {
 			object.put("flag", flag);
 			object.put("message", "삭제에 실패했습니다. 다시 시도해 주세요. ^^");			
@@ -210,8 +245,6 @@ public class UserMypageCtrl {
 		
 		return jsonData;
 	}
-	
-	
 	
 	
 }

@@ -189,7 +189,7 @@
 						       		
 						      	
 					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
+		                   			   onclick="location='UserInfoUpdate.do'; return false;">
 				    		
 				    		</div>
 					    	

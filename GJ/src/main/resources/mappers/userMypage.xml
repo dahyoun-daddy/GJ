@@ -326,14 +326,14 @@
 		     user_nick = #{userNick},
 		     user_name = #{userName},
 		     user_add = #{userAdd},
-		     user_passq = #{userPassQu},
-		     user_passa = #{userPassAn},
+		     user_pass_qu = #{userPassQu},
+		     user_pass_an = #{userPassAn},
 		     user_phone = #{userPhone},
 		     enter_salay = #{enterSalay},
 		     enter_cnt = #{enterCnt},
-		     enter_hiredate = #{enterHiredate},
+		     enter_hiredate = TO_DATE(#{enterHiredate},'YYYY/MM/DD'),
 		     mod_id = #{userId},
-		     mod_dt = #{modDt}
+		     mod_dt = sysdate
 		WHERE
 		     user_id = #{userId} 
 	</update>

@@ -188,7 +188,7 @@
 						       		<br><br>
 						      	
 					    		<input id="smallBtn" type="button" value="정보 수정하기"
-		                   			   onclick="location='CompInfoUpdate.jsp'; return false;">
+		                   			   onclick="location='CompInfoUpdate.do'; return false;">
 				    		
 				    		</div>
 					    	
