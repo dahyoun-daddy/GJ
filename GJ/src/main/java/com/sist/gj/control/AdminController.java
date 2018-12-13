@@ -54,7 +54,7 @@ public class AdminController {
 		}
 		
 		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("JASO_SEARCH");
+		codeSearch.setCmId("USER_SEARCH");
 		
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
@@ -69,6 +69,46 @@ public class AdminController {
 		model.addAttribute("param",invo);
 	
 		return VIEW_NAME;
+	}
+	
+	private static final String VIEW2_NAME="mypageAdmin/usercompany2";
+	
+	
+	
+	@RequestMapping(value="/mypageAdmin/companyList.do")
+		
+	public String doRetrieve2(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+		log.info("search : "+invo);
+		
+		if(invo.getPageSize() == 0) {
+			invo.setPageSize(10);
+		}
+		if(invo.getPageNum() == 0){
+			invo.setPageNum(1);
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("COMPANY_SEARCH");
+		
+		CodeVO codePage = new CodeVO();
+		codePage.setCmId("PAGING");
+		
+		List<UserVO> list = adminSvc.doRetrieveUser(invo);
+		log.info("list size : "+list.size());
+		 
+		
+	
+	
+		model.addAttribute("list",list);
+		model.addAttribute("param",invo);
+	
+		return VIEW2_NAME;
 	}
 	
 //	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")

@@ -5,6 +5,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 
 	String context = request.getContextPath();//context path
@@ -151,6 +153,9 @@
     <div class="form-group">
 					<select name="search_div" id="search_div" class="form-control input-sm">
 					    <option value="" >::전체::</option>
+					    <option value="" >::회사명::</option>
+					    <option value="" >::대표자::</option>
+					    <option value="" >::이메일::</option>
 										
 					</select>
 					<input type="text" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
@@ -177,6 +182,31 @@
 						
 					</tr>
 				</thead>
+				<tbody>
+						<c:choose>
+							<c:when test="${list.size()>0}">
+						  	<c:forEach var="UserVO" items="${list}">
+						  	<tr>
+						  		<td class="text-center"><input type="checkbox" id="check" name="check"></td>
+						  		<td class="text-center"><c:out value="${UserVO.userNick}"/></td>
+  									<td class="text-left"><c:out value="${UserVO.userName}"/></td>
+  									<td class="text-center"><c:out value="${UserVO.userId}"/></td>
+  									<td class="text-center"><c:out value="${UserVO.regDt}"/></td>
+  									<td class="text-center"><c:out value="${UserVO.userLevel}"/></td>
+						  	</tr>
+						  		</c:forEach>
+  						</c:when>
+						  	
+						  		<c:otherwise>
+ 	 						<tr>
+ 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+ 	 						</tr>
+						</c:otherwise>
+  					</c:choose>
+				
+				</tbody>
+				</table>
+				</div>
 	<!-- // Grid영역 -->
 	
 	<!-- 입력 Form영역---- ----------------------------------------------->

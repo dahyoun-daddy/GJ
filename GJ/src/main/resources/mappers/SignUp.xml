@@ -38,8 +38,8 @@
 	FROM Users
 			
 		WHERE	user_id=#{userId}
-		AND		user_passq=#{userPassQu}
-		AND		user_passa=#{userPassAn}
+		AND		user_pass_qu=#{userPassQu}
+		AND		user_pass_an	=#{userPassAn}
 	</select>
 	
 	<!-- 등록 -->
@@ -50,8 +50,8 @@
 	        user_nick,
 	        user_name,
 	        user_add,
-	        user_passq,
-	        user_passa,
+	        user_pass_qu,
+	        user_pass_an,
 	        user_phone,
 	        user_level,
 	        enter_salay,

@@ -211,6 +211,17 @@
 				</div>
 	<!-- // Grid영역 -->
 	
+		<!--pagenation ---------------------------------------------------->
+
+		<div class="form-inline text-center">
+
+			<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "search.do", "search_page") %>
+
+		</div>
+
+		<!--// pagenation영역 ----------------------------------------------->
+	
+	
 	<!-- 입력 Form영역---- ----------------------------------------------->
 			
 			<div class="form-group">
@@ -289,5 +300,119 @@
 					<button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>		      														
 			</form>
 	<!-- //입력 Form영역---- ----------------------------------------------->			
+	<script type="text/javascript">
+	
+	$("#listTable>tbody").on("click","tr",function(){
+
+		console.log("1 #listTable>tbody");
+
+		
+
+		var tr = $(this);
+
+		var td = tr.children();
+
+		var userId = td.eq(2).text();
+
+		console.log("2 userId="+userId);
+
+		
+
+		if(""==userId)return;
+
+		
+
+        $.ajax({
+
+            type:"POST",
+
+            url:"do_search_one.do",
+
+            dataType:"html",// JSON
+
+            data:{
+
+            "userId": userId
+
+            },
+
+            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+
+              var parseData = $.parseJSON(data);
+
+              /* console.log("3 parseData.u_id="+parseData.u_id);
+
+              console.log("3 parseData.name="+parseData.name);
+
+              console.log("3 parseData.password="+parseData.password);
+
+              console.log("3 parseData.login="+parseData.login);
+
+              console.log("3 parseData.recommend="+parseData.recommend);
+
+              console.log("3 parseData.email="+parseData.email);
+
+              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
+
+              console.log("3 parseData.regDt="+parseData.regDt); */
+
+              
+
+              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
+
+              
+
+              $("#userId").val(parseData.userId);
+
+              $("#userPasswd").val(parseData.userPasswd);
+
+              $("#password").val(userNick.userNick);
+
+              
+              $("#userName").val(parseData.userName);
+
+              $("#userPhone").val(parseData.userPhone);
+
+              $("#userAdd").val(parseData.userAdd);
+
+              $("#userPassQu").val(parseData.userPassQu);
+
+              $("#userPassAn").val(parseData.userPassAn);
+
+              
+              
+
+              $("#userId").prop("disabled",true);              
+
+            },
+
+            complete: function(data){//무조건 수행
+
+             
+
+            },
+
+            error: function(xhr,status,error){
+
+             
+
+            }
+
+       }); //--ajax
+
+		
+
+	});//--#listTable>tbody
+
+	
+
+	
+
+	
+
+});  
+	
+	</script>
+
 </body>
 </html>
