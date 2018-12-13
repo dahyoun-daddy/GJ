@@ -166,25 +166,25 @@
 				    		<div id="profcontext" style="text-align: left;">
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	<label><b>이메일</b></label>
-					        	<input type="text" name="user_email" placeholder="itnet@paran.com">
+					        	<input type="text" name="user_email" value="${userId}" readOnly>
 					        		<br><br>
 					      			<label><b>기업명</b></label>
-						        <input type="text" name="comp_compname" placeholder="(주)아이티기업">
+						        <input type="text" name="comp_compname" value="${userNick}" readOnly>
 						        	<br><br>
 						       	<label><b>대표성함</b></label>
-						        <input type="text" name="comp_name" placeholder="박사장">
+						        <input type="text" name="comp_name" value="${userName}" readOnly>
 						        	<br><br>
 						        <label><b>회사 전화번호</b></label>
-						        <input type="text" name="comp_phone" placeholder="ex) 02-0000-0000">
+						        <input type="text" name="comp_phone" value="${userPhone}" readOnly>
 						       		<br><br>
 						       	<label><b>주소</b></label> 
-						        <input type="text" name="comp_address" placeholder="서울시 마포구 와우산로 00-0">
+						        <input type="text" name="comp_address" value="${userAdd}" readOnly>
 						       		<br><br>
 						       	<label><b>매출액</b></label> 
-						        <input type="text" name="comp_money" placeholder="ex) 1,000,000,000">
+						        <input type="text" name="comp_money" value="${enterSalay}" readOnly>
 						       		<br><br>
 						       	<label><b>설립일</b></label> 
-						        <input type="text" name="comp_date" placeholder="ex) 2010-08-11">
+						        <input type="text" name="comp_date" value="${enterHiredate}" readOnly>
 						       		<br><br>
 						      	
 					    		<input id="smallBtn" type="button" value="정보 수정하기"

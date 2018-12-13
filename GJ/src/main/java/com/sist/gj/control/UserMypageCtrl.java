@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.MypageSvc;
+import com.sist.gj.service.SignUpSvc;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
-import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
@@ -30,7 +30,8 @@ import com.sist.gj.vo.UserVO;
 public class UserMypageCtrl {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private static final String VIEW_NAME_INFO="mypageUser/UserMyInfo";
+	private static final String VIEW_INFO_USER="mypageUser/UserMyInfo";
+	private static final String VIEW_INFO_COMP="mypageCompany/CompMyInfo";
 	private static final String VIEW_APPLY="mypageUser/UserApply";
 	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
 	
@@ -40,20 +41,52 @@ public class UserMypageCtrl {
 	private CodeSvc codeSvc;
 	@Autowired
 	private MypageSvc mypageSvc;
-	
-/*	UserSvc 나와야지 수행 가능함
- *  @Autowired
-	private UserSvc userSvc;
+	@Autowired
+	private SignUpSvc userSvc;
 	
 	@RequestMapping(value="/mypageUser/UserMyInfo.do")
-	public String select(@ModelAttribute UserVO invo, Model model) {
-		log.info("UserVO: "+invo);
+	public String UserInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+		log.info("=====================select=======================");
 		
-		model.addAttribute("param",invo);
+//		String userId = req.getParameter("selectUserId");
 		
+		UserVO invo = new UserVO();
+		invo.setUserId("boondll@hanmail.net");
 		
-		return VIEW_NAME_INFO;
-	}*/
+		UserVO outvo = userSvc.select(invo);
+		
+		model.addAttribute("userId",outvo.getUserId());
+		model.addAttribute("userNick",outvo.getUserNick());
+		model.addAttribute("userName",outvo.getUserName());
+		model.addAttribute("userPhone",outvo.getUserPhone());
+		model.addAttribute("userAdd",outvo.getUserAdd());
+		
+		return VIEW_INFO_USER;
+	}
+	
+	@RequestMapping(value="/mypageCompany/CompMyInfo.do")
+	public String CompInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+		log.info("=====================select=======================");
+		
+//		String userId = req.getParameter("selectUserId");
+		
+		UserVO invo = new UserVO();
+		invo.setUserId("test@company.com");
+		
+		UserVO outvo = userSvc.select(invo);
+		
+		model.addAttribute("userId",outvo.getUserId());
+		model.addAttribute("userNick",outvo.getUserNick());
+		model.addAttribute("userName",outvo.getUserName());
+		model.addAttribute("userPhone",outvo.getUserPhone());
+		model.addAttribute("userAdd",outvo.getUserAdd());
+		model.addAttribute("enterSalay",outvo.getEnterSalay());
+		model.addAttribute("enterHiredate",outvo.getEnterHiredate());
+		
+		return VIEW_INFO_COMP;
+	}
+	
+
 	
 	@RequestMapping(value="mypageUser/UserApply.do")
 	public String retrieveApply(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
@@ -183,7 +216,7 @@ public class UserMypageCtrl {
 	        produces="application/json;charset=utf8",
 		        method=RequestMethod.POST)
 	@ResponseBody
-		public String updateApply(HttpServletRequest req, Model model) throws RuntimeException, SQLException{
+	public String updateApply(HttpServletRequest req, Model model) throws RuntimeException, SQLException{
 		log.info("=====================deleteApply=======================");
 		
 		String noList = req.getParameter("applyNo_list");
