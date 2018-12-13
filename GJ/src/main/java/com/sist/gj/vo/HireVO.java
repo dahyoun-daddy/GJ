@@ -153,5 +153,5 @@ public class HireVO {
 	public int getTotalCnt() {
 		return 0;
 	}
-
+ 
 }

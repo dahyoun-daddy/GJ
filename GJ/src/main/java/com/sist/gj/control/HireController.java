@@ -66,5 +66,5 @@ public class HireController {
 		model.addAttribute("totalCnt",totalCnt);
 		return VIEW_NAME;
 	}
-
+ 
 }
