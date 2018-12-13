@@ -59,7 +59,7 @@ public class SignUpTest {
 	public void Test() {
 		assertThat(inVo1.getUserId(), is("test15@company.com")); 
 	}
-	@Test 
+	@Test   
 	public void insert() throws ClassNotFoundException, SQLException {
 		 signUpDao.insert(inVo1);
 
