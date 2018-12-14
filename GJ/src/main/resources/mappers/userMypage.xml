@@ -300,6 +300,7 @@
               FROM HIREAPPLY C, HIREINFO D, USERS E
              WHERE C.hire_no = D.hire_no
                AND C.user_id = E.user_id
+               AND C.apply_check = 1
 		      <include refid="searchApply"/>
 		) Y
 	</select>
