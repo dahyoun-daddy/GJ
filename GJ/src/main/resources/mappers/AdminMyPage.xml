@@ -144,16 +144,8 @@
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
-					    	<choose>
-				  				<when test="40 == searchDiv">
-				  				  WHERE user_level IN(2)
-				  				  AND user_nick LIKE #{searchWord}||'%' 
-				  				</when>
-				  				<otherwise>
-				  					 WHERE user_level IN(2,3) 
-		                 			<include refid="searchText"/>
-				  				</otherwise>
-				  			</choose>
+				          WHERE user_level IN(2,3) 
+		                 	<include refid="searchText"/>
 						    )T
 				            WHERE T.rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
@@ -162,16 +154,8 @@
 							(
 						    SELECT COUNT(*) AS total_cnt
 						      FROM users
-						    <choose>
-				  				<when test="40 == searchDiv">
-				  				  WHERE user_level IN(2)
-				  				  AND user_nick LIKE #{searchWord}||'%' 
-				  				</when>
-				  				<otherwise>
-				  					 WHERE user_level IN(2,3) 
-		                 			<include refid="searchText"/>
-				  				</otherwise>
-				  			</choose>
+						    WHERE user_level IN(2,3) 
+						     <include refid="searchText"/>
 							)Y
 		
 	</select>
@@ -209,7 +193,8 @@
 		    user_add = #{userAdd},
 		    enter_Salay	= #{enterSalay} ,  
 		    enter_Cnt	    = #{enterCnt}   ,
-		    enter_Hiredate = #{enterHiredate},   
+		    enter_Hiredate = #{enterHiredate}, 
+		   	user_Level = #{userLevel},  
 		    user_pass_Qu = #{userPassQu},
 		    user_pass_An = #{userPassAn}
 
