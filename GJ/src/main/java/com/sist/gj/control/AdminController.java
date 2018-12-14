@@ -37,6 +37,10 @@ public class AdminController {
 	@Autowired
 	private AdminPageSvc adminSvc;
 	
+	@Autowired
+	private CodeSvc codeSvc;
+	
+	
 	@RequestMapping(value="/mypageAdmin/userList.do")
 		
 	public String doRetrieve(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
@@ -56,7 +60,7 @@ public class AdminController {
 		}
 		
 		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("USER_SEARCH");
+		codeSearch.setCmId("SIGNUP_Q");
 		
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
@@ -66,8 +70,9 @@ public class AdminController {
 		 
 		
 	
-	
+		
 		model.addAttribute("list",list);
+		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("param",invo);
 	
 		return VIEW_NAME;
@@ -95,7 +100,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 	object.put("userPhone", outVO.getUserPhone());
 	object.put("userAdd", outVO.getUserAdd());
 	object.put("userPassQu", outVO.getuserPassQu());
-	object.put("userPassAn", outVO.getuserPassAn());
+	object.put("userPassAn", outVO.getuserPassAn());	
 	 
 	String jsonData = object.toJSONString();
 	
@@ -122,10 +127,9 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		//<-- 세션값으로 아이디값 받기 -->
 		String loginId = "boondll@hanmail.net";
 		invo.setRegId(loginId);
-		invo.setuserPassQu("1");
+				
 		
-		
-		flag = adminSvc.updateUser(invo);
+		flag = adminSvc.updateUser(invo);	 		
 		
 		if(flag > 0) {
 			object.put("flag",flag);
@@ -140,14 +144,38 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		return jsonData;
 	}
 	
+	@RequestMapping(value="/mypageAdmin/userDelete.do",produces="application/json;charset=utf8")
+	@ResponseBody
+	public String doDelete(@ModelAttribute UserVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================update=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+		
+		flag = adminSvc.deleteUser(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","삭제 되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","삭제 실패.");
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
+	}
 	
 	
 	
 	
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
 	
 	
 	
@@ -174,7 +202,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		}
 		
 		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("COMPANY_SEARCH");
+		codeSearch.setCmId("SIGNUP_Q");
 		
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
@@ -186,6 +214,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 	
 	
 		model.addAttribute("list",list);
+		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("param",invo);
 	
 		return VIEW2_NAME;
@@ -247,7 +276,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 				//<-- 세션값으로 아이디값 받기 -->
 				String loginId = "boondll@hanmail.net";
 				invo.setRegId(loginId);
-				invo.setuserPassQu("1");
+				
 				
 				
 				flag = adminSvc.updateCompany(invo);
@@ -265,5 +294,30 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 				return jsonData;
 			}
 				
+			@RequestMapping(value="/mypageAdmin/companyDelete.do",produces="application/json;charset=utf8")
+			@ResponseBody
+			public String doDelete2(@ModelAttribute UserVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+				log.info("=====================update=======================");
+				log.info("invo" + invo);
+				
+				int flag = 0;
+				
+				JSONObject object = new JSONObject();
+				
+				flag = adminSvc.deleteUser(invo);
+				
+				if(flag > 0) {
+					object.put("flag",flag);
+					object.put("msg","삭제 되었습니다.");
+				}else {
+					object.put("flag",flag);
+					object.put("msg","삭제 실패.");
+				}
+				
+				String jsonData = object.toJSONString();
+				
+				return jsonData;
+			}
+			
 
 }

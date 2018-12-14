@@ -193,7 +193,8 @@
 		    user_add = #{userAdd},
 		    enter_Salay	= #{enterSalay} ,  
 		    enter_Cnt	    = #{enterCnt}   ,
-		    enter_Hiredate = #{enterHiredate},   
+		    enter_Hiredate = #{enterHiredate}, 
+		   	user_Level = #{userLevel},  
 		    user_pass_Qu = #{userPassQu},
 		    user_pass_An = #{userPassAn}
 

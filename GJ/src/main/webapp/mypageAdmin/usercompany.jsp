@@ -21,7 +21,7 @@
 
 	String search_word="";//검색어
 
-	
+	String userPassQu ="";//찾기질문
 
 	int totalCnt      =0;
 
@@ -71,6 +71,10 @@
 		List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 
 				     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
+
+				 	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))
+
+						     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
 
 		
 	
@@ -281,14 +285,7 @@
 			<div class="form-group"> 
 					<label class="col-lg-4 control-label">비밀번호 찾기 질문:</label>
 					<div  class="col-lg-8">
-	      	<select name="passQ">
-	      	<option value="1">자신의 인생 좌우명은 ?</option>
-	      	<option value="2">자신의 보물 제 1호는 ?</option>
-	      	<option value="3">가장 기억에 남는 선물은 ?</option>
-	      	<option value="4">자신의 가장 소중한 친구 이름은 ?</option>
-	      	<option value="5">다시 태어나면 되고싶은것은 ?</option>
-	      	
-	      	</select>		
+	   			<%=StringUtill.makeSelectBox(signup_q, userPassQu, "userPassQu", false) %>
 	      	</div>
 			</div>	
 	      				
@@ -301,7 +298,7 @@
 					</div>
 				</div>		      				
 	      <button type="button" class="btn btn-default btn-sm" id="do_update">수정하기</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>		      														
+		  <button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>		      														
 			</form>
 	<!-- //입력 Form영역---- ----------------------------------------------->			
 	<script type="text/javascript">
@@ -403,7 +400,7 @@
 			//alert("ready");
 			$("#do_update").on("click",function(){
 				//alert("ready");
-				if(false == confirm("수정 하시곘습니까?")){
+				if(false == confirm("수정 하시겠습니까?")){
     				return;
     			}
 				
@@ -418,8 +415,8 @@
    		         	"userName":$("#userName").val(),
    		         	"userPhone":$("#userPhone").val(),
    		         	"userAdd":$("#userAdd").val(),
-   		         	"userPassQu":$("#userPassQu").val(),
-   		    	   "userPassAn":$("#userPassAn").val(),
+   		          	"userPassQu":$("#userPassQu").val(),
+   		    	   "userPassAn":$("#userPassAn").val()
    		        
    		         },
          		      	         
@@ -441,7 +438,50 @@
    		   	});
 			})
 		});
+		
+		
+		
+		$(document).ready(function(){
+			$("#do_delete").on("click",function(){
+				//alert("ready");
+				if(false == confirm("삭제 하시겠습니까?")){
+    				return;
+    			}
+				
+				
+				$.ajax({
+	   		         type:"POST",
+	   		         url:"userDelete.do",
+	   		         dataType:"html",// JSON
+	   		         data:{
+	   		         	"userId": $("#userId").val()
+	   		         },
+	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	   		         	var parseData = $.parseJSON(data);
+	   		         	if(parseData.flag > 0){
+	   		         		alert(parseData.msg);
+	   		         		doSearch();
+	   		         	}else{
+	   		         		alert(parseData.msg);
+	   		         	}
+	   		         },
+	   		         complete: function(data){//무조건 수행
+	   		          
+	   		         },
+	   		         error: function(xhr,status,error){
+	   		          
+	   		         }
+	   		   	});
+			});
+		});
+	
+		
+		
 	</script>
+	
+	<
+	
+	
 
 </body>
 </html>
