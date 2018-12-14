@@ -143,13 +143,13 @@ public class CompMypageCtrl {
 		
 		UserVO outvo = userSvc.select(invo);
 		
-		String hireDate = invo.getEnterHiredate();
-		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy/MM/dd");
+		String hireDate = outvo.getEnterHiredate();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = transeFormat.parse(hireDate);
 		
 		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
 		hireDate = notIncludeTime.format(date);
-		
+
 		model.addAttribute("userId",outvo.getUserId());
 		model.addAttribute("userNick",outvo.getUserNick());
 		model.addAttribute("userName",outvo.getUserName());
@@ -157,6 +157,7 @@ public class CompMypageCtrl {
 		model.addAttribute("userAdd",outvo.getUserAdd());
 		model.addAttribute("enterSalay",outvo.getEnterSalay());
 		model.addAttribute("enterHiredate",hireDate);
+//		model.addAttribute("enterHiredate",outvo.getEnterHiredate());
 		
 		return VIEW_INFO_COMP;
 	}

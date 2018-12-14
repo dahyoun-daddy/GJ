@@ -25,7 +25,7 @@ public class HireSvcImpl implements HireSvc {
 	}
 
 	@Override
-	public int read(HireVO hireVO) throws Exception {
+	public HireVO read(HireVO hireVO) throws Exception {
 		return hireDao.read(hireVO);
 	}
 

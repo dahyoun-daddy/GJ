@@ -11,7 +11,7 @@ public interface HireDao {
 	//등록
 	int create(HireVO hireVO) throws SQLException;
 	//조회
-	int read(HireVO hireVO) throws Exception;
+	HireVO read(HireVO hireVO) throws Exception;
 	//수정
 	int update(HireVO hireVO) throws SQLException;	
 	//삭제 : 게시 중인 채용공고를 삭제할 수 없다. 테스트용으로 작성

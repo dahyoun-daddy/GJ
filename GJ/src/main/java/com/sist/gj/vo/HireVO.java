@@ -11,15 +11,15 @@ public class HireVO {
 	private String hireAdd;            // 지역
 	private String hireSalary;         // 연봉
 	private String hireEdu;            // 학력
-	private String redId;              // 등록자
-	private String redDt;              // 등록일
+	private String regId;              // 등록자
+	private String regDt;              // 등록일
 	private String modId;              // 수정자
 	private String modDt;              // 수정일
 	
 	public HireVO() {}
 
 	public HireVO(int hireNo, String hireTitle, String hireBody, String userId, String hireDate, String hireDeadline,
-			String hireAdd, String hireSalary, String hireEdu, String redId, String redDt, String modId, String modDt) {
+			String hireAdd, String hireSalary, String hireEdu, String regId, String regDt, String modId, String modDt) {
 		super();
 		this.hireNo = hireNo;
 		this.hireTitle = hireTitle;
@@ -30,18 +30,17 @@ public class HireVO {
 		this.hireAdd = hireAdd;
 		this.hireSalary = hireSalary;
 		this.hireEdu = hireEdu;
-		this.redId = redId;
-		this.redDt = redDt;
+		this.regId = regId;
+		this.regDt = regDt;
 		this.modId = modId;
 		this.modDt = modDt;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "HireVO [hireNo=" + hireNo + ", hireTitle=" + hireTitle + ", hireBody=" + hireBody + ", userId=" + userId
 				+ ", hireDate=" + hireDate + ", hireDeadline=" + hireDeadline + ", hireAdd=" + hireAdd + ", hireSalary="
-				+ hireSalary + ", hireEdu=" + hireEdu + ", redId=" + redId + ", redDt=" + redDt + ", modId=" + modId
+				+ hireSalary + ", hireEdu=" + hireEdu + ", regId=" + regId + ", regDt=" + regDt + ", modId=" + modId
 				+ ", modDt=" + modDt + "]";
 	}
 
@@ -118,20 +117,20 @@ public class HireVO {
 		this.hireEdu = hireEdu;
 	}
 
-	public String getRedId() {
-		return redId;
+	public String getRegId() {
+		return regId;
 	}
 
-	public void setRedId(String redId) {
-		this.redId = redId;
+	public void setRegId(String regId) {
+		this.regId = regId;
 	}
 
-	public String getRedDt() {
-		return redDt;
+	public String getRegDt() {
+		return regDt;
 	}
 
-	public void setRedDt(String redDt) {
-		this.redDt = redDt;
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 
 	public String getModId() {
@@ -151,7 +150,9 @@ public class HireVO {
 	}
 
 	public int getTotalCnt() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
  
 }
