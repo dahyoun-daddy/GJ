@@ -56,38 +56,37 @@
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
    		<h1>구직자관리</h1>
-    	
-    	</div>
-  	<!--// Title영역 -->
-       	
+        	
      	 <input type="hidden" name="page_num" id="page_num">
 		<!-- 검색영역 -->
+		
+		
 		<div class="row">
-		  <div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			
-    
-    <div class="form-group">
-					<select name="search_div" id="search_div" class="form-control input-sm">
-					    <option value="" >::전체::</option>
-										
-					</select>
-					<input type="text" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
-					
-										
-				</div>					
-    	</div>
-    	</div>
-    	
-    	 
-    	
+		 <div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="form-group" > 
+  						<div style="float: left; width: 33%;">
+  							<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
+  						</div>
+  						<div style="float: left; width: 33%;">
+  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
+  						</div>
+  						<div style="float: left; width: 33%;">
+  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
+  						</div>
+  					</div>
+  					</div>
+    			<div class="form-group">
+  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+  				</div>
+  			</div>
+		
+	</div>
     <!--// 검색영역----------------------------------------------------->
    
     <!-- Grid영역 -->
 		<div class="table-responsive" >
 			<table id="listTable" class="table table-striped table-bordered table-hover">
-   <thead class="bg-primary">
+   				<thead class="bg-primary">
 				    <tr>
 				        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
 						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">이름</th>
@@ -98,29 +97,33 @@
 						
 					</tr>
 				</thead>
-				<tbody> 
-							<c:choose>
-  						<c:when test="${list.size()>0}">
-  							<c:forEach var="UserVO" items="${list}">
-  								<tr>
-  									<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-  									<td class="text-center"><c:out value="${UserVO.userName}"/></td>
-  									<td class="text-left"><c:out value="${UserVO.userNick}"/></td>
-  									<td class="text-center"><c:out value="${UserVO.userId}"/></td>
-  									<td class="text-center"><c:out value="${UserVO.regDt}"/></td>
-  								</tr>
-  							</c:forEach>
-  						</c:when>
- 	 					<c:otherwise>
- 	 						<tr>
- 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
- 	 						</tr>
-  						</c:otherwise>
-  					</c:choose>
-				
-				</tbody>
+					<tbody> 
+								<c:choose>
+	  						<c:when test="${list.size()>0}">
+	  							<c:forEach var="UserVO" items="${list}">
+	  								<tr>
+	  									<td class="text-center"><input type="checkbox" id="check" name="check"></td>
+	  									<td class="text-center"><c:out value="${UserVO.userName}"/></td>
+	  									<td class="text-left"><c:out value="${UserVO.userNick}"/></td>
+	  									<td class="text-center"><c:out value="${UserVO.userId}"/></td>
+	  									<td class="text-center"><c:out value="${UserVO.regDt}"/></td>
+	  								</tr>
+	  							</c:forEach>
+	  						</c:when>
+	 	 					<c:otherwise>
+	 	 						<tr>
+	 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+	 	 						</tr>
+	  						</c:otherwise>
+	  					</c:choose>
+					
+					</tbody>
 				</table>
 				</div>
+				  	<div class="dorm-inline text-center">
+	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "userList.do", "searchPage") %>
+	  	</div>
+  	
 	<!-- // Grid영역 -->
 	
 

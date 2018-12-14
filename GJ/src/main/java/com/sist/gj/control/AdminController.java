@@ -73,6 +73,7 @@ public class AdminController {
 		
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("param",invo);
 	
 		return VIEW_NAME;
