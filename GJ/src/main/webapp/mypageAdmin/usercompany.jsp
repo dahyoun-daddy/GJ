@@ -121,7 +121,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">기업정보 </a>
-                    </li>
+                    </li>채용정보
                     <li class="nav-item active">
                         <a class="nav-link">자기소개서 <span class="sr-only">(current)</span></a>
                     </li>
@@ -132,6 +132,10 @@
             </div>
         </div>
     </nav>
+	
+	<form id="frm" name="frm">
+	
+	</form>
 	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -373,34 +377,70 @@
 	            },
 
 	            complete: function(data){//무조건 수행
-
-	             
-
+          
 	            },
-
 	            error: function(xhr,status,error){
-
-	             
-
+           
 	            }
-
 	       }); //--ajax
-
-			
 
 		});//--#listTable>tbody
 
-		
-
-		
-
-		
-
 	});  
 	
+</script>
+
+<script type="text/javascript">
+		function doSearch(){
+			var frm = document.frm;
+			frm.action="userList.do";
+			frm.submit();
+		}
 	
-	
-	
+		
+		
+		$(document).ready(function(){
+			//alert("ready");
+			$("#do_update").on("click",function(){
+				//alert("ready");
+				if(false == confirm("수정 하시곘습니까?")){
+    				return;
+    			}
+				
+				$.ajax({
+   		         type:"POST",
+   		         url:"userUpdate.do",
+   		         dataType:"html",// JSON
+   		         data:{
+   		        	"userId":$("#userId").val() ,
+   		         	"userPasswd":$("#userPasswd").val(),
+   		         	"userNick":$("#userNick").val(),
+   		         	"userName":$("#userName").val(),
+   		         	"userPhone":$("#userPhone").val(),
+   		         	"userAdd":$("#userAdd").val(),
+   		         	"userPassQu":$("#userPassQu").val(),
+   		    	   "userPassAn":$("#userPassAn").val(),
+   		        
+   		         },
+         		      	         
+   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+   		         	var parseData = $.parseJSON(data);
+   		         	if(parseData.flag == "1"){
+   		         		alert(parseData.msg);
+   		         		doSearch();
+   		         	}else{
+   		         		alert(parseData.msg);
+   		         	}
+   		         },
+   		         complete: function(data){//무조건 수행
+   		          
+   		         },
+   		         error: function(xhr,status,error){
+   		          
+   		         }
+   		   	});
+			})
+		});
 	</script>
 
 </body>

@@ -122,6 +122,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		//<-- 세션값으로 아이디값 받기 -->
 		String loginId = "boondll@hanmail.net";
 		invo.setRegId(loginId);
+		invo.setuserPassQu("1");
 		
 		
 		flag = adminSvc.updateUser(invo);
@@ -169,7 +170,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		List<UserVO> list = adminSvc.doRetrieveUser(invo);
+		List<UserVO> list = adminSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
 		 
 		

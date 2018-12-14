@@ -358,7 +358,7 @@
 
 	            type:"POST",
 
-	            url:"userSelect.do",
+	            url:"companySelect.do",
 
 	            dataType:"html",// JSON
 
@@ -394,12 +394,12 @@
 	              $("#enterSalay").val(parseData.enterSalay);
 	              
 	              $("#enterCnt").val(parseData.enterCnt);
-	              
-	              $("#enterHiredate").val(parseData.enterHiredate);
-	              
+	              	             	             
 	              $("#enterHiredate").val(parseData.enterHiredate);
 	
 	              $("#UserLevel").val(parseData.UserLevel);
+	              
+	              $("#userPassQu").val(parseData.userPassQu);	              
 
 	              $("#userPassAn").val(parseData.userPassAn);
 
@@ -434,6 +434,7 @@
 	
 		
 	</script>
+	
 	
 			
 </body>
