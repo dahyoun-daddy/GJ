@@ -12,7 +12,7 @@
 	String searchDiv = "";  //검색구분
 	String searchWord = ""; //검색어
 	
-	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "20");
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "40");
 	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
 	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
 	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
@@ -125,13 +125,12 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="dorm-inline text-center">
+						<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "giupList.do", "searchPage")%>
+					</div>
 				</div>
-			</div>
-		</div>
-
-		<div class="dorm-inline text-center">
-			<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "giupList.do", "searchPage")%>
-		</div>
+			</div>			
+		</div>		
 	</form>
 
 
@@ -152,7 +151,7 @@
 	<script src="../resources/js/animate.js"></script>
 	<script src="../resources/js/custom.js"></script>
 	<script type="text/javascript">
-	 function search_page(url,page_num){
+	 function searchPage(url,pageNum){
     	 //alert(url+":search_page:"+page_num);
     	 var frm = document.frm;
     	 frm.pageNum.value = pageNum;
