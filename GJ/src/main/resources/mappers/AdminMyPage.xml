@@ -147,7 +147,7 @@
 				          WHERE user_level IN(2,3) 
 		                 	<include refid="searchText"/>
 						    )T
-				            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+				            WHERE T.rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
 							)X
 							NATURAL JOIN

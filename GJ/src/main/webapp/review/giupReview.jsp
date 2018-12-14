@@ -4,6 +4,7 @@
 <%@page import="com.sist.gj.common.StringUtill"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	String context = request.getContextPath();
 
@@ -59,7 +60,7 @@
     
     <style type="text/css">
 	  label {
-	  	line-height: 1.2em; 
+	  	line-height: 0.5em; 
 	  	font-size: 80%; 
 	  	font-weight: bold;
 	  	bottom: 1px;  
@@ -115,10 +116,10 @@
 				 <span style="font-size: 1.5em; font-weight: bold; color: green;">(주) 우아한 형제들</span>
 				</div>
 				
-				<div style="border: 1px solid gold; float: left; height:150px; width: 10%;">
-				<img src="D:\hr_file\2018\11\20181128102728_a9e8bde5445b4138a57e02c74a7bde95.png" height="150px" style='width: 100%; object-fit: contain'>
+				<div style="border: 1px solid gold; float: left; height:180px; width: 10%;">
+				<img src="../resources/images/bono.jpeg" height="180px" style='width: 100%; object-fit: contain'>
 				</div>
-				<div style="border: 1px solid red; float: left; height:150px; width: 10%;">
+				<div style="border: 1px solid red; float: left; height:180px; width: 10%;">
 					<label style="line-height: 1.5em;">설립일 </label>
 					</br>
 					<label>사원수 </label>
@@ -161,20 +162,24 @@
 					</label>
 					
 				</div>
-				<div style="border: 1px solid red; float: right; height:4px; width: 80%;">	
-				</div>
-				<div style="line-height: 1.2em; border: 1px solid red; float: left; height:46px; width: 60%;">
-					<label style="line-height: 1.2;">경기도 고양시 일산동구 중산로 101 하늘마을</label>
+		
+				<div style="line-height: 1.2em; border: 1px solid red; float: left; height:80px; width: 60%;">
+					</br>
+					<label style="line-height: 1.7;">경기도 고양시 일산동구 중산로 101 하늘마을</label>
 					</br>
 					<label style="line-height: 0.8;">010-6889-6689 </label>
 					
 				</div>
-				<div style="border: 1px solid red; float: right; height:13px; width: 20%;">	
+				<div style="border: 1px solid red; float: right; height:47px; width: 20%;">	
 				</div>
 				<div style="border: 1px solid red; float: right; height:33px; width: 20%;">
 					<button style="float: right;" type="button" class="btn btn-danger btn-sm">면접리뷰 작성하기</button>
 				</div>
    			<!-- 면접리뷰 -------------------------------  -->
+<form name="frm" id="frm" method="get">
+  <c:choose>
+    <c:when test="${company!=null}">
+      <c:forEach var="userVO" items="${company}">
 				<div style="border: 1px solid red; float: left; height:20px; width: 100%;">
 				</div>
 				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
@@ -215,10 +220,23 @@
 				</div>
 				<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">							    
 				</div>
-				<!-- //첫번째 리뷰 끝 -->
+				
 				
 				<div style="border: 1px solid red; float: left; height:50px; width: 80%;">
 				</div>
+				<div style="border: 1px solid red; float: left; height:50px; width: 20%;">
+				</div>
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
+</form>
+				<!-- //첫번째 리뷰 끝 -->
+										
 				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
 					 <label style="margin-top: 1%;" class="starRev">
 						  <span id="1" class="starR11 on">1</span>

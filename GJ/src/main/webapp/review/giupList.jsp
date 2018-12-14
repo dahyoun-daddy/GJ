@@ -7,7 +7,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	String context = request.getContextPath();
-
 	String pageSize = "10";
 	String pageNum = "1";
 	String searchDiv = "";  //검색구분
@@ -89,7 +88,7 @@
 	</nav>
 
 	<form name="frm" id="frm" method="get">
-	<input type="hidden" name="pageNum" id="pageNum">
+	<input type="hidden" name="pageNum" id="pageNum" value="1">
 	<input type="hidden" name="userId" id="userId">
 		<div class="container">
 			<div class="col-xl-9 col-lg-10 mx-auto">

@@ -1,6 +1,6 @@
 package com.sist.gj.vo;
 
-public class UserVO {
+public class UserVO extends DTO{
 	
 	private String  userId		      ;//사용자 아이디
 	private String  userPasswd        ;//사용자 비밀번호
