@@ -5,6 +5,7 @@ public class SearchVO {
 	private int pageNum;
 	private String searchWord;
 	private String searchDiv;
+	private String userId;
 	
 	public SearchVO() {}
 	
@@ -15,11 +16,13 @@ public class SearchVO {
 		this.searchWord = searchWord;
 		this.searchDiv = searchDiv;
 	}
+	
 	@Override
 	public String toString() {
 		return "SearchVO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", searchWord=" + searchWord + ", searchDiv="
-				+ searchDiv + "]";
+				+ searchDiv + ", userId=" + userId + "]";
 	}
+
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -44,6 +47,13 @@ public class SearchVO {
 	public void setSearchDiv(String searchDiv) {
 		this.searchDiv = searchDiv;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	
 	
 }
