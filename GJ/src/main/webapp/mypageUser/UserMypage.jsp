@@ -167,7 +167,7 @@
 				    		<br/><br/>
 				    		
 				    		<input id="smallBtn" type="button" value="정보 수정하기" 
-	                   			   onclick="location='UserInfoUpdate.jsp'; return false;">
+	                   			   onclick="location='UserInfoUpdate.do'; return false;">
 				    		<input id="smallBtn" type="button" value="탈퇴하기" 
 	                   			   onclick="location='UserSignOut.jsp'; return false;">
 				    		

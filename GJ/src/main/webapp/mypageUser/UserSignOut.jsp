@@ -3,22 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
-    
+   
 <style>
-
 	#bubble-float-right:{
 	  display: inline-block;
 	  position: relative;
@@ -97,16 +83,8 @@
 	   background-image: -ms-linear-gradient(top, #000000 0%, #000000 100%);
 	   color: #A9F5A9;
 	   }
-	
-
-	
-	
 </style>
-<% 
-	String nickname = "초보개발자";
-	String openResume = "있습니다";
 
-%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -135,27 +113,25 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-weight: bold;" align="center">
 				    		<h5><strong>탈퇴하기</strong></h5><br/><br/>
 				    		
-				    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
+			    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
 							<input type="hidden" name="workDiv" id="workDiv" />
 						   
 						   	<div class="form-group" style="display: inline-block;" >
 								<label for="su_id" style="float:left; margin-right: 10px;"><strong>이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
-								<input type="text" name="su_id" id="su_id" maxlength="320" 
-								       style="float:left; margin-right: 10px;"><br/>			                   
+								<input type="text" name="email" id="email" maxlength="320" 
+								       style="float:left; margin-right: 10px;" value="${userId}" readOnly><br/>			                   
 							</div><br/>
 							
 							<div class="form-group" style="display: inline-block;">
 								<label for="su_pw" style="float:left; margin-right: 10px;"><strong>비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
-								<input type="password" name="su_pw" id="su_pw" maxlength="20"
+								<input type="password" name="passwd" id="passwd" maxlength="20"
 								       style="float:left; margin-right: 10px;"><br/><br/>
 							</div>
 							
 							<div class="col;" style="color:orange; font-size:75%;">탈퇴하면 기존에 등록된 모든 정보들은 전부 파기되어 복구가 불가합니다.<br/>또한 작성한 리뷰 및 자기소개서 글은 무통보 삭제될 수 있습니다.<br/><br/></div>	
-						    <input id="smallBtn" type="button" value="탈퇴하기" onclick="javascript:do_delete();" />  
+						    <input id="smallBtn" name="signout" type="button" value="탈퇴하기"/>  
 						
 						</form>
-				    		
-				    	
 				    		
 				    	</div>
 			    	</div>
@@ -164,6 +140,39 @@
 	
 		 </section>
     
+    <script type="text/javascript">
     
+    $(document).ready(function(){
+		$("input[name='signout']").on("click",function(){
+			if(false==confirm("관련된 개인정보는 파기됩니다. 정말 탈퇴하시겠습니까?"))return;
+		
+			$.ajax({
+		         type:"POST",
+		         url:"deleteUser.do",
+		         dataType:"html",// JSON
+		         data:{
+		         	"userId": $("#email").val(),
+		         	"userPasswd": $("#passwd").val()
+		         },
+		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+		             var parseData = $.parseJSON(data);
+		         	 if(parseData.flag=="1"){
+		         		 alert(parseData.msg);
+		         		location.href="../common/Main.jsp";
+		         	 }else{
+		         		alert(parseData.msg);
+		         	 }
+		         },
+		         complete: function(data){//무조건 수행
+		          
+		         },
+		         error: function(xhr,status,error){
+		          
+		         }
+		     });//--ajax				
+		});//--signout
+    });
+    
+    </script>
 </body>
 </html>

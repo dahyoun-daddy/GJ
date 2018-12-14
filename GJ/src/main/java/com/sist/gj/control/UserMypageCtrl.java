@@ -2,6 +2,7 @@ package com.sist.gj.control;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,7 @@ public class UserMypageCtrl {
 	private static final String VIEW_INFO_USER="mypageUser/UserMyInfo";
 	private static final String VIEW_UPDATE_USER="mypageUser/UserInfoUpdate";
 	private static final String VIEW_APPLY="mypageUser/UserApply";
+	private static final String VIEW_SIGN_OUT="mypageUser/UserSignOut";
 	
 
 	
@@ -44,6 +46,47 @@ public class UserMypageCtrl {
 	@Autowired
 	private SignUpSvc userSvc;
 	
+	
+	@RequestMapping(value="/mypageUser/UserSignOut.do")
+	public String deletePage(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+		log.info("=====================delete=======================");
+		
+//		String userId = req.getParameter("selectUserId");
+		UserVO invo = new UserVO();
+		invo.setUserId("signout1");
+		model.addAttribute("userId",invo.getUserId());
+		
+		return VIEW_SIGN_OUT;
+	}
+	
+	@RequestMapping(value="/mypageUser/deleteUser.do",
+					method=RequestMethod.POST,
+			        produces="application/json;charset=utf8")
+	@ResponseBody
+	public String deleteUser(@ModelAttribute UserVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================delete=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+	
+		flag = mypageSvc.deleteUser(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","탈퇴 완료되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","탈퇴 실패. 비밀번호를 확인하세요.");
+		}
+	
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
+	}
+	
+	//수정되기 전에 회원정보 불러와서 뿌려주는 컨트롤
 	@RequestMapping(value="/mypageUser/UserInfoUpdate.do")
 	public String UserInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================update=======================");
@@ -69,6 +112,7 @@ public class UserMypageCtrl {
 	}
 	
 	
+	//수정 버튼 눌렀을 때 동작되는 컨트롤
 	@RequestMapping(value="/mypageUser/infoUpdate.do",
 			        method=RequestMethod.POST,
 	                produces="application/json;charset=utf8"  
@@ -105,6 +149,7 @@ public class UserMypageCtrl {
 		
 		return jsonData;
 	}	 
+	
 	
 	@RequestMapping(value="/mypageUser/UserMyInfo.do")
 	public String UserInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
@@ -150,14 +195,15 @@ public class UserMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
+		invo.setUserId("boondll@hanmail.net");
+		
 		List<ApplyVO> list = mypageSvc.retrieveApplyUser(invo);
-		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
 		if(null != list  &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();
-			
 		}
+		
 		
 		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));

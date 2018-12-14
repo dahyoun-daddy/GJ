@@ -243,6 +243,7 @@
 		          FROM HIREAPPLY C, HIREINFO D, USERS E
                  WHERE C.hire_no = D.hire_no
                    AND C.user_id = E.user_id
+    			   AND C.user_id = #{userId}
                    <include refid="searchApply"/>
 		    ) T
 		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -255,6 +256,7 @@
               FROM HIREAPPLY C, HIREINFO D, USERS E
              WHERE C.hire_no = D.hire_no
                AND C.user_id = E.user_id
+			   AND C.user_id = #{userId}
 		      <include refid="searchApply"/>
 		) Y
 	</select>
