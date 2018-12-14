@@ -26,4 +26,10 @@ public class SignUpSvcImple implements SignUpSvc {
 		return signupDao.select(userVO);
 	}
 
+	@Override
+	public UserVO login(UserVO userVO) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return signupDao.login(userVO);
+	}
+
 }

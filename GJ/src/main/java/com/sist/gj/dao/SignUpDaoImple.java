@@ -55,6 +55,19 @@ Logger log = LoggerFactory.getLogger(this.getClass());
 		return outVO;
 	}
 
+	@Override
+	public UserVO login(UserVO userVO) throws ClassNotFoundException, SQLException {
+UserVO outVO = null;
+		
+		String statement = NAMESPACE+".login";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+	}
+
 	
 
 }

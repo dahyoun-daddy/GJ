@@ -34,7 +34,7 @@
 	<!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark cyan">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="<%=context %>/common/Main.jsp">
             <img src="<%=context %>/resources/images/gj_logo.png" alt="nav-logo">
             </a>
             <form id="topFrm" name="topFrm">
@@ -58,7 +58,7 @@
                         <a class="nav-link" onclick="moveJasoList()">자기소개서 </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">...님 로그인중</a>
+                        <a class="nav-link" href="<%=context %>/login/login.jsp">로그인</a>
                     </li>
                 </ul>
             </div>
