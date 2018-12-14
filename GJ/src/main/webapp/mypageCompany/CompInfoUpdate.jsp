@@ -132,7 +132,7 @@
 					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompHireStt.jsp'">지원자 확인하기</button><br/><br/>
+					    	        onclick="location='CompHireStt.do'">지원자 확인하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
 					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
