@@ -78,7 +78,7 @@
 						    <a class="nav-link" href="<%=context %>/login/login.jsp">로그인</a>
 						    <%}%>
                     </li>
-                </ul>
+                </ul> 
             </div>
         </div>
     </nav>
