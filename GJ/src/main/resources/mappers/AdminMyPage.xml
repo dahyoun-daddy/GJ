@@ -144,7 +144,7 @@
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
-				          WHERE user_level = 2 OR user_level = 3
+				          WHERE user_level IN(2,3) 
 		                 	<include refid="searchText"/>
 						    )T
 				            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -154,7 +154,7 @@
 							(
 						    SELECT COUNT(*) AS total_cnt
 						      FROM users
-						        WHERE user_level = 2 OR user_level = 3
+						    WHERE user_level IN(2,3) 
 						     <include refid="searchText"/>
 							)Y
 		

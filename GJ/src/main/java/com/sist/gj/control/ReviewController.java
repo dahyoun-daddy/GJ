@@ -92,6 +92,7 @@ public class ReviewController {
 			}
 		}
 		
+		
 		model.addAttribute("list",list);
 		
 		return "review/giupList";
