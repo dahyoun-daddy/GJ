@@ -1,6 +1,6 @@
 package com.sist.gj.vo;
 
-public class ReviewVO {
+public class ReviewVO extends DTO{
 	private String reviewNo      ; /*리뷰no 	*/ 
 	private String userNick      ; /*기업명	*/
 	private String reviewComplain; /*받은신고수	*/

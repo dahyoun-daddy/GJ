@@ -83,18 +83,28 @@ public class ReviewController {
 			invo.setSearchWord("");
 		}
 		
+		
+		
 		List<UserVO> list = adminPageSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();		
+		}
 		for(Iterator<UserVO> it = list.iterator(); it.hasNext();) {
 			UserVO value = it.next();
 			if(value.getUserLevel() == 3) {
+				totalCnt -= 1;
 				it.remove();
 			}
 		}
+		log.info("=====================totalCnt=======================");
+		log.info("totalCnt:" + totalCnt);
+		log.info("=====================totalCnt=======================");
 		
 		
 		model.addAttribute("list",list);
-		
+		model.addAttribute("totalCnt",totalCnt);
 		return "review/giupList";
 	}
 	
