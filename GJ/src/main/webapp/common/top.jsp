@@ -77,7 +77,7 @@
     	function moveJasoList(){
     		var frm = document.topFrm;
     		frm.action="../jaso/jasoList.do";
-    		frm.submit();
+    		frm.submit(); 
     	}
     </script>
     
