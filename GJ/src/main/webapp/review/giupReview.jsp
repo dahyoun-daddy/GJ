@@ -8,14 +8,14 @@
 <% 
 	String context = request.getContextPath();
 
-	String pageSize = "10";
+	String pageSize = "5";
 	String pageNum = "1";
 	String searchDiv = "";  //검색구분
 	String searchWord = ""; //검색어
 	
-	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "20");
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
 	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
-	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "5");
 	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
 	
 	int totalCnt = 0;
@@ -24,7 +24,7 @@
 	int oPageSize = Integer.parseInt(pageSize);
 	int oPageNum = Integer.parseInt(pageNum);
 	
-	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"5":request.getAttribute("totalCnt").toString();
 	totalCnt = Integer.parseInt(totalCnts);
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
@@ -113,7 +113,7 @@
 				<div style="border: 1px solid gold; height:40px; float: left; width: 10%;">
 				</div>
 				<div style="border: 1px solid red; height:40px; float: left; width: 90%;">
-				 <span style="font-size: 1.5em; font-weight: bold; color: green;">(주) 우아한 형제들</span>
+				 <span style="font-size: 1.5em; font-weight: bold; color: green;">${company.userNick}</span>
 				</div>
 				
 				<div style="border: 1px solid gold; float: left; height:180px; width: 10%;">
@@ -135,27 +135,27 @@
 				<div style="border: 1px solid red; float: left; height:100px; width: 10%;">
 					<label style="line-height: 1.2em;">2018/11/28 </label>
 					</br>
-					<label>1000명</label>
+					<label>${company.enterCnt}명</label>
 					</br>
-					<label>1000억 </label>
+					<label>${company.enterSalay}억 </label>
 					</br>
-					<label>김준혁</label>	
+					<label>${company.userName}</label>	
 				</div>
 				<div style="border: 1px solid red; float: left; height:100px; width: 7%;">
 					<label style="line-height:2.3em">리뷰 평점</label>
 				</div>
 				<div style="border: 1px solid red; float: left; height:100px; width: 63%;">
 					<label class="starRev">
-						  <span id="1" class="starR1 on">1</span>
-						  <span id="2" class="starR2">2</span>
-						  <span id="3" class="starR1">3</span>
-						  <span id="4" class="starR2">4</span>
-						  <span id="5" class="starR1">5</span>
-						  <span id="6" class="starR2">6</span>
-						  <span id="7" class="starR1">7</span>
-						  <span id="8" class="starR2">8</span>
-						  <span id="9" class="starR1">9</span>
-						  <span id="10" class="starR2">10</span>
+						  <span id="0" class="starR1 on">1</span>
+						  <span id="1" class="starR2">2</span>
+						  <span id="2" class="starR1">3</span>
+						  <span id="3" class="starR2">4</span>
+						  <span id="4" class="starR1">5</span>
+						  <span id="5" class="starR2">6</span>
+						  <span id="6" class="starR1">7</span>
+						  <span id="7" class="starR2">8</span>
+						  <span id="8" class="starR1">9</span>
+						  <span id="9" class="starR2">10</span>
 						  <script type="text/javascript">
 						    $("#4").addClass('on').prevAll('span').addClass('on');
 						  </script>						  
@@ -165,9 +165,9 @@
 		
 				<div style="line-height: 1.2em; border: 1px solid red; float: left; height:80px; width: 60%;">
 					</br>
-					<label style="line-height: 1.7;">경기도 고양시 일산동구 중산로 101 하늘마을</label>
+					<label style="line-height: 1.7;">${company.userAdd}</label>
 					</br>
-					<label style="line-height: 0.8;">010-6889-6689 </label>
+					<label style="line-height: 0.8;">${company.userPhone} </label>
 					
 				</div>
 				<div style="border: 1px solid red; float: right; height:47px; width: 20%;">	
@@ -176,122 +176,98 @@
 					<button style="float: right;" type="button" class="btn btn-danger btn-sm">면접리뷰 작성하기</button>
 				</div>
    			<!-- 면접리뷰 -------------------------------  -->
-<form name="frm" id="frm" method="get">
-  <c:choose>
-    <c:when test="${company!=null}">
-      <c:forEach var="userVO" items="${company}">
-				<div style="border: 1px solid red; float: left; height:20px; width: 100%;">
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
-				 <div>
-					 <label style="margin-top: 1%;" class="starRev">
-						  <span id="1" class="starR11 on">1</span>
-						  <span id="2" class="starR22">2</span>
-						  <span id="3" class="starR11">3</span>
-						  <span id="4" class="starR22">4</span>
-						  <span id="51" class="starR11">5</span>
-						  <span id="6" class="starR22">6</span>
-						  <span id="7" class="starR11">7</span>
-						  <span id="8" class="starR22">8</span>
-						  <span id="9" class="starR11">9</span>
-						  <span id="10" class="starR22">10</span>
-						  <script type="text/javascript">
-						    $("#51").addClass('on').prevAll('span').addClass('on');
-						  </script>						  
-					</label>
-				  </div>
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
-					<button style="float: right;" type="button" class="btn btn-danger btn-sm">신고하기</button>
-					<button style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
-				</div>
-				<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
-					<label style="font-size:1em; color: #DBA901;">공채 최종면접 보고 연락 왔습니다.</label>
-					
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:40px; width: 20%;">
-					<span style="float: right; font-size: 80%;">작성일 : 18/11/28</span> 
-				</div>
-				
-				<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
-					ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">							    
-				</div>
-				
-				
-				<div style="border: 1px solid red; float: left; height:50px; width: 80%;">
-				</div>
-				<div style="border: 1px solid red; float: left; height:50px; width: 20%;">
-				</div>
-			</c:forEach>
-		</c:when>
-		<c:otherwise>
-			<tr>
-				<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
-			</tr>
-		</c:otherwise>
-	</c:choose>
-</form>
-				<!-- //첫번째 리뷰 끝 -->
-										
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
-					 <label style="margin-top: 1%;" class="starRev">
-						  <span id="1" class="starR11 on">1</span>
-						  <span id="2" class="starR22">2</span>
-						  <span id="3" class="starR11">3</span>
-						  <span id="4" class="starR22">4</span>
-						  <span id="51" class="starR11">5</span>
-						  <span id="6" class="starR22">6</span>
-						  <span id="7" class="starR11">7</span>
-						  <span id="81" class="starR22">8</span>
-						  <span id="9" class="starR11">9</span>
-						  <span id="10" class="starR22">10</span>
-						  <script type="text/javascript">
-						    $("#81").addClass('on').prevAll('span').addClass('on');
-						  </script>						  
-					</label>      
-				</div>    
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
-					<button style="float: right;" type="button" class="btn btn-danger btn-sm">신고하기</button>
-					<button style="float: right; margin-right: 2px" type="button" class="btn btn-danger btn-sm">수정하기</button>
-				</div>
-				<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
-					<label style="font-size:1em; color: #DBA901;">아오 드럽게 안되네</label>
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:40px; width: 20%;">
-					<span style="float: right;">작성일 : 18/11/28</span>
-				</div>
-				
-				<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
-					넘나 화가난다.
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
-				    
-				</div>
-				<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
-				    
-				</div>
-				<!-- //두번째 리뷰 끝 -->
-			
+			<form name="frm" id="frm" method="get">
+			  <c:choose>
+			    <c:when test="${list.size()>0}">
+			      <c:forEach var="reviewVO" items="${list}">
+							<div style="border: 1px solid red; float: left; height:20px; width: 100%;">
+							</div>
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
+							 <div>
+								 <label style="margin-top: 1%;" class="starRev">
+									  <span id="${reviewVO.reviewNo}0" class="starR11 on">1</span>
+									  <span id="${reviewVO.reviewNo}1" class="starR22">2</span>
+									  <span id="${reviewVO.reviewNo}2" class="starR11">3</span>
+									  <span id="${reviewVO.reviewNo}3" class="starR22">4</span>
+									  <span id="${reviewVO.reviewNo}4" class="starR11">5</span>
+									  <span id="${reviewVO.reviewNo}5" class="starR22">6</span>
+									  <span id="${reviewVO.reviewNo}6" class="starR11">7</span>
+									  <span id="${reviewVO.reviewNo}7" class="starR22">8</span>
+									  <span id="${reviewVO.reviewNo}8" class="starR11">9</span>
+									  <span id="${reviewVO.reviewNo}9" class="starR22">10</span>
+									  <script type="text/javascript">
+									    $("#${reviewVO.reviewPoint}").addClass('on').prevAll('span').addClass('on');
+									  </script>						  
+								</label>
+							  </div>
+							</div>
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
+								<button style="float: right;" type="button" class="btn btn-danger btn-sm">신고하기</button>
+								<button style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
+							</div>
+							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
+								<label style="font-size:1em; color: #DBA901;">${reviewVO.reviewTitle}</label>
+								
+							</div>
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:40px; width: 20%;">
+								<span style="float: right; font-size: 80%;">작성일 : ${reviewVO.regDt}</span> 
+							</div>
+							
+							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
+								${reviewVO.reviewBody}
+							</div>
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
+							</div>
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">							    
+							</div>
+							
+							
+							<div style="border: 1px solid red; float: left; height:30px; width: 80%;">
+							</div>
+							<div style="border: 1px solid red; float: left; height:30px; width: 20%;">
+							</div>
+							<input type="hidden" id="reviewNo" value="${reviewVO.reviewNo}" />
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+						
 			<!-- // 면접리뷰 -------------------------------  -->
    		</div>
    	</div>
+   	
+   	<div class="dorm-inline text-center">
+			<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "giupReview.do", "searchPage")%>
+	</div>
+	<input type="hidden" name="pageNum" id="pageNum" value="1">
+	<input type="hidden" name="userId" id="userId" value="${company.userId}">
+	</form>
    	<!-- // 기업 상세정보 -------------------------------  -->
    	
 	
 
     <script type="text/javascript">
+	 function searchPage(url,pageNum){
+    	 //alert(url+":search_page:"+page_num);
+    	 var frm = document.frm;
+    	 frm.pageNum.value = pageNum;
+    	 frm.action = url;
+    	 frm.submit();
+    	 
+     }
+    
     $(document).ready(function(){ 
-    	$("#4").addClass('on').prevAll('span').addClass('on');
+    	/* $("#4").addClass('on').prevAll('span').addClass('on');
         $('.starRev span').click(function(){
 		 $(this).parent().children('span').removeClass('on');
     	 $(this).addClass('on').prevAll('span').addClass('on');
     	 console.log("select:"+$(this).select().text());
     	  return false;
-    	}); 
+    	});  */
     	<%-- $(<%=ad %>).click(function(){
        	 $(this).addClass('on').prevAll('span').addClass('on');
        	});

@@ -41,13 +41,25 @@ public class ReviewDaoTest {
 	ReviewVO inVo1 = null;
 	ReviewVO inVo2 = null;
 	ReviewVO inVo3 = null;
+	ReviewVO inVo4 = null;
+	ReviewVO inVo5 = null;
+	ReviewVO inVo6 = null;
+	ReviewVO inVo7 = null;
+	ReviewVO inVo8 = null;
+	ReviewVO inVo9 = null;
 	SearchVO searchVO = null;
 	
 	@Before
 	public void setUp() {
-		inVo1 = new ReviewVO("1","기업1","3","제목","내용","","4","준혁","",null,null);
-		inVo2 = new ReviewVO("2","기업2","3","제목","내용","","4","준혁1","",null,null);
-		inVo3 = new ReviewVO("3","기업3","3","제목","내용","","4","준혁2","",null,null);
+		inVo1 = new ReviewVO("10","test4@naver.com","3","제목","내용","","4","준혁","",null,null);
+		inVo2 = new ReviewVO("11","test4@naver.com","3","제목","내용","","4","준혁1","",null,null);
+		inVo3 = new ReviewVO("12","test4@naver.com","3","제목","내용","","4","준혁2","",null,null);
+		inVo4 = new ReviewVO("4","test4@naver.com","3","제목","내용","","4","준혁","",null,null);
+		inVo5 = new ReviewVO("5","test4@naver.com","3","제목","내용","","4","준혁1","",null,null);
+		inVo6 = new ReviewVO("6","test4@naver.com","3","제목","내용","","4","준혁2","",null,null);
+		inVo7 = new ReviewVO("7","test4@naver.com","3","제목","내용","","4","준혁","",null,null);
+		inVo8 = new ReviewVO("8","test4@naver.com","3","제목","내용","","4","준혁1","",null,null);
+		inVo9 = new ReviewVO("9","test4@naver.com","3","제목","내용","","4","준혁2","",null,null);
 		
 		
 		searchVO = new SearchVO(10,1,"기업1",""); 
@@ -63,14 +75,20 @@ public class ReviewDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void add() throws ClassNotFoundException, SQLException{
 		reviewDao.add(inVo1);
 		reviewDao.add(inVo2);
 		reviewDao.add(inVo3);
+		reviewDao.add(inVo4);
+		reviewDao.add(inVo5);
+		reviewDao.add(inVo6);
+		reviewDao.add(inVo7);
+		reviewDao.add(inVo8);
+		reviewDao.add(inVo9);
 	}
 	
 	@Test
+	@Ignore
 	public void doRetrieve() throws ClassNotFoundException, SQLException {
 		List<ReviewVO> list = reviewDao.doRetrieve(searchVO);
 		LOG.info("size : "+list.size()+""); 

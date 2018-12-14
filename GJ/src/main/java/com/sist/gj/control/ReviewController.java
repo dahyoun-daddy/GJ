@@ -40,8 +40,11 @@ public class ReviewController {
 	public String doRetrieve(@ModelAttribute SearchVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
+		String userId = req.getParameter("userId");
+		log.info("userId : "+userId);
+		
 		if(invo.getPageSize() == 0) {
-			invo.setPageSize(10);
+			invo.setPageSize(5);
 		}
 		if(invo.getPageNum() == 0){
 			invo.setPageNum(1);
@@ -52,16 +55,22 @@ public class ReviewController {
 		if(null == invo.getSearchWord()) {
 			invo.setSearchWord("");
 		}
-		
+		invo.setSearchDiv("");
+		invo.setSearchWord(userId);
 		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
 		model.addAttribute("list",list);
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();		
+		}
 		
-		String userId = req.getParameter("userId");
 		UserVO userVO = new UserVO();
-		userVO.setUserNick(userId);
+		userVO.setUserId(userId);
 		UserVO outVO = adminPageSvc.selectCompany(userVO);
+		
 		model.addAttribute("company",outVO);
+		model.addAttribute("totalCnt",totalCnt);
 		
 		return "review/giupReview";
 	}
@@ -77,7 +86,7 @@ public class ReviewController {
 			invo.setPageNum(1);
 		}
 		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("20");
+			invo.setSearchDiv("40");
 		}
 		if(null == invo.getSearchWord()) {
 			invo.setSearchWord("");
@@ -91,13 +100,13 @@ public class ReviewController {
 		if(null != list  &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();		
 		}
-		for(Iterator<UserVO> it = list.iterator(); it.hasNext();) {
-			UserVO value = it.next();
-			if(value.getUserLevel() == 3) {
-				totalCnt -= 1;
-				it.remove();
-			}
-		}
+//		for(Iterator<UserVO> it = list.iterator(); it.hasNext();) {
+//			UserVO value = it.next();
+//			if(value.getUserLevel() == 3) {
+//				totalCnt -= 1;
+//				it.remove();
+//			}
+//		}
 		log.info("=====================totalCnt=======================");
 		log.info("totalCnt:" + totalCnt);
 		log.info("=====================totalCnt=======================");
