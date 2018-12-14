@@ -141,7 +141,16 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 	}
 	
 	
+	
+	
+	
+	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	
+	
+	
+	
 	private static final String VIEW2_NAME="mypageAdmin/usercompany2";
 	
 	
@@ -222,37 +231,39 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 			}
 	
 			
-			
-//	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
-//	@ResponseBody
-//	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
-//		log.info("=====================update=======================");
-//		log.info("invo" + invo);
-//		
-//		int flag = 0;
-//		
-//		JSONObject object = new JSONObject();
-//		
-//		//String loginId = req.getParameter("userId");
-//		
-//		//----------------------------------------------------------------
-//		//<-- 세션값으로 아이디값 받기 -->
-//		String loginId = "boondll@hanmail.net";
-//		invo.setRegId(loginId);
-//		
-//		
-//		flag = jasoSvc.merge(invo);
-//		
-//		if(flag > 0) {
-//			object.put("flag",flag);
-//			object.put("msg","등록 되었습니다.");
-//		}else {
-//			object.put("flag",flag);
-//			object.put("msg","등록 실패.");
-//		}
-//		
-//		String jsonData = object.toJSONString();
-//		
-//		return jsonData;
-//	}
+			@RequestMapping(value="/mypageAdmin/companyUpdate.do",produces="application/json;charset=utf8")
+			@ResponseBody
+			public String doUpdate2(@ModelAttribute UserVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+				log.info("=====================update=======================");
+				log.info("invo" + invo);
+				
+				int flag = 0;
+				
+				JSONObject object = new JSONObject();
+				
+				//String loginId = req.getParameter("userId");
+				
+				//----------------------------------------------------------------
+				//<-- 세션값으로 아이디값 받기 -->
+				String loginId = "boondll@hanmail.net";
+				invo.setRegId(loginId);
+				invo.setuserPassQu("1");
+				
+				
+				flag = adminSvc.updateCompany(invo);
+				
+				if(flag > 0) {
+					object.put("flag",flag);
+					object.put("msg","등록 되었습니다.");
+				}else {
+					object.put("flag",flag);
+					object.put("msg","등록 실패.");
+				}
+				
+				String jsonData = object.toJSONString();
+				
+				return jsonData;
+			}
+				
+
 }

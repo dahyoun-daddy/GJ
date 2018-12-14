@@ -129,6 +129,11 @@
         </div>
     </nav>
 	
+	<form id="frm" name="frm">
+	
+	</form>
+	
+	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -435,7 +440,58 @@
 		
 	</script>
 	
+	<script type="text/javascript">
+		function doSearch(){
+			var frm = document.frm;
+			frm.action="userList.do";
+			frm.submit();
+		}
 	
+		
+		
+		$(document).ready(function(){
+			//alert("ready");
+			$("#do_update").on("click",function(){
+				//alert("ready");
+				if(false == confirm("수정 하시곘습니까?")){
+    				return;
+    			}
+				
+				$.ajax({
+   		         type:"POST",
+   		         url:"userUpdate.do",
+   		         dataType:"html",// JSON
+   		         data:{
+   		        	"userId":$("#userId").val() ,
+   		         	"userPasswd":$("#userPasswd").val(),
+   		         	"userNick":$("#userNick").val(),
+   		         	"userName":$("#userName").val(),
+   		         	"userPhone":$("#userPhone").val(),
+   		         	"userAdd":$("#userAdd").val(),
+   		         	"userPassQu":$("#userPassQu").val(),
+   		    	   "userPassAn":$("#userPassAn").val(),
+   		        
+   		         },
+         		      	         
+   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+   		         	var parseData = $.parseJSON(data);
+   		         	if(parseData.flag == "1"){
+   		         		alert(parseData.msg);
+   		         		doSearch();
+   		         	}else{
+   		         		alert(parseData.msg);
+   		         	}
+   		         },
+   		         complete: function(data){//무조건 수행
+   		          
+   		         },
+   		         error: function(xhr,status,error){
+   		          
+   		         }
+   		   	});
+			})
+		});
+	</script>
 			
 </body>
 </html>
