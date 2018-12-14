@@ -186,6 +186,8 @@ public class CompMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
+		invo.setUserId("보승소프트");
+		
 		List<ApplyVO> list = mypageSvc.retrieveApplyComp(invo);
 		log.info("list size : "+list.size());
 		

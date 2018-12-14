@@ -290,6 +290,7 @@
                  WHERE C.hire_no = D.hire_no
                    AND C.user_id = E.user_id
                    AND C.apply_check = 1
+    			   AND D.user_id = #{userId}
                    <include refid="searchApply"/>
 		    ) T
 		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -303,6 +304,7 @@
              WHERE C.hire_no = D.hire_no
                AND C.user_id = E.user_id
                AND C.apply_check = 1
+    		   AND D.user_id = #{userId}
 		      <include refid="searchApply"/>
 		) Y
 	</select>
