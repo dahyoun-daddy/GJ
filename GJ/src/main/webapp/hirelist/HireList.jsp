@@ -106,3 +106,53 @@
     <script src="../resources/js/custom.js"></script>
 </body>
 </html>
+	<script type="text/javascript">
+	function searchPage(url,pageNum){
+		alert("url : "+url+" page_num : "+pageNum);
+		var frm = document.frm;
+		frm.pageNum.value = pageNum;
+		frm.action = url;
+		frm.submit();
+	}	
+
+	function doSearch(){
+		var frm = document.frm;
+		frm.pageNum.value = 1;
+		frm.action="jasoList.do";
+		frm.submit();
+	}
+	 
+	function doSelect(clNo){
+		var frm = document.frm;
+		frm.selectClNo.value = clNo;
+		frm.action="HireView.do";
+		frm.submit();
+	}
+	
+	$(document).ready(function(){
+		//엔터치면 검색
+		$("#searchWord").keydown(function(key) {
+			if (key.keyCode == 13) {
+				doSearch();
+			}
+		});
+
+		//등록페이지로 이동
+		$("#toCreate").on("click",function(){
+			//alert("ready");
+			location.href = "HireCreate.jsp";
+		});
+		
+		//게시물 제목 클릭시 뷰페이지이동?
+		$("#listTable>tbody").on("click","tr",function(){
+			//alert("ready");
+			var hireNo = $(this).attr('id');
+			//alert(clNo);
+			
+			if("" == hireNo){
+				return;
+			}
+			doSelect(hireNo);
+		});
+	});
+	</script>
