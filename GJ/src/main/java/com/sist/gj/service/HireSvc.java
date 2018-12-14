@@ -9,11 +9,11 @@ import com.sist.gj.vo.SearchVO;
 public interface HireSvc {
 
 	int create(HireVO hireVO) throws Exception;
-	int read(HireVO hireVO) throws Exception;
+	
 	int update(HireVO hireVO) throws Exception;
 	int delete(HireVO hireVO) throws Exception;
 	
 	List<HireVO> search(SearchVO searchVO) throws Exception;
 
-	//HireVO read(HireVO hireVO) throws Exception;
+	HireVO read(HireVO hireVO) throws Exception;
 }

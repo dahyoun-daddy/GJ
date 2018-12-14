@@ -77,7 +77,7 @@ public class HireDaoTest {
 	
 	@Test 
 	public void read() throws Exception {
-		int result = hireDao.read(inVo1);
+		HireVO result = hireDao.read(inVo1);
 		LOG.info("result : "+result);
 		assertThat(inVo1.getHireNo(),is(1));
 	}
