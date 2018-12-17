@@ -12,6 +12,7 @@ import com.sist.gj.dao.JasoDao;
 import com.sist.gj.dao.MypageDao;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
@@ -38,6 +39,12 @@ public class MypageSvcImple implements MypageSvc {
 	@Override
 	public CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException {
 		return mypageDao.selectCv(cvFormVO);
+	}
+	
+
+	@Override
+	public JasoVO selectCl(JasoVO jasoVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.selectCl(jasoVO);
 	}
 
 	@Override
@@ -169,6 +176,7 @@ public class MypageSvcImple implements MypageSvc {
 		log.debug("========================");
 		return flag;
 	}
+
 
 
 

@@ -4,7 +4,7 @@ public class LicenseVO extends DTO {
 	
 	//Table UserLicense 이용
 	private String licNo; //자격no
-	private String licName; //자격증 이 
+	private String licName; //자격증 이름
 	private String licDate; //취득일
 	private String licScore; //성적
 	private String regId; //채용no
