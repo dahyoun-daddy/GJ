@@ -115,7 +115,7 @@ public class JasoController {
 		String jsonData = object.toJSONString();
 		
 		return jsonData;
-	}
+	} 
 	
 	@RequestMapping(value="/jaso/delete.do",produces="application/json;charset=utf8")
 	@ResponseBody
