@@ -97,6 +97,11 @@
     		frm.action="../jaso/jasoList.do";
     		frm.submit(); 
     	}
+    	function moveReviewList(){
+    		var frm = document.topFrm;
+    		frm.action="../review/giupList.do";
+    		frm.submit(); 
+    	}
     </script>
     
 </body>
