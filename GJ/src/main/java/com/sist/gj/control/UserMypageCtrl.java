@@ -46,7 +46,8 @@ public class UserMypageCtrl {
 	private static final String VIEW_APPLY="mypageUser/UserApply";
 	private static final String VIEW_SIGN_OUT="mypageUser/UserSignOut";
 	private static final String VIEW_MYPAGE="mypageUser/UserMypage";
-	private static final String VIEW_RESUME="mypageUser/UserResumeView";
+	private static final String VIEW_RESUME_VIEW="mypageUser/UserResumeView";
+	private static final String VIEW_RESUME="mypageUser/UserResume";
 	
 
 	
@@ -184,7 +185,62 @@ public class UserMypageCtrl {
 		log.info("3========================");	
 		
 		return jsonData;
-	}	 
+	}	
+	
+	//UserResumeView에 값 뿌려주기
+	@RequestMapping(value="/mypageUser/UserResume.do")
+	public String resume(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+		log.info("=====================Resume update prepare=======================");
+		CvFormVO invoResume = new CvFormVO();
+		JasoVO invoJaso = new JasoVO();
+		LicenseVO inLic = new LicenseVO();
+		UserVO inUser = new UserVO();
+		
+		invoResume.setRegId("boondll@hanmail.net");
+		invoJaso.setRegId("boondll@hanmail.net");
+		inLic.setRegId("boondll@hanmail.net");
+		inUser.setUserId("boondll@hanmail.net");
+		
+		CvFormVO outResume = mypageSvc.selectCv(invoResume);
+		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
+		List<LicenseVO> list = mypageSvc.retrieveLic(inLic);
+		for(int i=0; i<list.size(); i++) {
+			String licDate = list.get(i).getLicDate();
+			SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = transeFormat.parse(licDate);
+			
+			SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+			licDate = notIncludeTime.format(date);
+			list.get(i).setLicDate(licDate);
+		}
+		UserVO outUser = userSvc.select(inUser);
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("HIRE_SEARCH_EDU");
+		
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		
+		model.addAttribute("regId",outResume.getRegId());
+		model.addAttribute("cvDate",outResume.getCvDate());
+		model.addAttribute("cvGrade",outResume.getCvGrade());
+		model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
+		//0이면 오픈하지 않음, 1이면 오픈함
+		
+		model.addAttribute("clTitle",outJaso.getClTitle());
+		model.addAttribute("clSungjang",outJaso.getClSungjang());
+		model.addAttribute("clSang",outJaso.getClSang());
+		model.addAttribute("clJangdan",outJaso.getClJangdan());
+		model.addAttribute("clJiwon",outJaso.getClJiwon());
+		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
+		
+		model.addAttribute("list",list);//자격증 list
+		model.addAttribute("param",inLic);
+		
+		model.addAttribute("userName",outUser.getUserName());
+		model.addAttribute("userPhone",outUser.getUserPhone());
+		model.addAttribute("userId",outUser.getUserId());
+	
+		return VIEW_RESUME_VIEW;
+	}
 	
 	@RequestMapping(value="/mypageUser/UserResumeView.do")
 	public String resumeView(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
@@ -230,8 +286,24 @@ public class UserMypageCtrl {
 		model.addAttribute("clJiwon",outJaso.getClJiwon());
 		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
 		
-		model.addAttribute("list",list);//자격증 list
-		model.addAttribute("param",inLic);
+		model.addAttribute("listSize",list.size());//자격증 list
+		
+		List<String> licNo    = new ArrayList<String>();
+		List<String> licName  = new ArrayList<String>();
+		List<String> licDate  = new ArrayList<String>();
+		List<String> licScore = new ArrayList<String>();
+		for(int n=0; n<list.size(); n++) {
+			licNo.add   ( list.get(n).getLicNo() );
+			licName.add ( list.get(n).getLicName() );
+			licDate.add ( list.get(n).getLicDate() );
+			licScore.add( list.get(n).getLicScore() );
+		}
+		
+		model.addAttribute("list",list);
+		model.addAttribute("licNo",licNo);
+		model.addAttribute("licName",licName);
+		model.addAttribute("licDate",licDate);
+		model.addAttribute("licScore",licScore);
 		
 		model.addAttribute("userName",outUser.getUserName());
 		model.addAttribute("userPhone",outUser.getUserPhone());

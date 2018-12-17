@@ -144,21 +144,21 @@
 					    		<div class="form-group" style="float: left;margin-right:45%;">
 					    			<label for="regId" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="regId" name="regId" value="${userName}"/>
+								    	<input type="text" class="form-control" id="regId" name="regId" value="${userName}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
 					    			<label for="userPhone" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}"/>
+								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
 					    			<label for="userId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="userId" name="userId" value="${userId}"/>
+								    	<input type="text" class="form-control" id="userId" name="userId" value="${userId}" readOnly/>
 							    	</div>
 								</div>
 								
@@ -166,7 +166,7 @@
 									<label for="cvGrade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력</strong></label>
 									<div class="col-sm-7" style="float: left;">
 									    <c:set var="opt" value="${cvGrade}" />
-										<select class="form-control" name="cvGrade" id="cvGrade" style="width:190px;">
+										<select class="form-control" name="cvGrade" id="cvGrade" style="width:190px;" disabled>
 											<option value="1"<c:if test="${opt == '1' }">selected</c:if>>학력무관</option>
 											<option value="2"<c:if test="${opt == '2' }">selected</c:if>>고졸</option>
 											<option value="3"<c:if test="${opt == '3' }">selected</c:if>>초대졸</option>
@@ -338,10 +338,10 @@
 	    	$(document).ready(function(){
 	    		//alert('document');
 	    		
-	    			
-	    		});
 	    	}); //-- document 
-	 	</script>
+	 	
+	    	
+	    </script>
     
 
 </body>

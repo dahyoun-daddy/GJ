@@ -1,22 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="com.sist.gj.common.StringUtill"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
-    
 <style>
 	#bubble-float-right:{
 	  display: inline-block;
@@ -131,7 +122,7 @@
 					    	        onclick="location='UserMyInfo.do'">나의 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserResumeView.jsp'">이력서</button><br/><br/>
+					    	        onclick="location='UserResumeView.do'">이력서</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
 					    	        onclick="location='UserApply.do'">지원 현황</button>
@@ -151,40 +142,42 @@
 						    		이미지는 나의 정보에서 변경 가능합니다
 						    		</div>
 					    		</div><br/>
-	    		<form name="frmSave" id="frmSave" class="form-horizontal" method="post" >
+	    		<form name="frm" id="frm" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
-					    			<label for="su_nm" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="regId" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="su_nm" name="su_nm"></textarea>
+								    	<input type="text" class="form-control" id="regId" name="regId" value="${userName}"/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="su_pho" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
+					    			<label for="userPhone" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="su_pho" name="su_pho"></textarea>
+								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}"/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="su_mail" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="userId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="su_mail" name="su_mail"></textarea>
+								    	<input type="text" class="form-control" id="userId" name="userId" value="${userId}"/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-									<label for="grade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력&nbsp;&nbsp;&nbsp;</strong></label>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-7" style="float: left;">
-										<select class="form-control" name="grade" id="grade" style="width:190px;">
-											<option value="1">고졸이하</option>
-											<option value="2">고졸</option>
-											<option value="3">초대졸</option>
-											<option value="4">대졸</option>
-											<option value="5">대졸이상</option>
+									<label for="cvGrade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력</strong></label>
+									<div class="col-sm-7" style="float: left;">
+									    <c:set var="opt" value="${cvGrade}" />
+										<select class="form-control" name="cvGrade" id="cvGrade" style="width:190px;">
+											<option value="1"<c:if test="${opt == '1' }">selected</c:if>>학력무관</option>
+											<option value="2"<c:if test="${opt == '2' }">selected</c:if>>고졸</option>
+											<option value="3"<c:if test="${opt == '3' }">selected</c:if>>초대졸</option>
+											<option value="4"<c:if test="${opt == '4' }">selected</c:if>>대졸</option>
+											<option value="5"<c:if test="${opt == '5' }">selected</c:if>>석사이상	</option>
 										</select>
 									</div>
 								</div>
+				</form>
 						    </div>	
 						   
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">
@@ -238,7 +231,7 @@
 					            	<tbody>
 					            		<tr>
 					            			<th>제목</th>
-					            			<td><input type="text" class="form-control col-lg-8 col-md-12" placeholder="제목"></td>
+					            			<td><input type="text" class="form-control col-lg-8 col-md-12" value="${clTitle}"></td>
 					            		</tr>
 					            		<tr>
 					            			<th>성장과정</th>
