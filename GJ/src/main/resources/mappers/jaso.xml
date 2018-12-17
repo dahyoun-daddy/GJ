@@ -82,7 +82,7 @@
 	</select>
 	
 	<select id="select" parameterType="JasoVO" resultType="JasoVO">
-		SELECT cl_no, cl_title, cl_sungjang, cl_sang,cl_jangdan, cl_jiwon, cl_check, B.user_nick
+		SELECT cl_no, cl_title, cl_sungjang, cl_sang,cl_jangdan, cl_jiwon, cl_check, A.reg_id, A.reg_dt, B.user_nick
 		 FROM usercl A, users B
 		WHERE cl_no = #{clNo}
 		  AND A.reg_id = B.user_id

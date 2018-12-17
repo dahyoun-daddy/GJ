@@ -63,7 +63,7 @@ public class LoginController {
 		
 		UserVO outVO = signUpSvc.select(inVO);
 		
-		ses.setAttribute("loginId", outVO);
+		ses.setAttribute("loginVo", outVO);
 		
 		return "common/Main";
 	}

@@ -48,7 +48,7 @@ public class JasoSvcImple implements JasoSvc {
 
 	@Override
 	public int merge(JasoVO jasoVO) throws SQLException {
-		if(null == jasoVO.getClNo()) {
+		if(null == jasoVO.getClNo()  || jasoVO.getClNo().equals("")) {
 			String randomString = random.makeRandom();
 			log.info("random no : "+randomString);
 			jasoVO.setClNo(randomString);

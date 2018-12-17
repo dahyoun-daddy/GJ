@@ -6,7 +6,7 @@
 <html>
 <% 
 	String context = request.getContextPath();
-	UserVO sessionVO = (UserVO)session.getAttribute("loginId");
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
 	String userId = "";
 	String userNick = "";
 	

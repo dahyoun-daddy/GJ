@@ -1,6 +1,18 @@
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+	String context = request.getContextPath();
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String userId = "";
+	String userNick = "";
+	
+	if(null != sessionVO){
+		userId = sessionVO.getUserId();
+		userNick = sessionVO.getUserNick();
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +42,14 @@
 			            	<input type="hidden" id="userNick" name="userNick" value="${userNick}">
 			            	<input type="hidden" id="regDt" name="regDt" value="${regDt}">
 			            	<input type="hidden" id="cList" name="cList" value="${cList}">
+			            	<input type="hidden" id="regId" name="regId" value="${regId}">
 			            	<button type="button" class="btn btn-default btn-sm" onclick="moveList();">목록</button>
-			            	<!------------------------------- 작성자만 보이는 버튼 -------------------------------------- -->
-  							<button type="button" class="btn btn-default btn-sm" onclick="doUpdate();">수정</button>
+			            	<c:set var="LoginId" value="<%=userId%>" />
+			  				<!------------------------------- 작성자만 보이는 버튼 -------------------------------------- -->
+			  				<c:if test="${LoginId eq regId}">
+			  					<button type="button" class="btn btn-default btn-sm" onclick="doUpdate();">수정</button>
   							<button type="button" class="btn btn-default btn-sm" id="doDelete" >삭제</button>
+			  				</c:if>
   							<!-- ------------------------------------------------------------------------------- -->
 			            </form>
 			            	
@@ -90,7 +106,11 @@
 			  									<td class="text-center"><c:out  value="${jasoCVO.userNick}"/></td>
 			  									<td class="text-left"><c:out value="${jasoCVO.commentBody}"/></td>
 			  									<td class="text-center"><c:out value="${jasoCVO.regDt}"/>
-			  									<button type="button" class="btn btn-default btn-sm" id="doCDelete" >삭제</button></td>
+			  									<c:set var="CId" value="<%=userId%>" />
+			  									<c:if test="${CId eq jasoCVO.regId}">
+			  										<button type="button" class="btn btn-default btn-sm" id="doCDelete" >삭제</button>
+			  									</c:if>
+			  									</td>
 			  								</tr>
 			  							</c:forEach>
 			  						</c:when>

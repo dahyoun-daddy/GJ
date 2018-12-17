@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.JasoCommentVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserVO;
 
 @Controller
 public class JasoController {
@@ -82,9 +84,11 @@ public class JasoController {
 	
 	@RequestMapping(value="/jaso/jasoUpdate.do",produces="application/json;charset=utf8")
 	@ResponseBody
-	public String doUpdate(@ModelAttribute JasoVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+	public String doUpdate(@ModelAttribute JasoVO invo, HttpSession ses, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
 		log.info("=====================update=======================");
 		log.info("invo" + invo);
+		
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
 		
 		int flag = 0;
 		
@@ -94,7 +98,7 @@ public class JasoController {
 		
 		//----------------------------------------------------------------
 		//<-- 세션값으로 아이디값 받기 -->
-		String loginId = "boondll@hanmail.net";
+		String loginId = sessionVO.getUserId();
 		invo.setRegId(loginId);
 		
 		
@@ -215,7 +219,7 @@ public class JasoController {
 		model.addAttribute("clJiwon", outVO.getClJiwon());
 		model.addAttribute("userNick", outVO.getUserNick());
 		model.addAttribute("regDt", outVO.getRegDt());
-		
+		model.addAttribute("regId", outVO.getRegId());
 		
 		return "jaso/jasoView";
 	}
