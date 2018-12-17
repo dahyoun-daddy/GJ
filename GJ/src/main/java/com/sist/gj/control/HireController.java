@@ -1,5 +1,6 @@
 package com.sist.gj.control;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,11 +11,13 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.HireSvc;
@@ -24,6 +27,7 @@ import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoCommentVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserVO;
 
 @Controller
 public class HireController {
@@ -147,7 +151,7 @@ public class HireController {
 		return "hirelist/HireView";
 	}
 	
-	
+	//수정할 정보 출력
 	@RequestMapping(value="/hirelist/HireUpdate.do",method=RequestMethod.POST)
 	public String update(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================UPDATE=======================");
@@ -172,5 +176,43 @@ public class HireController {
 		model.addAttribute("hireEdu", outVO.getHireEdu());
 		
 		return "hirelist/HireUpdate";
-	}
+		}
+		
+	//수정기능 실행
+		@RequestMapping(value="/hirelist/HireUpdate.do",
+				 produces="application/json;charset=utf8",
+				 method={RequestMethod.GET, RequestMethod.POST}
+               )		
+		@ResponseBody
+		public String edit(@ModelAttribute HireVO invo, HttpServletRequest req,Model model) throws Exception {
+			String upsert_div = req.getParameter("upsert_div");
+			
+			log.info("2========================");
+			log.info("invo="+invo);
+			log.info("upsert_div="+upsert_div);
+			log.info("2========================");	
+			
+			int flag = 0;
+			log.info("flag");
+			//수정		
+			flag = hireSvc.update(invo);
+			 
+			JSONObject object=new JSONObject();
+			
+			if(flag>0) {
+				object.put("flag", flag);
+				object.put("message", "수정 성공!");
+			}else {
+				object.put("flag", flag);
+				object.put("message", "수정 실패...");		
+			}
+			
+			String jsonData = object.toJSONString();
+			
+			log.info("3========================");
+			log.info("jsonData="+jsonData);
+			log.info("3========================");	
+			
+			return jsonData;
+			}
 }

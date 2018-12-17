@@ -102,7 +102,7 @@
 	
 	<update id="update" parameterType="HireVO">
 			UPDATE hireinfo
-		   SET hire_title = #{hireNo}, 
+		   SET hire_title = #{hireTitle}, 
 				 hire_body = #{hireBody},       
 				 hire_date = #{hireDate},       
 				 hire_deadline = #{hireDeadline},   
