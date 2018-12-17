@@ -146,7 +146,7 @@
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"
-		                   			   onclick="location=''; return false;"><br/><br/>
+		                   			   onclick="PicturePopup()"><br/><br/>
 					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
 					    		권장 사진 사이즈는 가로103*세로132 픽셀이며<br/>gif, jpg, jpeg 이미지 파일만 등록 가능합니다.
 				    		</div>
@@ -205,6 +205,12 @@
 		
 		 </section>
     <script type="text/javascript">
+    function PicturePopup(){
+    	var popUrl = "UserPicPopup.jsp";	//팝업창에 출력될 페이지 URL
+    	var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+   		window.open(popUrl,"",popOption);
+    }
+    
     
     $(document).ready(function(){
     	$("input[name='do_update']").on("click",function(){
