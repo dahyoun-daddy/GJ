@@ -196,7 +196,7 @@ public class JasoController {
 		}
 		
 		String jsonData = object.toJSONString();
-		
+		 
 		return jsonData;
 	}
 	
