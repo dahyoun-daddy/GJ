@@ -48,7 +48,7 @@
 			  				<!------------------------------- 작성자만 보이는 버튼 -------------------------------------- -->
 			  				<c:if test="${LoginId eq regId}">
 			  					<button type="button" class="btn btn-default btn-sm" onclick="doUpdate();">수정</button>
-  							<button type="button" class="btn btn-default btn-sm" id="doDelete" >삭제</button>
+  								<button type="button" class="btn btn-default btn-sm" id="doDelete" >삭제</button>
 			  				</c:if>
   							<!-- ------------------------------------------------------------------------------- -->
 			            </form>
@@ -125,11 +125,11 @@
 			            <form id="contact" name="contact" method="post" class="form" role="form">
 			            	<c:set var="LoginId" value="<%=userId%>" />
 			            	<c:choose>
-			            		<c:when test="${LoginId ne '' }">
+			            		<c:when test="${LoginId ne ''}">
 			            			<textarea class="form-control" id="comment" name="comment" placeholder="Message" rows="5"></textarea>
 			            		</c:when>
 			            		<c:otherwise>
-			            			댓글작성에 로그인이 필요합니다.
+			            			댓글작성은 로그인이 필요합니다.
 			            		</c:otherwise>
 			            	</c:choose>
 			                
@@ -137,7 +137,9 @@
 			                <br/>
 			                <div class="row">
 			                    <div class="col-xs-12 col-md-12 form-group">
-			                        <input type="button" class="btn btn-primary" id="submitC" name="submitC" value="댓글달기"/>
+			                    		<c:if test="${LoginId ne ''}">
+						  					<input type="button" class="btn btn-primary" id="submitC" name="submitC" value="댓글달기"/>
+						  				</c:if>
 			                    </div>
 			                </div>
 			            

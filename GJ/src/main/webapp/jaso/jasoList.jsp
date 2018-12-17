@@ -148,7 +148,7 @@
 			$("#doSave").on("click",function(){
 				var loginCheck = document.frm.sessionId.value;
 				if("" == loginCheck){
-					alert("로그인을 해주세요");
+					alert("자기소개서 작성시 로그인이 필요합니다");
 					return
 				}
 				//alert("ready");
