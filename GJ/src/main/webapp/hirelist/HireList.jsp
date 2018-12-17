@@ -43,8 +43,9 @@
 	<!-- 채용정보 목록 -->
 		<div class="row" style="float: left;">&nbsp;&nbsp;&nbsp;
 		<br><br><br>
-			<form class="form-inline" >
+			<form id="frm" name="frm" class="form-inline" >
 				<input type="hidden" name="pageNum" id="pageNum">
+				<input type="hidden" name="hireNo" id="hireNo">
 				<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
 				&nbsp;&nbsp;
 			  <div class="form-group">
@@ -56,7 +57,7 @@
 			</form>
 		</div>
 		<br>
-		<table class="table table-striped">
+		<table id="listTable" name="listTable" class="table table-striped">
               <thead>
                 <tr>
                   <th class="text-center">기업명</th>
@@ -72,7 +73,7 @@
               	<c:choose>
   						<c:when test="${list.size()>0}">
   							<c:forEach var="hireVO" items="${list}">
-  								<tr id="${HireVO.hireNo}">
+  								<tr id="${hireVO.hireNo}">
   									<td class="text-center"><c:out  value="${hireVO.userId}"/></td>
   									<td class="text-center"><c:out  value="${hireVO.hireTitle}"/></td>
   									<td class="text-center"><c:out  value="${hireVO.hireDate}"/></td>
@@ -123,13 +124,6 @@
 		frm.submit();
 	}
 	 
-	function doSelect(clNo){
-		var frm = document.frm;
-		frm.selectClNo.value = clNo;
-		frm.action="HireView.do";
-		frm.submit();
-	}
-	
 	$(document).ready(function(){
 		//엔터치면 검색
 		$("#searchWord").keydown(function(key) {
@@ -141,19 +135,22 @@
 		//등록페이지로 이동
 		$("#goCreate").on("click",function(){
 			alert("글쓰기 페이지로 이동?");
-			location.href = "HireCreate.do";
+			location.href = "HireCreate.jsp";
 		});
 		
 		//게시물 제목 클릭시 뷰페이지이동?
 		$("#listTable>tbody").on("click","tr",function(){
-			//alert("ready");
+			alert("되나?");
 			var hireNo = $(this).attr('id');
-			//alert(clNo);
+			alert(hireNo);
 			
 			if("" == hireNo){
 				return;
 			}
-			doSelect(hireNo);
-		});
+				var frm = document.frm;
+				frm.hireNo.value = hireNo;
+				frm.action="HireView.do";
+				frm.submit();
+			});
 	});
 	</script>

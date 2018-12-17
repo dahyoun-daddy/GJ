@@ -15,6 +15,7 @@
 	<br><br>
 	<!-- 메인화면 -->
 	<form class="form-horizontal">
+		<input type="hidden" name="hireNo" id="hireNo">
 	  <div class="form-group">
 	    <label for="hireTitle" class="col-sm-2 control-label">채용제목</label>
 	    <div class="col-sm-10">
@@ -73,26 +74,17 @@
 	
 	<script type="text/javascript">
 		function historyBack() { 
-			history.back(); 
+			window.history.back(); 
 		}
-	
-		//안먹네 
-		function goUpdate() {
-			var frm = document.frm;
-			frm.action="HireUpdate.jsp";
-			frm.submit();
-		}	
 		
 		$(document).ready(function(){
 			
 			$("#goUpdate").on("click",function(){
 				alert("수정 페이지로 이동?");
-				location.href = "HireUpdate.jsp";
+				location.href = "HireUpdate.do";
 			});
 			
 		});
-
-		출처: http://ingeni.tistory.com/entry/페이지-이동-javascript-자바스크립트 [ingeni]
 	</script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

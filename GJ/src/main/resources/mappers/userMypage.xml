@@ -375,7 +375,7 @@
 		SELECT t1.user_nick as user_nick,
 		       count(t2.hire_no) as hire_count
 		  FROM users t1, hireinfo t2
-		 WHERE t1.user_id = t2.user_id
+		 WHERE t1.user_id = t2.user_id(+)
 		   AND t1.user_id = #{userId}
 		 GROUP BY t1.user_nick
 	</select>

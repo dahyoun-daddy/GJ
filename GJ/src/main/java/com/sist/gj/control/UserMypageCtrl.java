@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import com.sist.gj.service.SignUpSvc;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Controller
@@ -36,6 +38,7 @@ public class UserMypageCtrl {
 	private static final String VIEW_UPDATE_USER="mypageUser/UserInfoUpdate";
 	private static final String VIEW_APPLY="mypageUser/UserApply";
 	private static final String VIEW_SIGN_OUT="mypageUser/UserSignOut";
+	private static final String VIEW_MYPAGE="mypageUser/UserMypage";
 	
 
 	
@@ -46,6 +49,29 @@ public class UserMypageCtrl {
 	@Autowired
 	private SignUpSvc userSvc;
 	
+	
+	@RequestMapping(value="mypageUser/UserMypage.do")
+	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, Model model) throws ClassNotFoundException, SQLException {
+		
+//		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		invo.setUserId("boondll@hanmail.net");
+//		String loginId = sessionVO.getUserId();
+//		invo.setUserId(loginId);
+		
+		UserMPViewVO outvo = mypageSvc.selectUserInfo(invo);
+		
+		int openResume = outvo.getCvCheck();
+		
+		if(openResume == 1) {
+			model.addAttribute("cvCheck","있습니다");
+		}else {
+			model.addAttribute("cvCheck","없습니다");
+		}
+		
+		model.addAttribute("userNick",outvo.getUserNick());
+		
+		return VIEW_MYPAGE;
+	}
 	
 	@RequestMapping(value="/mypageUser/UserSignOut.do")
 	public String deletePage(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {

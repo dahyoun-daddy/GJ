@@ -66,12 +66,17 @@
 	  <br>
 	  <div lass="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default" id="update">수정완료</button>
+	       <button type="submit" class="btn btn-default" id="historyBack" onclick="historyBack()">취소하기</button>
+	      <button type="submit" class="btn btn-default" id="update" onclick="update">수정하기</button>
 	    </div>
 	  </div>
-	  </form>
+	  </form><br><br>
 	
 	<script type="text/javascript">
+		function historyBack() { 
+			window.history.back(); 
+		}
+	
 		function update() {
 			var frm = document.frm;
 			frm.action="HireUpdate.do";
