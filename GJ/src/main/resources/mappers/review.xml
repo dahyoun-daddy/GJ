@@ -35,8 +35,14 @@
 			  FROM Review hr
 			 WHERE user_nick = #{searchWord}
 		  )T
-		  WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1) 
-		    AND (#{pageSize} * (#{pageNum}-1)+#{pageSize})
+		    <choose>
+  				<when test="10 == searchDiv"> 					
+  				</when>
+  				<otherwise>
+  						WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1) 
+		    			AND (#{pageSize} * (#{pageNum}-1)+#{pageSize})
+  				</otherwise>
+  			</choose>
 		)X    
 		NATURAL JOIN
 		(
@@ -77,12 +83,18 @@
 	<update id="update"  parameterType="ReviewVO" >
 		 UPDATE Review          
 	        SET review_complain  = #{reviewComplain}      
-	       ,review_title  = #{reviewTitle}      
-	       ,review_body   = #{reviewBody}       
-	       ,review_date     = SYSDATE      
-	       ,review_point = #{reviewPoint}      
-	       ,mod_id     = #{regId}      
-	       ,mod_dt    = SYSDATE
+	       <choose>
+  				<when test="null == regId"> 					
+  				</when>
+  				<otherwise>
+  					,review_title  = #{reviewTitle}      
+			       ,review_body   = #{reviewBody}       
+			       ,review_date     = SYSDATE      
+			       ,review_point = #{reviewPoint}      
+			       ,mod_id     = #{regId}      
+			       ,mod_dt    = SYSDATE
+  				</otherwise>
+  			</choose>
 	    WHERE review_no = #{reviewNo}           
 	</update>
 	
