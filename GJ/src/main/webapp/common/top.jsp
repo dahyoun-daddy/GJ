@@ -61,7 +61,7 @@
                         <a class="nav-link">채용정보</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">기업정보 </a>
+                        <a class="nav-link" onclick="moveReviewList()">기업정보 </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="moveJasoList()">자기소개서 </a>
