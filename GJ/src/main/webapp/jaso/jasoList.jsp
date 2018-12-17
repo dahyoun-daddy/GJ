@@ -1,3 +1,4 @@
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
 <%@page import="java.util.List"%>
@@ -31,6 +32,13 @@
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String userId = "";
+	
+	if(null != sessionVO){
+		userId = sessionVO.getUserId();
+	}
 %>
 <head>
     
@@ -41,6 +49,7 @@
 	<br/>
 	<div class="container">
 		<form name="frm" id="frm" method="get">
+		<input type="hidden" name="sessionId" id="sessionId" value="<%=userId%>">
 		<input type="hidden" name="pageNum" id="pageNum">
 		<input type="hidden" name="selectClNo" id="selectClNo">
   		<!-- --검색영역 -->
@@ -137,6 +146,11 @@
 
 			//등록페이지 이동
 			$("#doSave").on("click",function(){
+				var loginCheck = document.frm.sessionId.value;
+				if("" == loginCheck){
+					alert("로그인을 해주세요");
+					return
+				}
 				//alert("ready");
 				location.href = "jasoUpdate.jsp";
 			});

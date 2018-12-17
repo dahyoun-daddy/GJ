@@ -169,16 +169,18 @@ public class JasoController {
 	
 	@RequestMapping(value="/jaso/cInsert.do",produces="application/json;charset=utf8")
 	@ResponseBody
-	public String docInsert(@ModelAttribute JasoCommentVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+	public String docInsert(@ModelAttribute JasoCommentVO invo, HttpSession ses, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
 		log.info("=====================INSERT=======================");
 		log.info("invo" + invo);
 		
 		int flag = 0;
 		
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		
 		//-----------------------------------
 		//아이디 나중에 세션으로 받기
-		invo.setUserId("boondll@hanmail.net");
-		invo.setRegId("boondll@hanmail.net");
+		invo.setUserId(sessionVO.getUserId());
+		invo.setRegId(sessionVO.getUserId());
 		//-----------------------------------
 		
 		JSONObject object = new JSONObject();

@@ -123,7 +123,16 @@
 			            	</tbody>
 			            </table>
 			            <form id="contact" name="contact" method="post" class="form" role="form">
-			                <textarea class="form-control" id="comment" name="comment" placeholder="Message" rows="5"></textarea>
+			            	<c:set var="LoginId" value="<%=userId%>" />
+			            	<c:choose>
+			            		<c:when test="${LoginId ne '' }">
+			            			<textarea class="form-control" id="comment" name="comment" placeholder="Message" rows="5"></textarea>
+			            		</c:when>
+			            		<c:otherwise>
+			            			댓글작성에 로그인이 필요합니다.
+			            		</c:otherwise>
+			            	</c:choose>
+			                
 			            </form>   
 			                <br/>
 			                <div class="row">
