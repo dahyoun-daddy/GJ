@@ -98,8 +98,10 @@
 	  </form><br><br>
 	
 	<script type="text/javascript">
-		
-	
+		function historyBack() { 
+			window.history.back(); 
+		}
+
 		$(document).ready(function(){
 			alert("ready");
 			$("#doCreate").on("click",function(){

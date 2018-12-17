@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.HireSvc;
@@ -147,10 +148,11 @@ public class HireController {
 	}
 	
 	
-	@RequestMapping(value="/hirelist/HireUpdate.do")
+	@RequestMapping(value="/hirelist/HireUpdate.do",method=RequestMethod.POST)
 	public String update(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================UPDATE=======================");
 		String hireNo = req.getParameter("hireNo");
+		log.info("hireNo : "+hireNo);
 		
 		int num = Integer.parseInt(hireNo);
 		
