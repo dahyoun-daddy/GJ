@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-  String hireNo = StringUtill.nvl(request.getParameter("hireNo"),"");
+  	String hireNo = StringUtill.nvl(request.getParameter("hireNo"),"");
 %>
 
 <!DOCTYPE html>
@@ -19,7 +19,8 @@
 	<br><br>
 	<!-- 메인화면 -->
 	<form class="form-horizontal">
-		<input type="hidden" name="workDiv" id="workDiv" value="${workDiv}">
+		<input type="hidden" name="workDiv" id="workDiv" value="">
+		<input type="hidden" name="upsert_div" id="upsert_div" value="">
 		<input type="hidden" name="hireNo" id="hireNo" value="${hireNo}">
 	  <div class="form-group">
 	    <label for="hireTitle" class="col-sm-2 control-label">채용제목</label>
@@ -83,21 +84,20 @@
 			window.history.back(); 
 		}
 	
-	
 	    $(document).ready(function(){
 	    	$("input[name='update']").on("click",function(){
 				 if(false==confirm("수정할까요?"))	return;
 				  
-				 var workDiv = $("#workDiv").val();
-				 workDiv = (workDiv == "")?"updateInfo":"";
-				 console.log("workDiv:"+workDiv);
+				 var upsert_div = $("#upsert_div").val();
+				 upsert_div = (workDiv == "")?"updateInfo":"";
+				 console.log("upsert_div:"+upsert_div);
 
 			     $.ajax({
 			         type:"POST",
 			         url:"HireUpdate.do",
 			         dataType:"html",// JSON
 			         data:{
-			         	"workDiv": workDiv,
+			         	"upsert_div": upsert_div,
 			         	"hireTitle": $("#hireTitle").val(),
 			         	"hireBody": $("#hireBody").val(),
 			         	"hireDate": $("#hireDate").val(),
@@ -123,7 +123,6 @@
 			          
 			         }
 			        });//--ajax					
-				
 				
 			});//--do_update
 	    });
