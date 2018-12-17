@@ -143,6 +143,14 @@
 		WHERE reg_id = #{regId} 
 	</select>
 	
+	<select id="selectCl" parameterType="JasoVO" resultType="JasoVO">
+		SELECT cl_no, cl_title, cl_sungjang, cl_sang,cl_jangdan, cl_jiwon, cl_check, A.reg_id, A.reg_dt, B.user_nick
+		 FROM usercl A, users B
+		WHERE A.reg_id= #{regId}
+		  AND A.cl_check = 2
+		  AND A.reg_id = B.user_id
+	</select>
+	
 	<insert id="addLic" parameterType="LicenseVO">
 		INSERT INTO userlicense (
 		    lic_no,
@@ -174,7 +182,7 @@
 		WHERE lic_no = #{licNo}
 	</delete>
 	
-	<select id="retrieveLic" parameterType="SearchVO" resultType="LicenseVO">
+	<select id="retrieveLic" parameterType="LicenseVO" resultType="LicenseVO">
 		SELECT X.*, Y.*
 		  FROM
 		(

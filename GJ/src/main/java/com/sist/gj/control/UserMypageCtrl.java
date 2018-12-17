@@ -1,7 +1,10 @@
 package com.sist.gj.control;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,10 +25,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.sist.gj.service.CodeSvc;
+import com.sist.gj.service.JasoSvc;
 import com.sist.gj.service.MypageSvc;
 import com.sist.gj.service.SignUpSvc;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
+import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
@@ -39,6 +46,7 @@ public class UserMypageCtrl {
 	private static final String VIEW_APPLY="mypageUser/UserApply";
 	private static final String VIEW_SIGN_OUT="mypageUser/UserSignOut";
 	private static final String VIEW_MYPAGE="mypageUser/UserMypage";
+	private static final String VIEW_RESUME="mypageUser/UserResumeView";
 	
 
 	
@@ -48,6 +56,8 @@ public class UserMypageCtrl {
 	private MypageSvc mypageSvc;
 	@Autowired
 	private SignUpSvc userSvc;
+	@Autowired
+	private JasoSvc jasoSvc;
 	
 	
 	@RequestMapping(value="mypageUser/UserMypage.do")
@@ -176,12 +186,64 @@ public class UserMypageCtrl {
 		return jsonData;
 	}	 
 	
+	@RequestMapping(value="/mypageUser/UserResumeView.do")
+	public String resumeView(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+		log.info("=====================select Resume=======================");
+		CvFormVO invoResume = new CvFormVO();
+		JasoVO invoJaso = new JasoVO();
+		LicenseVO inLic = new LicenseVO();
+		UserVO inUser = new UserVO();
+		
+		invoResume.setRegId("boondll@hanmail.net");
+		invoJaso.setRegId("boondll@hanmail.net");
+		inLic.setRegId("boondll@hanmail.net");
+		inUser.setUserId("boondll@hanmail.net");
+		
+		CvFormVO outResume = mypageSvc.selectCv(invoResume);
+		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
+		List<LicenseVO> list = mypageSvc.retrieveLic(inLic);
+		for(int i=0; i<list.size(); i++) {
+			String licDate = list.get(i).getLicDate();
+			SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = transeFormat.parse(licDate);
+			
+			SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+			licDate = notIncludeTime.format(date);
+			list.get(i).setLicDate(licDate);
+		}
+		UserVO outUser = userSvc.select(inUser);
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("HIRE_SEARCH_EDU");
+		
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		
+		model.addAttribute("regId",outResume.getRegId());
+		model.addAttribute("cvDate",outResume.getCvDate());
+		model.addAttribute("cvGrade",outResume.getCvGrade());
+		model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
+		//0이면 오픈하지 않음, 1이면 오픈함
+		
+		model.addAttribute("clTitle",outJaso.getClTitle());
+		model.addAttribute("clSungjang",outJaso.getClSungjang());
+		model.addAttribute("clSang",outJaso.getClSang());
+		model.addAttribute("clJangdan",outJaso.getClJangdan());
+		model.addAttribute("clJiwon",outJaso.getClJiwon());
+		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
+		
+		model.addAttribute("list",list);//자격증 list
+		model.addAttribute("param",inLic);
+		
+		model.addAttribute("userName",outUser.getUserName());
+		model.addAttribute("userPhone",outUser.getUserPhone());
+		model.addAttribute("userId",outUser.getUserId());
+	
+		return VIEW_RESUME;
+	}
+	
 	
 	@RequestMapping(value="/mypageUser/UserMyInfo.do")
 	public String UserInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================select=======================");
-		
-//		String userId = req.getParameter("selectUserId");
 		
 		UserVO invo = new UserVO();
 		invo.setUserId("boondll@hanmail.net");

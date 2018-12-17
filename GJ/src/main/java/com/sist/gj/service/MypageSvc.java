@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
@@ -26,6 +27,8 @@ public interface MypageSvc {
 	 
 	//이력서 단건조회 
 	CvFormVO selectCv(CvFormVO cvFormVO) throws ClassNotFoundException, SQLException;
+	
+	JasoVO selectCl(JasoVO jasoVO) throws ClassNotFoundException, SQLException;
 	
 	//이력서 수정 
 	int updateCv(CvFormVO cvFormVO) throws SQLException;
