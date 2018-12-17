@@ -55,8 +55,8 @@ public class AdminController {
 		if(null == invo.getSearchDiv()) {
 			invo.setSearchDiv("");
 		}
-		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("");
+		if(null == invo.getSearchWord()) {
+			invo.setSearchWord("");
 		}
 		
 		CodeVO codeSearch = new CodeVO();
@@ -203,8 +203,8 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		if(null == invo.getSearchDiv()) {
 			invo.setSearchDiv("");
 		}
-		if(null == invo.getSearchDiv()) {
-			invo.setSearchDiv("");
+		if(null == invo.getSearchWord()) {
+			invo.setSearchWord("");
 		}
 		
 		CodeVO codeSearch = new CodeVO();
@@ -213,8 +213,8 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		CodeVO userSearch = new CodeVO();
-		userSearch.setCmId("MY_AD_COM");
+		CodeVO companySearch = new CodeVO();
+		companySearch.setCmId("MY_AD_COM");
 		
 		List<UserVO> list = adminSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
@@ -224,7 +224,7 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
-		model.addAttribute("companySearch",codeSvc.doRetrieve(userSearch));
+		model.addAttribute("companySearch",codeSvc.doRetrieve(companySearch));
 		model.addAttribute("param",invo);
 	
 		return VIEW2_NAME;

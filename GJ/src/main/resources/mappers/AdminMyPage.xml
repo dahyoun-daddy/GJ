@@ -8,13 +8,13 @@
 
   			<choose>
   				<when test="3 == searchDiv">
-  				  AND user_id LIKE #{searchWord}||'%'
+  				  WHERE user_id LIKE #{searchWord}||'%'
   				</when>
   				<when test="2 == searchDiv">
-  				  AND user_nick LIKE #{searchWord}||'%'
+  				  WHERE user_nick LIKE #{searchWord}||'%'
   				</when>
   				<when test="1 == searchDiv"> 
-  				  AND user_name LIKE #{searchWord}||'%'
+  				  WHERE user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -24,7 +24,7 @@
 
 	
 	<!-- 구직자 전체조회 -->
-	<select id="selectUser" parameterType="UserVO" resultType="UserVO">
+	<select id="selectUser" parameterType="SearchVO" resultType="UserVO">
 		  
 		        SELECT X.*, Y.*
 				  FROM
@@ -130,7 +130,7 @@
  
    	 
    	<!-- 기업 전체조회 -->
-	<select id="selectCompany" parameterType="UserVO" resultType="UserVO">
+	<select id="selectCompany" parameterType="SearchVO" resultType="UserVO">
 		  
 		        SELECT X.*, Y.*
 				  FROM( 
@@ -145,15 +145,18 @@
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
 				           <choose>
-				  				<when test="40 == searchDiv">
-				  				  WHERE user_level IN(2)
-				  				  AND user_nick LIKE #{searchWord}||'%' 
-				  				</when>
-				  				<otherwise>
-				  					 WHERE user_level IN(2,3) 
-		                 			<include refid="searchText"/>
-				  				</otherwise>
-				  			</choose>
+  				<when test="3 == searchDiv">
+  				  WHERE user_id LIKE #{searchWord}||'%'
+  				</when>
+  				<when test="1 == searchDiv">
+  				  WHERE user_nick LIKE #{searchWord}||'%'
+  				</when>
+  				<when test="2 == searchDiv"> 
+  				  WHERE user_name LIKE #{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
 						    )T
 				            WHERE T.rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
@@ -162,17 +165,22 @@
 							(
 						    SELECT COUNT(*) AS total_cnt
 						      FROM users
-						    <choose>
-				  				<when test="40 == searchDiv">
-				  				  WHERE user_level IN(2)
-				  				  AND user_nick LIKE #{searchWord}||'%' 
-				  				</when>
-				  				<otherwise>
-				  					 WHERE user_level IN(2,3) 
-		                 			<include refid="searchText"/>
-				  				</otherwise>
-				  			</choose>
+				<choose>
+  				<when test="3 == searchDiv">
+  				  WHERE user_id LIKE #{searchWord}||'%'
+  				</when>
+  				<when test="1 == searchDiv">
+  				  WHERE user_nick LIKE #{searchWord}||'%'
+  				</when>
+  				<when test="2 == searchDiv"> 
+  				  WHERE user_name LIKE #{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
 							)Y
+		
+		
 		
 	</select>
 

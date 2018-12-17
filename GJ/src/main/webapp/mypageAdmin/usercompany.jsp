@@ -49,7 +49,7 @@
 	<br/>
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
-		<input type="hidden" name="pageNum" id="pageNum">
+		<input type="hidden" name="pageNum" id="pageNum" value="<%= pageNum %>">
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
    		<h1>구직자관리</h1>

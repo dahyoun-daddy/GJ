@@ -30,13 +30,12 @@
 	
 	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
 	totalCnt = Integer.parseInt(totalCnts);
-	
+	 
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 	List<CodeVO> companySearch = (null == request.getAttribute("companySearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("companySearch");
 	
-	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))
-	?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
+	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))	?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
 		
 %>	
 <!DOCTYPE html>
@@ -50,8 +49,8 @@
 	<br/>
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
-		<input type="hidden" name="pageNum" id="pageNum">
-		<input type="hidden" name="selectClNo" id="selectClNo">
+		<input type="hidden" name="pageNum" id="pageNum" value="<%= pageNum %>">
+		<input type="hidden" name="selectClNo" id="selectClNo">\
    		
    		<h1>기업관리</h1>
         	
@@ -117,9 +116,10 @@
 				
 				</tbody>
 				</table>
-				</div>
+				
 				<div class="dorm-inline text-center">
 	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "companyList.do", "searchPage") %>
+	  	</div>
 	  	</div>
 	<!-- // Grid영역 -->
 	
@@ -239,7 +239,14 @@
 	<!-- //입력 Form영역---- ----------------------------------------------->	
 	
 		<script type="text/javascript">
-	
+		function searchPage(url,pageNum){
+			var frm = document.frm;
+			frm.pageNum.value = pageNum;
+			frm.action = url;
+			frm.submit();
+		}	
+		
+		
 	$(document).ready(function(){
 		$("#listTable>tbody").on("click","tr",function(){
 
@@ -324,7 +331,7 @@
 			var frm = document.frm;
 			frm.action="companyList.do";
 			frm.submit();
-		}
+		} 
 	
 		
 		
