@@ -7,13 +7,13 @@
 	<sql id="searchText">
 
   			<choose>
-  				<when test="10 == searchDiv">
+  				<when test="3 == searchDiv">
   				  AND user_id LIKE #{searchWord}||'%'
   				</when>
-  				<when test="20 == searchDiv">
+  				<when test="2 == searchDiv">
   				  AND user_nick LIKE #{searchWord}||'%'
   				</when>
-  				<when test="30 == searchDiv"> 
+  				<when test="1 == searchDiv"> 
   				  AND user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
@@ -42,14 +42,14 @@
 				          WHERE user_level = 1
 		                
 		                <choose>
-  				<when test="'10' == searchDiv">
-  					user_id LIKE '#{searchWord}||'%'
+  				<when test="3 == searchDiv">
+  				  AND user_id LIKE #{searchWord}||'%'
   				</when>
-  				<when test="'20' == searchDiv">
-  					user_nick LIKE #{searchWord}||'%'
+  				<when test="2 == searchDiv">
+  				  AND user_nick LIKE #{searchWord}||'%'
   				</when>
-  				<when test="'30' == searchDiv"> 
-  					user_name LIKE #{searchWord}||'%'
+  				<when test="1 == searchDiv"> 
+  				  AND user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>
@@ -64,14 +64,14 @@
 				      FROM users
 				      WHERE user_level = 1
 				     <choose>
-  				<when test="10 == searchDiv">
-  					user_id LIKE '%'||#{searchWord}||'%'
+  				<when test="3 == searchDiv">
+  				  AND user_id LIKE #{searchWord}||'%'
   				</when>
-  				<when test="20 == searchDiv">
-  					user_nick LIKE '%'||#{searchWord}||'%'
+  				<when test="2 == searchDiv">
+  				  AND user_nick LIKE #{searchWord}||'%'
   				</when>
-  				<when test="30 == searchDiv"> 
-  					user_name LIKE '%'||#{searchWord}||'%'
+  				<when test="1 == searchDiv"> 
+  				  AND user_name LIKE #{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>

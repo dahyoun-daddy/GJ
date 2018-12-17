@@ -65,6 +65,10 @@ public class AdminController {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
+		CodeVO userSearch = new CodeVO();
+		userSearch.setCmId("MY_AD_USER");
+		
+		
 		List<UserVO> list = adminSvc.doRetrieveUser(invo);
 		log.info("list size : "+list.size());
 		 
@@ -74,6 +78,7 @@ public class AdminController {
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
+		model.addAttribute("userSearch",codeSvc.doRetrieve(userSearch));
 		model.addAttribute("param",invo);
 	
 		return VIEW_NAME;
@@ -208,14 +213,18 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
+		CodeVO userSearch = new CodeVO();
+		userSearch.setCmId("MY_AD_COM");
+		
 		List<UserVO> list = adminSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
 		 
 		
 	
-	
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
+		model.addAttribute("companySearch",codeSvc.doRetrieve(userSearch));
 		model.addAttribute("param",invo);
 	
 		return VIEW2_NAME;

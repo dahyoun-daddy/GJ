@@ -33,13 +33,10 @@
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	List<CodeVO> userSearch = (null == request.getAttribute("userSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("userSearch");
 	
-	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))
-   ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
+	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
 %>
-
-
-    
     
 <!DOCTYPE html>
 <html>
@@ -51,7 +48,7 @@
 	<br/>
 	<br/>
 	<div class="container">
-		<form id="frm" name="frm"  method="get"></form>
+		<form id="frm" name="frm"  method="get">
 		<input type="hidden" name="pageNum" id="pageNum">
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
@@ -68,7 +65,7 @@
   							<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
   						</div>
   						<div style="float: left; width: 33%;">
-  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
+  							<%=StringUtill.makeSelectBox(userSearch, searchDiv, "searchDiv", false) %>
   						</div>
   						<div style="float: left; width: 33%;">
   							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
@@ -79,7 +76,7 @@
   					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
   				</div>
   			</div>
-		
+		</form>
 	</div>
     <!--// 검색영역----------------------------------------------------->
    
@@ -206,8 +203,7 @@
 		$("#listTable>tbody").on("click","tr",function(){
 
 			console.log("1 #listTable>tbody");
-
-			
+	
 
 			var tr = $(this);
 
@@ -216,7 +212,6 @@
 			var userId = td.eq(3).text();
 
 			console.log("2 userId="+userId);
-
 			
 
 			if(""==userId)return;
@@ -241,19 +236,13 @@
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 
 	              var parseData = $.parseJSON(data);
-
-
-
-	            
-
-	              
-
+     
+              
 	              $("#userId").val(parseData.userId);
 
 	              $("#userPasswd").val(parseData.userPasswd);
 
 	              $("#userNick").val(parseData.userNick);
-
 	              
 	              $("#userName").val(parseData.userName);
 
@@ -264,10 +253,8 @@
 	              $("#userPassQu").val(parseData.userPassQu);
 
 	              $("#userPassAn").val(parseData.userPassAn);
-
-	              
-	              
- 
+   
+        
 	              $("#userId").prop("disabled",true);              
 
 	            },
@@ -337,17 +324,43 @@
    		   	});
 			})
 		});
-		
-		
-		
-		
-		
-		
+							
+		$(document).ready(function(){
+			$("#do_delete").on("click",function(){
+				//alert("ready");
+				if(false == confirm("삭제 하시겠습니까?")){
+    				return;
+    			}
+				
+				
+				$.ajax({
+	   		         type:"POST",
+	   		         url:"userDelete.do",
+	   		         dataType:"html",// JSON
+	   		         data:{
+	   		         	"userId": $("#userId").val()
+	   		         },
+	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	   		         	var parseData = $.parseJSON(data);
+	   		         	if(parseData.flag > 0){
+	   		         		alert(parseData.msg);
+	   		         		doSearch();
+	   		         	}else{
+	   		         		alert(parseData.msg);
+	   		         	}
+	   		         },
+	   		         complete: function(data){//무조건 수행
+	   		          
+	   		         },
+	   		         error: function(xhr,status,error){
+	   		          
+	   		         }
+	   		   	});
+			});
+		});
 	</script>
-	
-	<
-	
-	
+		
+		
 
 </body>
 </html>

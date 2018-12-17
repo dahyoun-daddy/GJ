@@ -8,148 +8,81 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-
-	String context = request.getContextPath();//context path
-
+	String context = request.getContextPath();
 	
-
-	String page_size ="10";//page_size
-
-	String page_num  ="1";//page_num
-
-	String search_div ="";//검색구분
-
-	String search_word="";//검색어
-
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
 	String userPassQu ="";//찾기질문
-
-	int totalCnt      =0;
-
-	int bottomCount   =10;
-
-    
-
-	SearchVO vo =  (SearchVO)request.getAttribute("param");
-
-	//out.print("vo:"+vo);
-
-		if(null !=vo ){
-
-		search_div  = StringUtill.nvl(vo.getSearchDiv(), "");  
-
-		search_word = StringUtill.nvl(vo.getSearchWord(), ""); 
-
-		page_size   = StringUtill.nvl(vo.getPageSize(), "10"); 
-
-		page_num   = StringUtill.nvl(vo.getPageNum(), "1"); 
-
-	}else{ 
-
-		search_div  = StringUtill.nvl(request.getParameter("search_div"), ""); 
-
-		search_word = StringUtill.nvl(request.getParameter("search_word"), "");
-
-		page_size = StringUtill.nvl(request.getParameter("page_size"), "10");
-
-		page_num = StringUtill.nvl(request.getParameter("page_num"), "1");
-
-	}
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
+	int totalCnt = 0;
+	int bottomCount = 10;
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	List<CodeVO> companySearch = (null == request.getAttribute("companySearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("companySearch");
+	
+	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))
+	?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
 		
-
-		int oPageSize = Integer.parseInt(page_size);
-
-		int oPageNum  = Integer.parseInt(page_num);
-
-		
-
-		String iTotalCnt = (null == request.getAttribute("total_cnt"))?"0":request.getAttribute("total_cnt").toString();
-
-		totalCnt = Integer.parseInt(iTotalCnt);
-
-		
-
-					List<CodeVO> code_page = (null == request.getAttribute("code_page"))
-
-				     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
-
-				 	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))
-
-						     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
-	
-
-	
-	
-	
 %>	
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>기업관리</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
-</head>
+     <title>기업관리</title>
+ </head>
 <body>
-	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-	
-	<form id="frm" name="frm">
-	
-	</form>
-	
-	
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="../resources/js/animate.js"></script>
-    <script src="../resources/js/custom.js"></script>
-    <br><br><br>
-  
-    	<div class="page-header">
-    		<h1>기업관리</h1>
-    	</div>
-  	<!--// Title영역 -->
-       	
-     	 <input type="hidden" name="page_num" id="page_num">
-		<!-- 검색영역 -->
-		<div class="row">
-		  <div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			
-    
-    <div class="form-group">
-					<select name="search_div" id="search_div" class="form-control input-sm">
-					    <option value="" >::전체::</option>
-					    <option value="" >::회사명::</option>
-					    <option value="" >::대표자::</option>
-					    <option value="" >::이메일::</option>
-										
-					</select>
-					<input type="text" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
-										
-				</div>					
-    	</div>
-    	</div>
-    	
+<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	<br/>
+	<br/>
+	<div class="container">
+		<form id="frm" name="frm"  method="get">
+		<input type="hidden" name="pageNum" id="pageNum">
+		<input type="hidden" name="selectClNo" id="selectClNo">
+   		
+   		<h1>기업관리</h1>
+        	
+   		<!-- 검색영역 -->
+				
+		<div class="row"> 
+		 <div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="form-group" > 
+  						<div style="float: left; width: 33%;">
+  							<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
+  						</div>
+  						<div style="float: left; width: 33%;">
+  							<%=StringUtill.makeSelectBox(companySearch, searchDiv, "searchDiv", false) %>
+  						</div>
+  						<div style="float: left; width: 33%;">
+  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
+  						</div>
+  					</div>
+  					</div>
+    			<div class="form-group">
+  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+  				</div>
+  			</div>
+		</form>
+	</div>
     <!--// 검색영역----------------------------------------------------->
    
     <!-- Grid영역 -->
 		<div class="table-responsive" >
 			<table id="listTable" class="table table-striped table-bordered table-hover">
-   <thead class="bg-primary">
+  				 <thead class="bg-primary">
 				    <tr>
 				        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
 						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">회사명</th>
@@ -185,6 +118,9 @@
 				</tbody>
 				</table>
 				</div>
+				<div class="dorm-inline text-center">
+	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "companyList.do", "searchPage") %>
+	  	</div>
 	<!-- // Grid영역 -->
 	
 	<!-- 입력 Form영역---- ----------------------------------------------->
@@ -295,10 +231,9 @@
 						   maxlength="200" />
 					</div>
 				</div>		      				
-			
-			
+					
 			<button type="button" class="btn btn-default btn-sm" id="do_update">수정하기</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>				   
+			<button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>				   
 				      														
 			</form>
 	<!-- //입력 Form영역---- ----------------------------------------------->	
@@ -309,11 +244,8 @@
 		$("#listTable>tbody").on("click","tr",function(){
 
 			console.log("1 #listTable>tbody");
-
-			
-
 			var tr = $(this);
-
+	
 			var td = tr.children();
 
 			var userId = td.eq(3).text();
@@ -321,7 +253,6 @@
 			console.log("2 userId="+userId);
 
 			
-
 			if(""==userId)return;
 			
 			//alert("userId"+userId);
@@ -344,19 +275,13 @@
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 
 	              var parseData = $.parseJSON(data);
-
-
-
-	            
-
-	              
+    	              
 
 	              $("#userId").val(parseData.userId);
 
 	              $("#userPasswd").val(parseData.userPasswd);
 
 	              $("#userNick").val(parseData.userNick);
-
 	              
 	              $("#userName").val(parseData.userName);
 
@@ -375,38 +300,24 @@
 	              $("#userPassQu").val(parseData.userPassQu);	              
 
 	              $("#userPassAn").val(parseData.userPassAn);
-
-	              
-	              
- 
+        
+	               
 	              $("#userId").prop("disabled",true);              
 
 	            },
 
 	            complete: function(data){//무조건 수행
-
 	             
-
 	            },
 
 	            error: function(xhr,status,error){
-
 	             
-
 	            }
- 
-	       }); //--ajax
-
-			
-
-		});//--#listTable>tbody
+ 	       }); //--ajax
+					});//--#listTable>tbody
 		
-
 	});  
-	
-	
-		
-	</script>
+			</script>
 	
 	<script type="text/javascript">
 		function doSearch(){
@@ -476,7 +387,7 @@
 				
 				$.ajax({
 	   		         type:"POST",
-	   		         url:"userDelete.do",
+	   		         url:"companyDelete.do",
 	   		         dataType:"html",// JSON
 	   		         data:{
 	   		         	"userId": $("#userId").val()
@@ -501,12 +412,7 @@
 		});
 		
 	</script>
-	
-
-	
-	
-		
-		
 			
+				
 </body>
 </html>
