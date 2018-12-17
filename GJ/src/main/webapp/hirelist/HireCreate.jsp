@@ -91,14 +91,17 @@
 	  <br>
 	  <div lass="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" class="btn btn-default" id="historyBack" onclick="historyBack()">취소하기</button>
 	      <button type="submit" class="btn btn-default" id="doCreate">등록하기</button>
 	    </div>
 	  </div>
-	  </form>
+	  </form><br><br>
 	
 	<script type="text/javascript">
+		
+	
 		$(document).ready(function(){
-			//alert("ready");
+			alert("ready");
 			$("#doCreate").on("click",function(){
 				//alert("ready");
 				if(false == confirm("등록하시습니까?")){
