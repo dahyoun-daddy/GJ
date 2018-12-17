@@ -11,10 +11,13 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.AdminPageSvc;
 import com.sist.gj.service.JasoCommentSvc;
@@ -40,6 +43,16 @@ public class ReviewController {
 	public String doRetrieve(@ModelAttribute SearchVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
+		String reviewNo = req.getParameter("reviewNo");
+		log.info("==========================");
+		log.info("reviewNo :"+reviewNo);
+		log.info("==========================");
+		if(!(null==reviewNo)) {
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewNo(reviewNo);
+			reviewSvc.delete(reviewVO);
+		}
+		
 		String userId = req.getParameter("userId");
 		log.info("userId : "+userId);
 		
@@ -60,9 +73,29 @@ public class ReviewController {
 		List<ReviewVO> list = reviewSvc.doRetrieve(invo);
 		log.info("list size : "+list.size());
 		model.addAttribute("list",list);
+		
 		int totalCnt = 0;
 		if(null != list  &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();		
+		}
+		
+		log.info("==========================");
+		log.info("list.size()1111 :"+list.size());
+		log.info("==========================");
+		if(list.size()>0) {
+		int star = 0;
+		invo.setSearchDiv("10");
+		List<ReviewVO> list2 = reviewSvc.doRetrieve(invo);
+		for(Iterator<ReviewVO> it = list2.iterator(); it.hasNext();) {
+			ReviewVO value = it.next();
+			star += Integer.parseInt(value.getReviewPoint().substring(value.getReviewPoint().length()-1));
+		}
+		star = star / list2.size();
+		log.info("==========================");
+		log.info("star :"+star);
+		log.info("==========================");
+		
+		model.addAttribute("star",star);
 		}
 		
 		UserVO userVO = new UserVO();
@@ -140,6 +173,48 @@ public class ReviewController {
 			object.put("flag",flag);
 			object.put("msg","등록 실패.");
 		}
-		return VIEW_NAME;
+		return "review/giupReview";
 	}
+	
+	
+	@RequestMapping(value="/review/complain.do",method=RequestMethod.POST
+	        ,produces="application/json;charset=utf8"  
+	)
+	@ResponseBody
+	public String update(@ModelAttribute ReviewVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		String reviewNo2 = req.getParameter("reviewNo2");
+		
+		log.info("2========================");
+		log.info("invo="+invo);
+		log.info("reviewNo2="+reviewNo2);
+		
+		log.info("2========================");	
+		
+		int flag = 0;
+		//수정	
+		invo.setReviewNo(reviewNo2);
+		ReviewVO outvo = reviewSvc.select(invo);
+		outvo.setRegId(null);
+		outvo.setReviewComplain(String.valueOf((Integer.parseInt(outvo.getReviewComplain())+1)));
+		flag = reviewSvc.update(outvo);
+		
+		 
+		JSONObject object=new JSONObject();
+		
+		if(flag>0) {
+			object.put("flag", flag);
+			object.put("message", "신고 되었습니다.");
+		}else {
+			object.put("flag", flag);
+			object.put("message", "신고 실패^^.");			
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		log.info("3========================");
+		log.info("jsonData="+jsonData);
+		log.info("3========================");			
+		return jsonData;
+	}
+	
 }

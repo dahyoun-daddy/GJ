@@ -157,7 +157,7 @@
 						  <span id="8" class="starR1">9</span>
 						  <span id="9" class="starR2">10</span>
 						  <script type="text/javascript">
-						    $("#4").addClass('on').prevAll('span').addClass('on');
+						    $("#<%=request.getAttribute("star") %>").addClass('on').prevAll('span').addClass('on');
 						  </script>						  
 					</label>
 					
@@ -202,8 +202,9 @@
 							  </div>
 							</div>
 							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
-								<button style="float: right;" type="button" class="btn btn-danger btn-sm">신고하기</button>
-								<button style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
+						 		<button id="doComplain" style="float: right;" type="button" class="btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
+								<button id="doUpdate" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
+								<button id="doDelete" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
 							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
 								<label style="font-size:1em; color: #DBA901;">${reviewVO.reviewTitle}</label>
@@ -226,7 +227,6 @@
 							</div>
 							<div style="border: 1px solid red; float: left; height:30px; width: 20%;">
 							</div>
-							<input type="hidden" id="reviewNo" value="${reviewVO.reviewNo}" />
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
@@ -245,7 +245,10 @@
 	</div>
 	<input type="hidden" name="pageNum" id="pageNum" value="1">
 	<input type="hidden" name="userId" id="userId" value="${company.userId}">
+	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
+	<input type="hidden" name="reviewNo2" id="reviewNo2" value="" />
 	</form>
+	
    	<!-- // 기업 상세정보 -------------------------------  -->
    	
 	
@@ -261,20 +264,53 @@
      }
     
     $(document).ready(function(){ 
-    	/* $("#4").addClass('on').prevAll('span').addClass('on');
-        $('.starRev span').click(function(){
-		 $(this).parent().children('span').removeClass('on');
-    	 $(this).addClass('on').prevAll('span').addClass('on');
-    	 console.log("select:"+$(this).select().text());
-    	  return false;
-    	});  */
-    	<%-- $(<%=ad %>).click(function(){
-       	 $(this).addClass('on').prevAll('span').addClass('on');
-       	});
-    	<%	
-    		String ad="\"#"+"5"+"\"";   		
-    	%>
-    	$(<%=ad %>).trigger("click"); --%>
+    	$("#doDelete").on("click",function(){
+			//alert("doComplain");
+			
+			var reviewNo = $(this).val();
+			
+			if(false==confirm("삭제 하시겠습니까?"))return;
+			
+			var frm = document.frm;
+			frm.reviewNo.value =reviewNo;
+			frm.action = "giupReview.do";
+			frm.submit();
+			
+		});//--do_delete
+		
+		$("#doComplain").on("click",function(){
+			//alert("doComplain");
+			
+			if(false==confirm("신고 하시겠습니까?"))return;
+			
+			var reviewNo2 = $(this).val();
+							
+			$.ajax({
+		         type:"POST",
+		         url:"complain.do",
+		         dataType:"html",// JSON
+		         data:{
+		         	"reviewNo2": reviewNo2,
+		         },
+		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+		             var parseData = $.parseJSON(data);
+		         	 if(parseData.flag=="1"){
+		         		alert(parseData.message);
+		         	 }else{
+		         		alert(parseData.message);
+		         	 }
+		         },
+		         complete: function(data){//무조건 수행
+		          
+		         },
+		         error: function(xhr,status,error){
+		          
+		         }
+		    });//--ajax		
+			
+		});//--do_delete
+    	
+    	
     });	
     </script>
 
