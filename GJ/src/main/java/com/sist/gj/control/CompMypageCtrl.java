@@ -28,6 +28,7 @@ import com.sist.gj.service.SignUpSvc;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.SearchVO;
+import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
 
 @Controller
@@ -38,6 +39,7 @@ public class CompMypageCtrl {
 	private static final String VIEW_INFO_COMP="mypageCompany/CompMyInfo";
 	private static final String VIEW_UPDATE_COMP="mypageCompany/CompInfoUpdate";
 	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
+	private static final String VIEW_MYPAGE="mypageCompany/CompMypage";
 	
 
 	
@@ -47,6 +49,19 @@ public class CompMypageCtrl {
 	private MypageSvc mypageSvc;
 	@Autowired
 	private SignUpSvc userSvc;
+	
+	@RequestMapping(value="mypageCompany/CompMypage.do")
+	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, Model model) throws ClassNotFoundException, SQLException {
+		
+		invo.setUserId("보승소프트");
+		
+		UserMPViewVO outvo = mypageSvc.selectCompInfo(invo);
+		
+		model.addAttribute("userNick",outvo.getUserNick());
+		model.addAttribute("hireCount",outvo.getHireCount());
+		
+		return VIEW_MYPAGE;
+	}
 	
 	@RequestMapping(value="/mypageCompany/CompInfoUpdate.do")
 	public String CompInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {

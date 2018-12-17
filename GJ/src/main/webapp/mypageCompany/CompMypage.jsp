@@ -1,24 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
-    
 <style>
-
 	#bubble-float-right:{
 	  display: inline-block;
 	  position: relative;
@@ -117,11 +103,7 @@
 	
 	
 </style>
-<% 
-	String compName = "쌍용교육센터";
-	String hireCount = "2";
 
-%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -157,8 +139,8 @@
 				    		</div>
 				    		<div id ="profmain">
 				    		<br/>
-				    		기업명 <a style="color: orange;"><%=compName %></a><br/>
-				    		현재 올린 구인 공고 <a style="color: orange;"><%=hireCount %></a> 건 입니다.<br/><br/>
+				    		기업명 <a style="color: orange;"><c:out value="${userNick}"/></a><br/>
+				    		현재 올린 구인 공고 <a style="color: orange;"><c:out value="${hireCount}"/></a> 건 입니다.<br/><br/>
 				    		
 				    		<input id="smallBtn" type="button" value="정보 수정하기" 
 	                   			   onclick="location='CompMyInfo.jsp'; return false;">
