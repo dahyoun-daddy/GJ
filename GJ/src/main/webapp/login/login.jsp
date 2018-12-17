@@ -32,8 +32,8 @@
             </table>
             <br>
             <input type="button" value="로그인" id="loginBt" name="loginBt"/>
-            <input type="button" value="구직자 가입" onclick="goJoinForm()" />
-            <input type="button" value="기업 가입" onclick="goJoinForm()" />
+            <input type="button" value="구직자 가입" onclick="userSign()" />
+            <input type="button" value="기업 가입" onclick="compSign()" />
         </form>
     </div>
         
