@@ -6,11 +6,18 @@
 
 	<sql id="searchCv">
 		<choose>
-			<when test="1 == searchDiv">
-				AND D.user_name LIKE '%'||#{searchWord}||'%'
-			</when>
 			<when test="2 == searchDiv">
 				AND C.cv_grade LIKE '%'||#{searchWord}||'%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<sql id="compNick">
+		<choose>
+			<when test="1 == searchDiv">
+				AND T.comp_nick LIKE '%'||#{searchWord}||'%'
 			</when>
 			<otherwise>
 			</otherwise>
@@ -248,7 +255,7 @@
 		    ) T
 		    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 			  AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-		   		  
+		   	  <include refid="compNick"/>	  
 		) X
 		NATURAL JOIN
 		(
