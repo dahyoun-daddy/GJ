@@ -147,6 +147,7 @@
 					    	<br/>
 					    	<form name="frm" id="frm" method="get">
 					    	<input type="hidden" name="pageNum" id="pageNum"/>
+					    	<input type="hidden" name="hireNo" id="hireNo">
 							<!-- --검색영역 -->
 					    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -174,19 +175,16 @@
 							<!-- Grid영역 -->
 					    	<div class="table-responsive" align="center" style="float:left;">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
-								
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
 								  			<col width="5%" style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
-								  			<col width="50%"style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
+								  			<col width="55%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
 								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								  			<th class="text-center" style="background-color: #FACC2E;">지원 NO</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">기업명</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
@@ -196,9 +194,8 @@
 								  			<c:choose>
 								  				<c:when test="${list.size()>0}">
 								  					<c:forEach var="applyVO" items="${list}">
-								  					<tr>
+								  					<tr id="${applyVO.hireNo }">
 								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
-								  						<td class="text-center"><c:out value="${applyVO.applyNo}"/></td> 
 										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
 										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
@@ -244,7 +241,6 @@
 	    }//checkAll()
 	    
 	    function searchPage(url,pageNum){
-			alert("url : "+url+" page_num : "+pageNum);
 			var frm = document.frm;
 			frm.pageNum.value = pageNum;
 			frm.action = url;
@@ -255,7 +251,6 @@
     		var frm = document.frm;
     		frm.pageNum.value = 1;
     		frm.action="UserApply.do";
-    		frm.submit();
     	}
 		
 	    $(document).ready(function(){
@@ -264,6 +259,21 @@
 				if (key.keyCode == 13) {
 					doSearch();
 				}
+			});
+	    	
+			$("#listTable>tbody").on("click","tr",function(){
+				//alert("ready");
+				var hireNo = $(this).attr('id');
+				//alert(hireNo);
+				if("" == hireNo){
+    				return;
+    			}
+    			
+    			var frm = document.frm;
+        		frm.hireNo.value = hireNo;
+        		frm.action = "/gj/hirelist/HireView.do";
+        		frm.submit();
+        		
 			});
 	    	
 			$("#cancelApply").on("click",function(){
