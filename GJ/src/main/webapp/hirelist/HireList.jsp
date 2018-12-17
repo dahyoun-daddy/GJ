@@ -41,7 +41,7 @@
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br><br>
 	<!-- 채용정보 목록 -->
-		<div class="row" style="float: right;">&nbsp;&nbsp;&nbsp;
+		<div class="row" style="float: left;">&nbsp;&nbsp;&nbsp;
 		<br><br><br>
 			<form class="form-inline" >
 				<input type="hidden" name="pageNum" id="pageNum">
@@ -51,7 +51,8 @@
 			    <input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
 			  	&nbsp;&nbsp;
 			  </div>
-			  <button type="submit" class="btn btn-default">검색</button>
+			  <button type="submit" class="btn btn-default">검색</button>&nbsp;&nbsp;
+			  <button type="button" class="btn btn-default" id="goCreate">글쓰기</button>
 			</form>
 		</div>
 		<br>
@@ -138,9 +139,9 @@
 		});
 
 		//등록페이지로 이동
-		$("#toCreate").on("click",function(){
-			//alert("ready");
-			location.href = "HireCreate.jsp";
+		$("#goCreate").on("click",function(){
+			alert("글쓰기 페이지로 이동?");
+			location.href = "HireCreate.do";
 		});
 		
 		//게시물 제목 클릭시 뷰페이지이동?

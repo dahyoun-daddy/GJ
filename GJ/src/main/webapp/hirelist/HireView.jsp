@@ -63,20 +63,36 @@
 	      <input type="text" class="form-control" id="hireEdu" value="${hireEdu}" readonly>
 	    </div>
 	  </div>
-	  <br>
-	  <div lass="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default" id="read">수정하기</button>
-	    </div>
-	  </div>
 	  </form>
+	  <br>
+	    <div class="col-sm-offset-2 col-sm-10">
+	    <button type="submit" class="btn btn-default" id="historyBack" onclick="historyBack()">이전화면</button>
+	      <button type="submit" class="btn btn-default" id="goUpdate" onclick="goUpdate()">수정하기</button>
+	    </div><br><br>
+	  
 	
 	<script type="text/javascript">
-		function read() {
+		function historyBack() { 
+			history.back(); 
+		}
+	
+		//안먹네 
+		function goUpdate() {
 			var frm = document.frm;
-			frm.action="HireList.do";
+			frm.action="HireUpdate.jsp";
 			frm.submit();
 		}	
+		
+		$(document).ready(function(){
+			
+			$("#goUpdate").on("click",function(){
+				alert("수정 페이지로 이동?");
+				location.href = "HireUpdate.jsp";
+			});
+			
+		});
+
+		출처: http://ingeni.tistory.com/entry/페이지-이동-javascript-자바스크립트 [ingeni]
 	</script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
