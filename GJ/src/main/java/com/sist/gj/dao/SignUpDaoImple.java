@@ -67,6 +67,19 @@ UserVO outVO = null;
 				
 		return outVO;
 	}
+	
+	@Override
+	public UserVO findIdPass(UserVO userVO) throws ClassNotFoundException, SQLException {
+UserVO outVO = null;
+		
+		String statement = NAMESPACE+".findId";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+	}
 
 	
 

@@ -72,11 +72,17 @@ public class AdminController {
 		List<UserVO> list = adminSvc.doRetrieveUser(invo);
 		log.info("list size : "+list.size());
 		 
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
 		
 	
 		
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("userSearch",codeSvc.doRetrieve(userSearch));
 		model.addAttribute("param",invo);
@@ -219,10 +225,16 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 		List<UserVO> list = adminSvc.doRetrieveCompany(invo);
 		log.info("list size : "+list.size());
 		 
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
 		
 	
 		model.addAttribute("list",list);
 		model.addAttribute("SIGNUP_Q",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("companySearch",codeSvc.doRetrieve(companySearch));
 		model.addAttribute("param",invo);

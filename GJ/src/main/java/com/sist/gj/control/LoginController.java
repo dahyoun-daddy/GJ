@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sist.gj.service.SignUpSvc;
+import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.UserVO;
 
 @Controller
@@ -67,4 +68,16 @@ public class LoginController {
 		
 		return "common/Main";
 	}
+	
+	// 아이디 찾기 
+		@RequestMapping(value = "/login/findIdPass.do")
+		public String findIdPass(@ModelAttribute UserVO invo,HttpSession ses,HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+			log.info("=====================SELECT=======================");
+						
+			UserVO outVO = signUpSvc.findIdPass(invo);
+			
+			ses.setAttribute("UserVo", outVO);
+			
+			return "login/findIdPass";
+		}
 }

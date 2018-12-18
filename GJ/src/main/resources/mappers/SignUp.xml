@@ -29,7 +29,7 @@
 	  parameterType="UserVO"
 	  resultType="UserVO"	  >
 	SELECT 
-		UserId
+		user_id
 	FROM Users
 			
 		WHERE	user_name=#{userName}

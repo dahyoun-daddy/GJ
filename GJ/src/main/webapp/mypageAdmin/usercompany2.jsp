@@ -45,6 +45,7 @@
  </head>
 <body>
 <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	<%=totalCnts %>
 	<br/>
 	<br/>
 	<div class="container">

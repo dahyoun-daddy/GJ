@@ -31,5 +31,11 @@ public class SignUpSvcImple implements SignUpSvc {
 		// TODO Auto-generated method stub
 		return signupDao.login(userVO);
 	}
+	
+	@Override
+	public UserVO findIdPass(UserVO userVO) throws ClassNotFoundException, SQLException {
+		
+		return signupDao.findIdPass(userVO);
+	}
 
 }

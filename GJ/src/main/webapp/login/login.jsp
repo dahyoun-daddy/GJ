@@ -34,6 +34,8 @@
             <input type="button" value="로그인" id="loginBt" name="loginBt"/>
             <input type="button" value="구직자 가입" onclick="userSign()" />
             <input type="button" value="기업 가입" onclick="compSign()" />
+            <input type="button" value="ID/PW찾기" onclick="findIdPass" />
+           
         </form>
     </div>
         
@@ -76,6 +78,14 @@
 	   		   	});
 			});
 		});
+		
+	
+	$(function(){
+		$("#findIdPass").click(function(){
+			location.href="../login/findIdPass.do";
+		})
+	})	
+		
 	</script>
 
 

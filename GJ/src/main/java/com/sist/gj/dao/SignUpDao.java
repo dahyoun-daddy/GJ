@@ -18,5 +18,6 @@ public interface SignUpDao {
 		UserVO select(UserVO userVO) throws ClassNotFoundException, SQLException;
 	
 		UserVO login(UserVO userVO) throws ClassNotFoundException, SQLException;
-	
+
+		UserVO findIdPass(UserVO userVO) throws ClassNotFoundException, SQLException;
 }
