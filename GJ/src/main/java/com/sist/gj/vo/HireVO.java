@@ -1,6 +1,6 @@
 package com.sist.gj.vo;
 
-public class HireVO {
+public class HireVO extends DTO {
 
 	private int hireNo;						// 채용순번		
 	private String hireTitle;				// 채용제목
@@ -149,10 +149,6 @@ public class HireVO {
 		this.modDt = modDt;
 	}
 
-	public int getTotalCnt() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
  
 }
