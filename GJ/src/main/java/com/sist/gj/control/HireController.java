@@ -76,6 +76,10 @@ public class HireController {
 		model.addAttribute("list",list);
 		model.addAttribute("param",invo);
 		model.addAttribute("totalCnt",totalCnt);
+		
+		log.info("=======================");
+		log.info("totalCnt"+list.get(0).getTotalCnt());
+		log.info("=======================");
 		return VIEW_NAME;
 	}
  

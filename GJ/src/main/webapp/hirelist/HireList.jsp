@@ -101,7 +101,7 @@
             </table>
             <br><br>
             <div class="dorm-inline text-center">
-			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "jasoList.do", "searchPage") %>
+			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "HireList.do", "searchPage") %>
 			  </div>
 	<!--// 채용정보 목록 -->
 	
@@ -128,7 +128,7 @@
 	function doSearch(){
 		var frm = document.frm;
 		frm.pageNum.value = 1;
-		frm.action="jasoList.do";
+		frm.action="HireList.do";
 		frm.submit();
 	}
 	 
@@ -142,15 +142,14 @@
 
 		//등록페이지로 이동
 		$("#goCreate").on("click",function(){
-			alert("글쓰기 페이지로 이동?");
+			//alert("글쓰기 페이지로 이동합니다");
 			location.href = "HireCreate.jsp";
 		});
 		
 		//게시물 제목 클릭시 뷰페이지이동?
 		$("#listTable>tbody").on("click","tr",function(){
-			alert("되나?");
 			var hireNo = $(this).attr('id');
-			alert(hireNo);
+			//alert(hireNo);
 			
 			if("" == hireNo){
 				return;
