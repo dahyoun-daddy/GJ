@@ -122,10 +122,11 @@ public class MypagePictureCtrl {
 			
 			fileVO.setUserId(sessionVO.getUserId());
 			fileVO.setpFlNm(orgFileName);
-			fileVO.setpSvNm(saveFileName);
+			fileVO.setpSvNm(fileId);
 			fileVO.setpFlSz(fileSize+"");
 			fileVO.setpFlPt(uploadPath);
 			fileVO.setpFlTp(ext);
+			fileVO.setRegId(sessionVO.getUserId());
 			
 			if(null != orgFileName  &&  !uploadPath.equals("")) {
 				//mutipart  ->  uploadPath전송
@@ -138,6 +139,6 @@ public class MypagePictureCtrl {
 		int flag = this.mypageSvc.addPic(list.get(0));
 		log.debug("8. do_saveTx flag : "+flag);
 		
-		return "mypageUser/UserPicPopup";
+		return "mypageUser/UserUpdate";
 	}
 }
