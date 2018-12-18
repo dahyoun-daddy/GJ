@@ -154,7 +154,7 @@ public class MypagePictureCtrl {
 		log.debug("8. do_saveTx flag : "+flag);
 		
 		JSONObject object = new JSONObject();
-		if(flag > 0) {
+		if(flag > 0) { 
 			object.put("flag",flag);
 			object.put("msg",list.get(0).getpFlNm());
 		}else {
