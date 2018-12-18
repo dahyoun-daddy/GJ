@@ -18,12 +18,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form id="frm" name="frm" method="post" enctype="multipart/form-data" action="file.do" >
-		<input type="text" id="picname" name="picname">
+	<form id="frm" name="frm" method="post" enctype="multipart/form-data" >
 		<br>
 		<input type="file" id="pic" name="pic" >
+		<input type="hidden" id="resultVO" name="resultVO">
 	</form>
-	<input type="button" id="insert" name="insert" value="입력" onclick="retrieve()">
+	<input type="button" id="insert" name="insert" value="입력">
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -34,9 +34,13 @@
     <script src="<%=context %>/resources/js/custom.js"></script>
 </body>
 <script type="text/javascript">
-	function retrieve(){
-		var frm = document.frm;
+	function moveUpdate(){
+		//var frm = document.frm;
+		//frm.resultVO = result;
+		//frm.action = "moveUpdate.do";
 		//frm.submit();
+		window.opener.location.reload();    //부모창 reload
+		window.close();    //현재 팝업창 Close
 	}
 	
 	$(document).ready(function(){
@@ -56,9 +60,9 @@
 		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		        	 var parseData = $.parseJSON(data);
 	   		         	if(parseData.flag == "1"){
-	 	  		         	$("#picname").val(parseData.msg);
+	 	  		         	moveUpdate();
 	   		         	}else{
-	   		         		$("#picname").val(parseData.msg);
+	   		         		alert(parseData.msg);
 	   		         		$("#pic").val(null);
 	   		         	}
 		         },

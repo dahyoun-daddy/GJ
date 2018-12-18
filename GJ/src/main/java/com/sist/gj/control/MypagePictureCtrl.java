@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sist.gj.common.RandomNum;
 import com.sist.gj.common.StringUtill;
 import com.sist.gj.service.MypageSvc;
@@ -57,6 +59,7 @@ public class MypagePictureCtrl {
 		List<PictureVO> list = new ArrayList<PictureVO>();
 		
 		String uploadPath = "";
+		int flag =0;
 		
 		File fileRootDir = new File(UPLOAD_ROOT);
 		if(fileRootDir.isDirectory() == false) {
@@ -88,6 +91,7 @@ public class MypagePictureCtrl {
 		
 		Iterator<String> files = mReq.getFileNames();
 		
+		int fileLength = 1;
 		while(files.hasNext()) {
 			PictureVO fileVO = new PictureVO();
 			String uploadFileName = files.next();
@@ -141,22 +145,31 @@ public class MypagePictureCtrl {
 				//mutipart  ->  uploadPath전송
 				mFile.transferTo(new File(uploadPath+File.separator+saveFileName));
 				list.add(fileVO);
+				flag = 1;
 			}
 		}
 		log.debug("7. file list : "+list);
 		
-		int flag =0;
+		
 		
 		if(null != list  &&  list.size()>0) {
-			flag = this.mypageSvc.addPic(list.get(0));
+			//flag = this.mypageSvc.addPic(list.get(0));
 		}
-
+		
 		log.debug("8. do_saveTx flag : "+flag);
+		
+		Gson gson = new GsonBuilder().create();
+		String result = "";
+		if(null != list  &&  list.size()>0){
+			result = gson.toJson(list.get(0));
+		}
+		
 		
 		JSONObject object = new JSONObject();
 		if(flag > 0) { 
 			object.put("flag",flag);
 			object.put("msg",list.get(0).getpFlNm());
+			object.put("result",result);
 		}else {
 			object.put("flag",flag);
 			object.put("msg","등록 실패. 이미지파일이 맞는지 확인해주세요");
