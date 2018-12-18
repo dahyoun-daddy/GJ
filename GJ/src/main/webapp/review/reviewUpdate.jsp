@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String context = request.getContextPath();//context path
 %>
@@ -21,6 +22,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/css/main.css">
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="../resources/js/animate.js"></script>
+    <script src="../resources/js/custom.js"></script>
 </head>
 <body>
 	<!--Navbar -->
@@ -54,6 +63,7 @@
         </div>
         
     </nav>
+    <form id="frm" name="frm" method="get">
     <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
 			<div class="bg-faded rounded p-5">    
@@ -66,7 +76,7 @@
 				</div>
 				
 				<div style="float: left; height:50px; width: 70%;">
-				   <input style="width:70%;" type="text" placeholder="제목"/> 
+				   <input id="reviewTitle" name="reviewTitle" style="width:70%;" type="text" placeholder="제목" value="${reviewVO.reviewTitle}"/> 
 				</div>
 				
 				<div style="float: left; height:150px; width: 30%;">
@@ -74,7 +84,7 @@
 				</div>
 				
 				<div style="float: left; height:150px; width: 70%;">
-				   <textarea style="width:70%; height:150px;" placeholder="내용"></textarea> 
+				   <textarea name="reviewBody" id="reviewBody" style="width:70%; height:150px;" placeholder="내용">${reviewVO.reviewBody}</textarea> 
 				</div>
 				
 				<div style="float: left; height:50px; width: 30%;">
@@ -84,16 +94,25 @@
 				<div style="float: left; height:50px; width: 70%;">
 				  <div style="margin-top: 1%;"> 
 				   	<label class="starRev">
-						  <span id="1" class="starR1 on">1</span>
-						  <span id="2" class="starR2">2</span>
-						  <span id="3" class="starR1">3</span>
-						  <span id="4" class="starR2">4</span>
-						  <span id="5" class="starR1">5</span>
-						  <span id="6" class="starR2">6</span>
-						  <span id="7" class="starR1">7</span>
-						  <span id="8" class="starR2">8</span>
-						  <span id="9" class="starR1">9</span>
-						  <span id="10" class="starR2">10</span>					  
+						  <span id="${reviewVO.reviewNo}0" class="starR1 on">1</span>
+						  <span id="${reviewVO.reviewNo}1" class="starR2">2</span>
+						  <span id="${reviewVO.reviewNo}2" class="starR1">3</span>
+						  <span id="${reviewVO.reviewNo}3" class="starR2">4</span>
+						  <span id="${reviewVO.reviewNo}4" class="starR1">5</span>
+						  <span id="${reviewVO.reviewNo}5" class="starR2">6</span>
+						  <span id="${reviewVO.reviewNo}6" class="starR1">7</span>
+						  <span id="${reviewVO.reviewNo}7" class="starR2">8</span>
+						  <span id="${reviewVO.reviewNo}8" class="starR1">9</span>
+						  <span id="${reviewVO.reviewNo}9" class="starR2">10</span>
+						  	<c:choose>
+				  				<c:when test="${null == reviewVO.reviewPoint}"> 					
+				  				</c:when>
+				  				<c:otherwise>
+				  					<script type="text/javascript">
+								     	$("#${reviewVO.reviewPoint}").addClass('on').prevAll('span').addClass('on');
+								   	</script>	
+				  				</c:otherwise>
+				  			</c:choose>					   				  
 					</label>
 				  </div>	
 				</div>
@@ -116,38 +135,43 @@
 				
 				
 				<div style="text-align: center; height:50px; width: 100%;">
-				    <button type="button" class="btn btn-danger btn-sm">면접리뷰 등록하기</button>
+				    <button name="doUpdateSave" id="doUpdateSave" type="button" class="btn btn-danger btn-sm" value="doUpdateSave">면접리뷰 등록하기</button>
 				</div>
 				   
    			</div>
    		</div>
    	</div>
+   	<input type="hidden" name="userId" id="userId" value="${userId}" />
+   	<input type="hidden" name="reviewComplain" id="reviewComplain" value="${reviewVO.reviewComplain}" />
+   	<input type="hidden" name="star" id="star" value="${reviewVO.reviewPoint}" />
+   	<input type="hidden" name="reviewNo3" id="reviewNo3" value="${reviewVO.reviewNo}" />
+   	<input type="hidden" name="reviewNo4" id="reviewNo4" value="1" />
+   	</form>
     
 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="../resources/js/animate.js"></script>
-    <script src="../resources/js/custom.js"></script>
+	
     
     <script type="text/javascript">
     $(document).ready(function(){ 
         $('.starRev span').click(function(){
 		 $(this).parent().children('span').removeClass('on');
     	 $(this).addClass('on').prevAll('span').addClass('on');
-    	 console.log("select:"+$(this).select().text());
-    	  return false;
+    	 console.log("select:"+$(this).attr('id'));
+    	 var star = $(this).attr('id');
+    	 var frm = document.frm;
+		 frm.star.value=star;
+    	 return false;
     	}); 
-    	<%-- $(<%=ad %>).click(function(){
-       	 $(this).addClass('on').prevAll('span').addClass('on');
-       	});
-    	<%	
-    		String ad="\"#"+"5"+"\"";   		
-    	%>
-    	$(<%=ad %>).trigger("click"); --%>
+    	
+		$("#doUpdateSave").on("click",function(){
+			var frm = document.frm;
+
+			frm.action = "giupReview.do";
+			frm.submit();
+			
+			
+		});//--#doUpdateSave
+        
     });	
     </script>
     

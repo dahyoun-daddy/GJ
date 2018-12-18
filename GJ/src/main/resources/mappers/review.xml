@@ -84,7 +84,7 @@
 		 UPDATE Review          
 	        SET review_complain  = #{reviewComplain}      
 	       <choose>
-  				<when test="null == regId"> 					
+  				<when test="null == reviewTitle"> 					
   				</when>
   				<otherwise>
   					,review_title  = #{reviewTitle}      

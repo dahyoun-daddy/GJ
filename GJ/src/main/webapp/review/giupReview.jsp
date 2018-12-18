@@ -172,8 +172,9 @@
 				</div>
 				<div style="border: 1px solid red; float: right; height:47px; width: 20%;">	
 				</div>
+				
 				<div style="border: 1px solid red; float: right; height:33px; width: 20%;">
-					<button style="float: right;" type="button" class="btn btn-danger btn-sm">면접리뷰 작성하기</button>
+						<button id="doWrite" name="doWrite" style="float: right;" type="button" class="btn btn-danger btn-sm" value="doWrite" onclick="doWrite();">면접리뷰 작성하기</button>
 				</div>
    			<!-- 면접리뷰 -------------------------------  -->
 			<form name="frm" id="frm" method="get">
@@ -203,7 +204,7 @@
 							</div>
 							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
 						 		<button id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
-								<button id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
+								<button id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
 								<button id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
 							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
@@ -247,6 +248,7 @@
 	<input type="hidden" name="userId" id="userId" value="${company.userId}">
 	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
 	<input type="hidden" name="reviewNo2" id="reviewNo2" value="" />
+	<input type="hidden" name="upsertDiv" id="upsertDiv" value="" />
 	</form>
 	
    	<!-- // 기업 상세정보 -------------------------------  -->
@@ -254,6 +256,16 @@
 	
 
     <script type="text/javascript">
+	 function doWrite(){
+    	 //alert(url+":search_page:"+page_num);
+    	 var frm = document.frm;
+    	 var upsertDiv = $("#doWrite").val();
+    	 frm.upsertDiv.value = upsertDiv;
+    	 frm.action = "reviewUpdate.do";
+    	 frm.submit();
+    	 
+     }
+	 
 	 function searchPage(url,pageNum){
     	 //alert(url+":search_page:"+page_num);
     	 var frm = document.frm;
@@ -262,8 +274,25 @@
     	 frm.submit();
     	 
      }
+	 
     
     $(document).ready(function(){ 
+    	$(".doUpdate").on("click",function(){
+			//alert("doComplain");
+			
+			var reviewNo = $(this).val();
+			alert(reviewNo);
+			
+			if(false==confirm("수정 하시겠습니까?"))return;			
+			var frm = document.frm;
+			
+	    	frm.upsertDiv.value = "doUpdate";
+			frm.reviewNo.value =reviewNo;
+			frm.action = "reviewUpdate.do";
+			frm.submit();
+			
+		});//--doUpdate
+    	
     	$(".doDelete").on("click",function(){
 			//alert("doComplain");
 			

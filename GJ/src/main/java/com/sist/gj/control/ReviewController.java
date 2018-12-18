@@ -53,6 +53,29 @@ public class ReviewController {
 			reviewSvc.delete(reviewVO);
 		}
 		
+		String reviewNo3 = req.getParameter("reviewNo3");
+		String reviewNo4 = req.getParameter("reviewNo4");
+		String reviewTitle = req.getParameter("reviewTitle");
+		String reviewBody = req.getParameter("reviewBody");
+		String reviewPoint = req.getParameter("star");
+		String reviewComplain = req.getParameter("reviewComplain");
+		
+		ReviewVO reviewVO2 = new ReviewVO();
+		reviewVO2.setReviewNo(reviewNo3);
+		reviewVO2.setReviewTitle(reviewTitle);
+		reviewVO2.setReviewBody(reviewBody);
+		reviewVO2.setReviewPoint(reviewPoint);
+		reviewVO2.setReviewComplain(reviewComplain);
+		
+		//수정
+		if(!(null==reviewNo3)) {	
+			reviewSvc.update(reviewVO2);
+		}
+		
+		//저장 세션 받고 시퀀스 만들고 add실행
+		
+		
+		
 		String userId = req.getParameter("userId");
 		log.info("userId : "+userId);
 		
@@ -157,23 +180,25 @@ public class ReviewController {
 		log.info("invo" + invo);
 		
 		int flag = 0;
-		
-		JSONObject object = new JSONObject();
-		
-		//String loginId = req.getParameter("userId");
-		String loginId = "기업1";
-		invo.setRegId(loginId);
-		
-		flag = reviewSvc.update(invo);
-		
-		if(flag > 0) {
-			object.put("flag",flag);
-			object.put("msg","등록 되었습니다.");
-		}else {
-			object.put("flag",flag);
-			object.put("msg","등록 실패.");
+
+		String upsertDiv = req.getParameter("upsertDiv");
+		log.info("=====================upsert=======================");
+		log.info("upsertDiv : " + upsertDiv);
+		log.info("=====================upsert=======================");
+		if(upsertDiv=="doWrite") {
+			
+		}else if(upsertDiv.equals("doUpdate")) {
+			String reviewNo = req.getParameter("reviewNo");
+			invo.setReviewNo(reviewNo);
+			invo = reviewSvc.select(invo);
 		}
-		return "review/giupReview";
+		
+		String userId = req.getParameter("userId");		
+		
+		model.addAttribute("userId",userId);
+		model.addAttribute("reviewVO",invo);
+		
+		return "review/reviewUpdate";
 	}
 	
 	
@@ -194,7 +219,7 @@ public class ReviewController {
 		//수정	
 		invo.setReviewNo(reviewNo2);
 		ReviewVO outvo = reviewSvc.select(invo);
-		outvo.setRegId(null);
+		outvo.setReviewTitle(null);
 		outvo.setReviewComplain(String.valueOf((Integer.parseInt(outvo.getReviewComplain())+1)));
 		flag = reviewSvc.update(outvo);
 		
