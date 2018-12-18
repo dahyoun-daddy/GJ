@@ -34,7 +34,7 @@ public class MypagePictureCtrl {
 	@Autowired
 	private MypageSvc mypageSvc;
 	
-	private static final String UPLOAD_ROOT = "/home/sist/git/GJ/GJ/src/main/webapp/images";
+	private String UPLOAD_ROOT = "";
 	private RandomNum random = new RandomNum();
 	private static final String VIEW_UPDATE_USER="mypageUser/UserInfoUpdate";
 	Logger log = LoggerFactory.getLogger(this.getClass());
@@ -53,7 +53,11 @@ public class MypagePictureCtrl {
 	public String uploadSubmit(MultipartHttpServletRequest mReq, HttpSession ses, Model model) 
 			throws IOException, DataAccessException {
 		log.debug("1. uploadSubmit Method check");
-		
+		String path = mReq.getSession().getServletContext().getRealPath("/");
+		UPLOAD_ROOT = path+"resources/images";
+		log.info("-------------------------------");
+		log.info("path : "+path);
+		log.info("-------------------------------");
 		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
 		
 		List<PictureVO> list = new ArrayList<PictureVO>();
@@ -68,7 +72,7 @@ public class MypagePictureCtrl {
 		
 		uploadPath = UPLOAD_ROOT;
 		String yyyy = StringUtill.currDate("yyyy");
-		uploadPath = uploadPath+File.separator+yyyy;
+		uploadPath += File.separator+yyyy;
 		
 		File yyyyDir = new File(uploadPath);
 		if(yyyyDir.isDirectory() == false) {
@@ -76,7 +80,7 @@ public class MypagePictureCtrl {
 		}
 		
 		String mm = StringUtill.currDate("MM");
-		uploadPath = uploadPath+File.separator+mm;
+		uploadPath += File.separator+mm;
 		
 		File mmDir = new File(uploadPath);
 		if(mmDir.isDirectory() == false) {
@@ -140,7 +144,9 @@ public class MypagePictureCtrl {
 			fileVO.setpFlPt(uploadPath);
 			fileVO.setpFlTp(ext);
 			fileVO.setRegId(sessionVO.getUserId());
-			
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			log.info("VO : "+fileVO);
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			if(null != orgFileName  &&  !uploadPath.equals("")) {
 				//mutipart  ->  uploadPath전송
 				mFile.transferTo(new File(uploadPath+File.separator+saveFileName));
@@ -150,7 +156,9 @@ public class MypagePictureCtrl {
 		}
 		log.debug("7. file list : "+list);
 		
-		
+		log.info("+++++++++++++++++++++++++=");
+		log.info("real Path"+UPLOAD_ROOT);
+		log.info("+++++++++++++++++++++++++=");
 		
 		if(null != list  &&  list.size()>0) {
 			//flag = this.mypageSvc.addPic(list.get(0));
@@ -158,18 +166,11 @@ public class MypagePictureCtrl {
 		
 		log.debug("8. do_saveTx flag : "+flag);
 		
-		Gson gson = new GsonBuilder().create();
-		String result = "";
-		if(null != list  &&  list.size()>0){
-			result = gson.toJson(list.get(0));
-		}
-		
-		
 		JSONObject object = new JSONObject();
 		if(flag > 0) { 
 			object.put("flag",flag);
 			object.put("msg",list.get(0).getpFlNm());
-			object.put("result",result);
+			ses.setAttribute("pictureVO", list.get(0));
 		}else {
 			object.put("flag",flag);
 			object.put("msg","등록 실패. 이미지파일이 맞는지 확인해주세요");
