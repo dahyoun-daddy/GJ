@@ -202,9 +202,9 @@
 							  </div>
 							</div>
 							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
-						 		<button id="doComplain" style="float: right;" type="button" class="btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
-								<button id="doUpdate" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
-								<button id="doDelete" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
+						 		<button id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
+								<button id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="btn btn-danger btn-sm">수정하기</button>
+								<button id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
 							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
 								<label style="font-size:1em; color: #DBA901;">${reviewVO.reviewTitle}</label>
@@ -264,7 +264,7 @@
      }
     
     $(document).ready(function(){ 
-    	$("#doDelete").on("click",function(){
+    	$(".doDelete").on("click",function(){
 			//alert("doComplain");
 			
 			var reviewNo = $(this).val();
@@ -278,7 +278,7 @@
 			
 		});//--do_delete
 		
-		$("#doComplain").on("click",function(){
+		$(".doComplain").on("click",function(){
 			//alert("doComplain");
 			
 			if(false==confirm("신고 하시겠습니까?"))return;
