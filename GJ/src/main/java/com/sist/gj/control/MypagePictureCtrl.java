@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -30,7 +32,7 @@ public class MypagePictureCtrl {
 	@Autowired
 	private MypageSvc mypageSvc;
 	
-	private static final String UPLOAD_ROOT = "gj/images";
+	private static final String UPLOAD_ROOT = "/home/sist/git/GJ/GJ/src/main/webapp/images";
 	private RandomNum random = new RandomNum();
 	private static final String VIEW_UPDATE_USER="mypageUser/UserInfoUpdate";
 	Logger log = LoggerFactory.getLogger(this.getClass());
@@ -38,13 +40,14 @@ public class MypagePictureCtrl {
 	 * D:\\sh_file 폴더하위폴더생성
 	 * 방법 : 년도별/월별 폴더구조
 	 * 예시 : 2018/11
-	 * @param multipartReq
+	 * @param multipartReq 
 	 * @param model
 	 * @return
 	 * @throws IOException
 	 * @throws DataAccessException
 	 */
-	@RequestMapping(value="/file/file.do",method=RequestMethod.POST)
+	@RequestMapping(value="/common/file.do",method=RequestMethod.POST,produces="application/json;charset=utf8")
+	@ResponseBody
 	public String uploadSubmit(MultipartHttpServletRequest mReq, HttpSession ses, Model model) 
 			throws IOException, DataAccessException {
 		log.debug("1. uploadSubmit Method check");
@@ -108,6 +111,12 @@ public class MypagePictureCtrl {
 			if(orgFileName.lastIndexOf(".") > -1) {
 				ext = orgFileName.substring(orgFileName.lastIndexOf("."));
 			}
+			
+			String lowExt = ext.toLowerCase();
+			if(!(lowExt.equals(".jpg")  ||  lowExt.equals(".png")  ||  lowExt.equals(".jpeg"))) {
+				break;
+			}
+			
 			log.debug("4. file ext : "+ext);
 			
 			//파일사이즈
@@ -136,9 +145,24 @@ public class MypagePictureCtrl {
 		}
 		log.debug("7. file list : "+list);
 		
-		int flag = this.mypageSvc.addPic(list.get(0));
+		int flag =0;
+		
+		if(null != list  &&  list.size()>0) {
+			flag = this.mypageSvc.addPic(list.get(0));
+		}
+
 		log.debug("8. do_saveTx flag : "+flag);
 		
-		return "mypageUser/UserUpdate";
+		JSONObject object = new JSONObject();
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg",list.get(0).getpFlNm());
+		}else {
+			object.put("flag",flag);
+			object.put("msg","등록 실패. 이미지파일이 맞는지 확인해주세요");
+		}
+		
+		String jsonData = object.toJSONString();
+		return jsonData;
 	}
 }

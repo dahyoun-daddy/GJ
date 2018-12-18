@@ -100,6 +100,7 @@
    		         	}else{
    		         		alert(parseData.msg);
    		         	}
+   		         	
    		         },
    		         complete: function(data){//무조건 수행
    		          
