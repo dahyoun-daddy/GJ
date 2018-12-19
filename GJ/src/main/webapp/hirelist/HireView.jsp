@@ -16,7 +16,6 @@
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br><br>
-	<%=hireNo%>
 	<!-- 메인화면 -->
 	<form id="frm" name="frm" class="form-horizontal" method="post">
 		<input type="hidden" name="hireNo" id="hireNo" value="<%=hireNo%>">

@@ -27,8 +27,8 @@ public class MainController {
 	@Autowired
 	private CodeSvc codeSvc;
 	
-	//메인페이지 띄우
-	@RequestMapping(value="common/Start.do")
+	//메인페이지 띄우기
+	@RequestMapping(value="hirelist/Start.do")
 	public String view(@ModelAttribute SearchVO invo, Model model) throws Exception {
 		log.debug("search : "+invo);
 		
@@ -38,11 +38,11 @@ public class MainController {
 		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("param",invo);
 		
-		return "common/Main";
+		return "hirelist/Main";
 	}
 	
 	//검색
-	@RequestMapping(value="common/Main.do")
+	@RequestMapping(value="hirelist/Main.do")
 	public String search(@ModelAttribute SearchVO invo, Model model) throws Exception {
 		log.debug("search : "+invo);
 		
