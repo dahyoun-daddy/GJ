@@ -100,7 +100,7 @@
 		float: left;
 		padding: 15px;
 	}
-	input:focus {
+	input:focus, textarea:focus {
 	  outline: none;
 	}
 	
@@ -130,6 +130,7 @@
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
+   		<form name="frm" id="frm" class="form-horizontal" method="post" >
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 			    		<h5 style="color: orange" align="center"><strong>나의 이력서</strong></h5>
 				    	<div style="float: left; width: 110%; height: auto; padding:10px;" align="center">
@@ -142,7 +143,6 @@
 						    		이미지는 나의 정보에서 변경 가능합니다
 						    		</div>
 					    		</div><br/>
-	    		<form name="frm" id="frm" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
 					    			<label for="regId" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
@@ -177,46 +177,102 @@
 										</select>
 									</div>
 								</div>
-				</form>
 						    </div>	
 						   
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">
-						    	<strong style="color: #045FB4; font-size: 130%">보유한 기술</strong>
-						    	<div class="col-sm-10">
-								    <textarea class="form-control" id="tech" rows="1" placeholder="사용 가능한 기술을 나열해 주세요 ex) JAVA, C++, JSP, MariaDB, PHP 등"></textarea>
-							    </div><br/><br/>
-						    
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.
 						    	
-						    	<div class="form-group text-right">
-									<button type="button" id="addBtn" class="btn btn-success btn-sm">추가</button>
-						        </div>	
-						        
-						    	<div class="form-group" id="addDiv">
-							    	<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_nm" class="col-sm-10 control-label" style="float: left;"><strong>자격증 이름/ 어학 시험 이름</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_nm" name="lcs_nm"></textarea>
-								    	</div>
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_dt" class="col-sm-10 control-label" style="float: left;"><strong>취득일</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_dt" name="lcs_dt"></textarea>
-								    	</div>
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:45%;">
-						    			<label for="lcs_score" class="col-sm-10 control-label" style="float: left;"><strong>성적</strong></label>
-										<div class="col-sm-7" style="float: left;">
-									    	<input type="text" class="form-control" id="lcs_score" name="lcs_score"></textarea>
-								    	</div>
-									</div>
-									<div style="float:left;"><input type=text style="border:none; width: 1000px;" value="------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"/></div>
+						    							    	<div class="table-responsive" align="center">
+								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center" style="float:left;">
 								
+							  	
+								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
+								  		<colgroup>
+								  			<col width="50%"style="background-color: #FFFFFF;"/>
+								  			<col width="25%"style="background-color: #FFFFFF;"/>
+								  			<col width="25%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
+								  		<thead class="bg-primary">
+								  		<tr>
+								  			<th class="text-center" style="background-color: #FACC2E;">자격증/어학 시험 이름</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">취득일</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">성적</th>
+								  		</tr>
+								  		</thead>
+								  		<tbody>
+						  			<c:set var="lic1" value="${lic1}" />
+						  			<c:set var="lic2" value="${lic2}" />
+						  			<c:set var="lic3" value="${lic3}" />
+						  			<c:set var="lic4" value="${lic4}" />
+						  			<c:set var="lic5" value="${lic5}" />
+								  		<tr>
+							  				<td class="text-center">
+							  					<input type="hidden" id="licNo" id="licNo" name="licNo" value="<c:out value="${lic1.licNo }"/>"/>
+							  					<textarea id="licName" name="licName" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;" ><c:out value="${lic1.licName }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licDate" name="licDate" rows="1" placeholder="2000/01/01" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic1.licDate }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licScore" name="licScore" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic1.licScore }"/></textarea>
+							  				</td>
+							  			</tr>
+			 	 						<tr>
+							  				<td class="text-center">
+							  					<input type="hidden" id="licNo" id="licNo" name="licNo" value="<c:out value="${lic2.licNo }"/>"/>
+							  					<textarea id="licName" name="licName" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;" ><c:out value="${lic2.licName }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licDate" name="licDate" rows="1" placeholder="2000/01/01" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic2.licDate }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licScore" name="licScore" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic2.licScore }"/></textarea>
+							  				</td>
+							  			</tr>
+			 	 						<tr>
+							  				<td class="text-center">
+							  					<input type="hidden" id="licNo" id="licNo" name="licNo" value="<c:out value="${lic3.licNo }"/>"/>
+							  					<textarea id="licName" name="licName" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;" ><c:out value="${lic3.licName }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licDate" name="licDate" rows="1" placeholder="2000/01/01" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic3.licDate }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licScore" name="licScore" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic3.licScore }"/></textarea>
+							  				</td>
+							  			</tr>
+			 	 						<tr>
+							  				<td class="text-center">
+							  					<input type="hidden" id="licNo" id="licNo" name="licNo" value="<c:out value="${lic4.licNo }"/>"/>
+							  					<textarea id="licName" name="licName" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;" ><c:out value="${lic4.licName }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licDate" name="licDate" rows="1" placeholder="2000/01/01" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic4.licDate }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licScore" name="licScore" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic4.licScore }"/></textarea>
+							  				</td>
+							  			</tr>
+			 	 						<tr>
+							  				<td class="text-center">
+							  					<input type="hidden" id="licNo" id="licNo" name="licNo" value="<c:out value="${lic5.licNo }"/>"/>
+							  					<textarea id="licName" name="licName" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;" ><c:out value="${lic5.licName }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licDate" name="licDate" rows="1" placeholder="2000/01/01" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic5.licDate }"/></textarea>
+							  				</td> 
+							  				<td class="text-center">
+							  					<textarea id="licScore" name="licScore" rows="1" style="width:100%; border: 0; resize: none; background: transparent; text-align:center;"><c:out value="${lic5.licScore }"/></textarea>
+							  				</td>
+							  			</tr>
+								  		</tbody>
+								  	</table>
+							  	</div>
+							  	
+								<br/><br/>
 								</div>
+							
 								<div style="float: left;"><br/>
 								위 사항들은 이력서에 포함되는 내용으로, 기업 열람 동의 시 기업에게 보여지게 되는 내용입니다.<br/>
 								이하 아래의 자기소개서도 기업에게 보여지며, 자기소개서만 따로 게시판에 등록하여 유저들에게 조언을 얻을 수 있습니다.
@@ -231,98 +287,135 @@
 					            	<tbody>
 					            		<tr>
 					            			<th>제목</th>
-					            			<td><input type="text" class="form-control col-lg-8 col-md-12" value="${clTitle}"></td>
+					            			<td>
+					            				<input type="hidden" id="clNo" value="${clNo}"/>
+					            				<textarea id="clSungjang" name="clSungjang" rows="1" style="width:100%; border: 0; resize: none;">${clTitle}</textarea>
+					            			</td>
 					            		</tr>
 					            		<tr>
 					            			<th>성장과정</th>
-					            			<td> <textarea class="form-control" id="message" name="message" placeholder="성장과정" rows="5"></textarea></td>
-					            		</tr>
-					            		<tr>
-					            			<th>성장과정</th>
-					            			<td><textarea class="form-control" id="message" name="message" placeholder="성장과정" rows="5"></textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clSungjang}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>학교생활</th>
-					            			<td><textarea class="form-control" id="message" name="message" placeholder="학교생활" rows="5"></textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clSungjang}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>성격장단점</th>
-					            			<td><textarea class="form-control" id="message" name="message" placeholder="성격장단점" rows="5"></textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clJangdan}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>지원동기</th>
-					            			<td><textarea class="form-control" id="message" name="message" placeholder="지원동기" rows="5"></textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clJiwon}</textarea></td>
 					            		</tr>
 					            	</tbody>
 					            </table>
 					            <div>
-					            	<strong>내 이력서 및 개인정보를 기업이 열람할 수 있게 하고, 기업이 연락할 수 있음에 동의합니다.</strong>
+					            <strong>내 이력서 및 개인정보를 기업이 열람할 수 있게 하고, 기업이 연락할 수 있음에 동의합니다.</strong>
 					            	<div style="text-align: right;">
 						            	<label class="radio-inline">
-						            		<input type="radio" name="resumeOpen" id="resumeOpenY" value="1"> 예
+						            		<input type="radio" name="cvCheck" id="cvCheck" value="1" > 예
 						            	</label>
 						            	<label class="radio-inline">
-						            		<input type="radio" name="resumeOpen" id="resumeOpenN" value="2"> 아니오
+						            		<input type="radio" name="cvCheck" id="cvCheck" value="2" > 아니오
 						            	</label>
 					            	</div><br/>
 					            	<strong>내 자기소개서를 자기소개서 게시판에 게시하여 유저들의 첨삭을 받겠습니다.</strong>
 					            	<div style="text-align: right;">
 						            	<label class="radio-inline">
-						            		<input type="radio" name="cvOpen" id="cvOpenY" value="1"> 예
+						            		<input type="radio" name="clCheck" id="clCheck" value="1" > 예
 						            	</label>
 						            	<label class="radio-inline">
-						            		<input type="radio" name="cvOpen" id="cvOpenN" value="2"> 아니오
+						            		<input type="radio" name="clCheck" id="clCheck" value="0"> 아니오
 						            	</label>
-					            	</div><br/><br/>
+				            		</div><br/>
+				            		<strong>현재 자기소개서를 나의 이력서와 한 묶음으로 취급합니다. <br/>(이를 '예'에 체크하지 않을 시, 지원하는 기업의 이력서에 자기소개서는 빈칸으로 나타나게 됩니다.)</strong>
+				            		<div style="text-align: right;">
+						            	<label class="radio-inline">
+						            		<input type="radio" name="clCheck2" id="clCheck2" value="2"> 예
+						            	</label>
+						            	<label class="radio-inline">
+						            		<input type="radio" name="clCheck2" id="clCheck2"> 아니오
+						            	</label>
+				            		</div><br/><br/>
 					            </div>
 					            <h6 style="color:red;">저장하기 버튼을 클릭하지 않으면, 수정된 정보가 저장되지 않습니다. 변경 사항이 있다면 꼭 저장하기 버튼을 눌러주십시오.<br/><br/></h6>
 						    </div>
-			    	</form>
 				    	<div style="margin: 50px;">
-				    		<input id="smallBtn" type="button" value="저장하기"
-				    		       onclick="location='UserResumeView.jsp'">
+				    		<input id="smallBtn" name="do_save" type="button" value="저장하기">
 				    	</div>	
 				    	
 				    	</div>
+    	</form>
 			    	</div>
 		          </div>
 		     </div>
-	
-		
+		     
 		 </section>
 		 
 		 <script type="text/javascript">
 		 	var fileNumber = 2;
 	    	$(document).ready(function(){
-	    		//alert('document');
-	    		$("#addBtn").on("click",function(){
-	    			//alert('addBtn');
-	    			var tmpHtml  = "";
-	    			    tmpHtml += "<div class='form-group' style='float: left; margin-right:45%;'>";
-	    			    tmpHtml += "<label for='lcs_nm"+fileNumber+"' class='col-sm-10 control-label' style='float: left;'><strong>자격증 이름/ 어학 시험 이름</strong></label>";
-	    				tmpHtml += "<div class='col-sm-7' style='float: left;'>";
-	    				tmpHtml += "<input type='text' class='form-control' id='lcs_nm"+fileNumber+"' name='lcs_nm"+fileNumber+"'></textarea></div></div><div class='form-group' style='float: left; margin-right:45%;'>";
-	    				tmpHtml += "<label for='lcs_dt"+fileNumber+"' class='col-sm-10 control-label' style='float: left;'><strong>취득일</strong></label><div class='col-sm-7' style='float: left;'><input type='text' class='form-control' id='lcs_dt"+fileNumber+"' name='lcs_dt"+fileNumber+"'></textarea></div></div>";
-	    				tmpHtml += "<div class='form-group' style='float: left; margin-right:45%;'>";
-	    				tmpHtml += "<label for='lcs_score"+fileNumber+"' class='col-sm-10 control-label' style='float: left;'><strong>성적</strong></label>";
-	    				tmpHtml += "<div class='col-sm-7' style='float: left;'>";
-	    				tmpHtml += "<input type='text' class='form-control' id='lcs_score"+fileNumber+"' name='lcs_score"+fileNumber+"'></textarea>";
-	    				tmpHtml += "</div></div><button type='button' class='btnDel btn btn-danger btn-sm' style='float:right;'>삭제</button>";
-						tmpHtml += "<div style='float:left;'><input type=text style='border:none; width: 1000px;' value='------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'/></div>";
-				
-	    			console.log("tmpHtml\n"+tmpHtml);  
-	    			$("#addDiv").append(tmpHtml);
-	    			fileNumber++;
+	    		$("input[name='do_save']").on("click",function(){
+	    			if(false==confirm("해당 내용을 저장하시겠습니까?"))return;
 	    			
-	    			$(".btnDel").on("click",function(){
-	    				$(this).prev().prev().prev().remove();
-	    				$(this).prev().prev().remove();
-	    				$(this).prev().remove();
-	    				$(this).next().remove();
-	    				$(this).remove();
+	    			var licNo = [];
+	    			var licName = [];
+	    			var licDate = [];
+	    			var licScore = [];
+	    			$("input[name='licNo']").each(function(){
+	    				var no = $(this).val(); 
+	    				licNo.push(no);
 	    			});
+	    			$("textarea[name='licName']").each(function(){
+	    				var name = $(this).val(); 
+	    				licName.push(name);
+	    			});
+	    			$("textarea[name='licDate']").each(function(){
+	    				var date = $(this).val(); 
+	    				licDate.push(date);
+	    			});
+	    			$("textarea[name='licScore']").each(function(){
+	    				var score = $(this).val(); 
+	    				licScore.push(score);
+	    			});
+	    			var jsonNoList = JSON.stringify(licNo);
+	    			var jsonNameList = JSON.stringify(licName);
+	    			var jsonDateList = JSON.stringify(licDate);
+	    			var jsonScoreList = JSON.stringify(licScore);
+	    			
+					$.ajax({
+						type : 'POST',
+						url : 'updateLic.do',
+						data : {
+							"jsonNoList": jsonNoList,
+							"jsonNameList": jsonNameList,
+							"jsonDateList": jsonDateList,
+							"jsonScoreList": jsonScoreList
+						},
+						success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+				             var parseData = data;
+			                 console.log("updateLic.flag="+parseData.flag);
+			                 console.log("updateLic.message="+parseData.message);
+				         	 if(parseData.flag > 0){
+				         		alert(parseData.message);
+// 				         		location.href="UserResumeView.do";
+				         	 }else{
+				         		alert(parseData.message);
+				         	 }				             
+			            },
+			            complete: function(data){//무조건 수행
+			             
+			            },
+			            error: function(xhr,status,error){
+			             
+			            }
+					});//'updateLic.do' ajax
 	    			
 	    		});
+	    		
+	    		
+    			
 	    	}); //-- document 
 	 	</script>
     

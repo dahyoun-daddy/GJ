@@ -205,14 +205,14 @@
 								  					<c:forEach var="license" items="${list}">
 								  					<tr id="${license.licNo }">
 										  				<td class="text-center"><c:out value="${license.licName}"/></td> 
-										  				<td class="text-left"><c:out value="${license.licDate}"/></td> 
+										  				<td class="text-center"><c:out value="${license.licDate}"/></td> 
 		 								  				<td class="text-center"><c:out value="${license.licScore}"/></td>
 		 								  			</tr>
 								  					</c:forEach>
 								  				</c:when>
 			  				 	 					<c:otherwise>
 						 	 						<tr>
-						 	 							<td class="text-center" colspan="99">지원한 정보가 없습니다.</td>
+						 	 							<td class="text-center" colspan="99">자격증 정보가 없습니다.</td>
 						 	 						</tr>
 							  						</c:otherwise>
 								  			</c:choose>

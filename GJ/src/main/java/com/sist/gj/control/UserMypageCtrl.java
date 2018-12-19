@@ -185,7 +185,108 @@ public class UserMypageCtrl {
 		log.info("3========================");	
 		
 		return jsonData;
-	}	
+	}
+	
+	@RequestMapping(value="/mypageUser/updateLic.do",
+			        method=RequestMethod.POST,
+	                produces="application/json;charset=utf8"  
+	)
+	@ResponseBody
+	public String resumeLicense(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		log.info("=====================resumeLicense=======================");
+		
+		LicenseVO invo = new LicenseVO();
+		invo.setRegId("boondll@hanmail.net");
+		
+		List<LicenseVO> list = mypageSvc.retrieveLic(invo);
+//		int updateCnt = 0;
+//		int deleteCnt = 0;
+//		int addCnt =0;
+		
+		String noList = req.getParameter("jsonNoList");
+		String nameList = req.getParameter("jsonNameList");
+		String dateList = req.getParameter("jsonDateList");
+		String scoreList = req.getParameter("jsonScoreList");
+		log.info("licNo_list: "+noList);
+		
+		Gson gson=new Gson();
+		List<String>  NO = gson.fromJson(noList, List.class);
+		List<String>  NAME = gson.fromJson(nameList, List.class);
+		List<String>  DATE = gson.fromJson(dateList, List.class);
+		List<String>  SCORE = gson.fromJson(scoreList, List.class);
+		log.info("NO: "+NO);
+		log.info("NAME: "+NAME);
+		log.info("DATE: "+DATE);
+		log.info("SCORE: "+SCORE);
+		
+		List<String> orgNoList = new ArrayList<String>();
+		
+		int flag = 0;
+		
+		for(int i=0;i<NO.size();i++) { //수정된 새로운 데이터
+			String newNo = NO.get(i);
+			String newName = NAME.get(i);
+			String newDate = DATE.get(i);
+			String newScore = SCORE.get(i);
+			
+			log.info("바뀐정보의 넘버: "+newNo.toString());
+			
+			for(int n=0; n<list.size(); n++) { //기존 디비에 있는 데이터
+				String orgNo = list.get(n).getLicNo();
+				LicenseVO vo = new LicenseVO();
+				orgNoList.add(orgNo);
+				
+				log.info("디비정보의 넘버: "+orgNoList.toString());
+				
+				if(NO.contains(orgNo)==true && orgNoList.contains(orgNo)==true && newDate.equals("") && newName.equals("") && orgNo.equals(newNo)) {//삭제
+					log.info("삭제만하는조건입니다");
+					
+					vo.setLicNo(orgNo);
+					vo.setRegId("boondll@hanmail.net");
+					flag = mypageSvc.deleteLic(vo);
+					
+				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
+					log.info("삭제 후 추가하는 조건입니다.");
+					
+					vo.setLicNo(orgNo);
+					vo.setRegId("boondll@hanmail.net");
+					mypageSvc.deleteLic(vo);
+					
+					vo.setLicNo("");
+					vo.setLicName(newName);
+					vo.setLicDate(newDate);
+					vo.setLicScore(newScore);
+					flag = mypageSvc.addLic(vo);
+				}else if(!newDate.equals("") && !newName.equals("") ) {
+					log.info("추가만 하는 조건입니다.");
+					vo.setRegId("boondll@hanmail.net");
+					vo.setLicName(newName);
+					vo.setLicDate(newDate);
+					vo.setLicScore(newScore);
+					flag = mypageSvc.addLic(vo);
+				}
+			}
+//			if(flag>0) break;
+		}
+		 
+		JSONObject object=new JSONObject();
+		
+		if(flag>0) {
+			object.put("flag", flag);
+			object.put("message", "자격증 수정 성공!");
+		}else {
+			object.put("flag", flag);
+			object.put("message", "자격증 수정 실패...");			
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		log.info("3========================");
+		log.info("jsonData="+jsonData);
+		log.info("3========================");	
+		
+		return jsonData;
+	}
 	
 	//UserResumeView에 값 뿌려주기
 	@RequestMapping(value="/mypageUser/UserResume.do")
@@ -204,15 +305,34 @@ public class UserMypageCtrl {
 		CvFormVO outResume = mypageSvc.selectCv(invoResume);
 		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
 		List<LicenseVO> list = mypageSvc.retrieveLic(inLic);
+		
 		for(int i=0; i<list.size(); i++) {
-			String licDate = list.get(i).getLicDate();
+			String LDate = list.get(i).getLicDate();
 			SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = transeFormat.parse(licDate);
+			Date date = transeFormat.parse(LDate);
 			
 			SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
-			licDate = notIncludeTime.format(date);
-			list.get(i).setLicDate(licDate);
+			LDate = notIncludeTime.format(date);
+			list.get(i).setLicDate(LDate);
 		}
+		
+		LicenseVO lic1 = new LicenseVO();
+		LicenseVO lic2 = new LicenseVO();
+		LicenseVO lic3 = new LicenseVO();
+		LicenseVO lic4 = new LicenseVO();
+		LicenseVO lic5 = new LicenseVO();
+		
+		try {
+			lic1 = list.get(0);
+			lic2 = list.get(1);
+			lic3 = list.get(2);
+			lic4 = list.get(3);
+			lic5 = list.get(4);
+		}catch(IndexOutOfBoundsException e) {
+			log.info(e.toString());
+		}
+
+		
 		UserVO outUser = userSvc.select(inUser);
 		CodeVO codeSearch = new CodeVO();
 		codeSearch.setCmId("HIRE_SEARCH_EDU");
@@ -230,16 +350,21 @@ public class UserMypageCtrl {
 		model.addAttribute("clSang",outJaso.getClSang());
 		model.addAttribute("clJangdan",outJaso.getClJangdan());
 		model.addAttribute("clJiwon",outJaso.getClJiwon());
-		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
+		model.addAttribute("clCheck",outJaso.getClCheck());//자소서 게시판에 게시 여부
+		model.addAttribute("clNo",outJaso.getClNo());
 		
-		model.addAttribute("list",list);//자격증 list
-		model.addAttribute("param",inLic);
+		model.addAttribute("list",list);
+		model.addAttribute("lic1", lic1);
+		model.addAttribute("lic2", lic2);
+		model.addAttribute("lic3", lic3);
+		model.addAttribute("lic4", lic4);
+		model.addAttribute("lic5", lic5);
 		
 		model.addAttribute("userName",outUser.getUserName());
 		model.addAttribute("userPhone",outUser.getUserPhone());
 		model.addAttribute("userId",outUser.getUserId());
 	
-		return VIEW_RESUME_VIEW;
+		return VIEW_RESUME;
 	}
 	
 	@RequestMapping(value="/mypageUser/UserResumeView.do")
@@ -286,30 +411,13 @@ public class UserMypageCtrl {
 		model.addAttribute("clJiwon",outJaso.getClJiwon());
 		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
 		
-		model.addAttribute("listSize",list.size());//자격증 list
-		
-		List<String> licNo    = new ArrayList<String>();
-		List<String> licName  = new ArrayList<String>();
-		List<String> licDate  = new ArrayList<String>();
-		List<String> licScore = new ArrayList<String>();
-		for(int n=0; n<list.size(); n++) {
-			licNo.add   ( list.get(n).getLicNo() );
-			licName.add ( list.get(n).getLicName() );
-			licDate.add ( list.get(n).getLicDate() );
-			licScore.add( list.get(n).getLicScore() );
-		}
-		
 		model.addAttribute("list",list);
-		model.addAttribute("licNo",licNo);
-		model.addAttribute("licName",licName);
-		model.addAttribute("licDate",licDate);
-		model.addAttribute("licScore",licScore);
 		
 		model.addAttribute("userName",outUser.getUserName());
 		model.addAttribute("userPhone",outUser.getUserPhone());
 		model.addAttribute("userId",outUser.getUserId());
 	
-		return VIEW_RESUME;
+		return VIEW_RESUME_VIEW;
 	}
 	
 	

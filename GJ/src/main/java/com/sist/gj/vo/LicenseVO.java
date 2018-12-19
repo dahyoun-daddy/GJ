@@ -7,7 +7,7 @@ public class LicenseVO extends DTO {
 	private String licName; //자격증 이름
 	private String licDate; //취득일
 	private String licScore; //성적
-	private String regId; //채용no
+	private String regId; //
 	
 	public LicenseVO() {}
 

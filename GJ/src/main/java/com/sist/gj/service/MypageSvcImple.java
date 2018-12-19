@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sist.gj.common.RandomNum;
 import com.sist.gj.dao.JasoDao;
 import com.sist.gj.dao.MypageDao;
 import com.sist.gj.vo.ApplyVO;
@@ -22,6 +23,8 @@ import com.sist.gj.vo.UserVO;
 @Service
 public class MypageSvcImple implements MypageSvc {
 	private Logger log = LoggerFactory.getLogger(MypageSvcImple.class);
+	
+	private RandomNum random = new RandomNum();
 
 	@Autowired
 	private MypageDao mypageDao;
@@ -64,6 +67,10 @@ public class MypageSvcImple implements MypageSvc {
 
 	@Override
 	public int addLic(LicenseVO licenseVO) {
+			if(null==licenseVO.getLicNo() || licenseVO.getLicNo().equals("")) {
+				String randomString = random.makeRandom();
+				licenseVO.setLicNo(randomString);
+			}
 		return mypageDao.addLic(licenseVO);
 	}
 
@@ -89,6 +96,10 @@ public class MypageSvcImple implements MypageSvc {
 
 	@Override
 	public int addApply(ApplyVO applyVO) {
+		if(null==applyVO.getApplyNo() || applyVO.getApplyNo().equals("")) {
+			String randomString = random.makeRandom();
+			applyVO.setApplyNo(randomString);
+		}
 		return mypageDao.addApply(applyVO);
 	}
 
