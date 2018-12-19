@@ -9,6 +9,8 @@
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	
+	
 	<br/>
 	<br/>
 	
@@ -32,9 +34,9 @@
             </table>
             <br>
             <input type="button" value="로그인" id="loginBt" name="loginBt"/>
-            <input type="button" value="구직자 가입" onclick="userSign()" />
-            <input type="button" value="기업 가입" onclick="compSign()" />
-            <input type="button" value="ID/PW찾기" onclick="findIdPass()" />
+            <input type="button" value="구직자 가입" id="signupU" name="signupU" onclick="userSign()" />
+            <input type="button" value="기업 가입" id="signupC" name="signupC" onclick="compSign()" />
+            <input type="button" value="ID/PW찾기" id="loginBt" name="loginBt"onclick="findIdPass()" />
            
         </form>
     </div>
@@ -61,7 +63,7 @@
 
 		function findIdPass(){
 			var frm = document.login;
-    		frm.action="findIdPass.jsp";
+    		frm.action="findIdPass.do";
     		frm.submit();
 		}
 		$(document).ready(function(){
@@ -103,6 +105,7 @@
 		})
 	})	
 		
+	
 	</script>
 
 
