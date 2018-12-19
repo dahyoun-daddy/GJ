@@ -134,7 +134,7 @@
 					    	        onclick="location='UserMyInfo.do'">나의 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
-					    	        onclick="location='UserResumeView.jsp'">이력서</button><br/><br/>
+					    	        onclick="location='UserResumeView.do'">이력서</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
 					    	        onclick="location='UserApply.do'">지원 현황</button>

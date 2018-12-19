@@ -278,46 +278,6 @@
 								            	</label>
 							            	</c:if>
 						            	</div><br/>
-						            	<strong>내 자기소개서를 자기소개서 게시판에 게시하여 유저들의 첨삭을 받겠습니다.</strong>
-						            	<div style="text-align: right;">
-						            		<c:set var="clChk" value="${clCheck }" />
-						            			<c:if test="${clChk eq '0'}">
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck" id="clCheck" value="1" disabled="disabled"> 예
-									            	</label>
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck" id="clCheck" checked="checked" disabled="disabled"> 아니오
-									            	</label>
-									            </c:if>
-									            <c:if test="${clChk ne '0'}">
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck" id="clCheck" value="1" checked="checked" disabled="disabled"> 예
-									            	</label>
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck" id="clCheck" disabled="disabled"> 아니오
-									            	</label>
-									            </c:if>
-					            		</div><br/>
-					            		<strong>현재 자기소개서를 나의 이력서와 한 묶음으로 취급합니다. <br/>(이를 '예'에 체크하지 않을 시, 지원하는 기업의 이력서에 자기소개서는 빈칸으로 나타나게 됩니다.)</strong>
-					            		<div style="text-align: right;">
-						            		<c:set var="clChk" value="${clCheck }" />
-						            			<c:if test="${clChk ne '2'}">
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck2" id="clCheck2" value="2" disabled="disabled"> 예
-									            	</label>
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck2" id="clCheck2" checked="checked" disabled="disabled"> 아니오
-									            	</label>
-									            </c:if>
-									            <c:if test="${clChk eq '2'}">
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck2" id="clCheck2" value="2" checked="checked" disabled="disabled"> 예
-									            	</label>
-									            	<label class="radio-inline">
-									            		<input type="radio" name="clCheck2" id="clCheck2" disabled="disabled"> 아니오
-									            	</label>
-									            </c:if>
-					            		</div><br/><br/>
 					            </div>
 					            <h6 style="color:red;">변경할 사항이 있다면 수정하기 버튼을 누른 후 수정해 주십시오.<br/>단, 기업에 지원했을 경우 보여지는 이력서는 최근 변경된 이력서이며, 변경 전의 이력서를 기업이 열람했을 수 있습니다.<br/></h6>
 						    </div>

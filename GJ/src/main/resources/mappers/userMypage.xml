@@ -154,7 +154,7 @@
 		SELECT cl_no, cl_title, cl_sungjang, cl_sang,cl_jangdan, cl_jiwon, cl_check, A.reg_id, A.reg_dt, B.user_nick
 		 FROM usercl A, users B
 		WHERE A.reg_id= #{regId}
-		  AND A.cl_check = 2
+		  AND A.cl_check = 0
 		  AND A.reg_id = B.user_id
 	</select>
 	

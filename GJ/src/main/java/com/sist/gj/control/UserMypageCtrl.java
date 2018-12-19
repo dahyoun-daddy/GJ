@@ -223,80 +223,80 @@ public class UserMypageCtrl {
 		
 //자격증 시작----------------------------------------------------------------------	
 		
-//		for(int i=0;i<NO.size();i++) { //수정된 새로운 데이터
-//			String newNo = NO.get(i);
-//			String newName = NAME.get(i);
-//			String newDate = DATE.get(i);
-//			String newScore = SCORE.get(i);
-//			
-//			log.info("바뀐정보의 넘버: "+newNo.toString());
-//			
-//			for(int n=0; n<list.size(); n++) { //기존 디비에 있는 데이터
-//				String orgNo = list.get(n).getLicNo();
-//				LicenseVO vo = new LicenseVO();
-//				orgNoList.add(orgNo);
-//				
-//				log.info("디비정보의 넘버: "+orgNoList.toString());
-//				
-//				if(NO.contains(orgNo)==true && orgNoList.contains(orgNo)==true && newDate.equals("") && newName.equals("") && orgNo.equals(newNo)) {//삭제
-//					log.info("삭제만하는조건입니다");
-//					
-//					vo.setLicNo(orgNo);
-//					vo.setRegId("boondll@hanmail.net");
-//					flag = mypageSvc.deleteLic(vo);
-//					
-//				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
-//					log.info("삭제 후 추가하는 조건입니다.");
-//					
-//					vo.setLicNo(orgNo);
-//					vo.setRegId("boondll@hanmail.net");
-//					mypageSvc.deleteLic(vo);
-//					
-//					vo.setLicNo("");
-//					vo.setLicName(newName);
-//					vo.setLicDate(newDate);
-//					vo.setLicScore(newScore);
-//					flag = mypageSvc.addLic(vo);
-//				}
-//			}
-//		}
-//		
-//		try {
-//			
-//			int listDiff = NO.size()-list.size();
-//			log.info("길이차이: "+listDiff);
-//			if(listDiff>0) {
-//				for(int q=0; q<listDiff; q++) {
-//					if(null!=NAME.get(q+list.size())){
-//						LicenseVO vo = new LicenseVO();
-//						vo.setRegId("boondll@hanmail.net");
-//						vo.setLicName( NAME.get(q+list.size()) );
-//						vo.setLicDate( DATE.get(q+list.size()) );
-//						vo.setLicScore( SCORE.get(q+list.size()) );
-//						flag = mypageSvc.addLic(vo);
-//					}else{
-//						break;
-//					}
-//				}
-//			}
-//		}catch(Exception e) {
-//			log.debug(e.toString());
-//		}
+		for(int i=0;i<NO.size();i++) { //수정된 새로운 데이터
+			String newNo = NO.get(i);
+			String newName = NAME.get(i);
+			String newDate = DATE.get(i);
+			String newScore = SCORE.get(i);
+			
+			log.info("바뀐정보의 넘버: "+newNo.toString());
+			
+			for(int n=0; n<list.size(); n++) { //기존 디비에 있는 데이터
+				String orgNo = list.get(n).getLicNo();
+				LicenseVO vo = new LicenseVO();
+				orgNoList.add(orgNo);
+				
+				log.info("디비정보의 넘버: "+orgNoList.toString());
+				
+				if(NO.contains(orgNo)==true && orgNoList.contains(orgNo)==true && newDate.equals("") && newName.equals("") && orgNo.equals(newNo)) {//삭제
+					log.info("삭제만하는조건입니다");
+					
+					vo.setLicNo(orgNo);
+					vo.setRegId("boondll@hanmail.net");
+					flag = mypageSvc.deleteLic(vo);
+					
+				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
+					log.info("삭제 후 추가하는 조건입니다.");
+					
+					vo.setLicNo(orgNo);
+					vo.setRegId("boondll@hanmail.net");
+					mypageSvc.deleteLic(vo);
+					
+					vo.setLicNo("");
+					vo.setLicName(newName);
+					vo.setLicDate(newDate);
+					vo.setLicScore(newScore);
+					flag = mypageSvc.addLic(vo);
+				}
+			}
+		}
+		
+		try {
+			
+			int listDiff = NO.size()-list.size();
+			log.info("길이차이: "+listDiff);
+			if(listDiff>0) {
+				for(int q=0; q<listDiff; q++) {
+					if(null!=NAME.get(q+list.size())){
+						LicenseVO vo = new LicenseVO();
+						vo.setRegId("boondll@hanmail.net");
+						vo.setLicName( NAME.get(q+list.size()) );
+						vo.setLicDate( DATE.get(q+list.size()) );
+						vo.setLicScore( SCORE.get(q+list.size()) );
+						flag = mypageSvc.addLic(vo);
+					}else{
+						break;
+					}
+				}
+			}
+		}catch(Exception e) {
+			log.debug(e.toString());
+		}
 		
 //자격증 끝----------------------------------------------------------------------
 //학력 시작-------------------------------------------------------------------------
 		
 		String regId = req.getParameter("regId");
-//		String cvGrade = req.getParameter("cvGrade");
-//		String cvCheck = req.getParameter("cvCheck");
-//		
-//		CvFormVO cvcv = new CvFormVO();
-//		cvcv.setRegId(regId);
-//		cvcv.setCvCheck(Integer.parseInt(cvCheck));
-//		cvcv.setCvGrade(cvGrade);
-//		
-//		mypageSvc.deleteCv(cvcv);
-//		mypageSvc.addCv(cvcv);
+		String cvGrade = req.getParameter("cvGrade");
+		String cvCheck = req.getParameter("cvCheck");
+		
+		CvFormVO cvcv = new CvFormVO();
+		cvcv.setRegId(regId);
+		cvcv.setCvCheck(Integer.parseInt(cvCheck));
+		cvcv.setCvGrade(cvGrade);
+		
+		flag = mypageSvc.deleteCv(cvcv);
+		flag = mypageSvc.addCv(cvcv);
 		
 //학력 끝-------------------------------------------------------------------------		
 //이력서 시작-------------------------------------------------------------------------	
@@ -307,10 +307,6 @@ public class UserMypageCtrl {
 		String clSang = req.getParameter("clSang");
 		String clJangdan = req.getParameter("clJangdan");
 		String clJiwon = req.getParameter("clJiwon");
-		int clCheck1 = Integer.parseInt(req.getParameter("clCheck1"));
-		int clCheck2 = Integer.parseInt(req.getParameter("clCheck2"));
-		log.info("///////////////////////////////////"+clCheck1);
-		log.info("///////////////////////////////////"+clCheck2);
 		
 		JasoVO jaso = new JasoVO();
 		jaso.setClNo(clNo);
@@ -320,29 +316,10 @@ public class UserMypageCtrl {
 		jaso.setClJangdan(clJangdan);
 		jaso.setClJiwon(clJiwon);
 		jaso.setRegId(regId);
-		JasoVO jaso2 = jaso;
+		jaso.setClCheck(0);
 		
-		if(clCheck1==0||clCheck2==0) {
-			jaso.setClCheck(0);
-		}else if(clCheck1!=0||clCheck2==0) {
-			jaso.setClCheck(clCheck1);
-		}else if(clCheck1==0||clCheck2==2) {
-			jaso.setClCheck(2);
-		}else if(clCheck1==1||clCheck2==2) {
-			jaso2.setClCheck(1);
-			jaso.setClCheck(2);
-		}
+		flag = jasoSvc.merge(jaso);
 		
-		int havetoAdd = jaso2.getClCheck();
-		
-		if(havetoAdd==1) {
-			jasoSvc.delete(jaso);
-			jasoSvc.add(jaso2);
-			jasoSvc.add(jaso);
-		}else {
-			jasoSvc.delete(jaso);
-			jasoSvc.add(jaso);
-		}
 		
 //이력서 끝-------------------------------------------------------------------------	
 		 
@@ -350,10 +327,10 @@ public class UserMypageCtrl {
 		
 		if(flag>0) {
 			object.put("flag", flag);
-			object.put("message", "자격증 수정 성공!");
+			object.put("message", "저장 성공!");
 		}else {
 			object.put("flag", flag);
-			object.put("message", "자격증 수정 실패...");			
+			object.put("message", "저장 실패...");			
 		}
 		
 		String jsonData = object.toJSONString();

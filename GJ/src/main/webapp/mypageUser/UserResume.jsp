@@ -181,7 +181,8 @@
 						   
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
-						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.
+						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.<br>
+						    	<red>단, 줄에 공백 없이 윗칸부터 작성해 주세요.</red>
 						    	
 							<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center" style="float:left;">
@@ -320,24 +321,6 @@
 						            		<input type="radio" name="cvCheck" id="cvCheck" value="0" > 아니오
 						            	</label>
 					            	</div><br/>
-					            	<strong>내 자기소개서를 자기소개서 게시판에 게시하여 유저들의 첨삭을 받겠습니다.</strong>
-					            	<div style="text-align: right;">
-						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck1" id="clCheck1" value="1" > 예
-						            	</label>
-						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck1" id="clCheck1" value="0"> 아니오
-						            	</label>
-				            		</div><br/>
-				            		<strong>현재 자기소개서를 나의 이력서와 한 묶음으로 취급합니다. <br/>(이를 '예'에 체크하지 않을 시, 이력서에 현재 입력한 자기소개서는 빈칸으로 나타나게 됩니다.)</strong>
-				            		<div style="text-align: right;">
-						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck2" id="clCheck2" value="2"> 예
-						            	</label>
-						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck2" id="clCheck2" value="0"> 아니오
-						            	</label>
-				            		</div><br/><br/>
 					            </div>
 					            <h6 style="color:red;">저장하기 버튼을 클릭하지 않으면, 수정된 정보가 저장되지 않습니다. 변경 사항이 있다면 꼭 저장하기 버튼을 눌러주십시오.<br/><br/></h6>
 						    </div>
@@ -400,9 +383,7 @@
 							"clSungjang": $("#clSungjang").val(),
 							"clSang": $("#clSang").val(),
 							"clJangdan": $("#clJangdan").val(),
-							"clJiwon": $("#clJiwon").val(),
-							"clCheck1": $("input[name='clCheck1']:checked").val(),
-							"clCheck2": $("input[name='clCheck2']:checked").val()
+							"clJiwon": $("#clJiwon").val()
 						},
 						success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 				             var parseData = data;
@@ -410,7 +391,7 @@
 			                 console.log("updateLic.message="+parseData.message);
 				         	 if(parseData.flag > 0){
 				         		alert(parseData.message);
-// 				         		location.href="UserResumeView.do";
+				         		location.href="UserResumeView.do";
 				         	 }else{
 				         		alert(parseData.message);
 				         	 }				             
