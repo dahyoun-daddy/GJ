@@ -188,6 +188,11 @@ public class MypageSvcImple implements MypageSvc {
 		return flag;
 	}
 
+	@Override
+	public int deleteCv(CvFormVO cvFormVO) throws SQLException {
+		return mypageDao.deleteCv(cvFormVO);
+	}
+
 
 
 

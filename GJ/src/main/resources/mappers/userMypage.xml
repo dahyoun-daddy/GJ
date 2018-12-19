@@ -116,14 +116,21 @@
 	</select>
 
 	<insert id="addCv" parameterType="CvFormVO">
-		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt) VALUES (
+		INSERT INTO USERCV(reg_id, cv_date, cv_grade, cv_check, reg_dt, mod_id, mod_dt) VALUES (
 		    #{regId},
             sysdate,
             #{cvGrade},
             #{cvCheck},
+            sysdate,
+            #{regId},
             sysdate
             )
 	</insert>
+	
+	<delete id="deleteCv" parameterType="CvFormVO">
+		DELETE FROM USERCV
+		WHERE reg_id = #{regId}
+	</delete>
 	
 	<update id="updateCv" parameterType="CvFormVO">
 		UPDATE usercv

@@ -40,6 +40,7 @@ public class CompMypageCtrl {
 	private static final String VIEW_UPDATE_COMP="mypageCompany/CompInfoUpdate";
 	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
 	private static final String VIEW_MYPAGE="mypageCompany/CompMypage";
+	private static final String VIEW_SIGN_OUT="mypageCompany/CompSignOut";
 	
 
 	
@@ -61,6 +62,45 @@ public class CompMypageCtrl {
 		model.addAttribute("hireCount",outvo.getHireCount());
 		
 		return VIEW_MYPAGE;
+	}
+	
+	@RequestMapping(value="/mypageCompany/CompSignOut.do")
+	public String deletePage(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+		log.info("=====================delete=======================");
+		
+//		String userId = req.getParameter("selectUserId");
+		UserVO invo = new UserVO();
+		invo.setUserId("signout1");
+		model.addAttribute("userId",invo.getUserId());
+		
+		return VIEW_SIGN_OUT;
+	}
+	
+	@RequestMapping(value="/mypageCompany/deleteUser.do",
+					method=RequestMethod.POST,
+			        produces="application/json;charset=utf8")
+	@ResponseBody
+	public String deleteUser(@ModelAttribute UserVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+		log.info("=====================delete=======================");
+		log.info("invo" + invo);
+		
+		int flag = 0;
+		
+		JSONObject object = new JSONObject();
+	
+		flag = mypageSvc.deleteUser(invo);
+		
+		if(flag > 0) {
+			object.put("flag",flag);
+			object.put("msg","탈퇴 완료되었습니다.");
+		}else {
+			object.put("flag",flag);
+			object.put("msg","탈퇴 실패. 비밀번호를 확인하세요.");
+		}
+	
+		String jsonData = object.toJSONString();
+		
+		return jsonData;
 	}
 	
 	@RequestMapping(value="/mypageCompany/CompInfoUpdate.do")

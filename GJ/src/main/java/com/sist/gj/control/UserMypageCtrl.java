@@ -1,6 +1,7 @@
 package com.sist.gj.control;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -187,21 +188,18 @@ public class UserMypageCtrl {
 		return jsonData;
 	}
 	
-	@RequestMapping(value="/mypageUser/updateLic.do",
+	@RequestMapping(value="/mypageUser/updateResume.do",
 			        method=RequestMethod.POST,
 	                produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
-	public String resumeLicense(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	public String resumeUpdate(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		log.info("=====================resumeLicense=======================");
 		
 		LicenseVO invo = new LicenseVO();
 		invo.setRegId("boondll@hanmail.net");
 		
 		List<LicenseVO> list = mypageSvc.retrieveLic(invo);
-//		int updateCnt = 0;
-//		int deleteCnt = 0;
-//		int addCnt =0;
 		
 		String noList = req.getParameter("jsonNoList");
 		String nameList = req.getParameter("jsonNameList");
@@ -214,60 +212,139 @@ public class UserMypageCtrl {
 		List<String>  NAME = gson.fromJson(nameList, List.class);
 		List<String>  DATE = gson.fromJson(dateList, List.class);
 		List<String>  SCORE = gson.fromJson(scoreList, List.class);
-		log.info("NO: "+NO);
-		log.info("NAME: "+NAME);
-		log.info("DATE: "+DATE);
-		log.info("SCORE: "+SCORE);
+//		log.info("NO: "+NO);
+//		log.info("NAME: "+NAME);
+//		log.info("DATE: "+DATE);
+//		log.info("SCORE: "+SCORE);
 		
 		List<String> orgNoList = new ArrayList<String>();
 		
 		int flag = 0;
 		
-		for(int i=0;i<NO.size();i++) { //수정된 새로운 데이터
-			String newNo = NO.get(i);
-			String newName = NAME.get(i);
-			String newDate = DATE.get(i);
-			String newScore = SCORE.get(i);
-			
-			log.info("바뀐정보의 넘버: "+newNo.toString());
-			
-			for(int n=0; n<list.size(); n++) { //기존 디비에 있는 데이터
-				String orgNo = list.get(n).getLicNo();
-				LicenseVO vo = new LicenseVO();
-				orgNoList.add(orgNo);
-				
-				log.info("디비정보의 넘버: "+orgNoList.toString());
-				
-				if(NO.contains(orgNo)==true && orgNoList.contains(orgNo)==true && newDate.equals("") && newName.equals("") && orgNo.equals(newNo)) {//삭제
-					log.info("삭제만하는조건입니다");
-					
-					vo.setLicNo(orgNo);
-					vo.setRegId("boondll@hanmail.net");
-					flag = mypageSvc.deleteLic(vo);
-					
-				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
-					log.info("삭제 후 추가하는 조건입니다.");
-					
-					vo.setLicNo(orgNo);
-					vo.setRegId("boondll@hanmail.net");
-					mypageSvc.deleteLic(vo);
-					
-					vo.setLicNo("");
-					vo.setLicName(newName);
-					vo.setLicDate(newDate);
-					vo.setLicScore(newScore);
-					flag = mypageSvc.addLic(vo);
-				}else if(!newDate.equals("") && !newName.equals("") ) {
-					log.info("추가만 하는 조건입니다.");
-					vo.setRegId("boondll@hanmail.net");
-					vo.setLicName(newName);
-					vo.setLicDate(newDate);
-					vo.setLicScore(newScore);
-					flag = mypageSvc.addLic(vo);
-				}
-			}
-//			if(flag>0) break;
+//자격증 시작----------------------------------------------------------------------	
+		
+//		for(int i=0;i<NO.size();i++) { //수정된 새로운 데이터
+//			String newNo = NO.get(i);
+//			String newName = NAME.get(i);
+//			String newDate = DATE.get(i);
+//			String newScore = SCORE.get(i);
+//			
+//			log.info("바뀐정보의 넘버: "+newNo.toString());
+//			
+//			for(int n=0; n<list.size(); n++) { //기존 디비에 있는 데이터
+//				String orgNo = list.get(n).getLicNo();
+//				LicenseVO vo = new LicenseVO();
+//				orgNoList.add(orgNo);
+//				
+//				log.info("디비정보의 넘버: "+orgNoList.toString());
+//				
+//				if(NO.contains(orgNo)==true && orgNoList.contains(orgNo)==true && newDate.equals("") && newName.equals("") && orgNo.equals(newNo)) {//삭제
+//					log.info("삭제만하는조건입니다");
+//					
+//					vo.setLicNo(orgNo);
+//					vo.setRegId("boondll@hanmail.net");
+//					flag = mypageSvc.deleteLic(vo);
+//					
+//				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
+//					log.info("삭제 후 추가하는 조건입니다.");
+//					
+//					vo.setLicNo(orgNo);
+//					vo.setRegId("boondll@hanmail.net");
+//					mypageSvc.deleteLic(vo);
+//					
+//					vo.setLicNo("");
+//					vo.setLicName(newName);
+//					vo.setLicDate(newDate);
+//					vo.setLicScore(newScore);
+//					flag = mypageSvc.addLic(vo);
+//				}
+//			}
+//		}
+//		
+//		try {
+//			
+//			int listDiff = NO.size()-list.size();
+//			log.info("길이차이: "+listDiff);
+//			if(listDiff>0) {
+//				for(int q=0; q<listDiff; q++) {
+//					if(null!=NAME.get(q+list.size())){
+//						LicenseVO vo = new LicenseVO();
+//						vo.setRegId("boondll@hanmail.net");
+//						vo.setLicName( NAME.get(q+list.size()) );
+//						vo.setLicDate( DATE.get(q+list.size()) );
+//						vo.setLicScore( SCORE.get(q+list.size()) );
+//						flag = mypageSvc.addLic(vo);
+//					}else{
+//						break;
+//					}
+//				}
+//			}
+//		}catch(Exception e) {
+//			log.debug(e.toString());
+//		}
+		
+//자격증 끝----------------------------------------------------------------------
+//학력 시작-------------------------------------------------------------------------
+		
+		String regId = req.getParameter("regId");
+//		String cvGrade = req.getParameter("cvGrade");
+//		String cvCheck = req.getParameter("cvCheck");
+//		
+//		CvFormVO cvcv = new CvFormVO();
+//		cvcv.setRegId(regId);
+//		cvcv.setCvCheck(Integer.parseInt(cvCheck));
+//		cvcv.setCvGrade(cvGrade);
+//		
+//		mypageSvc.deleteCv(cvcv);
+//		mypageSvc.addCv(cvcv);
+		
+//학력 끝-------------------------------------------------------------------------		
+//이력서 시작-------------------------------------------------------------------------	
+		
+		String clNo = req.getParameter("clNo");
+		String clTitle = req.getParameter("clTitle");
+		String clSungjang = req.getParameter("clSungjang");
+		String clSang = req.getParameter("clSang");
+		String clJangdan = req.getParameter("clJangdan");
+		String clJiwon = req.getParameter("clJiwon");
+		int clCheck1 = Integer.parseInt(req.getParameter("clCheck1"));
+		int clCheck2 = Integer.parseInt(req.getParameter("clCheck2"));
+		log.info("///////////////////////////////////"+clCheck1);
+		log.info("///////////////////////////////////"+clCheck2);
+		
+		JasoVO jaso = new JasoVO();
+		jaso.setClNo(clNo);
+		jaso.setClTitle(clTitle);
+		jaso.setClSungjang(clSungjang);
+		jaso.setClSang(clSang);
+		jaso.setClJangdan(clJangdan);
+		jaso.setClJiwon(clJiwon);
+		jaso.setRegId(regId);
+		JasoVO jaso2 = jaso;
+		
+		if(clCheck1==0||clCheck2==0) {
+			jaso.setClCheck(0);
+		}else if(clCheck1!=0||clCheck2==0) {
+			jaso.setClCheck(clCheck1);
+		}else if(clCheck1==0||clCheck2==2) {
+			jaso.setClCheck(2);
+		}else if(clCheck1==1||clCheck2==2) {
+			jaso2.setClCheck(1);
+			jaso.setClCheck(2);
 		}
+		
+		int havetoAdd = jaso2.getClCheck();
+		
+		if(havetoAdd==1) {
+			jasoSvc.delete(jaso);
+			jasoSvc.add(jaso2);
+			jasoSvc.add(jaso);
+		}else {
+			jasoSvc.delete(jaso);
+			jasoSvc.add(jaso);
+		}
+		
+//이력서 끝-------------------------------------------------------------------------	
 		 
 		JSONObject object=new JSONObject();
 		
@@ -334,36 +411,48 @@ public class UserMypageCtrl {
 
 		
 		UserVO outUser = userSvc.select(inUser);
-		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("HIRE_SEARCH_EDU");
+		try {
+			model.addAttribute("regId",outResume.getRegId());
+			model.addAttribute("cvDate",outResume.getCvDate());
+			model.addAttribute("cvGrade",outResume.getCvGrade());
+			model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
+			//0이면 오픈하지 않음, 1이면 오픈함
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		try {
+			model.addAttribute("clTitle",outJaso.getClTitle());
+			model.addAttribute("clSungjang",outJaso.getClSungjang());
+			model.addAttribute("clSang",outJaso.getClSang());
+			model.addAttribute("clJangdan",outJaso.getClJangdan());
+			model.addAttribute("clJiwon",outJaso.getClJiwon());
+			model.addAttribute("clCheck",outJaso.getClCheck());//자소서 게시판에 게시 여부
+			model.addAttribute("clNo",outJaso.getClNo());
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("regId",outResume.getRegId());
-		model.addAttribute("cvDate",outResume.getCvDate());
-		model.addAttribute("cvGrade",outResume.getCvGrade());
-		model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
-		//0이면 오픈하지 않음, 1이면 오픈함
+		try {
+			model.addAttribute("list",list);
+			model.addAttribute("lic1", lic1);
+			model.addAttribute("lic2", lic2);
+			model.addAttribute("lic3", lic3);
+			model.addAttribute("lic4", lic4);
+			model.addAttribute("lic5", lic5);
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("clTitle",outJaso.getClTitle());
-		model.addAttribute("clSungjang",outJaso.getClSungjang());
-		model.addAttribute("clSang",outJaso.getClSang());
-		model.addAttribute("clJangdan",outJaso.getClJangdan());
-		model.addAttribute("clJiwon",outJaso.getClJiwon());
-		model.addAttribute("clCheck",outJaso.getClCheck());//자소서 게시판에 게시 여부
-		model.addAttribute("clNo",outJaso.getClNo());
-		
-		model.addAttribute("list",list);
-		model.addAttribute("lic1", lic1);
-		model.addAttribute("lic2", lic2);
-		model.addAttribute("lic3", lic3);
-		model.addAttribute("lic4", lic4);
-		model.addAttribute("lic5", lic5);
-		
-		model.addAttribute("userName",outUser.getUserName());
-		model.addAttribute("userPhone",outUser.getUserPhone());
-		model.addAttribute("userId",outUser.getUserId());
+		try {	
+			model.addAttribute("userName",outUser.getUserName());
+			model.addAttribute("userPhone",outUser.getUserPhone());
+			model.addAttribute("userId",outUser.getUserId());
 	
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
+			
 		return VIEW_RESUME;
 	}
 	
@@ -393,29 +482,42 @@ public class UserMypageCtrl {
 			list.get(i).setLicDate(licDate);
 		}
 		UserVO outUser = userSvc.select(inUser);
-		CodeVO codeSearch = new CodeVO();
-		codeSearch.setCmId("HIRE_SEARCH_EDU");
 		
-		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		try {
+			model.addAttribute("regId",outResume.getRegId());
+			model.addAttribute("cvDate",outResume.getCvDate());
+			model.addAttribute("cvGrade",outResume.getCvGrade());
+			model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
+			//0이면 오픈하지 않음, 1이면 오픈함
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("regId",outResume.getRegId());
-		model.addAttribute("cvDate",outResume.getCvDate());
-		model.addAttribute("cvGrade",outResume.getCvGrade());
-		model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
-		//0이면 오픈하지 않음, 1이면 오픈함
+		try {	
+			model.addAttribute("clTitle",outJaso.getClTitle());
+			model.addAttribute("clSungjang",outJaso.getClSungjang());
+			model.addAttribute("clSang",outJaso.getClSang());
+			model.addAttribute("clJangdan",outJaso.getClJangdan());
+			model.addAttribute("clJiwon",outJaso.getClJiwon());
+			model.addAttribute("clCheck",outJaso.getClCheck());//자소서 게시판에 게시 여부
+			model.addAttribute("clNo",outJaso.getClNo());
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("clTitle",outJaso.getClTitle());
-		model.addAttribute("clSungjang",outJaso.getClSungjang());
-		model.addAttribute("clSang",outJaso.getClSang());
-		model.addAttribute("clJangdan",outJaso.getClJangdan());
-		model.addAttribute("clJiwon",outJaso.getClJiwon());
-		model.addAttribute("clCheck",outJaso.getClCheck()); //자소서 게시판에 게시 여부
+		try {
+			model.addAttribute("list",list);
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 		
-		model.addAttribute("list",list);
-		
-		model.addAttribute("userName",outUser.getUserName());
-		model.addAttribute("userPhone",outUser.getUserPhone());
-		model.addAttribute("userId",outUser.getUserId());
+		try {	
+			model.addAttribute("userName",outUser.getUserName());
+			model.addAttribute("userPhone",outUser.getUserPhone());
+			model.addAttribute("userId",outUser.getUserId());
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
 	
 		return VIEW_RESUME_VIEW;
 	}

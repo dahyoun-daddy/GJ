@@ -144,9 +144,9 @@
 						    		</div>
 					    		</div><br/>
 					    		<div class="form-group" style="float: left;margin-right:45%;">
-					    			<label for="regId" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="userName" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="regId" name="regId" value="${userName}"/>
+								    	<input type="text" class="form-control" id="userName" name="userName" value="${userName}"/>
 							    	</div>
 								</div>
 								
@@ -158,9 +158,9 @@
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="userId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="regId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="userId" name="userId" value="${userId}"/>
+								    	<input type="text" class="form-control" id="regId" name="regId" value="${userId}"/>
 							    	</div>
 								</div>
 								
@@ -183,7 +183,7 @@
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.
 						    	
-						    							    	<div class="table-responsive" align="center">
+							<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center" style="float:left;">
 								
 							  	
@@ -271,7 +271,7 @@
 							  	</div>
 							  	
 								<br/><br/>
-								</div>
+							</div>
 							
 								<div style="float: left;"><br/>
 								위 사항들은 이력서에 포함되는 내용으로, 기업 열람 동의 시 기업에게 보여지게 되는 내용입니다.<br/>
@@ -289,7 +289,7 @@
 					            			<th>제목</th>
 					            			<td>
 					            				<input type="hidden" id="clNo" value="${clNo}"/>
-					            				<textarea id="clSungjang" name="clSungjang" rows="1" style="width:100%; border: 0; resize: none;">${clTitle}</textarea>
+					            				<textarea id="clTitle" name="clTitle" rows="1" style="width:100%; border: 0; resize: none;">${clTitle}</textarea>
 					            			</td>
 					            		</tr>
 					            		<tr>
@@ -298,15 +298,15 @@
 					            		</tr>
 					            		<tr>
 					            			<th>학교생활</th>
-					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clSungjang}</textarea></td>
+					            			<td><textarea id="clSang" name="clSang" rows="5" style="width:100%; border: 0; resize: none;">${clSang}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>성격장단점</th>
-					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clJangdan}</textarea></td>
+					            			<td><textarea id="clJangdan" name="clJangdan" rows="5" style="width:100%; border: 0; resize: none;">${clJangdan}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>지원동기</th>
-					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clJiwon}</textarea></td>
+					            			<td><textarea id="clJiwon" name="clJiwon" rows="5" style="width:100%; border: 0; resize: none;">${clJiwon}</textarea></td>
 					            		</tr>
 					            	</tbody>
 					            </table>
@@ -317,25 +317,25 @@
 						            		<input type="radio" name="cvCheck" id="cvCheck" value="1" > 예
 						            	</label>
 						            	<label class="radio-inline">
-						            		<input type="radio" name="cvCheck" id="cvCheck" value="2" > 아니오
+						            		<input type="radio" name="cvCheck" id="cvCheck" value="0" > 아니오
 						            	</label>
 					            	</div><br/>
 					            	<strong>내 자기소개서를 자기소개서 게시판에 게시하여 유저들의 첨삭을 받겠습니다.</strong>
 					            	<div style="text-align: right;">
 						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck" id="clCheck" value="1" > 예
+						            		<input type="radio" name="clCheck1" id="clCheck1" value="1" > 예
 						            	</label>
 						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck" id="clCheck" value="0"> 아니오
+						            		<input type="radio" name="clCheck1" id="clCheck1" value="0"> 아니오
 						            	</label>
 				            		</div><br/>
-				            		<strong>현재 자기소개서를 나의 이력서와 한 묶음으로 취급합니다. <br/>(이를 '예'에 체크하지 않을 시, 지원하는 기업의 이력서에 자기소개서는 빈칸으로 나타나게 됩니다.)</strong>
+				            		<strong>현재 자기소개서를 나의 이력서와 한 묶음으로 취급합니다. <br/>(이를 '예'에 체크하지 않을 시, 이력서에 현재 입력한 자기소개서는 빈칸으로 나타나게 됩니다.)</strong>
 				            		<div style="text-align: right;">
 						            	<label class="radio-inline">
 						            		<input type="radio" name="clCheck2" id="clCheck2" value="2"> 예
 						            	</label>
 						            	<label class="radio-inline">
-						            		<input type="radio" name="clCheck2" id="clCheck2"> 아니오
+						            		<input type="radio" name="clCheck2" id="clCheck2" value="0"> 아니오
 						            	</label>
 				            		</div><br/><br/>
 					            </div>
@@ -386,12 +386,23 @@
 	    			
 					$.ajax({
 						type : 'POST',
-						url : 'updateLic.do',
+						url : 'updateResume.do',
 						data : {
+							"regId": $("#regId").val(),
 							"jsonNoList": jsonNoList,
 							"jsonNameList": jsonNameList,
 							"jsonDateList": jsonDateList,
-							"jsonScoreList": jsonScoreList
+							"jsonScoreList": jsonScoreList,
+							"cvGrade": $("#cvGrade option:selected").val(),
+							"cvCheck" : $("input[name='cvCheck']:checked").val(),
+							"clNo": $("#clNo").val(),
+							"clTitle": $("#clTitle").val(),
+							"clSungjang": $("#clSungjang").val(),
+							"clSang": $("#clSang").val(),
+							"clJangdan": $("#clJangdan").val(),
+							"clJiwon": $("#clJiwon").val(),
+							"clCheck1": $("input[name='clCheck1']:checked").val(),
+							"clCheck2": $("input[name='clCheck2']:checked").val()
 						},
 						success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 				             var parseData = data;

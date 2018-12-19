@@ -38,6 +38,9 @@ public interface MypageDao {
 	
 	JasoVO selectCl(JasoVO jasoVO) throws ClassNotFoundException, SQLException;
 	
+	//이력서 삭제
+	int deleteCv(CvFormVO cvFormVO) throws SQLException;
+	
 	//이력서 수정 
 	int updateCv(CvFormVO cvFormVO) throws SQLException;
 	

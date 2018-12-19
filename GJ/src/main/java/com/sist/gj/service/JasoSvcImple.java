@@ -33,6 +33,12 @@ public class JasoSvcImple implements JasoSvc {
 
 	@Override
 	public int add(JasoVO jasoVO) {
+		if(null == jasoVO.getClNo()  || jasoVO.getClNo().equals("")) {
+			String randomString = random.makeRandom();
+			log.info("random no : "+randomString);
+			jasoVO.setClNo(randomString);
+		}
+		
 		return jasoDao.add(jasoVO);
 	}
 

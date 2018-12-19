@@ -272,6 +272,16 @@ public class MypageDaoImple implements MypageDao {
 		return flag;
 	}
 
+	@Override
+	public int deleteCv(CvFormVO cvFormVO) throws SQLException {
+		String statement = NAMESPACE+".deleteCv";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+cvFormVO);
+		int flag = sqlSession.update(statement, cvFormVO);
+		log.debug("result : "+flag);
+		return flag;
+	}
+
 
 	
 }
