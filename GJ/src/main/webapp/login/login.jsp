@@ -34,7 +34,7 @@
             <input type="button" value="로그인" id="loginBt" name="loginBt"/>
             <input type="button" value="구직자 가입" onclick="userSign()" />
             <input type="button" value="기업 가입" onclick="compSign()" />
-            <input type="button" value="ID/PW찾기" onclick="findIdPass" />
+            <input type="button" value="ID/PW찾기" onclick="findIdPass()" />
            
         </form>
     </div>
@@ -46,7 +46,24 @@
     		frm.action="Main.do";
     		frm.submit();
 		}
-	
+		
+		function userSign(){
+			var frm = document.login;
+    		frm.action="userSignUp.jsp";
+    		frm.submit();
+		}
+		
+		function compSign(){
+			var frm = document.login;
+    		frm.action="companySignUp.jsp";
+    		frm.submit();
+		}
+
+		function findIdPass(){
+			var frm = document.login;
+    		frm.action="findIdPass.jsp";
+    		frm.submit();
+		}
 		$(document).ready(function(){
 			//alert("ready");
 			$("#loginBt").on("click",function(){
