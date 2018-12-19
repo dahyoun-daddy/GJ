@@ -188,7 +188,7 @@
 							  </div>
 							</div>
 							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
-						 		<button id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
+						 		<button <c:if test="${user == reviewVO.regId}">style="display:none;"</c:if> id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
