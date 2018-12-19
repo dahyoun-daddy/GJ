@@ -98,7 +98,7 @@
 			});
 		});
 		
-	
+	 
 	$(function(){
 		$("#findIdPass").click(function(){
 			location.href="../login/findIdPass.do";
