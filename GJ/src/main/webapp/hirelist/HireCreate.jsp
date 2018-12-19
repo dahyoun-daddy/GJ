@@ -103,7 +103,7 @@
 		}
 
 		$(document).ready(function(){
-			alert("ready");
+			//alert("ready");
 			$("#doCreate").on("click",function(){
 				//alert("ready");
 				if(false == confirm("등록하시습니까?")){

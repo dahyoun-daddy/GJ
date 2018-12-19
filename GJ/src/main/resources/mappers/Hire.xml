@@ -7,10 +7,10 @@
 		<where>
   			<choose>
   				<when test="1 == searchDiv">
-  					hr.u_id LIKE '%'||#{searchWord}||'%'
+  					C.user_id LIKE '%'||#{searchWord}||'%'
   				</when>
   				<when test="2 == searchDiv">
-  					hr.name LIKE '%'||#{searchWord}||'%'
+  					C.hire_title LIKE '%'||#{searchWord}||'%'
   				</when>
   				<otherwise>
   				</otherwise>

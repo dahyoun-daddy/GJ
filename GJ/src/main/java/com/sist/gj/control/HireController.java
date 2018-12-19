@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.HireSvc;
 import com.sist.gj.service.JasoSvc;
+import com.sist.gj.service.MypageSvc;
+import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoCommentVO;
@@ -39,6 +41,8 @@ public class HireController {
 	private HireSvc hireSvc;
 	@Autowired
 	private CodeSvc codeSvc;
+	@Autowired
+	private MypageSvc mypageSvc;
 	
 	//리스트 출력 
 	@RequestMapping(value="/hirelist/HireList.do")
@@ -143,10 +147,20 @@ public class HireController {
 		HireVO outVO = hireSvc.read(inVO);
 		log.info("final outVO : "+outVO);
 		
+		String hireDate = outVO.getHireDate();
+		String hireDeadline = outVO.getHireDeadline();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = transeFormat.parse(hireDate);
+		Date date2 = transeFormat.parse(hireDeadline);
+		
+		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+		hireDate = notIncludeTime.format(date);
+		hireDeadline = notIncludeTime.format(date);
+		
 		model.addAttribute("hireTitle", outVO.getHireTitle());
 		model.addAttribute("hireBody", outVO.getHireBody());
-		model.addAttribute("hireDate", outVO.getHireDate());
-		model.addAttribute("hireDeadline", outVO.getHireDeadline());
+		model.addAttribute("hireDate", hireDate);
+		model.addAttribute("hireDeadline", hireDeadline);
 		model.addAttribute("userId", outVO.getUserId());
 		model.addAttribute("hireAdd", outVO.getHireAdd());
 		model.addAttribute("hireSalary", outVO.getHireSalary());
@@ -170,10 +184,21 @@ public class HireController {
 		HireVO outVO = hireSvc.read(inVO);
 		log.info("final outVO : "+outVO);
 		
+		String hireDate = outVO.getHireDate();
+		String hireDeadline = outVO.getHireDeadline();
+		SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = transeFormat.parse(hireDate);
+		Date date2 = transeFormat.parse(hireDeadline);
+		
+		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+		hireDate = notIncludeTime.format(date);
+		hireDeadline = notIncludeTime.format(date);
+		
+		model.addAttribute("hireNo", outVO.getHireNo());
 		model.addAttribute("hireTitle", outVO.getHireTitle());
 		model.addAttribute("hireBody", outVO.getHireBody());
-		model.addAttribute("hireDate", outVO.getHireDate());
-		model.addAttribute("hireDeadline", outVO.getHireDeadline());
+		model.addAttribute("hireDate", hireDate);
+		model.addAttribute("hireDeadline", hireDeadline);
 		model.addAttribute("userId", outVO.getUserId());
 		model.addAttribute("hireAdd", outVO.getHireAdd());
 		model.addAttribute("hireSalary", outVO.getHireSalary());
@@ -189,18 +214,31 @@ public class HireController {
                )		
 		@ResponseBody
 		public String edit(@ModelAttribute HireVO invo, HttpServletRequest req,Model model) throws Exception {
-			String upsert_div = req.getParameter("upsert_div");
 			
 			log.info("2========================");
 			log.info("invo="+invo);
-			log.info("upsert_div="+upsert_div);
 			log.info("2========================");	
 			
 			int flag = 0;
 			log.info("flag");
+		
+			//일자? 데이터파싱 
+			String hireDate = invo.getHireDate();
+			String hireDeadline = invo.getHireDeadline();
+			SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = transeFormat.parse(hireDate);
+			Date date2 = transeFormat.parse(hireDeadline);
+			
+			SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+			hireDate = notIncludeTime.format(date);
+			hireDeadline = notIncludeTime.format(date2);
+			
+			invo.setHireDate(hireDate);
+			invo.setHireDate(hireDeadline);
+			
 			//수정		
 			flag = hireSvc.update(invo);
-			 
+			
 			JSONObject object=new JSONObject();
 			
 			if(flag>0) {
@@ -219,4 +257,54 @@ public class HireController {
 			
 			return jsonData;
 			}
+		
+		@RequestMapping(value="/hirelist/HireApply.do")
+		public String apply(@ModelAttribute ApplyVO invo, HttpServletRequest req, Model model) throws Exception {
+			log.info("=====================APPLY=======================");
+			log.info("invo" + invo);
+			
+			int flag = 0;
+			
+			//-----------------------------------
+			//아이디 나중에 세션으로 받기
+			invo.setUserId("boondll@hanmail.net");
+			//-----------------------------------
+			
+			JSONObject object = new JSONObject();
+			
+			flag = mypageSvc.addApply(invo);
+			
+			if(flag > 0) {
+				object.put("flag",flag);
+				object.put("msg","등록 되었습니다."); 
+			}else {
+				object.put("flag",flag);
+				object.put("msg","등록 실패.");
+			}
+			
+			String jsonData = object.toJSONString();
+			
+			return jsonData;
+		}
+		
+		
+		/*
+		@RequestMapping(value="/mypageUser/mypageUser.do",method=RequestMethod.POST)
+		public String apply(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
+			//기한내의 공고만 지원할 수 있다
+			SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+			Date now = new Date();
+			Date deadline = invo.getHireDeadline();
+			
+			int available = 0;
+			
+			if() {
+				
+			}else if() {
+				
+			}
+			return null;
+		}
+		 */
 }

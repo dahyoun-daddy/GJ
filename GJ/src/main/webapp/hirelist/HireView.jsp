@@ -16,6 +16,7 @@
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br><br>
+	<%=hireNo%>
 	<!-- 메인화면 -->
 	<form id="frm" name="frm" class="form-horizontal" method="post">
 		<input type="hidden" name="hireNo" id="hireNo" value="<%=hireNo%>">
@@ -72,6 +73,7 @@
 	    <div class="col-sm-offset-2 col-sm-10">
 	    <button type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()">이전화면</button>
 	    <button type="button" class="btn btn-default" id="goUpdate" name="goUpdate">수정하기</button>
+	    <button type="button" class="btn btn-default" id="apply" name="apply">지원하기</button>
 	    </div><br><br>
 	  
 	
@@ -85,11 +87,46 @@
 			$("#goUpdate").on("click",function(){
 				
 				var frm = document.frm;
-				alert("수정 페이지로 이동?"+frm.hireNo.value);
+				//alert("수정 페이지로 이동?"+frm.hireNo.value);
 				//var hireNo = document.getElementById("hireNo").value 
 				 frm.action = "HireUpdate.do";
 				 frm.submit();
 			});
+			
+			$("#apply").on("click",function(){
+				//alert("ready");
+				if(false == confirm("지원하시겠습니까?")){
+    				return;
+    			}
+				
+				$.ajax({
+   		         type:"POST",
+   		         url:"HireApply.do",
+   		         dataType:"html",// JSON
+   		         data:{
+   		        	//"applyNo":$("#applyNo").val() ,
+   		         	"userId":$("#userId").val(),
+   		         //	"applyDate":$("#applyDate").val(),
+   		         	"hireNo":$("#hireNo").val(),
+   		         	"applyCheck":1
+   		         },
+   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+   		         	var parseData = $.parseJSON(data);
+   		         	if(parseData.flag == "1"){
+   		         		alert(parseData.msg);
+   		         		doSearch();
+   		         	}else{
+   		         		alert(parseData.msg);
+   		         	}
+   		         },
+   		         complete: function(data){//무조건 수행
+   		          
+   		         },
+   		         error: function(xhr,status,error){
+
+   		         }
+   		   	});
+			})
 			
 		});
 	</script>

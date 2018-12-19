@@ -224,7 +224,7 @@
 		) VALUES (
 		    #{applyNo},
 		    #{userId},
-		    #{applyDate},
+		    sysdate,
 		    #{hireNo},
 		    '1'
 		)

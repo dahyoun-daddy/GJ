@@ -52,7 +52,7 @@
 		<div class="row" style="float: left;">&nbsp;&nbsp;&nbsp;
 		<br><br><br>
 			<form id="frm" name="frm" class="form-inline" >
-				<input type="hidden" name="pageNum" id="pageNum">
+				<input type="hidden" name="pageNum" id="pageNum" value="1">
 				<input type="hidden" name="hireNo" id="hireNo">
 				<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
 				&nbsp;&nbsp;
