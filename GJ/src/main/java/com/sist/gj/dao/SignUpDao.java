@@ -20,4 +20,11 @@ public interface SignUpDao {
 		UserVO login(UserVO userVO) throws ClassNotFoundException, SQLException;
 
 		UserVO findIdPass(UserVO userVO) throws ClassNotFoundException, SQLException;
+		
+		UserVO findIdPass2(UserVO userVO) throws ClassNotFoundException, SQLException;
+		
+		
+	//////////////////////////회원가입
+		
+		UserVO checkId(UserVO userVO) throws ClassNotFoundException, SQLException;
 }

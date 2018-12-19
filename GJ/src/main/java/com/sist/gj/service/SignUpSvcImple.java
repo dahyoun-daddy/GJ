@@ -38,4 +38,18 @@ public class SignUpSvcImple implements SignUpSvc {
 		return signupDao.findIdPass(userVO);
 	}
 
+	@Override
+	public UserVO findIdPass2(UserVO userVO) throws ClassNotFoundException, SQLException {
+		
+		return signupDao.findIdPass2(userVO);
+	}
+	
+	///////////////////////////////////////signup////////////////////////////////
+	
+	@Override
+	public UserVO checkId(UserVO userVO) throws ClassNotFoundException, SQLException {
+		
+		return signupDao.checkId(userVO);  
+	}
+	
 }

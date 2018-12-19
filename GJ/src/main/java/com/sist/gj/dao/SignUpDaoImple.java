@@ -80,7 +80,31 @@ UserVO outVO = null;
 				
 		return outVO;
 	}
-
 	
+	@Override
+	public UserVO findIdPass2(UserVO userVO) throws ClassNotFoundException, SQLException {
+UserVO outVO = null;
+		
+		String statement = NAMESPACE+".findPw";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+	}
+
+	@Override
+	public UserVO checkId(UserVO userVO) throws ClassNotFoundException, SQLException {
+UserVO outVO = null;
+		
+		String statement = NAMESPACE+".checkId";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		outVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+outVO);
+				
+		return outVO;
+	}
 
 }

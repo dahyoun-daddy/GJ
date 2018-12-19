@@ -22,5 +22,9 @@ public interface SignUpSvc {
 		
 		UserVO findIdPass(UserVO userVO) throws ClassNotFoundException, SQLException;
 		
+		UserVO findIdPass2(UserVO userVO) throws ClassNotFoundException, SQLException;
+		
+		UserVO checkId(UserVO userVO) throws ClassNotFoundException, SQLException;
+		
 		
 }
