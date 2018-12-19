@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.AdminPageSvc;
 import com.sist.gj.service.JasoCommentSvc;
+import com.sist.gj.service.ReviewCpSvc;
 import com.sist.gj.service.ReviewSvc;
 import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.ReviewCpVO;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
@@ -38,6 +40,9 @@ public class ReviewController {
 	
 	@Autowired
 	private AdminPageSvc adminPageSvc;
+	
+	@Autowired
+	private ReviewCpSvc reviewCpSvc;
 	
 	@RequestMapping(value="/review/giupReview.do")
 	public String doRetrieve(@ModelAttribute SearchVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
@@ -217,21 +222,28 @@ public class ReviewController {
 	@ResponseBody
 	public String update(@ModelAttribute ReviewVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		String reviewNo2 = req.getParameter("reviewNo2");
-		
+		String user = req.getParameter("user");
 		log.info("2========================");
 		log.info("invo="+invo);
 		log.info("reviewNo2="+reviewNo2);
-		
+		log.info("user="+req.getParameter("user"));
 		log.info("2========================");	
 		
-		int flag = 0;
-		//수정	
-		invo.setReviewNo(reviewNo2);
-		ReviewVO outvo = reviewSvc.select(invo);
-		outvo.setReviewTitle(null);
-		outvo.setReviewComplain(String.valueOf((Integer.parseInt(outvo.getReviewComplain())+1)));
-		flag = reviewSvc.update(outvo);
+		ReviewCpVO reviewCpVO = new ReviewCpVO();
+		reviewCpVO.setReviewcpNo(reviewNo2);
+		reviewCpVO.setReviewcpId(user);
+		ReviewCpVO outvo2 = reviewCpSvc.select(reviewCpVO);
 		
+		//신고하기
+		int flag = 0;
+		if(null == outvo2) {			
+			invo.setReviewNo(reviewNo2);
+			ReviewVO outvo = reviewSvc.select(invo);
+			outvo.setReviewTitle(null);
+			outvo.setReviewComplain(String.valueOf((Integer.parseInt(outvo.getReviewComplain())+1)));
+			flag = reviewSvc.update(outvo);
+			reviewCpSvc.add(reviewCpVO);
+		}
 		 
 		JSONObject object=new JSONObject();
 		
@@ -240,7 +252,7 @@ public class ReviewController {
 			object.put("message", "신고 되었습니다.");
 		}else {
 			object.put("flag", flag);
-			object.put("message", "신고 실패^^.");			
+			object.put("message", "이미 신고하셨습니다.");			
 		}
 		
 		String jsonData = object.toJSONString();

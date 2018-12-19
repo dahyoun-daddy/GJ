@@ -235,6 +235,7 @@
 	<input type="hidden" name="reviewNo2" id="reviewNo2" value="" />
 	<input type="hidden" name="upsertDiv" id="upsertDiv" value="" />
 	<input type="hidden" name="userNick" id="userNick" value="${company.userNick}" />
+	<input type="hidden" name="user" id="user" value="${user}" />
 	</form>
 	
    	<!-- // 기업 상세정보 -------------------------------  -->
@@ -315,6 +316,7 @@
 		         dataType:"html",// JSON
 		         data:{
 		         	"reviewNo2": reviewNo2,
+		         	"user": $("#user").val()
 		         },
 		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		             var parseData = $.parseJSON(data);

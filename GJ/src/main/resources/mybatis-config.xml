@@ -16,6 +16,7 @@
   		<typeAlias alias="JasoVO" type="com.sist.gj.vo.JasoVO"/> 
   		<typeAlias alias="JasoCommentVO" type="com.sist.gj.vo.JasoCommentVO"/> 
   		<typeAlias alias="ReviewVO" type="com.sist.gj.vo.ReviewVO"/>
+  		<typeAlias alias="ReviewCpVO" type="com.sist.gj.vo.ReviewCpVO"/>
   		<typeAlias alias="SearchVO" type="com.sist.gj.vo.SearchVO"/> 
   		<typeAlias alias="CodeVO" type="com.sist.gj.vo.CodeVO"/>
   		<typeAlias alias="HireVO" type="com.sist.gj.vo.HireVO"/>

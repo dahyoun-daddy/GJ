@@ -24,7 +24,6 @@ public class ReviewDaoImple implements ReviewDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	
 	@Override
 	public int update(ReviewVO reviewVO) throws SQLException {
 		String statement = NAMESPACE+".update";

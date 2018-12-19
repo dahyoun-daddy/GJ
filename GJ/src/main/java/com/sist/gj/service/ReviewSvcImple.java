@@ -19,7 +19,7 @@ public class ReviewSvcImple implements ReviewSvc {
 	private ReviewDao reviewDao;
 	
 	private RandomNum random = new RandomNum();
-	
+
 	@Override
 	public int delete(ReviewVO reviewVO) throws SQLException {
 		// TODO Auto-generated method stub
