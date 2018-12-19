@@ -114,9 +114,7 @@
     <!-- Custom JavaScript -->
     <script src="../resources/js/animate.js"></script>
     <script src="../resources/js/custom.js"></script>
-</body>
-</html>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function searchPage(url,pageNum){
 		alert("url : "+url+" page_num : "+pageNum);
 		var frm = document.frm;
@@ -161,3 +159,6 @@
 			});
 	});
 	</script>
+</body>
+</html>
+	
