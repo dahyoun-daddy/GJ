@@ -53,12 +53,16 @@ public class ReviewController {
 			reviewSvc.delete(reviewVO);
 		}
 		
+		String upsertDiv2 = req.getParameter("upsertDiv");
+		if(null==upsertDiv2) {
+			upsertDiv2 = "";
+		}
 		String reviewNo3 = req.getParameter("reviewNo3");
-		String reviewNo4 = req.getParameter("reviewNo4");
 		String reviewTitle = req.getParameter("reviewTitle");
 		String reviewBody = req.getParameter("reviewBody");
 		String reviewPoint = req.getParameter("star");
 		String reviewComplain = req.getParameter("reviewComplain");
+		String userNick = req.getParameter("userNick");
 		
 		ReviewVO reviewVO2 = new ReviewVO();
 		reviewVO2.setReviewNo(reviewNo3);
@@ -66,15 +70,19 @@ public class ReviewController {
 		reviewVO2.setReviewBody(reviewBody);
 		reviewVO2.setReviewPoint(reviewPoint);
 		reviewVO2.setReviewComplain(reviewComplain);
+		reviewVO2.setUserNick(userNick);
 		
-		//수정
-		if(!(null==reviewNo3)) {	
+		//수정 및 저장
+		if(upsertDiv2.equals("doWrite")) {
+			reviewVO2.setReviewComplain("0");
+			reviewVO2.setRegId(req.getParameter("regId"));
+			reviewSvc.add(reviewVO2);
+		}else if(upsertDiv2.equals("doUpdate")) {
 			reviewSvc.update(reviewVO2);
+		}else {
+			
 		}
-		
-		//저장 세션 받고 시퀀스 만들고 add실행
-		
-		
+
 		
 		String userId = req.getParameter("userId");
 		log.info("userId : "+userId);
@@ -185,7 +193,7 @@ public class ReviewController {
 		log.info("=====================upsert=======================");
 		log.info("upsertDiv : " + upsertDiv);
 		log.info("=====================upsert=======================");
-		if(upsertDiv=="doWrite") {
+		if(upsertDiv.equals("doWrite")) {
 			
 		}else if(upsertDiv.equals("doUpdate")) {
 			String reviewNo = req.getParameter("reviewNo");
@@ -193,8 +201,9 @@ public class ReviewController {
 			invo = reviewSvc.select(invo);
 		}
 		
-		String userId = req.getParameter("userId");		
+		String userId = req.getParameter("userId");
 		
+		model.addAttribute("upsertDiv",upsertDiv);
 		model.addAttribute("userId",userId);
 		model.addAttribute("reviewVO",invo);
 		

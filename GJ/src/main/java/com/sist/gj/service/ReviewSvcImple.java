@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.sist.gj.common.RandomNum;
 import com.sist.gj.dao.ReviewDao;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
@@ -16,6 +17,8 @@ public class ReviewSvcImple implements ReviewSvc {
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	private RandomNum random = new RandomNum();
 	
 	@Override
 	public int delete(ReviewVO reviewVO) throws SQLException {
@@ -31,7 +34,10 @@ public class ReviewSvcImple implements ReviewSvc {
 
 	@Override
 	public int add(ReviewVO reviewVO) {
-		// TODO Auto-generated method stub
+		String randomString = random.makeRandom();
+		reviewVO.setReviewNo(randomString);
+		reviewVO.setReviewPoint(reviewVO.getReviewNo()+reviewVO.getReviewPoint());
+		
 		return reviewDao.add(reviewVO);
 	}
 

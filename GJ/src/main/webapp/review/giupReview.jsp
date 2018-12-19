@@ -1,3 +1,4 @@
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -29,6 +30,18 @@
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+%>
+
+<% 
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String user = "";
+	String userNick = "";
+	
+	if(null != sessionVO){
+		user = sessionVO.getUserId();
+		userNick = sessionVO.getUserNick();
+	}
+	request.setAttribute("user", user);
 %>
     
 <!DOCTYPE html>
@@ -71,35 +84,7 @@
 </head>
 <body>
 	<!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark cyan">
-        <div class="container">
-            <a class="navbar-brand" href="jasoTest2.jsp">
-            <img src="../resources/images/gj_logo.png" alt="nav-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link">채용정보</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="jasoTest.jsp">기업정보 </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="jasoTest3.jsp">자기소개서 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">...님 로그인중</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
     
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
@@ -204,8 +189,8 @@
 							</div>
 							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
 						 		<button id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
-								<button id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
-								<button id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
+								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
+								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
 							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
 								<label style="font-size:1em; color: #DBA901;">${reviewVO.reviewTitle}</label>
@@ -249,6 +234,7 @@
 	<input type="hidden" name="reviewNo" id="reviewNo" value="" />
 	<input type="hidden" name="reviewNo2" id="reviewNo2" value="" />
 	<input type="hidden" name="upsertDiv" id="upsertDiv" value="" />
+	<input type="hidden" name="userNick" id="userNick" value="${company.userNick}" />
 	</form>
 	
    	<!-- // 기업 상세정보 -------------------------------  -->
@@ -258,6 +244,11 @@
     <script type="text/javascript">
 	 function doWrite(){
     	 //alert(url+":search_page:"+page_num);
+    	 if("${user}" == null || "${user}" == ""){
+    		 alert("로그인을 하시죠?");
+    		 return;
+    	 }
+    	 
     	 var frm = document.frm;
     	 var upsertDiv = $("#doWrite").val();
     	 frm.upsertDiv.value = upsertDiv;
@@ -309,7 +300,11 @@
 		
 		$(".doComplain").on("click",function(){
 			//alert("doComplain");
-			
+			if("${user}" == null || "${user}" == ""){
+	    		 alert("로그인을 하시죠?");
+	    		 return;
+	    	}
+			 
 			if(false==confirm("신고 하시겠습니까?"))return;
 			
 			var reviewNo2 = $(this).val();

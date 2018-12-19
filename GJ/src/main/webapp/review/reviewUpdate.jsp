@@ -1,10 +1,21 @@
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String context = request.getContextPath();//context path
 %>
-    
+<% 
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String user = "";
+	String userNick = "";
+	
+	if(null != sessionVO){
+		user = sessionVO.getUserId();
+		userNick = sessionVO.getUserNick();
+	}
+	request.setAttribute("user", user);
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,34 +44,7 @@
 </head>
 <body>
 	<!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark cyan">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-            <img src="../resources/images/gj_logo.png" alt="nav-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="jasoTest2.jsp">채용정보</a>
-                    </li>
-                    <li class="nav-item" href="jasoTest.jsp">
-                        <a class="nav-link">기업정보 </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link">자기소개서 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">...님 로그인중</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+   <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
         
     </nav>
     <form id="frm" name="frm" method="get">
@@ -127,8 +111,8 @@
 				<div style="float: left; height:150px; width: 49%;">
 				   <h6>과한 허구의 내용을 작성했을 시 발생하는 갈등 및 충돌은 책임지지 않습니다. 또한 신고가 들어왔을 시 관리자의 판단 후 사전 통보 없이 리뷰가 삭제 될 수 있습니다. 동의하십니까?</h6>
 				   <div style="float: right;">
-					  <input type = "radio" name = "gender" value = "남자" checked = "checked">예    
-	      			  <input type = "radio" name = "gender" value = "여자">아니요
+					  <input id="sign" name="sign" type = "radio">예    
+	      			  <input id="noSign" name="noSign" type = "radio">아니요
       			  </div>
 				</div>
 				
@@ -145,14 +129,16 @@
    	<input type="hidden" name="reviewComplain" id="reviewComplain" value="${reviewVO.reviewComplain}" />
    	<input type="hidden" name="star" id="star" value="${reviewVO.reviewPoint}" />
    	<input type="hidden" name="reviewNo3" id="reviewNo3" value="${reviewVO.reviewNo}" />
-   	<input type="hidden" name="reviewNo4" id="reviewNo4" value="1" />
+   	<input type="hidden" name="regId" id="regId" value="${user}" />
+   	<input type="hidden" name="upsertDiv" id="upsertDiv" value="${upsertDiv}" />
+   	<input type="hidden" name="userNick" id="userNick" value="${userId}" />
    	</form>
     
 
 	
     
     <script type="text/javascript">
-    $(document).ready(function(){ 
+    $(document).ready(function(){     	   	
         $('.starRev span').click(function(){
 		 $(this).parent().children('span').removeClass('on');
     	 $(this).addClass('on').prevAll('span').addClass('on');
@@ -161,11 +147,34 @@
     	 var frm = document.frm;
 		 frm.star.value=star;
     	 return false;
-    	}); 
-    	
+    	});
+        
+       $("#sign").click(function(){
+    	   $("input:radio[name='noSign']").prop('checked', false);     	   
+        });
+       
+       $("#noSign").click(function(){
+    	   $("input:radio[name='sign']").prop('checked', false);
+        });
+        
 		$("#doUpdateSave").on("click",function(){
+			if($(reviewTitle).val() == null || $(reviewTitle).val() == ""){
+	    		 alert("제목이 없다?");
+	    		 return;
+	    	 }
+			
+			if($(reviewBody).val() == null || $(reviewBody).val() == ""){
+	    		 alert("내용이 없다?");
+	    		 return;
+	    	 }
+			
+			if($("input[name='sign']").is(":checked") == false){
+	    		 alert("동의 하셨나?");
+	    		 return;
+	    	 }
+			
+			
 			var frm = document.frm;
-
 			frm.action = "giupReview.do";
 			frm.submit();
 			
