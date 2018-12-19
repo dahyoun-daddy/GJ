@@ -9,10 +9,12 @@
 	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
 	String userId = "";
 	String userNick = "";
+	int userLevel = 0;
 	
 	if(null != sessionVO){
 		userId = sessionVO.getUserId();
 		userNick = sessionVO.getUserNick();
+		userLevel = sessionVO.getUserLevel();
 	}
 %>
 <head>
@@ -48,17 +50,27 @@
             </a>
             <form id="topFrm" name="topFrm">
             	<input type="hidden" id="nowLoginId" name="nowLoginId" >
+            	<input type="hidden" id="userLevel" name="userLevel" value="<%=userLevel%>" >
             </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <ul class="navbar-nav ml-auto">
+                		<%
+						    if(null != userNick && !userNick.equals("")){
+						%>
+						<li class="nav-item">
+                        <a class="nav-link" onclick="moveMypage()"><%=userNick %>님</a>
+                     </li>
+                        <%
+						        }
+						%>
                     <li class="nav-item">
-                        <a class="nav-link">Home</a>
+                        <a class="nav-link" href="<%=context %>/common/Main.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">채용정보</a>
+                        <a class="nav-link" onclick="moveHireList()">채용정보</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="moveReviewList()">기업정보 </a>
@@ -92,6 +104,30 @@
     <script src="<%=context %>/resources/js/animate.js"></script>
     <script src="<%=context %>/resources/js/custom.js"></script>
     <script type="text/javascript">
+    	function moveMypage(){
+    		var frm = document.topFrm;
+    		var check = frm.userLevel.value;
+    		//alert("check : "+check);
+    		if(check == 1){
+    			frm.action="../mypageUser/UserMyInfo.do";
+        		frm.submit(); 
+    		}else if(check == 2){
+    			alert("허가되지 않는 기업입니다.\n 관리자의 허락을 기다려주세요");
+    		}else if(check == 3){
+    			frm.action="../mypageCompany/CompMyInfo.do";
+        		frm.submit(); 
+    		}else if(check == 9){
+    			frm.action="../mypageAdmin/userList.do";
+        		frm.submit(); 
+    		}else{
+    			alert("오류발생");
+    		}
+    	}
+    	function moveHireList(){
+    		var frm = document.topFrm;
+    		frm.action="../hirelist/HireList.do";
+    		frm.submit(); 
+    	}
     	function moveJasoList(){
     		var frm = document.topFrm;
     		frm.action="../jaso/jasoList.do";
