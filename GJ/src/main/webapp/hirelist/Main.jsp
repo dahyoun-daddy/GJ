@@ -45,7 +45,7 @@ if(null != sessionVO){
     
 </head>
 <body>
-	<jsp:include page="top.jsp" flush="false"></jsp:include>
+	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br><br>
 	<!-- 메인화면 -->
 	<div style=text-align:center>
