@@ -26,7 +26,7 @@
 	<h2>아이디 찾기</h2>
 	<form id="frm" name="frm" method="get">
 		<br> <input type="hidden" name="work_div" id="work_div">
-		<label><b>이름</b></label> <input type="text" id="name" name="name"
+		<label><b>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label> <input type="text" id="name" name="name"
 			placeholder="성함을 입력하세요"> <br> <br> <label><b>전화번호</b></label>
 		<input type="text" id="pn" name="pn" placeholder="ex) 02-0000-0000">
 		<br> <br>
@@ -41,11 +41,14 @@
 
 	<h2>비밀번호 찾기</h2>
 	<form id="frm11" name="frm11" method="get">
-		<br> <br> <label><b>이메일</b></label> <input type="text"
+		<br> <br> <label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label> <input type="text"
 			id="id" name="id" placeholder="이메일을 입력하세요"> <br> <br>
-		<label><b>비밀번호 찾기 질문:</b></label>
-		<%=StringUtill.makeSelectBox(signup_q, userPassQu, "userPassQu", false)%><br>
-		<br> <label><b>비밀번호 찾기 답변</b></label> <input type="text" id="an"
+		
+		<div class="form-inline" style="width:400px" >
+		<label><b>비밀번호 찾기 질문</b></label>
+		
+		<%=StringUtill.makeSelectBox(signup_q, userPassQu, "userPassQu", false)%></div><br>
+		 <label><b>비밀번호 찾기 답변</b></label> <input type="text" id="an"
 			name="an" placeholder="10글자 이하 입력"> <br> <br> <input
 			type="button" value="비밀번호 찾기" id="findPw" name="findPw">
 	</form>

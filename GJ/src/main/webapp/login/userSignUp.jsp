@@ -15,25 +15,26 @@
 	<h2>구직자 회원가입</h2>
 	<form id="frm" name="frm" method="get">
 		<br> <input type="hidden" name="work_div" id="work_div">
-		<label><b>이메일</b></label> <input type="text" id="id" name="id"
+		<div class="form-inline" >
+		<label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label > <input type="text" id="id" name="id"
 			placeholder="이메일을 입력하세요"> <input type="hidden" id="idcheck"
 			name="idcheck" value="0">
 		<div class="form-group">
-			<input type="button" value="아이디 중복확인" id="checkId" name="checkId">
+			&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId"></div></div>
 			<br>
-			<br> <label><b>비밀번호</b></label> <input type="password" id="pw"
+			<br> <label style="width:100px"><b>비밀번호</b></label> <input type="password" id="pw"
 				name="pw" placeholder="비밀번호 입력 조건"> <br>
-			<br> <label><b>비밀번호 확인</b></label> <input type="password"
+			<br> <label style="width:100px"><b>비밀번호 확인</b></label> <input type="password"
 				id="pw2" name="pw2" placeholder="다시 입력하세요"> <br>
-			<br> <label><b>닉네임</b></label> <input type="text" id="nick"
+			<br> <label style="width:100px"><b>닉네임</b></label> <input type="text" id="nick"
 				name="nick" placeholder="닉네임을 입력하세요"> <br>
-			<br> <label><b>성함</b></label> <input type="text" id="name"
+			<br> <label style="width:100px"><b>성함</b></label> <input type="text" id="name"
 				name="name" placeholder="성함을 입력하세요"> <br>
-			<br> <label><b>전화번호</b></label> <input type="text" id="pn"
+			<br> <label style="width:100px"><b>전화번호</b></label> <input type="text" id="pn"
 				name="pn" placeholder="ex) 010-0000-0000"> <br>
-			<br> <label><b>주소</b></label> <input type="text" id="ad"
+			<br> <label style="width:100px"><b>주소</b></label> <input type="text" id="ad"
 				name="ad" placeholder="주소를 입력하세요"> <br>
-			<br> <label><b>비밀번호 찾기 질문:</b></label> <select id="passQ"
+			<br> <label style="width:150px"><b>비밀번호 찾기 질문:</b></label> <select id="passQ"
 				name="passQ">
 				<option value="1">기억에 남는 추억은 ?</option>
 				<option value="2">자신의 인생 좌우명은 ?</option>
@@ -42,17 +43,17 @@
 				<option value="5">자신의 가장 소중한 친구 이름은 ?</option>
 				<option value="6">다시 태어나면 되고싶은것은 ?</option>
 			</select> <br>
-			<br> <label><b>비밀번호 찾기 답변</b></label> <input type="text"
+			<br> <label style="width:150px"><b>비밀번호 찾기 답변</b></label> <input type="text"
 				id="passA" name="passA" placeholder="10글자 이하 입력"> <br>
 			<br>
 			<!--  <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">-->
 			<!-- <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()"> >-->
-			<button class="btn btn-primary" type="button" id="reset" name="reset">초기화</button>
-			<button class="btn btn-primary" type="button" id="insertId"
+			<button class="btn btn-default btn-sm" type="button" id="reset" name="reset">초기화</button>
+			<button class="btn btn-default btn-sm" type="button" id="insertId"
 				name="insertId">회원가입</button>
 			<br>
 
-		</div>
+		
 	</form>
 
 

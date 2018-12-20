@@ -15,29 +15,29 @@
 	<h2>기업 회원가입</h2>
 	<form id="frm" name="frm" method="get">
 		<br> <input type="hidden" name="work_div" id="work_div">
-		<label><b>이메일</b></label> <input type="text" id="id" name="id"
+		<div class="form-inline" >
+		<label ><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label> <input type="text" id="id" name="id"
 			placeholder="이메일을 입력하세요"> <input type="hidden" id="idcheck"
 			name="idcheck" value="0">
-		<div class="form-group">
-			<input type="button" value="아이디 중복확인" id="checkId" name="checkId">
-			<br>
-			<br> <label><b>비밀번호</b></label> <input type="password" id="pw"
+			&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId"></div>
+			
+			<br> <label style="width:100px"><b>비밀번호</b></label> <input type="password" id="pw"
 				name="pw" placeholder="비밀번호 입력 조건"> <br>
-			<br> <label><b>비밀번호 확인</b></label> <input type="password"
+			<br> <label style="width:100px"><b>비밀번호 확인</b></label> <input type="password"
 				id="pw2" name="pw2" placeholder="다시 입력하세요"> <br>
-			<br> <label><b>기업명</b></label> <input type="text" id="nick"
+			<br> <label style="width:100px"><b>기업명</b></label> <input type="text" id="nick"
 				name="nick" placeholder="기업명을 입력하세요"> <br>
-			<br> <label><b>대표자</b></label> <input type="text" id="name"
+			<br> <label style="width:100px"><b>대표자</b></label> <input type="text" id="name"
 				name="name" placeholder="대표자을 입력하세요"> <br>
-			<br> <label><b>회사 전화번호</b></label> <input type="text" id="pn"
+			<br> <label style="width:100px"><b>회사 전화번호</b></label> <input type="text" id="pn"
 				name="pn" placeholder="ex) 02-0000-0000"> <br>
-			<br> <label><b>회사 주소</b></label> <input type="text" id="ad"
+			<br> <label style="width:100px"><b>회사 주소</b></label> <input type="text" id="ad"
 				name="ad" placeholder="회사 주소를 입력하세요"> <br>
-			<br> <label><b>매출액</b></label> <input type="text" id="salay"
+			<br> <label style="width:100px"><b>매출액</b></label> <input type="text" id="salay"
 				name="salay" placeholder="매출액을 입력하세요"> <br>
-			<br> <label><b>사원수</b></label> <input type="text" id="cnt"
+			<br> <label style="width:100px"><b>사원수</b></label> <input type="text" id="cnt"
 				name="cnt" placeholder="사원수를 입력하세요"> <br>
-			<br> <label><b>설립일</b></label> <input type="text" id="hire"
+			<br> <label style="width:100px"><b>설립일</b></label> <input type="text" id="hire"
 				name="hire" placeholder="ex 1990-05-05"> <br>
 			<br> <label><b>비밀번호 찾기 질문:</b></label> <select id="passQ"
 				name="passQ">
@@ -53,11 +53,11 @@
 			<br>
 			<!--  <input type="reset" name="reset"  value="초기화" onclick="javascript:do_reset()">-->
 			<!-- <input type="submit" name="submit" value="회원가입" onclick="javascript:do_insert()"> >-->
-			<button class="btn btn-primary" type="button" id="reset" name="reset">초기화</button>
-			<button class="btn btn-primary" type="button" id="insertId"
+			<button class="btn btn-default btn-sm" type="button" id="reset" name="reset">초기화</button>
+			<button class="btn btn-default btn-sm" type="button" id="insertId"
 				name="insertId">회원가입</button>
 			<br> <label><b> 기업은 관리자의 승인 이후의 이용이 가능합니다 .</b></label>
-		</div>
+		
 	</form>
 	<br>
 	<!--// 구직자 회원가입 폼 -->

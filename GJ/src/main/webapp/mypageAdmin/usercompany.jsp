@@ -54,7 +54,7 @@
 	<br/>
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
-		<input type="hidden" name="pageNum" id="pageNum" value="<%= pageNum %>">
+		<input type="hidden" name="pageNum" id="pageNum" value="">
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
    		<h1>구직자관리</h1>
@@ -86,14 +86,17 @@
     <!--// 검색영역----------------------------------------------------->
    
     <!-- Grid영역 -->
-		<div class="table-responsive" >
-			<table id="listTable" class="table table-striped table-bordered table-hover">
-   				<thead class="bg-primary">
-				    <tr>
-				        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">이름</th>
-						<th class="text-center col-xs-4 col-sm-4 col-md-4 col-lg-4">닉네임</th>
-						<th class="text-center col-xs-3 col-sm-3 col-md-3 col-lg-3">이메일</th>
+		<div class="table-responsive" align="center" >
+		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
+				<table id="listTable" class="table table-striped table-bordered table-hover" >
+				    
+				    	
+				  		<thead class="bg-primary">
+				  		<tr>
+				       <th class="text-center "><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+				       <th class="text-center col-xs-4 col-sm-4 col-md-4 col-lg-4">이메일</th>
+						<th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2">이름</th>
+						<th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2">닉네임</th>
 						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">가입일</th>
 						
 						
@@ -104,10 +107,10 @@
 	  						<c:when test="${list.size()>0}">
 	  							<c:forEach var="UserVO" items="${list}">
 	  								<tr>
-	  									<td class="text-center"><input type="checkbox" id="check" name="check"></td>
-	  									<td class="text-center"><c:out value="${UserVO.userName}"/></td>
-	  									<td class="text-left"><c:out value="${UserVO.userNick}"/></td>
+	  									<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
 	  									<td class="text-center"><c:out value="${UserVO.userId}"/></td>
+	  									<td class="text-center"><c:out value="${UserVO.userName}"/></td>
+	  									<td class="text-center"><c:out value="${UserVO.userNick}"/></td>
 	  									<td class="text-center"><c:out value="${UserVO.regDt}"/></td>
 	  								</tr>
 	  							</c:forEach>
@@ -120,12 +123,14 @@
 	  					</c:choose>
 					
 					</tbody>
-				</table>
+					</table>
+			
 				</div>
+				
 				  	<div class="dorm-inline text-center">
 	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "userList.do", "searchPage") %>
 	  	</div>
-  	
+  	</div><br><br>
 	<!-- // Grid영역 -->
 	
 
@@ -133,9 +138,11 @@
 	
 	<!-- 입력 Form영역---- ----------------------------------------------->
 			
+			<div class="table-responsive" align="center" >
+			
 			<div class="form-group">
 			<label class="col-lg-4 control-label">이메일</label>
-			<div  class="col-lg-8">
+			<div  class="col-lg-3">
 			<input type="text" name="userId" id="userId" disabled="disabled"
 						   class="form-control input-sm" placeholder="이메일" />						   
 			</div>
@@ -144,7 +151,7 @@
 			
 			<div class="form-group">
 					<label class="col-lg-4 control-label">비밀번호</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="password" name="userPasswd" id="userPasswd"
 						   class="form-control input-sm" placeholder="비밀번호"
 						   maxlength="20" />
@@ -152,7 +159,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-lg-4 control-label">닉네임</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="text" name="userNick" id="userNick"
 						   class="form-control input-sm" placeholder="닉네임"
 						   maxlength="20" />
@@ -161,7 +168,7 @@
 							
 				<div class="form-group">
 					<label class="col-lg-4 control-label">성함</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="text" name="userName" id="userName"
 						   class="form-control input-sm" placeholder="성함"
 						   maxlength="4" />
@@ -169,7 +176,7 @@
 				</div>				
 				<div class="form-group">
 					<label class="col-lg-4 control-label">전화번호</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="text" name="userPhone" id="userPhone"
 						   class="form-control input-sm" placeholder="전화번호"
 						   maxlength="4" />
@@ -177,7 +184,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-lg-4 control-label">주소</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="text" name="uerAdd" id="userAdd"
 						   class="form-control input-sm" placeholder="주소"
 						   maxlength="200" />
@@ -185,14 +192,14 @@
 				</div>	
 			<div class="form-group"> 
 					<label class="col-lg-4 control-label">비밀번호 찾기 질문:</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 	   			<%=StringUtill.makeSelectBox(signup_q, userPassQu, "userPassQu", false) %>
 	      	</div>
 			</div>	
 	      				
 			<div class="form-group">
 					<label class="col-lg-4 control-label">비밀번호 찾기 답변:</label>
-					<div  class="col-lg-8">
+					<div  class="col-lg-3">
 						<input type="text" name="userPassAn" id="userPassAn"
 						   class="form-control input-sm" placeholder="비밀번호 찾기 답변"
 						   maxlength="200" />
@@ -200,7 +207,7 @@
 				</div>		      				
 	      <button type="button" class="btn btn-default btn-sm" id="do_update">수정하기</button>
 		  <button type="button" class="btn btn-default btn-sm" id="do_delete">탈퇴시키기</button>		      														
-			</form>
+			</div>
 	<!-- //입력 Form영역---- ----------------------------------------------->			
 	<script type="text/javascript">
 	
@@ -214,7 +221,7 @@
 
 			var td = tr.children();
 
-			var userId = td.eq(3).text();
+			var userId = td.eq(1).text();
 
 			console.log("2 userId="+userId);
 			
