@@ -27,6 +27,7 @@ import com.sist.gj.service.MypageSvc;
 import com.sist.gj.service.SignUpSvc;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
+import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
@@ -41,8 +42,8 @@ public class CompMypageCtrl {
 	private static final String VIEW_APPLY_COMP="mypageCompany/CompHireStt";
 	private static final String VIEW_MYPAGE="mypageCompany/CompMypage";
 	private static final String VIEW_SIGN_OUT="mypageCompany/CompSignOut";
+	private static final String VIEW_OPEN_RESUME="mypageCompany/CompResume";
 	
-
 	
 	@Autowired
 	private CodeSvc codeSvc;
@@ -102,6 +103,49 @@ public class CompMypageCtrl {
 		
 		return jsonData;
 	}
+	
+	@RequestMapping(value="/mypageCompany/CompResume.do")
+	public String searchOpenResume(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+		log.info("=====================searchOpenResume=======================");
+		
+		if(invo.getPageSize() == 0) {
+			invo.setPageSize(10);
+		}
+		if(invo.getPageNum() == 0){
+			invo.setPageNum(1);
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		if(null == invo.getSearchDiv()) {
+			invo.setSearchDiv("");
+		}
+		
+		CodeVO codeSearch = new CodeVO();
+		codeSearch.setCmId("MY_COM_CV");
+		
+		CodeVO codePage = new CodeVO();
+		codePage.setCmId("PAGING");
+		
+		invo.setUserId("보승소프트");
+		
+		List<CvFormVO> list = mypageSvc.retrieveCv(invo);
+		log.info("list size : "+list.size());
+		
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+			
+		}
+		
+		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
+		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
+		model.addAttribute("list",list);
+		model.addAttribute("param",invo);
+		
+		return VIEW_OPEN_RESUME;
+	}
+	
 	
 	@RequestMapping(value="/mypageCompany/CompInfoUpdate.do")
 	public String CompInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {

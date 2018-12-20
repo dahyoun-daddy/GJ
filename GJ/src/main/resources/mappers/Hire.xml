@@ -7,7 +7,7 @@
 		<where>
   			<choose>
   				<when test="1 == searchDiv">
-  					C.user_id LIKE '%'||#{searchWord}||'%'
+  					D.user_nick LIKE '%'||#{searchWord}||'%'
   				</when>
   				<when test="2 == searchDiv">
   					C.hire_title LIKE '%'||#{searchWord}||'%'
@@ -21,23 +21,35 @@
 	<select id="search" parameterType="SearchVO" resultType="HireVO">
 				SELECT X.*, Y.*
 				  FROM
-				(
-				    SELECT T.hire_no,
-				           T.hire_title,
-				           T.hire_body,
-				           T.user_id,
-				           TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
-				           TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
-				           T.hire_add,
-				           T.hire_edu,
-				           T.reg_id,
-				           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
-				           T.rnum AS no
-				      FROM
+			    (
+			        SELECT T.hire_no,
+			               T.hire_title,
+			               T.hire_body,
+			               T.user_id,
+			               T.user_nick,
+			               TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
+			               TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
+			               T.hire_add,
+			               T.hire_edu,
+			               T.reg_id,
+			               TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
+			               T.rnum AS no
+			          FROM
 				    (
-				        SELECT C.*,
-				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
-				          FROM hireinfo C
+				        SELECT C.hire_no as hire_no,
+			                   C.hire_title as hire_title,
+			                   C.hire_body as hire_body,
+			                   C.user_id as user_id,
+			                   C.hire_date as hire_date,
+			                   C.hire_deadline as hire_deadline,
+			                   C.hire_add as hire_add,
+			                   C.hire_edu as hire_edu,
+			                   C.reg_id as reg_id,
+			                   C.reg_dt as reg_dt,
+			                   D.user_nick as user_nick,
+			                   ROW_NUMBER() OVER(ORDER BY C.reg_dt DESC) AS rnum
+			              FROM hireinfo C, users D
+			             WHERE C.user_id = D.user_id
 		                <include refid="searchWord"/>
 				    ) T
 		            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -46,7 +58,8 @@
 				NATURAL JOIN
 				(
 				    SELECT COUNT(*) AS total_cnt
-				      FROM hireinfo C
+			          FROM HIREINFO C, users D
+			         WHERE C.user_id = D.user_id
 		            <include refid="searchWord"/>
 				) Y
 

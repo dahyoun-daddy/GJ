@@ -10,7 +10,10 @@
 				AND D.user_name LIKE '%'||#{searchWord}||'%'
 			</when>
 			<when test="2 == searchDiv">
-				AND C.cv_grade LIKE '%'||#{searchWord}||'%'
+				AND F.cd_nm like '%'||#{searchWord}||'%'
+			</when>
+			<when test="3 == searchDiv">
+				AND E.cl_title LIKE '%'||#{searchWord}||'%'
 			</when>
 			<otherwise>
 			</otherwise>
@@ -38,6 +41,21 @@
 			<otherwise>
 			</otherwise>
 		</choose>
+	</sql>
+	
+		<sql id="searchWord">
+		<where>
+  			<choose>
+  				<when test="1 == searchDiv">
+  					C.user_id LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<when test="2 == searchDiv">
+  					C.hire_title LIKE '%'||#{searchWord}||'%'
+  				</when>
+  				<otherwise>
+  				</otherwise>
+  			</choose>
+  		</where>
 	</sql>
 	
 	<insert id="addPic" parameterType="PictureVO">
@@ -83,23 +101,32 @@
     						,TO_CHAR(T.cv_date,'HH24:mm:SS'),TO_CHAR(T.cv_date,'YYYY/MM/DD')) AS cv_date,
                    T.cv_grade,
                    T.cv_check,
-				   DECODE(TO_CHAR(T.reg_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
-        					,TO_CHAR(T.reg_dt,'HH24:mm:SS'),TO_CHAR(T.reg_dt,'YYYY/MM/DD')) AS reg_dt
-                   T.mod_id,
-				   DECODE(TO_CHAR(T.mod_dt,'MM/DD'),TO_CHAR(sysdate,'MM/DD')
-        					,TO_CHAR(T.mod_dt,'HH24:mm:SS'),TO_CHAR(T.mod_dt,'YYYY/MM/DD')) AS mod_dt
                    T.user_nick,
                    T.user_name,
+                   T.cl_title,
 		           T.rnum AS no
 		      FROM
 		    (
-		        SELECT C.*,
+		        SELECT C.reg_id as reg_id,
+                       C.cv_date as cv_date,
+                       C.cv_check as cv_check,
+                       DECODE(C.cv_grade, 1, '학력무관',
+                                          2, '고졸',
+                                          3, '초대졸',
+                                          4, '대졸',
+                                          5, '석사이상') as cv_grade,
+                       F.cd_id as cd_id,
 		               D.user_nick as user_nick,
 		               D.user_name as user_name,
-		               ROW_NUMBER() OVER(ORDER BY C.reg_dt DESC) AS rnum
-		          FROM usercv C, users D
+                       E.cl_title as cl_title,
+		               ROW_NUMBER() OVER(ORDER BY C.cv_date DESC) AS rnum
+		          FROM usercv C, users D, usercl E, codeD F
 		         WHERE C.reg_id = D.user_id
+                   AND C.reg_id = E.reg_id
 		           AND C.cv_check = 1
+                   AND E.cl_check = 0
+                   AND F.cm_id = 'HIRE_SEARCH_EDU'
+                   AND F.cd_id = C.cv_grade
 				  		<include refid="searchCv"/>
 				    ) T
 				    WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
@@ -108,11 +135,15 @@
 			NATURAL JOIN
 			(
 			    SELECT COUNT(*) AS total_cnt
-			      FROM usercv C, users D
+			      FROM usercv C, users D, usercl E, codeD F
 			     WHERE C.reg_id = D.user_id
-			       AND C.cv_check = 1
+                   AND C.reg_id = E.reg_id
+                   AND C.cv_check = 1
+                   AND E.cl_check = 0
+                   AND F.cm_id = 'HIRE_SEARCH_EDU'
+                   AND F.cd_id = C.cv_grade
 			        <include refid="searchCv"/>
-			) Y;
+			) Y
 	</select>
 
 	<insert id="addCv" parameterType="CvFormVO">
@@ -393,6 +424,42 @@
 		 WHERE t1.user_id = t2.user_id(+)
 		   AND t1.user_id = #{userId}
 		 GROUP BY t1.user_nick
+	</select>
+	
+	<select id="retrieveHire" parameterType="SearchVO" resultType="HireVO">
+			SELECT X.*, Y.*
+			  FROM
+			(
+			    SELECT T.hire_no,
+			           T.hire_title,
+			           T.hire_body,
+			           T.user_id,
+			           TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
+			           TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
+			           T.hire_add,
+			           T.hire_edu,
+			           T.reg_id,
+			           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
+			           T.rnum AS no
+			      FROM
+			    (
+			        SELECT C.*,
+			               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
+			          FROM hireinfo C
+			         WHERE user_id = #{userId}
+	                <include refid="searchWord"/>
+			    ) T
+	            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+				   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+			) X
+			NATURAL JOIN
+			(
+			    SELECT COUNT(*) AS total_cnt
+			      FROM hireinfo C
+			     WHERE user_id = #{userId}
+	            <include refid="searchWord"/>
+			) Y
+
 	</select>
 	
 	

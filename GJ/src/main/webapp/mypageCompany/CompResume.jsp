@@ -1,21 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/main.css">
     
 <style>
 	#bubble-float-right:{
@@ -100,6 +92,32 @@
 	
 	
 </style>
+<% 
+	String context = request.getContextPath();
+			
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
+	int totalCnt = 0;
+	int bottomCount = 10;
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -130,38 +148,35 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>오픈된 이력서 열람하기</strong></h5>
 					    	<br/>
-					    	<div class="container">
-							<input type="hidden" name="page_num" id="page_num">
-				    	    	<div class="row" style="float: right;">
+					    	<form name="frm" id="frm" method="get">
+					    	<input type="hidden" name="pageNum" id="pageNum"/>
+					    	<input type="hidden" name="selectNo" id="selectNo">
+					    	<!-- --검색영역 -->
+					    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					  					<div class="form-group" >
 					  						<div style="float: left; width: 25%;">
-					  						<select name="search_Div" id="search_Div" class="form-control input-sm">
-					  							<option value="1">10</option>
-					  							<option value="2">20</option>
-					  							<option value="3">50</option>
-					  						</select>
+						  						<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
 					  						</div>
 					  						<div style="float: left; width: 33%;">
-					  							<select name="search_Div" id="search_Div" class="form-control input-sm">
-					  							<option value="1">이름</option>
-					  							<option value="2">최종학력</option>
-					  							<option value="3">자기소개서 제목</option>
-					  						</select>
+					  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
 					  						</div>
 					  						<div style="float: left; width: 41%;">
-					  							<input type="text" name="search_Word" id="search_Word" class="form-control input-sm" placeholder="검색어"/>
+					  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
 					  						</div>
 					  					</div>
 					  		  		</div>
 					  		  		<div class="form-group">
 					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
 					  				</div>
-								</div>
-		
+				  				</div>
+				  				</form>
+				  				
+							<!--// 검색영역----------------------------------------------------->
+					  
+					  		<!-- Grid영역 -->
 					    	<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
-								
 							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
@@ -177,48 +192,79 @@
 								  		</tr>
 								  		</thead>
 								  		<tbody>
-								  			<tr>
-								  				<td class="text-center">이주영</td>
-								  				<td class="text-center">열심히 하겠습니다</td>
-								  				<td class="text-center">대졸</td>
-								  			</tr>	
-								  			<tr>
-								  				<td class="text-center">김지혜</td>
-								  				<td class="text-center">자기소개서입니다</td>
-								  				<td class="text-center">대졸</td>
-								  			</tr>
-								  			<tr>
-								  				<td class="text-center">김지훈</td>
-								  				<td class="text-center">준비된 신입 개발자입니다</td>
-								  				<td class="text-center">대졸</td>
-								  			</tr>
+									  		<c:choose>
+										  		<c:when test="${list.size()>0}">
+										  			<c:forEach var="resume" items="${list}">
+											  			<tr id="${resume.regId }">
+											  				<td class="text-center"><c:out value="${resume.userName}"/></td>
+											  				<td class="text-center"><c:out value="${resume.clTitle}"/></td>
+										  					<td class="text-center"><c:out value="${resume.cvGrade}"/></td>
+											  			</tr>
+										  			</c:forEach>
+									  			</c:when>
+									  			<c:otherwise>
+						 	 						<tr>
+						 	 							<td class="text-center" colspan="99">이력서를 오픈한 구직자가 없습니다.</td>
+						 	 						</tr>
+						  						</c:otherwise>
+								  			</c:choose>
 								  		</tbody>
 								  	</table>
 							  	</div>
-							  	<div class="dorm-inline text-center">
-							  		1
-							  	</div>
-							  	
+							<!--pagenation ---------------------------------------------------->
+						  	<div class="dorm-inline text-center">
+			  			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "CompHireStt.do", "searchPage") %>
 						  	</div>
-				    		
-				    	</div>
-		          </div>
-		     </div>
+						  	<!--// pagenation영역 ----------------------------------------------->
+				  		</div>
+		    		<!--// Grid영역 ---------------------------------------------------->
+			    </div>
+	     	</div>
+	     </div>
 	
 		
 		 </section>
     
     <script type="text/javascript">
     
-	     //check 전체 선택
-	    function checkAll(){
-	   	 if($("#checkAll").is(':checked') == true  ){
-	   		 $("input[name='check']").prop("checked",true);
-	   	 }else{
-	   		 $("input[name='check']").prop("checked",false);
-	   	 }
-	   	   
-	    }
+	    function searchPage(url,pageNum){
+			alert("url : "+url+" page_num : "+pageNum);
+			var frm = document.frm;
+			frm.pageNum.value = pageNum;
+			frm.action = url;
+			frm.submit();
+		}	
+	
+		function doSearch(){//검색
+			var frm = document.frm;
+			frm.pageNum.value = 1;
+			frm.action="CompResume.do";
+			frm.submit();
+		}
+		
+		$(document).ready(function(){
+	    	//엔터키 처리
+			$("#searchWord").keydown(function(key) {
+				if (key.keyCode == 13) {
+					doSearch();
+				}
+			});
+	    	
+			$("#listTable>tbody").on("click","tr",function(){
+				var regId = $(this).attr('id');
+				
+				if("" == regId){
+    				return;
+    			}
+				
+    			var frm = document.frm;
+        		frm.selectNo.value = regId;
+        		frm.action = "/gj/mypageUser/UserResumeView.do";
+        		frm.submit();
+        		
+			});
+	    	
+		});// $(document).ready(function()
 	     
     </script>
     

@@ -174,7 +174,7 @@
 				  				
 							<!--// 검색영역----------------------------------------------------->
 					    	
-					    	<!-- Grid영역 -->
+					    	
 					    	<div class="table-responsive" align="center" style="float:left;">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 								
@@ -189,7 +189,6 @@
 								  		<thead class="bg-primary">
 								  		<tr>
 								  			<th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								  			<th class="text-center" style="background-color: #FACC2E;">지원 NO</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">지원자명</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">채용제목</th>
 								  			<th class="text-center" style="background-color: #FACC2E;">지원일</th>
@@ -199,10 +198,9 @@
 								  			<c:choose>
 								  				<c:when test="${list.size()>0}">
 								  					<c:forEach var="applyVO" items="${list}">
-								  					<tr>
+								  					<tr id="<c:out value="${applyVO.applyNo}"/>">
 								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
-								  						<td class="text-center"><c:out value="${applyVO.applyNo}"/></td> 
-										  				<td class="text-center"><c:out value="${applyVO.userName}"/></td> 
+										  				<td class="text-center click" id="${applyVO.userId }"><c:out value="${applyVO.userName}"/></td> 
 										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
 		 								  			</tr>
@@ -239,13 +237,13 @@
     
 	     //check 전체 선택
 	    function checkAll(){
-	   	 if($("#checkAll").is(':checked') == true  ){
-	   		 $("input[name='check']").prop("checked",true);
-	   	 }else{
-	   		 $("input[name='check']").prop("checked",false);
-	   	 }
-	   	   
-}//checkAll()
+		   	 if($("#checkAll").is(':checked') == true  ){
+		   		 $("input[name='check']").prop("checked",true);
+		   	 }else{
+		   		 $("input[name='check']").prop("checked",false);
+		   	 }
+		   	   
+		}//checkAll()
 	    
 	    function searchPage(url,pageNum){
 			alert("url : "+url+" page_num : "+pageNum);
@@ -275,10 +273,9 @@
 				var arr = []; //var arr=new Array();
 				
 				$("input[name='check']:checked").each(function(index,row ){
-					var record = $(row).parents("tr");
-					var applyNo = $(record).find("td").eq(1).text();
-					console.log("applyNo="+applyNo);
-					arr.push(applyNo);
+					var record = $(row).parents("tr").attr('id');
+					console.log("record="+record);
+					arr.push(record);
 				});
 
 				var jsonIdList = JSON.stringify(arr);
@@ -300,7 +297,7 @@
 				                 console.log("parseData.message="+parseData.message);
 					         	 if(parseData.flag > 0){
 					         		alert(parseData.message);
-					         		doSearch();
+					         		location.reload();
 					         	 }else{
 					         		alert(parseData.message);
 					         		

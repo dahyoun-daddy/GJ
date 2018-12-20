@@ -144,6 +144,7 @@
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>지원 현황</strong></h5>
+				    	<p style="font-size:50%; text-align:center;">제목 클릭 시 해당 채용정보로 넘어갑니다.</p>
 					    	<br/>
 					    	<form name="frm" id="frm" method="get">
 					    	<input type="hidden" name="pageNum" id="pageNum"/>
@@ -194,10 +195,10 @@
 								  			<c:choose>
 								  				<c:when test="${list.size()>0}">
 								  					<c:forEach var="applyVO" items="${list}">
-								  					<tr id="${applyVO.hireNo }">
+								  					<tr id="${applyVO.applyNo }">
 								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
 										  				<td class="text-center"><c:out value="${applyVO.compNick}"/></td> 
-										  				<td class="text-left"><c:out value="${applyVO.hireTitle}"/></td> 
+										  				<td class="text-left" id="${applyVO.hireNo}"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
 		 								  			</tr>
 								  					</c:forEach>
@@ -261,14 +262,13 @@
 				}
 			});
 	    	
-			$("#listTable>tbody").on("click","tr",function(){
-				//alert("ready");
+			$("#listTable tr td.text-left").click(function(){
 				var hireNo = $(this).attr('id');
-				//alert(hireNo);
+				
 				if("" == hireNo){
     				return;
     			}
-    			
+				
     			var frm = document.frm;
         		frm.hireNo.value = hireNo;
         		frm.action = "/gj/hirelist/HireView.do";
@@ -281,10 +281,10 @@
 				var arr = []; //var arr=new Array();
 				
 				$("input[name='check']:checked").each(function(index,row ){
-					var record = $(row).parents("tr");
-					var applyNo = $(record).find("td").eq(1).text();
-					console.log("applyNo="+applyNo);
-					arr.push(applyNo);
+					var record = $(row).parents("tr").attr('id');
+// 					var applyNo = $(record).find("td").eq(1).text();
+					console.log("record="+record);
+					arr.push(record);
 				});
 
 				var jsonIdList = JSON.stringify(arr);
@@ -306,7 +306,7 @@
 				                 console.log("parseData.message="+parseData.message);
 					         	 if(parseData.flag > 0){
 					         		alert(parseData.message);
-					         		doSearch();
+					         		location.reload();
 					         	 }else{
 					         		alert(parseData.message);
 					         		

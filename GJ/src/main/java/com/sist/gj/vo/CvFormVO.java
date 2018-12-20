@@ -10,6 +10,9 @@ public class CvFormVO extends DTO {
 	private String regDt; //등록일
 	private String modId; //수정자
 	private String modDt; //수정일
+	private String userNick;
+	private String userName;
+	private String clTitle;
 	
 	public CvFormVO() {}
 
@@ -29,6 +32,32 @@ public class CvFormVO extends DTO {
 	public String toString() {
 		return "CvFormVO [regId=" + regId + ", cvDate=" + cvDate + ", cvGrade=" + cvGrade + ", cvCheck=" + cvCheck
 				+ ", regDt=" + regDt + ", modId=" + modId + ", modDt=" + modDt + "]";
+	}
+	
+	
+
+	public String getUserNick() {
+		return userNick;
+	}
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getClTitle() {
+		return clTitle;
+	}
+
+	public void setClTitle(String clTitle) {
+		this.clTitle = clTitle;
 	}
 
 	public String getRegId() {
