@@ -100,6 +100,8 @@ public interface MypageDao {
 	//회원정보 수정하기 
 	int updateUser(UserVO userVO) throws SQLException;
 	
+	//기업의 채용정보 조회하기
+	List<HireVO> retrieveHire(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 	
 
 }

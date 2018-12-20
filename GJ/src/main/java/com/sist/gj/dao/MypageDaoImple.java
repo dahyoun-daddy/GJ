@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
@@ -282,6 +283,16 @@ public class MypageDaoImple implements MypageDao {
 		return flag;
 	}
 
+	@Override
+	public List<HireVO> retrieveHire(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		String statement = NAMESPACE+".retrieveHire";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+searchVO);
+		List<HireVO> list = sqlSession.selectList(statement, searchVO);
+		log.debug("result : "+list);
+		
+		return list;
+	}
 
 	
 }

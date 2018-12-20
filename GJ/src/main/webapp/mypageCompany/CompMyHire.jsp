@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,6 +93,32 @@
 	
 	
 </style>
+<% 
+	String context = request.getContextPath();
+			
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = "";  //검색구분
+	String searchWord = ""; //검색어
+	
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+	
+	int totalCnt = 0;
+	int bottomCount = 10;
+	
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+	
+	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -104,13 +135,13 @@
 					    	        onclick="location='CompMyInfo.do'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
+					    	        onclick="location='CompMyHire.do'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
 					    	        onclick="location='CompHireStt.do'">지원자 확인하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
+					    	        onclick="location='CompResume.do'">오픈된 이력서<br/>열람하기</button>
 				    	</div>
 			    	</div>
 			    	
@@ -118,13 +149,35 @@
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 				    	<h5 style="color: orange" align="center"><strong>채용 관리하기</strong></h5>
 					    	<br/>
+					    	<form name="frm" id="frm" method="get">
+					    	<input type="hidden" name="pageNum" id="pageNum"/>
+					    	<input type="hidden" name="hireNo" id="hireNo">
+							<!-- --검색영역 -->
+					    	<div class="row" style="float: right;">
+					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					  					<div class="form-group" >
+					  						<div style="float: left; width: 25%;">
+						  						<%=StringUtill.makeSelectBox(codePage, pageSize, "pageSize", false) %>
+					  						</div>
+					  						<div style="float: left; width: 33%;">
+					  							<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
+					  						</div>
+					  						<div style="float: left; width: 41%;">
+					  							<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" class="form-control input-sm" placeholder="검색어"/>
+					  						</div>
+					  					</div>
+					  		  		</div>
+					  		  		<div class="form-group">
+					  					<button type="button" class="btn btn-default btn-sm" onclick="doSearch();">조회</button>
+					  				</div>
+				  				</div>
+				  				</form>
+				  				
+							<!--// 검색영역----------------------------------------------------->
+							
+							<!-- Grid영역 -->
 					    	<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
-								
-								<div align="right" style="margin:10px; font-size:70%;">
-									각 공고는 채용 마감일 이전에는 삭제가 불가하며, 수정은 가능합니다.&nbsp;&nbsp;&nbsp;
-							  		<input id="smallBtn" type="button" value="등록하기" onclick="location='../hirelist/HireCreate.jsp'">
-							  	</div>
 							  	
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
@@ -144,22 +197,30 @@
 								  		</tr>
 								  		</thead>
 								  		<tbody>
-								  			<tr>
-								  				<td class="text-left">[하반기 공채] 개발자 본사 인턴 모집 </td>
-								  				<td class="text-center">서울</td>
-								  				<td class="text-center">회사내규</td>
-								  				<td class="text-center">초대졸</td>
-								  				<td class="text-center">2018/12/20</td>
-								  			</tr>	
-								  			<tr>
-								  				<td class="text-left">[하반기 공채] 신입 개발자 본사 정직원 모집합니다 </td>
-								  				<td class="text-center">서울</td>
-								  				<td class="text-center">2500~3000</td>
-								  				<td class="text-center">초대졸</td>
-								  				<td class="text-center">2018/12/20</td>
-								  			</tr>
+								  			<c:choose>
+								  				<c:when test="${list.size()>0}">
+								  					<c:forEach var="hireVO" items="${list}">
+										  			<tr id="${hireVO.hireNo }">
+										  				<td class="text-left"><c:out value="${hireVO.hireTitle}"/></td>
+										  				<td class="text-center"><c:out value="${hireVO.hireAdd}"/></td>
+										  				<td class="text-center"><c:out value="${hireVO.hireSalary}"/></td>
+										  				<td class="text-center"><c:out value="${hireVO.hireEdu}"/></td>
+										  				<td class="text-center"><c:out value="${hireVO.hireDeadline}"/></td>
+										  			</tr>
+								  					</c:forEach>
+								  				</c:when>
+			  				 	 					<c:otherwise>
+						 	 						<tr>
+						 	 							<td class="text-center" colspan="99">등록한 채용 정보가 없습니다.</td>
+						 	 						</tr>
+							  						</c:otherwise>
+								  			</c:choose>	
 								  		</tbody>
 								  	</table>
+									<div align="right" style="margin:10px; font-size:70%;">
+										각 공고는 채용 마감일 이전에는 삭제가 불가하며, 수정은 가능합니다.&nbsp;&nbsp;&nbsp;
+								  		<input id="smallBtn" type="button" value="등록하기" onclick="location='../hirelist/HireCreate.jsp'">
+								  	</div>
 							  	</div>
 							  	<div class="dorm-inline text-center">
 							  		1
@@ -175,7 +236,48 @@
 		 </section>
     
     <script type="text/javascript">
-	     
+	    
+	    function searchPage(url,pageNum){
+			var frm = document.frm;
+			frm.pageNum.value = pageNum;
+			frm.action = url;
+			frm.submit();
+		}	
+	
+		function doSearch(){//검색
+    		var frm = document.frm;
+    		frm.pageNum.value = 1;
+    		frm.action="CompMyHire.do";
+    	}
+		
+	    $(document).ready(function(){
+	    	//엔터키 처리
+			$("#searchWord").keydown(function(key) {
+				if (key.keyCode == 13) {
+					doSearch();
+				}
+			});
+	    	
+			$("#listTable>tbody").on("click","tr",function(){
+				var hireNo = $(this).attr('id');
+				
+				if("" == hireNo){
+    				return;
+    			}
+				
+    			var frm = document.frm;
+        		frm.hireNo.value = hireNo;
+        		frm.action = "/gj/hirelist/HireView.do";
+        		frm.submit();
+        		
+			});
+	    	
+			
+		});// $(document).ready(function()
+	    
+	   
+
+	    
     </script>
     
 </body>

@@ -13,6 +13,7 @@ import com.sist.gj.dao.JasoDao;
 import com.sist.gj.dao.MypageDao;
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
@@ -191,6 +192,11 @@ public class MypageSvcImple implements MypageSvc {
 	@Override
 	public int deleteCv(CvFormVO cvFormVO) throws SQLException {
 		return mypageDao.deleteCv(cvFormVO);
+	}
+
+	@Override
+	public List<HireVO> retrieveHire(SearchVO searchVO) throws ClassNotFoundException, SQLException {
+		return mypageDao.retrieveHire(searchVO);
 	}
 
 

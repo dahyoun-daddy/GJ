@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CvFormVO;
+import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
 import com.sist.gj.vo.PictureVO;
@@ -90,7 +91,9 @@ public interface MypageSvc {
 	
 	//회원정보 수정하기 
 	int updateUser(UserVO userVO) throws SQLException;
-	
+
+	//기업의 채용정보 조회하기
+	List<HireVO> retrieveHire(SearchVO searchVO) throws ClassNotFoundException, SQLException;
 		
 
 }

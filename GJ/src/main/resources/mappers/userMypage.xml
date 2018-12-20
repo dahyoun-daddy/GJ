@@ -43,19 +43,17 @@
 		</choose>
 	</sql>
 	
-		<sql id="searchWord">
-		<where>
-  			<choose>
-  				<when test="1 == searchDiv">
-  					C.user_id LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<when test="2 == searchDiv">
-  					C.hire_title LIKE '%'||#{searchWord}||'%'
-  				</when>
-  				<otherwise>
-  				</otherwise>
-  			</choose>
-  		</where>
+	<sql id="searchWord">
+		<choose>
+			<when test="1 == searchDiv">
+				AND D.user_nick LIKE '%'||#{searchWord}||'%'
+			</when>
+			<when test="2 == searchDiv">
+				AND C.hire_title LIKE '%'||#{searchWord}||'%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
 	</sql>
 	
 	<insert id="addPic" parameterType="PictureVO">
@@ -427,38 +425,53 @@
 	</select>
 	
 	<select id="retrieveHire" parameterType="SearchVO" resultType="HireVO">
-			SELECT X.*, Y.*
-			  FROM
-			(
-			    SELECT T.hire_no,
-			           T.hire_title,
-			           T.hire_body,
-			           T.user_id,
-			           TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
-			           TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
-			           T.hire_add,
-			           T.hire_edu,
-			           T.reg_id,
-			           TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
-			           T.rnum AS no
-			      FROM
-			    (
-			        SELECT C.*,
-			               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
-			          FROM hireinfo C
-			         WHERE user_id = #{userId}
-	                <include refid="searchWord"/>
-			    ) T
-	            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
-				   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
-			) X
-			NATURAL JOIN
-			(
-			    SELECT COUNT(*) AS total_cnt
-			      FROM hireinfo C
-			     WHERE user_id = #{userId}
-	            <include refid="searchWord"/>
-			) Y
+		SELECT X.*, Y.*
+		  FROM
+	    (
+	        SELECT T.hire_no,
+	               T.hire_title,
+	               T.hire_body,
+	               T.user_id,
+	               T.user_nick,
+	               TO_CHAR(T.hire_date,'YYYY/MM/DD') AS hire_date,
+	               TO_CHAR(T.hire_deadline,'YYYY/MM/DD') AS hire_deadline,
+	               T.hire_add,
+	               T.hire_edu,
+	               T.hire_salary,
+	               T.reg_id,
+	               TO_CHAR(T.reg_dt,'YYYY/MM/DD') AS reg_dt,
+	               T.rnum AS no
+	          FROM
+		    (
+		        SELECT C.hire_no as hire_no,
+	                   C.hire_title as hire_title,
+	                   C.hire_body as hire_body,
+	                   C.user_id as user_id,
+	                   C.hire_date as hire_date,
+	                   C.hire_deadline as hire_deadline,
+	                   C.hire_add as hire_add,
+	                   C.hire_edu as hire_edu,
+	                   C.hire_salary as hire_salary,
+	                   C.reg_id as reg_id,
+	                   C.reg_dt as reg_dt,
+	                   D.user_nick as user_nick,
+	                   ROW_NUMBER() OVER(ORDER BY C.reg_dt DESC) AS rnum
+	              FROM hireinfo C, users D
+	             WHERE C.user_id = D.user_id
+	               AND C.user_id = #{userId}
+                <include refid="searchWord"/>
+		    ) T
+            WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
+			   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
+		) X
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) AS total_cnt
+	          FROM HIREINFO C, users D
+	         WHERE C.user_id = D.user_id
+	           AND C.user_id = #{userId}
+            <include refid="searchWord"/>
+		) Y
 
 	</select>
 	

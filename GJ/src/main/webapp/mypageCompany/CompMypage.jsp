@@ -120,13 +120,13 @@
 					    	        onclick="location='CompMyInfo.do'">기업 정보</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompMyHire.jsp'">채용 관리하기</button><br/><br/>
+					    	        onclick="location='CompMyHire.do'">채용 관리하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
 					    	        onclick="location='CompHireStt.do'">지원자 확인하기</button><br/><br/>
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
-					    	        onclick="location='CompResume.jsp'">오픈된 이력서<br/>열람하기</button>
+					    	        onclick="location='CompResume.do'">오픈된 이력서<br/>열람하기</button>
 				    	</div>
 			    	</div>
 			    	
@@ -143,9 +143,9 @@
 				    		현재 올린 구인 공고 <a style="color: orange;"><c:out value="${hireCount}"/></a> 건 입니다.<br/><br/>
 				    		
 				    		<input id="smallBtn" type="button" value="정보 수정하기" 
-	                   			   onclick="location='CompMyInfo.jsp'; return false;">
+	                   			   onclick="location='CompMyInfo.do'; return false;">
 				    		<input id="smallBtn" type="button" value="탈퇴하기" 
-	                   			   onclick="location='CompSignOut.jsp'; return false;">
+	                   			   onclick="location='CompSignOut.do'; return false;">
 				    		
 				    		</div>
 				    		
