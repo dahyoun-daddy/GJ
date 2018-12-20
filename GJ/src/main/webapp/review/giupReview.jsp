@@ -76,7 +76,7 @@
     
     <style type="text/css">
 	  label {
-	  	line-height: 0.5em; 
+	  	line-height: auto; min-height: 0.5em; 
 	  	font-size: 80%; 
 	  	font-weight: bold;
 	  	bottom: 1px;  
@@ -88,6 +88,7 @@
 <body>
 	<!--Navbar -->
     <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
