@@ -1,10 +1,24 @@
+<%@page import="com.sist.gj.vo.PictureVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-
+<%
+	String context = request.getContextPath();
+	PictureVO profileVO = (PictureVO)session.getAttribute("pictureVO");
+	String fileOrgName = "";
+	String imgPath = "";
+	String projectPath = "";
+	if(null != profileVO){
+		fileOrgName = profileVO.getpFlNm();
+		int pathNum = profileVO.getpFlPt().indexOf("resources");
+		projectPath = profileVO.getpFlPt().substring(pathNum);
+		imgPath = context+"/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
+		//"gj/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
+	}
+%>
 <style>
 
 	#bubble-float-right:{
@@ -144,9 +158,12 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg">
+				    			<img src="<%=imgPath%>" width=150px, height=180px/>
 				    			이미지 불러오기
 				    		</div>
 				    		<div id ="profmain">
+				    			<input id="smallBtn" type="button" value="사진 업로드"
+		                   			   onclick="PicturePopup()"><br/><br/>
 					    		<orange style="color: orange;">회사를 대표할 수 있는 로고 혹은 이미지를 올려 주세요.<br/>기업 정보 및 채용 공고에 보여질 사진입니다.<br/><br/></orange>
 				    		</div>
 				    		
@@ -215,6 +232,11 @@
 		 </section>
 
      <script type="text/javascript">
+	     function PicturePopup(){
+	     	var popUrl = "../common/UserPicPopup.jsp";	//팝업창에 출력될 페이지 URL
+	     	var popOption = "width=360, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	    		window.open(popUrl,"",popOption);
+	     }
      
 	    $(document).ready(function(){
 	    	$("input[name='do_update']").on("click",function(){
