@@ -27,7 +27,7 @@ public interface MypageDao {
 	//사진 추가
 	int addPic(PictureVO pictureVO);
 
-	UserVO selectPic(UserVO userVO);
+	PictureVO selectPic(UserVO userVO);
 	
 	//사진 삭제 
 	int deletePic(PictureVO pictureVO) throws SQLException;

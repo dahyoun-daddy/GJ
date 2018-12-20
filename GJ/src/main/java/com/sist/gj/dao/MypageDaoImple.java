@@ -42,11 +42,11 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
-	public UserVO selectPic(UserVO userVO) {
+	public PictureVO selectPic(UserVO userVO) {
 		String statement = NAMESPACE+".selectPic";
 		log.debug("sql statement : "+statement);
 		log.debug("param : "+userVO);
-		UserVO inVO = sqlSession.selectOne(statement, userVO);
+		PictureVO inVO = sqlSession.selectOne(statement, userVO);
 		log.debug("result : "+inVO);
 				
 		return inVO;
