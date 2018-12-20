@@ -83,7 +83,7 @@
 	</div>
     <!--// 검색영역----------------------------------------------------->
    
-    <!-- Grid영역 -->
+    <!-- Grid영역 --> 
 		<div class="table-responsive" align="center"  >
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 			<table id="listTable" class="table table-striped table-bordered table-hover">
