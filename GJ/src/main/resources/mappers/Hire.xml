@@ -99,18 +99,20 @@
 	
 	<select id="read" parameterType="HireVO" resultType="HireVO">
 		SELECT
-		    hire_no,
-		    hire_title,
-		    hire_body,
-		    user_id,
-		    hire_date,
-		    hire_deadline,
-		    hire_add,
-		    hire_salary,
-		    hire_edu
+		    A.hire_no,
+		    A.hire_title,
+		    A.hire_body,
+		    A.user_id,
+		    A.hire_date,
+		    A.hire_deadline,
+		    A.hire_add,
+		    A.hire_salary,
+		    A.hire_edu,
+		    B.user_nick
 		FROM
-		    hireinfo
-		WHERE hire_no = #{hireNo}
+		    hireinfo A, users B
+		WHERE A.user_id = B.user_id
+		  AND hire_no = #{hireNo}
 	</select>
 	
 	<update id="update" parameterType="HireVO">

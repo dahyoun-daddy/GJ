@@ -135,7 +135,7 @@ public class HireController {
 		return jsonData;
 	}
 	
-	//게시물목록 클릭했을때 
+	//게시물목록 클릭했을때 조회화면
 	@RequestMapping(value="/hirelist/HireView.do")
 	public String read(HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================read=======================");
@@ -157,7 +157,7 @@ public class HireController {
 		
 		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
 		hireDate = notIncludeTime.format(date);
-		hireDeadline = notIncludeTime.format(date);
+		hireDeadline = notIncludeTime.format(date2);
 		
 		model.addAttribute("hireTitle", outVO.getHireTitle());
 		model.addAttribute("hireBody", outVO.getHireBody());

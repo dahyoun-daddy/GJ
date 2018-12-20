@@ -48,8 +48,8 @@ public class HireDaoTest {
 	
 	@Before
 	public void setUp() {
-		inVo1 = new HireVO(15,"보승소프트 신입공채","보승소프트 신입공채","보승소프트"
-				,"20181212","20181212","창원시","3000","학력무관","보승소프트",null,"보승소프트",null);
+	//	inVo1 = new HireVO(15,"보승소프트 신입공채","보승소프트 신입공채","보승소프트"
+		//		,"20181212","20181212","창원시","3000","학력무관","보승소프트",null,"보승소프트",null);
 		inVo2 = new HireVO();
 		inVo3 = new HireVO();
 		
