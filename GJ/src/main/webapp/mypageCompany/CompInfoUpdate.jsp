@@ -250,14 +250,145 @@
 	     	var popOption = "width=360, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 	    		window.open(popUrl,"",popOption);
 	     }
+	     
+		function validateEmail(email) {
+			var re = /^([\w-]+(?:.[\w-]+))@((?:[\w-]+.)\w[\w-]{0,66}).([a-z]{2,6}(?:.[a-z]{2})?)$/i;
+			return re.test(email);
+		}
+
+		function validatephone(phone) {
+			var regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+			return regExp.test(phone);
+		}
+		function validatehire(hire) {
+			var pattern = /^(19|20)\d{2}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[0-1])$/;
+			return pattern.test();
+		}
      
 	    $(document).ready(function(){
 	    	$("input[name='do_update']").on("click",function(){
-				 if(false==confirm("수정 하시겠습니까?"))return;
+				
 				  
 				 var upsert_div = $("#upsert_div").val();
 				 upsert_div = (upsert_div == "")?"updateInfo":"";
 				 console.log("upsert_div:"+upsert_div);
+				 
+				 var pwcheck = $("#comp_pw").val();
+				if (pwcheck == "") {
+					alert("비밀번호를 입력해주세요");
+					return;
+				}
+				var pwchecklength = $("#comp_pw").val().length;
+				if (pwchecklength >= (15) || pwchecklength <= (5)) {
+					alert("비밀번호를 5자이상 15자 이하로 입력해주세요");
+					return;
+				}
+				var pw2check = $("#pw_check").val();
+				if (pw2check == "") {
+					alert("비밀번호 확인을 입력해주세요");
+					return;
+				}
+				if (pw2check != pwcheck) {
+					alert("비밀번호가 일치하지 않습니다");
+					return;
+				}
+				var nickcheck = $("#comp_compname").val();
+				if (nickcheck == "") {
+					alert("기업명을 입력해주세요");
+					return;
+				}
+				var nicklength = $("#comp_compname").val().length;
+				if (nicklength >= (20) || nicklength <= (2)) {
+					alert("기업명을 2자이상 20자 이하로 입력해주세요");
+					return;
+				}
+				var namecheck = $("#comp_name").val();
+				if (namecheck == "") {
+					alert("대표자성함을 입력해주세요");
+					return;
+				}
+				var namelength = $("#comp_name").val().length;
+				if (namelength >= (20) || namelength <= (2)) {
+					alert("대표자성함을 2자이상 20자 이하로 입력해주세요");
+					return;
+				}
+				var pncheck = $("#comp_phone").val();
+				if (pncheck == "" || !validatephone(pncheck)) {
+					alert("ex)02-0000-0000형식으로 입력해주세요");
+					return;
+
+				}
+				var pnchecklength = $("#comp_phone").val().length;
+				if (pnchecklength > (13)) {
+					alert("회사전화번호 자릿수를 확인해주세요");
+					return;
+				}
+				var adcheck = $("#comp_address").val();
+				if (adcheck == "") {
+					alert("회사주소를 입력해주세요");
+					return;
+				}
+				var adchecklength = $("#comp_address").val().length;
+				if (adchecklength > (50)) {
+					alert("회사주소를 50자 미만으로 입력해주세요");
+					return;
+				}
+				var passQcheck = $("#passQ").val();
+				if (passQcheck == "") {
+					return;
+				}
+				var passAcheck = $("#user_passA").val();
+				if (passAcheck == "") {
+					alert("비밀번호찾기답을 입력해주세요");
+					return;
+				}
+				var passAcheck = $("#passA").val().length;
+				if (passAcheck > (10)) {
+					alert("답을 10글자 미만으로 입력해주세요");
+					return;
+				}
+				var adcheck = $("#ad").val();
+				if (adcheck == "") {
+					alert("회사주소를 입력해주세요");
+					return;
+				}
+				var adchecklength = $("#comp_address").val().length;
+				if (adchecklength > (50)) {
+					alert("회사주소를 50자 미만으로 입력해주세요");
+					return;
+
+				}
+				var salaycheck = $("#comp_money").val();
+				if (salaycheck == "") {
+					alert("매출액을 입력해주세요");
+					return;
+				}
+				var salaychecklength = $("#comp_money").val().length;
+				if (salaychecklength > (10)) {
+					alert("매출액을 50자 미만으로 입력해주세요");
+					return;
+				}
+				var cntcheck = $("#comp_cnt").val();
+				if (cntcheck == "") {
+					alert("사원수를 입력해주세요");
+					return;
+				}
+				var cntchecklength = $("#comp_cnt").val().length;
+				if (cntchecklength > (50)) {
+					alert("사원수를 다시 확인해주세요");
+					return;
+				}
+				var hirecheck = $("#comp_date").val();
+				if (hirecheck == "" || !validatehire(hirecheck)) {
+					alert("ex)1990/09/09 형식으로 입력해주세요");
+					return;
+				}
+				var hirechecklength = $("#comp_date").val().length;
+				if (hirechecklength > (50)) {
+					alert("설립일을 다시 확인해주세요");
+					return;
+				}
+				if(false==confirm("수정 하시겠습니까?"))return;
 	
 			     $.ajax({
 			         type:"POST", 

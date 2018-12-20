@@ -241,9 +241,91 @@
    		window.open(popUrl,"",popOption);
     }
     
+	function validatephone(phone) {
+		var regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		return regExp.test(phone);
+	}
     
     $(document).ready(function(){
     	$("input[name='do_update']").on("click",function(){
+    		
+    		var pwcheck = $("#user_pw").val();
+			if (pwcheck == "") {
+				alert("비밀번호를 입력해 주세요");
+				return;
+			}
+			var pwchecklength = $("#user_pw").val().length;
+			if (pwchecklength >= (15) || pwchecklength <= (5)) {
+				alert("비밀번호를 5자 이상 15 자 이하로 입력해 주세요")
+				return;
+			}
+			var pw2check = $("#pw_check").val()
+			if (pw2check == "") {
+				alert("비밀번호 확인을 입력해 주세요");
+				return;
+			}
+			var pw2checklength = $("#pw_check").val().length;
+			if (pw2check != pwcheck) {
+				alert("비밀번호가 일치하지 않습니다");
+				return;
+			}
+			var nickcheck = $("#user_nickname").val();
+			if (nickcheck == "") {
+				alert("닉네임을 입력해 주세요");
+				return;
+			}
+			var nicklength = $("#user_nickname").val().length;
+			if (nicklength >= (20) || nicklength <= (2)) {
+				alert("닉네임을 2자 이상 20자 이하로 입력해 주세요");
+				return;
+			}
+			var namecheck = $("#user_name").val();
+			if (namecheck == "") {
+				alert("이름을 입력해 주세요");
+				return;
+			}
+			var namelength = $("#user_name").val().length;
+			if (namelength >= (20) || namelength <= (2)) {
+				alert("성함을 2자 이상 20자 이하로 입력해 주세요");
+				return;
+			}
+			var pncheck = $("#user_phone").val();
+			if (pncheck == "" || !validatephone(pncheck)) {
+				alert("ex)010-0000-0000형식으로 입력해주세요");
+				return;
+
+			}
+			var pnchecklength = $("#user_phone").val().length;
+			if (pnchecklength > (13)) {
+				alert("전화번호 자릿수를 확인해주세요");
+				return;
+			}
+			var adcheck = $("#user_address").val();
+			if (adcheck == "") {
+				alert("주소를 입력해 주세요");
+				return;
+			}
+			var adchecklength = $("#user_address").val().length;
+			if (adchecklength > (50)) {
+				alert("주소를 50자 미만으로 입력해 주세요");
+				return;
+			}
+			var passQcheck = $("#passQ").val();
+			if (passQcheck == "") {
+				return;
+			}
+			var passAcheck = $("#user_passA").val();
+			if (passAcheck == "") {
+				alert("비밀번호 찾기 답을 입력해 주세요");
+				return;
+			}
+			var passAcheck = $("#user_passA").val().length;
+			if (passAcheck > (10)) {
+				alert("답을 10글자 미만으로 입력해 주세요");
+				return;
+			}
+    		
+    		
 			 if(false==confirm("수정 하시겠습니까?"))return;
 			  
 			 var upsert_div = $("#upsert_div").val();

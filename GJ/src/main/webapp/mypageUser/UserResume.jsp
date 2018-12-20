@@ -202,7 +202,7 @@
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.<br>
-						    	<red>단, 줄에 공백 없이 윗칸부터 작성해 주세요.</red>
+						    	<red style="color:red;">단, 줄에 공백 없이 윗칸부터 작성해 주세요.</red>
 						    	
 							<div class="table-responsive" align="center">
 								<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center" style="float:left;">
@@ -360,7 +360,12 @@
 		 	var fileNumber = 2;
 	    	$(document).ready(function(){
 	    		$("input[name='do_save']").on("click",function(){
-	    			if(false==confirm("해당 내용을 저장하시겠습니까?"))return;
+	    			
+	    			var trueorfalse = $('input:radio[name=cvCheck]').is(':checked');
+	    			if(trueorfalse == false){
+	    				alert("마지막 항목에서 예 혹은 아니오를 반드시 선택해야 합니다.");
+	    				return;
+	    			}
 	    			
 	    			var licNo = [];
 	    			var licName = [];
@@ -382,6 +387,16 @@
 	    				var score = $(this).val(); 
 	    				licScore.push(score);
 	    			});
+	    			
+	    			for(var i=0; i<licScore.length; i++){
+	    				if(licScore[i].length > 3){
+	    					alert("자격증의 성적은 세 글자를 초과하여 적을 수 없습니다.");
+	    					return;
+	    				}
+	    			}
+	    			
+	    			if(false==confirm("해당 내용을 저장하시겠습니까?"))return;
+	    			
 	    			var jsonNoList = JSON.stringify(licNo);
 	    			var jsonNameList = JSON.stringify(licName);
 	    			var jsonDateList = JSON.stringify(licDate);
