@@ -82,7 +82,7 @@
                     		<%
 						      	if(null != userNick && !userNick.equals("")){
 						    %>
-						    <a class="nav-link" href="<%=context %>/login/login.jsp">로그아웃</a>
+						    <a class="nav-link" href="<%=context %>/login/logout.do">로그아웃</a>
                         
                         	<%
 						        }else{

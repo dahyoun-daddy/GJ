@@ -75,7 +75,7 @@ public class LoginController {
 		
 		ses.setAttribute("loginVo", outVO);
 		
-		return "common/Main";
+		return "hirelist/Main";
 	}
 	
 
