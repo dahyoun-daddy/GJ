@@ -19,9 +19,12 @@ public class HireVO extends DTO {
 	
 	public HireVO() {}
 
-	public HireVO(int hireNo, String hireTitle, String hireBody, String userId, String hireDate, String hireDeadline,
-			String hireAdd, String hireSalary, String hireEdu, String regId, String regDt, String modId, String modDt) {
-		super();
+	
+
+	public HireVO(int no, int totalCnt, int hireNo, String hireTitle, String hireBody, String userId, String hireDate,
+			String hireDeadline, String hireAdd, String hireSalary, String hireEdu, String regId, String regDt,
+			String modId, String modDt, String userNick) {
+		super(no, totalCnt);
 		this.hireNo = hireNo;
 		this.hireTitle = hireTitle;
 		this.hireBody = hireBody;
@@ -35,7 +38,9 @@ public class HireVO extends DTO {
 		this.regDt = regDt;
 		this.modId = modId;
 		this.modDt = modDt;
+		this.userNick = userNick;
 	}
+
 
 	@Override
 	public String toString() {

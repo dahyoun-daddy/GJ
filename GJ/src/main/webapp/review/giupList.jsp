@@ -68,11 +68,12 @@
 		<div class="container">
 			<div class="col-xl-9 col-lg-10 mx-auto">
 				<div class="bg-faded rounded p-5">
-					<div style="float: right;">
-						<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" placeholder="기업 검색하기" maxlength="30">
-						<button type="button" class="btn btn-danger btn-sm" onclick="doSearch();">검색</button>
+					<div class="form-inline" style="float: right;">
+						<input type="text" name="searchWord" id="searchWord" value="${param.searchWord}" placeholder="기업 검색하기" maxlength="30" style="width:200px;">&nbsp;&nbsp;
+						<button type="button" style="height:34px" class="btn btn-danger btn-sm" onclick="doSearch();">검색</button>
+						<div style="width:100%; height:3px"></div>
 					</div>
-					</br> </br>
+					
 					<div class="table-responsive">
 						<table id="listTable"
 							class="table table-striped table-bordered table-hover"
@@ -151,15 +152,10 @@
 			}
 		});
 		$("#listTable>tbody").on("click","tr",function(){
-			
-			
-			console.log("1 #listTable>tbody");
 
 			var userId = $(this).attr('id');
-			console.log("2 userId="+userId);
-			alert(userId);
 			
-			if(""==userId)return;
+			if(""==userId || null == userId)return;
 			
 			var frm = document.frm;
 			frm.userId.value = userId;

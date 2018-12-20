@@ -19,69 +19,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<style type="text/css">
+		#frm {
+			width:800px;
+			margin: 0 auto;
+			border:1px solid #BDBDBD;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-	<br><br>
 	<!-- 메인화면 -->
-	<form id="frm" name="frm" class="form-horizontal" method="post">
-		<input type="hidden" name="hireNo" id="hireNo" value="<%=hireNo%>">
-	  <div class="form-group">
-	    <label for="hireTitle" class="col-sm-2 control-label">채용제목</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireTitle" name="hireTitle" value="${hireTitle}" readonly>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="hireContens" class="col-sm-2 control-label">채용내용</label>
-	    <div class="col-sm-10">
-		    <textarea class="form-control" id="hireBody" name="hireBody" rows="6" readonly>${hireBody}</textarea>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="location" class="col-sm-2 control-label">채용시작</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireDate" name="hireDate" value="${hireDate}" readonly>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="location" class="col-sm-2 control-label">채용마감</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireDeadline" name="hireDeadline" value="${hireDeadline}" readonly>
-	    </div>
-	  </div>
-	   <div class="form-group">
-	    <label for="location" class="col-sm-2 control-label">기업명</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="userId" name="userId" value="${userId}" readonly>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="location" class="col-sm-2 control-label">근무지</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireAdd" name="hireAdd" value="${hireAdd}" readonly>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="salary" class="col-sm-2 control-label">연봉</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireSalary" name="hireSalary" value="${hireSalary}" readonly>
-	    </div>
-	  </div>  
-	  <div class="form-group">
-	    <label for="degree" class="col-sm-2 control-label">최종학력</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="hireEdu" name="hireEdu" value="${hireEdu}" readonly>
-	    </div>
-	  </div>
-	  </form>
-	  <br>
-	    <div class="col-sm-offset-2 col-sm-10">
-	    <button type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()">이전화면</button>
-	    <button type="button" class="btn btn-default" id="goUpdate" name="goUpdate">수정하기</button>
-	    <button type="button" class="btn btn-default" id="apply" name="apply">지원하기</button>
-	    </div><br><br>
+	<br><form id="frm" name="frm" class="form-horizontal" method="post">
+			<br><h4 style="text-align:center;">채용공고 상세정보</h4>
+			<input type="hidden" name="hireNo" id="hireNo" value="<%=hireNo%>">
+			<input type="hidden" name="userId" id="userId" value="<%=userId%>">
+		  <div class="form-group"><br>
+		    <label for="hireTitle" class="col-sm-2 control-label">채용제목</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireTitle" name="hireTitle" value="${hireTitle}" readonly>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="hireContens" class="col-sm-2 control-label">채용내용</label>
+		    <div class="col-sm-12">
+			    <textarea class="form-control" id="hireBody" name="hireBody" rows="6" readonly>${hireBody}</textarea>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="location" class="col-sm-2 control-label">채용시작</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireDate" name="hireDate" value="${hireDate}" readonly>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="location" class="col-sm-2 control-label">채용마감</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireDeadline" name="hireDeadline" value="${hireDeadline}" readonly>
+		    </div>
+		  </div>
+		   <div class="form-group">
+		    <label for="location" class="col-sm-2 control-label">기업명</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="userNick" name="userNick" value="${userNick}" readonly>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="location" class="col-sm-2 control-label">근무지</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireAdd" name="hireAdd" value="${hireAdd}" readonly>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="salary" class="col-sm-2 control-label">연봉</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireSalary" name="hireSalary" value="${hireSalary}" readonly>
+		    </div>
+		  </div>  
+		  <div class="form-group">
+		    <label for="degree" class="col-sm-2 control-label">최종학력</label>
+		    <div class="col-sm-12">
+		      <input type="text" class="form-control" id="hireEdu" name="hireEdu" value="${hireEdu}" readonly>
+		    </div>
+		  </div>
+		    <br>
+		    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
+		    <button type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()">이전화면</button>
+		    <button type="button" class="btn btn-default" id="goUpdate" name="goUpdate">수정하기</button>
+		    <button type="button" class="btn btn-default" id="apply" name="apply">지원하기</button>
+		    </div><br>
+	  </form><br>
+	
 	  
 	
 	<script type="text/javascript">
