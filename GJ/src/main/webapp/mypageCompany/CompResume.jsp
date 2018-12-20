@@ -186,9 +186,9 @@
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">이름</th>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">자기소개서 제목</th>
-								  			<th class="text-center" style="background-color: #FACC2E; font-size: 80%;">최종학력</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">이름</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">자기소개서 제목</th>
+								  			<th class="text-center" style="background-color: #FACC2E;">최종학력</th>
 								  		</tr>
 								  		</thead>
 								  		<tbody>

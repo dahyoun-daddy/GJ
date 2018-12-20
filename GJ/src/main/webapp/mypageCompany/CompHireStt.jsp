@@ -150,6 +150,7 @@
 					    	<br/>
 					    	<form name="frm" id="frm" method="get">
 					    	<input type="hidden" name="pageNum" id="pageNum"/>
+					    	<input type="hidden" name="selectNo" id="selectNo">
 							<!-- --검색영역 -->
 					    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -180,11 +181,10 @@
 								
 								  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 								  		<colgroup>
-								  			<col width="5%" style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="10%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
 								  			<col width="50%"style="background-color: #FFFFFF;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
@@ -266,6 +266,20 @@
 				if (key.keyCode == 13) {
 					doSearch();
 				}
+			});
+	    	
+			$("#listTable>tbody").on("click","tr",function(){
+				var regId = $(this).attr('id');
+				
+				if("" == regId){
+    				return;
+    			}
+				
+    			var frm = document.frm;
+        		frm.selectNo.value = regId;
+        		frm.action = "/gj/mypageUser/UserResumeView.do";
+        		frm.submit();
+        		
 			});
 	    	
 			$("#deleteEmp").on("click",function(){
