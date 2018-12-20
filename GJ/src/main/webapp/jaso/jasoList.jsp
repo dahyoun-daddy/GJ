@@ -84,9 +84,9 @@
 		  		</colgroup>
 		  		<thead class="bg-primary">
 		  		<tr>
-		  			<th class="text-center">작성자</th>
-		  			<th class="text-center">자기소개서 제목</th>
-		  			<th class="text-center">작성일</th>
+		  			<th class="text-center" style="background-color: #FACC2E;">작성자</th>
+		  			<th class="text-center" style="background-color: #FACC2E;">자기소개서 제목</th>
+		  			<th class="text-center" style="background-color: #FACC2E;">작성일</th>
 		  		</tr>
 		  		</thead>
 		  		<tbody>

@@ -79,6 +79,8 @@ public class JasoController {
 		model.addAttribute("list",list);
 		model.addAttribute("param",invo);
 		model.addAttribute("totalCnt",totalCnt);
+		
+		
 		return VIEW_NAME;
 	}
 	
