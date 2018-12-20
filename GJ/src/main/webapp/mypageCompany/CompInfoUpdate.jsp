@@ -247,7 +247,7 @@
 				 console.log("upsert_div:"+upsert_div);
 	
 			     $.ajax({
-			         type:"POST",
+			         type:"POST", 
 			         url:"infoUpdate.do",
 			         dataType:"html",// JSON
 			         data:{
