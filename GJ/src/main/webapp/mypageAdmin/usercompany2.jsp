@@ -12,31 +12,35 @@
 	
 	String pageSize = "10";
 	String pageNum = "1";
-	String searchDiv = "";  //검색구분
+	String searchDiv = ""; //검색구분
 	String searchWord = ""; //검색어
-	
-	String userPassQu ="";//찾기질문
-	
+
+	String userPassQu = "";//찾기질문
+
 	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "");
 	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
 	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
 	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
-	
+
 	int totalCnt = 0;
 	int bottomCount = 10;
-	
+
 	int oPageSize = Integer.parseInt(pageSize);
 	int oPageNum = Integer.parseInt(pageNum);
-	
-	String totalCnts = (null == request.getAttribute("totalCnt"))?"10":request.getAttribute("totalCnt").toString();
+
+	String totalCnts = (null == request.getAttribute("totalCnt")) ? "10"
+			: request.getAttribute("totalCnt").toString();
 	totalCnt = Integer.parseInt(totalCnts);
-	 
-	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
-	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
-	List<CodeVO> companySearch = (null == request.getAttribute("companySearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("companySearch");
-	
-	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q"))	?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("SIGNUP_Q");
-		
+
+	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch")) ? new ArrayList<CodeVO>()
+			: (List<CodeVO>) request.getAttribute("codeSearch");
+	List<CodeVO> codePage = (null == request.getAttribute("codePage")) ? new ArrayList<CodeVO>()
+			: (List<CodeVO>) request.getAttribute("codePage");
+	List<CodeVO> companySearch = (null == request.getAttribute("companySearch")) ? new ArrayList<CodeVO>()
+			: (List<CodeVO>) request.getAttribute("companySearch");
+
+	List<CodeVO> signup_q = (null == request.getAttribute("SIGNUP_Q")) ? new ArrayList<CodeVO>()
+			: (List<CodeVO>) request.getAttribute("SIGNUP_Q");
 %>	
 <!DOCTYPE html>
 <html>

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -55,9 +56,11 @@ public class CompMypageCtrl {
 	private SignUpSvc userSvc;
 	
 	@RequestMapping(value="mypageCompany/CompMypage.do")
-	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		
-		invo.setUserId("보승소프트");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		invo.setUserId(loginId);
 		
 		UserMPViewVO outvo = mypageSvc.selectCompInfo(invo);
 		
@@ -68,12 +71,14 @@ public class CompMypageCtrl {
 	}
 	
 	@RequestMapping(value="/mypageCompany/CompSignOut.do")
-	public String deletePage(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	public String deletePage(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================delete=======================");
 		
-//		String userId = req.getParameter("selectUserId");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
 		UserVO invo = new UserVO();
-		invo.setUserId("signout1");
+		invo.setUserId(loginId);
 		model.addAttribute("userId",invo.getUserId());
 		
 		return VIEW_SIGN_OUT;
@@ -107,7 +112,7 @@ public class CompMypageCtrl {
 	}
 	
 	@RequestMapping(value="/mypageCompany/CompMyHire.do")
-	public String compMyHire(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String compMyHire(@ModelAttribute SearchVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================compMyHire=======================");
 		
 		if(invo.getPageSize() == 0) {
@@ -129,7 +134,10 @@ public class CompMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		invo.setUserId("보승소프트");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invo.setUserId(loginId);
 		
 		List<HireVO> list = mypageSvc.retrieveHire(invo);
 		
@@ -147,7 +155,7 @@ public class CompMypageCtrl {
 	}
 	
 	@RequestMapping(value="/mypageCompany/CompResume.do")
-	public String searchOpenResume(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String searchOpenResume(@ModelAttribute SearchVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================searchOpenResume=======================");
 		
 		if(invo.getPageSize() == 0) {
@@ -169,7 +177,10 @@ public class CompMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		invo.setUserId("보승소프트");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invo.setUserId(loginId);
 		
 		List<CvFormVO> list = mypageSvc.retrieveCv(invo);
 		log.info("list size : "+list.size());
@@ -190,13 +201,14 @@ public class CompMypageCtrl {
 	
 	
 	@RequestMapping(value="/mypageCompany/CompInfoUpdate.do")
-	public String CompInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+	public String CompInfoUpdate(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================update=======================");
 		
-//		String userId = req.getParameter("selectUserId");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
 		
 		UserVO invo = new UserVO();
-		invo.setUserId("test@company.com");
+		invo.setUserId(loginId);
 		
 		UserVO outvo = userSvc.select(invo);
 		log.info(outvo.toString());
@@ -274,13 +286,14 @@ public class CompMypageCtrl {
 	
 	
 	@RequestMapping(value="/mypageCompany/CompMyInfo.do")
-	public String CompInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+	public String CompInfo(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================select=======================");
 		
-//		String userId = req.getParameter("selectUserId");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
 		
 		UserVO invo = new UserVO();
-		invo.setUserId("test@company.com");
+		invo.setUserId(loginId);
 		
 		UserVO outvo = userSvc.select(invo);
 		
@@ -305,7 +318,7 @@ public class CompMypageCtrl {
 	
 	
 	@RequestMapping(value="mypageCompany/CompHireStt.do")
-	public String retrieveApplyComp(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String retrieveApplyComp(@ModelAttribute SearchVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
@@ -327,7 +340,10 @@ public class CompMypageCtrl {
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		invo.setUserId("보승소프트");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invo.setUserId(loginId);
 		
 		List<ApplyVO> list = mypageSvc.retrieveApplyComp(invo);
 		log.info("list size : "+list.size());

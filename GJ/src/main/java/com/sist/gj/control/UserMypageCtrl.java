@@ -63,12 +63,11 @@ public class UserMypageCtrl {
 	
 	
 	@RequestMapping(value="mypageUser/UserMypage.do")
-	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		
-//		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
-		invo.setUserId("boondll@hanmail.net");
-//		String loginId = sessionVO.getUserId();
-//		invo.setUserId(loginId);
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		invo.setUserId(loginId);
 		
 		UserMPViewVO outvo = mypageSvc.selectUserInfo(invo);
 		
@@ -86,12 +85,14 @@ public class UserMypageCtrl {
 	}
 	
 	@RequestMapping(value="/mypageUser/UserSignOut.do")
-	public String deletePage(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	public String deletePage(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================delete=======================");
 		
-//		String userId = req.getParameter("selectUserId");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
 		UserVO invo = new UserVO();
-		invo.setUserId("signout1");
+		invo.setUserId(loginId);
 		model.addAttribute("userId",invo.getUserId());
 		
 		return VIEW_SIGN_OUT;
@@ -126,13 +127,14 @@ public class UserMypageCtrl {
 	
 	//수정되기 전에 회원정보 불러와서 뿌려주는 컨트롤
 	@RequestMapping(value="/mypageUser/UserInfoUpdate.do")
-	public String UserInfoUpdate(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	public String UserInfoUpdate(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================update=======================");
 		
-//		String userId = req.getParameter("selectUserId");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
 		
 		UserVO invo = new UserVO();
-		invo.setUserId("boondll@hanmail.net");
+		invo.setUserId(loginId);
 		
 		UserVO outvo = userSvc.select(invo);
 		log.info(outvo.toString());
@@ -193,11 +195,15 @@ public class UserMypageCtrl {
 	                produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
-	public String resumeUpdate(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		log.info("=====================resumeLicense=======================");
+	public String resumeUpdate(HttpServletRequest req, HttpSession ses, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		log.info("=====================resumeUpdate=======================");
 		
 		LicenseVO invo = new LicenseVO();
-		invo.setRegId("boondll@hanmail.net");
+		
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invo.setRegId(loginId);
 		
 		List<LicenseVO> list = mypageSvc.retrieveLic(invo);
 		
@@ -242,14 +248,14 @@ public class UserMypageCtrl {
 					log.info("삭제만하는조건입니다");
 					
 					vo.setLicNo(orgNo);
-					vo.setRegId("boondll@hanmail.net");
+					vo.setRegId(loginId);
 					flag = mypageSvc.deleteLic(vo);
 					
 				}else if(!newDate.equals("") && !newName.equals("") && orgNo.equals(newNo)) {//수정
 					log.info("삭제 후 추가하는 조건입니다.");
 					
 					vo.setLicNo(orgNo);
-					vo.setRegId("boondll@hanmail.net");
+					vo.setRegId(loginId);
 					mypageSvc.deleteLic(vo);
 					
 					vo.setLicNo("");
@@ -269,7 +275,7 @@ public class UserMypageCtrl {
 				for(int q=0; q<listDiff; q++) {
 					if(null!=NAME.get(q+list.size())){
 						LicenseVO vo = new LicenseVO();
-						vo.setRegId("boondll@hanmail.net");
+						vo.setRegId(loginId);
 						vo.setLicName( NAME.get(q+list.size()) );
 						vo.setLicDate( DATE.get(q+list.size()) );
 						vo.setLicScore( SCORE.get(q+list.size()) );
@@ -344,17 +350,20 @@ public class UserMypageCtrl {
 	
 	//UserResumeView에 값 뿌려주기
 	@RequestMapping(value="/mypageUser/UserResume.do")
-	public String resume(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+	public String resume(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================Resume update prepare=======================");
 		CvFormVO invoResume = new CvFormVO();
 		JasoVO invoJaso = new JasoVO();
 		LicenseVO inLic = new LicenseVO();
 		UserVO inUser = new UserVO();
 		
-		invoResume.setRegId("boondll@hanmail.net");
-		invoJaso.setRegId("boondll@hanmail.net");
-		inLic.setRegId("boondll@hanmail.net");
-		inUser.setUserId("boondll@hanmail.net");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invoResume.setRegId(loginId);
+		invoJaso.setRegId(loginId);
+		inLic.setRegId(loginId);
+		inUser.setUserId(loginId);
 		
 		CvFormVO outResume = mypageSvc.selectCv(invoResume);
 		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
@@ -434,17 +443,20 @@ public class UserMypageCtrl {
 	}
 	
 	@RequestMapping(value="/mypageUser/UserResumeView.do")
-	public String resumeView(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException, ParseException {
+	public String resumeView(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================select Resume=======================");
 		CvFormVO invoResume = new CvFormVO();
 		JasoVO invoJaso = new JasoVO();
 		LicenseVO inLic = new LicenseVO();
 		UserVO inUser = new UserVO();
 		
-		invoResume.setRegId("boondll@hanmail.net");
-		invoJaso.setRegId("boondll@hanmail.net");
-		inLic.setRegId("boondll@hanmail.net");
-		inUser.setUserId("boondll@hanmail.net");
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
+		invoResume.setRegId(loginId);
+		invoJaso.setRegId(loginId);
+		inLic.setRegId(loginId);
+		inUser.setUserId(loginId);
 		
 		CvFormVO outResume = mypageSvc.selectCv(invoResume);
 		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
@@ -501,11 +513,14 @@ public class UserMypageCtrl {
 	
 	
 	@RequestMapping(value="/mypageUser/UserMyInfo.do")
-	public String UserInfo(HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
+	public String UserInfo(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.info("=====================select=======================");
 		
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
 		UserVO invo = new UserVO();
-		invo.setUserId("boondll@hanmail.net");
+		invo.setUserId(loginId);
 		
 		UserVO outvo = userSvc.select(invo);
 		
@@ -520,7 +535,7 @@ public class UserMypageCtrl {
 
 	
 	@RequestMapping(value="mypageUser/UserApply.do")
-	public String retrieveApply(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+	public String retrieveApply(@ModelAttribute SearchVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
 		log.debug("search : "+invo);
 		
 		if(invo.getPageSize() == 0) {
@@ -536,13 +551,16 @@ public class UserMypageCtrl {
 			invo.setSearchDiv("");
 		}
 		
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		String loginId = sessionVO.getUserId();
+		
 		CodeVO codeSearch = new CodeVO();
 		codeSearch.setCmId("MY_USER_APPLY");
 		
 		CodeVO codePage = new CodeVO();
 		codePage.setCmId("PAGING");
 		
-		invo.setUserId("boondll@hanmail.net");
+		invo.setUserId(loginId);
 		
 		List<ApplyVO> list = mypageSvc.retrieveApplyUser(invo);
 		
