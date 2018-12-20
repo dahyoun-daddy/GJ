@@ -67,11 +67,7 @@
     		frm.action="findIdPass.do";
     		frm.submit();
 		}
-		function logOut(){
-			var frm = document.login;
-    		frm.action="logout.do";
-    		frm.submit();
-		}
+	
 		$(document).ready(function(){
 			//alert("ready");
 			$("#loginBt").on("click",function(){
@@ -116,12 +112,7 @@
 			location.href="../login/findIdPass.do";
 		})
 	})	
-	$(function(){
-		$("#logout").click(function(){
-			location.href="../login/logout.jsp";
-		})
-	})	
-		
+
 	
 	</script>
 
