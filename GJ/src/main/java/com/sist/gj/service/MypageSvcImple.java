@@ -31,6 +31,11 @@ public class MypageSvcImple implements MypageSvc {
 	private MypageDao mypageDao;
 	
 	@Override
+	public UserVO selectPic(UserVO userVO) {
+		return mypageDao.selectPic(userVO);
+	}
+	
+	@Override
 	public int addPic(PictureVO pictureVO) {
 		return mypageDao.addPic(pictureVO);
 	}

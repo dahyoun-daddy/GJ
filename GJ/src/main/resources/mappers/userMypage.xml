@@ -78,6 +78,23 @@
 			)
 	</insert>
 	
+	<select id="selectPic" parameterType="UserVO" resultType="PictureVO">
+		SELECT
+		    user_id,
+		    p_fl_nm,
+		    p_sv_nm,
+		    p_fl_pt,
+		    p_fl_tp,
+		    p_fl_sz,
+		    reg_id,
+		    reg_dt,
+		    mod_id,
+		    mod_dt
+		FROM
+		    profile
+		WHERE user_id = #{userId}
+	</select>
+	
 	<delete id="deletePic" parameterType="PictureVO">
 		DELETE FROM profile
 		WHERE user_id = #{userId}

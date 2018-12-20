@@ -23,6 +23,8 @@ public interface MypageSvc {
 	//사진 삭제 
 	int deletePic(PictureVO pictureVO) throws SQLException;
 	
+	UserVO selectPic(UserVO userVO);
+	
 	//이력서 전체 삭제
 	int deleteCvAll() throws SQLException;
 	 

@@ -42,6 +42,17 @@ public class MypageDaoImple implements MypageDao {
 	}
 
 	@Override
+	public UserVO selectPic(UserVO userVO) {
+		String statement = NAMESPACE+".selectPic";
+		log.debug("sql statement : "+statement);
+		log.debug("param : "+userVO);
+		UserVO inVO = sqlSession.selectOne(statement, userVO);
+		log.debug("result : "+inVO);
+				
+		return inVO;
+	}
+	
+	@Override
 	public int deletePic(PictureVO pictureVO) throws SQLException {
 		String statement = NAMESPACE+".deletePic";
 		log.debug("sql statement : "+statement);
