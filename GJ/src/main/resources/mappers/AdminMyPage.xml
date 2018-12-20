@@ -144,19 +144,23 @@
 				        SELECT C.*,
 				               ROW_NUMBER() OVER(ORDER BY reg_dt DESC) AS rnum
 				          FROM users C
-				           <choose>
-  				<when test="3 == searchDiv">
-  				  WHERE user_id LIKE #{searchWord}||'%'
-  				</when>
-  				<when test="1 == searchDiv">
-  				  WHERE user_nick LIKE #{searchWord}||'%'
-  				</when>
-  				<when test="2 == searchDiv"> 
-  				  WHERE user_name LIKE #{searchWord}||'%'
-  				</when>
-  				<otherwise>
-  				</otherwise>
-  			</choose>
+				       <choose>
+				       	<when test="40 == searchDiv">
+			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				    AND user_level = '3'
+			  				</when>
+			  				<when test="3 == searchDiv">
+			  				  WHERE user_id LIKE #{searchWord}||'%'
+			  				</when>
+			  				<when test="1 == searchDiv">
+			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				</when>
+			  				<when test="2 == searchDiv"> 
+			  				  WHERE user_name LIKE #{searchWord}||'%'
+			  				</when>
+			  				<otherwise>
+			  				</otherwise>
+			  			</choose>
 						    )T
 				            WHERE T.rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1)
 							   AND (#{pageSize} * (#{pageNum}-1)+ #{pageSize})
@@ -165,19 +169,23 @@
 							(
 						    SELECT COUNT(*) AS total_cnt
 						      FROM users
-				<choose>
-  				<when test="3 == searchDiv">
-  				  WHERE user_id LIKE #{searchWord}||'%'
-  				</when>
-  				<when test="1 == searchDiv">
-  				  WHERE user_nick LIKE #{searchWord}||'%'
-  				</when>
-  				<when test="2 == searchDiv"> 
-  				  WHERE user_name LIKE #{searchWord}||'%'
-  				</when>
-  				<otherwise>
-  				</otherwise>
-  			</choose>
+				 		<choose>
+				       	<when test="40 == searchDiv">
+			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				    AND user_level = '3'
+			  				</when>
+			  				<when test="3 == searchDiv">
+			  				  WHERE user_id LIKE #{searchWord}||'%'
+			  				</when>
+			  				<when test="1 == searchDiv">
+			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				</when>
+			  				<when test="2 == searchDiv"> 
+			  				  WHERE user_name LIKE #{searchWord}||'%'
+			  				</when>
+			  				<otherwise>
+			  				</otherwise>
+			  			</choose>
 							)Y
 		
 		

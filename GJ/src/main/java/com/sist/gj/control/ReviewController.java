@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.gj.service.AdminPageSvc;
 import com.sist.gj.service.JasoCommentSvc;
+import com.sist.gj.service.MypageSvc;
 import com.sist.gj.service.ReviewCpSvc;
 import com.sist.gj.service.ReviewSvc;
 import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.ReviewCpVO;
 import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
@@ -43,6 +45,9 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewCpSvc reviewCpSvc;
+	
+	@Autowired
+	private MypageSvc mypageSvc;
 	
 	@RequestMapping(value="/review/giupReview.do")
 	public String doRetrieve(@ModelAttribute SearchVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException {
@@ -137,6 +142,18 @@ public class ReviewController {
 		UserVO userVO = new UserVO();
 		userVO.setUserId(userId);
 		UserVO outVO = adminPageSvc.selectCompany(userVO);
+		PictureVO pictureVO = mypageSvc.selectPic(userVO);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
+		
+		
+		// /jsp 위에 경로/resources/images/날짜도넣어야/P_SV_NM+P_FL_TP
+		
 		
 		model.addAttribute("company",outVO);
 		model.addAttribute("totalCnt",totalCnt);

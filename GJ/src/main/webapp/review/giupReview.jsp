@@ -30,6 +30,9 @@
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+	
+	String pictureUrl = context+request.getAttribute("pictureUrl");
+	
 %>
 
 <% 
@@ -85,7 +88,7 @@
 <body>
 	<!--Navbar -->
     <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-    
+    <%=pictureUrl %>
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
@@ -102,7 +105,7 @@
 				</div>
 				
 				<div style="border: 1px solid gold; float: left; height:180px; width: 10%;">
-				<img src="../resources/images/bono.jpeg" height="180px" style='width: 100%; object-fit: contain'>
+				<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
 				</div>
 				<div style="border: 1px solid red; float: left; height:180px; width: 10%;">
 					<label style="line-height: 1.5em;">설립일 </label>
@@ -126,10 +129,10 @@
 					</br>
 					<label>${company.userName}</label>	
 				</div>
-				<div style="border: 1px solid red; float: left; height:100px; width: 7%;">
+				<div style="border: 1px solid red; float: left; height:100px; width: 5%;">
 					<label style="line-height:2.3em">리뷰 평점</label>
 				</div>
-				<div style="border: 1px solid red; float: left; height:100px; width: 63%;">
+				<div style="border: 1px solid red; float: left; height:100px; width: 65%;">
 					<label class="starRev">
 						  <span id="0" class="starR1 on">1</span>
 						  <span id="1" class="starR2">2</span>
@@ -168,7 +171,7 @@
 			      <c:forEach var="reviewVO" items="${list}">
 							<div style="border: 1px solid red; float: left; height:20px; width: 100%;">
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 80%;">
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:33px; width: 80%;">
 							 <div>
 								 <label style="margin-top: 1%;" class="starRev">
 									  <span id="${reviewVO.reviewNo}0" class="starR11 on">1</span>
@@ -187,7 +190,7 @@
 								</label>
 							  </div>
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:30px; width: 20%;">
+							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:33px; width: 20%;">
 						 		<button <c:if test="${user == reviewVO.regId}">style="display:none;"</c:if> id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
