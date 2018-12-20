@@ -89,15 +89,21 @@
 		<div class="table-responsive" align="center" >
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 				<table id="listTable" class="table table-striped table-bordered table-hover" >
-				    
+				    					<colgroup>
+								  			<col width="5%"style="background-color: #FFFFFF;"/>
+								  			<col width="45%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
 				    	
 				  		<thead class="bg-primary">
 				  		<tr>
-				       <th class="text-center "><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-				       <th class="text-center col-xs-4 col-sm-4 col-md-4 col-lg-4">이메일</th>
-						<th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2">이름</th>
-						<th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2">닉네임</th>
-						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">가입일</th>
+				       <th class="text-center " style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+				       <th class="text-center " style="background-color: #FACC2E;">이메일</th>
+						<th class="text-center" style="background-color: #FACC2E;">이름</th>
+						<th class="text-center" style="background-color: #FACC2E;">닉네임</th>
+						<th class="text-center" style="background-color: #FACC2E;">가입일</th>
 						
 						
 					</tr>

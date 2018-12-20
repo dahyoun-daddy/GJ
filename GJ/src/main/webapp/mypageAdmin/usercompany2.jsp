@@ -87,24 +87,23 @@
 		<div class="table-responsive" align="center"  >
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 			<table id="listTable" class="table table-striped table-bordered table-hover">
-  				 <thead class="bg-primary">
-				   
-				   	<colgroup>
-		  			<col width="40%"/>
-		  			<col width="15%"/>
-		  			<col width="15%"/>
-		  			<col width="15%"/>
-		  			<col width="15%"/>
-		  		   </colgroup>
+  					<colgroup>
+								  			<col width="5%"style="background-color: #FFFFFF;"/>
+								  			<col width="45%"style="background-color: #FFFFFF;"/>
+								  			<col width="10%"style="background-color: #FFFFFF;"/>
+								  			<col width="10%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
 				    	
 				    	<thead class="bg-primary">
 				    	 <tr>
-				        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-				        <th class="text-center ">이메일</th>
-					     <th class="text-center">회사명</th>
-						 <th class="text-center">대표자</th>
-						<th class="text-center ">가입일</th>
-						<th class="text-center ">이용가능</th>
+				        <th class="text-center" style="background-color: #FACC2E;"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+				        <th class="text-center" style="background-color: #FACC2E;">이메일</th>
+					     <th class="text-center" style="background-color: #FACC2E;">회사명</th>
+						 <th class="text-center" style="background-color: #FACC2E;">대표자</th>
+						<th class="text-center"  style="background-color: #FACC2E;">가입일</th>
+						<th class="text-center"  style="background-color: #FACC2E;">이용가능</th>
 						
 					</tr>
 				</thead>
