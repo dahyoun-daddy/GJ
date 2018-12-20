@@ -109,12 +109,12 @@
     		var check = frm.userLevel.value;
     		//alert("check : "+check);
     		if(check == 1){
-    			frm.action="../mypageUser/UserMyInfo.do";
+    			frm.action="../mypageUser/UserMypage.do";
         		frm.submit(); 
     		}else if(check == 2){
     			alert("허가되지 않는 기업입니다.\n 관리자의 허락을 기다려주세요");
     		}else if(check == 3){
-    			frm.action="../mypageCompany/CompMyInfo.do";
+    			frm.action="../mypageCompany/CompMypage.do";
         		frm.submit(); 
     		}else if(check == 9){
     			frm.action="../mypageAdmin/userList.do";
