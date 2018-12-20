@@ -79,7 +79,7 @@
 		  	<table id="listTable" class="table table-striped table-bordered table-hover" style="table-layout:fixed; word-break:break-all;">
 		  		<colgroup>
 		  			<col width="20%"/>
-		  			<col width="60%"/>
+		  			<col width="60%"/> 
 		  			<col width="20%"/>
 		  		</colgroup>
 		  		<thead class="bg-primary">
