@@ -88,7 +88,6 @@
 <body>
 	<!--Navbar -->
     <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-    <%=pictureUrl %>
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">

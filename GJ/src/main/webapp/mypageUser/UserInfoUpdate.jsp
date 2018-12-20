@@ -18,6 +18,8 @@
 		imgPath = context+"/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
 		//"gj/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
 	}
+	
+	String pictureUrl = context+request.getAttribute("pictureUrl");
 %>
 <style>
 
@@ -154,9 +156,22 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg" >
-				    			<img src="<%=imgPath%>" width=150px, height=180px/>
+				    			<% if(null != imgPath && !imgPath.equals("")){
+					    		%>
+					    			<img src="<%=imgPath%>" width=150px, height=180px/>
+					    		<%
+					    		}else if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl%>" width=150px, height=180px/>
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" width=150px, height=180px/>
+					    		<%
+					    		}
+					    		%>
 				    			
-				    			이미지 불러오기
+				    			
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"

@@ -18,6 +18,8 @@
 		imgPath = context+"/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
 		//"gj/"+projectPath+"/"+profileVO.getpSvNm()+profileVO.getpFlTp();
 	}
+	
+	String pictureUrl = context+request.getAttribute("pictureUrl");
 %>
 <style>
 
@@ -132,7 +134,6 @@
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	
 	<br/><br/>
-    
 	<section class="page-section" style="height: auto;" >
 		    <div class="about-heading-content" style="height: auto;">
 		          <div class="row" style="width: 80%; height: auto; margin : auto">
@@ -158,7 +159,21 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg">
+				    		<% if(null != imgPath && !imgPath.equals("")){
+				    		%>
 				    			<img src="<%=imgPath%>" width=150px, height=180px/>
+				    		<%
+				    		}else if(!pictureUrl.equals("/gjnull")){
+				    		%>
+				    			<img src="<%=pictureUrl%>" width=150px, height=180px/>
+				    		<%
+				    		}else{
+				    		%>
+				    			<img src="../resources/images/noImage.png" width=150px, height=180px/>
+				    		<%
+				    		}
+				    		%>
+				    			
 				    			이미지 불러오기
 				    		</div>
 				    		<div id ="profmain">
