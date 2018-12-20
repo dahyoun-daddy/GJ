@@ -88,6 +88,7 @@
 <body>
 	<!--Navbar -->
     <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+    <%=pictureUrl %>
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
@@ -131,7 +132,7 @@
 				<div style="border: 1px solid red; float: left; height:100px; width: 5%;">
 					<label style="line-height:2.3em">리뷰 평점</label>
 				</div>
-				<div style="border: 1px solid red; float: left; height:100px; width: 65%;">
+				<div style="border-right: 5px double #48BAE4; float: left; height:100px; width: 65%;">
 					<label class="starRev">
 						  <span id="0" class="starR1 on">1</span>
 						  <span id="1" class="starR2">2</span>
@@ -150,17 +151,17 @@
 					
 				</div>
 		
-				<div style="line-height: 1.2em; border: 1px solid red; float: left; height:80px; width: 60%;">
+				<div style="line-height: 1.2em; border-bottom: 5px double #48BAE4; float: left; height:80px; width: 60%;">
 					</br>
 					<label style="line-height: 1.7;">${company.userAdd}</label>
 					</br>
 					<label style="line-height: 0.8;">${company.userPhone} </label>
 					
 				</div>
-				<div style="border: 1px solid red; float: right; height:47px; width: 20%;">	
+				<div style="border-right: 5px double #48BAE4; float: right; height:47px; width: 20%;">	
 				</div>
 				
-				<div style="border: 1px solid red; float: right; height:33px; width: 20%;">
+				<div style="border-right: 5px double #48BAE4; border-bottom: 5px double #48BAE4; float: right; height:33px; width: 20%;">
 						<button id="doWrite" name="doWrite" style="float: right;" type="button" class="btn btn-danger btn-sm" value="doWrite" onclick="doWrite();">면접리뷰 작성하기</button>
 				</div>
    			<!-- 면접리뷰 -------------------------------  -->
@@ -168,9 +169,9 @@
 			  <c:choose>
 			    <c:when test="${list.size()>0}">
 			      <c:forEach var="reviewVO" items="${list}">
-							<div style="border: 1px solid red; float: left; height:20px; width: 100%;">
+							<div style="float: left; height:20px; width: 100%;">
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:33px; width: 80%;">
+							<div style="background-color:#ECF6CE; float: left; height:33px; width: 80%;">
 							 <div>
 								 <label style="margin-top: 1%;" class="starRev">
 									  <span id="${reviewVO.reviewNo}0" class="starR11 on">1</span>
@@ -189,31 +190,31 @@
 								</label>
 							  </div>
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:33px; width: 20%;">
+							<div style="background-color:#ECF6CE; float: left; height:33px; width: 20%;">
 						 		<button <c:if test="${user == reviewVO.regId}">style="display:none;"</c:if> id="doComplain" name="doComplain" style="float: right;" type="button" class="doComplain btn btn-danger btn-sm" value="${reviewVO.reviewNo}">신고하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doUpdate" name="doUpdate" style="float: right; margin-right: 1px" type="button" class="doUpdate btn btn-danger btn-sm" value="${reviewVO.reviewNo}">수정하기</button>
 								<button <c:if test="${user != reviewVO.regId}">style="display:none;"</c:if> id="doDelete" name="doDelete" style="float: right; margin-right: 1px" type="button" class="doDelete btn btn-danger btn-sm" value="${reviewVO.reviewNo}">삭제하기</button>
 							</div>
-							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
+							<div style="background-color:#ECF6CE; float: left; height:40px; width: 80%;">
 								<label style="font-size:1em; color: #DBA901;">${reviewVO.reviewTitle}</label>
 								
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: left; height:40px; width: 20%;">
+							<div style="background-color:#ECF6CE; float: left; height:40px; width: 20%;">
 								<span style="float: right; font-size: 80%;">작성일 : ${reviewVO.regDt}</span> 
 							</div>
 							
-							<div style="border: 1px solid gold; background-color:#ECF6CE; float: left; height:40px; width: 80%;">
+							<div style="background-color:#ECF6CE; float: left; height:40px; width: 80%;">
 								${reviewVO.reviewBody}
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
+							<div style="background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
 							</div>
-							<div style="border: 1px solid red; background-color:#ECF6CE; float: right; height:20px; width: 20%;">							    
+							<div style="background-color:#ECF6CE; float: right; height:20px; width: 20%;">							    
 							</div>
 							
 							
-							<div style="border: 1px solid red; float: left; height:30px; width: 80%;">
+							<div style="float: left; height:30px; width: 80%;">
 							</div>
-							<div style="border: 1px solid red; float: left; height:30px; width: 20%;">
+							<div style="float: left; height:30px; width: 20%;">
 							</div>
 						</c:forEach>
 					</c:when>
