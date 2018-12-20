@@ -240,20 +240,16 @@
 					            			<td>${clSungjang}</td>
 					            		</tr>
 					            		<tr>
-					            			<th>성장과정</th>
+					            			<th>학교생활</th>
 					            			<td>${clSang}</td>
 					            		</tr>
 					            		<tr>
-					            			<th>학교생활</th>
+					            			<th>성격장단점</th>
 					            			<td>${clJangdan}</td>
 					            		</tr>
 					            		<tr>
-					            			<th>성격장단점</th>
-					            			<td>${clJiwon}</td>
-					            		</tr>
-					            		<tr>
 					            			<th>지원동기</th>
-					            			<td>${clCheck}</td>
+					            			<td>${clJiwon}</td>
 					            		</tr>
 					            	</tbody>
 					            </table>

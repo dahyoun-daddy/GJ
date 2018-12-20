@@ -46,33 +46,37 @@ if(null != sessionVO){
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-	<br><br>
+	<br><br><br><br><br><br><br>
 	<!-- 메인화면 -->
 	<div style=text-align:center>
 		<img src="../resources/images/gj_logo_black.png" alt="nav-logo" style="float:center">
 	</div>
-		<br><br><br>
-	<div style="border: 1px solid white; float: left; width: 30%; float: 30%">
-	</div>
-	<div class="btn-group btn-group-lg" role="group" aria-label="...">
-		<form id="frm" name="frm" style="text-align:center;" class="form-inline" >
-			<input type="hidden" name="hireNo" id="hireNo">
-			<div class="input-group input-group-lg">
-			<select class="form-control" id="searchDiv" name="searchDiv">
-				  <option value="1">기업명</option>
-				  <option value="2">채용제목</option>
-				</select>
-			</div>
-			&nbsp;&nbsp;
-		  <div class="input-group input-group-lg">
-		    <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요">
-		  	&nbsp;&nbsp;
-		  </div>
-		  <div class="btn-group btn-group-lg">
-		  <input type="button" class="btn btn-default" onclick="doSearch()" value="검색">
-		  </div>
-		</form>
+		
+					<form id="frm" name="frm" style="text-align:center;" class="form-inline" >
+	<div class="container">
+		<div class="col-xl-9 col-lg-10 mx-auto">
+			<div class="bg-faded rounded p-5">
+				<div class="btn-group btn-group-lg" role="group" aria-label="...">
+						<input type="hidden" name="hireNo" id="hireNo">
+						<div class="input-group input-group-lg">
+							<select class="form-control" id="searchDiv" name="searchDiv">
+							  <option value="1">기업명</option>
+							  <option value="2">채용제목</option>
+							</select>
+						</div>
+						&nbsp;&nbsp;
+					  <div class="input-group input-group-lg">
+					    <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요">
+					  	&nbsp;&nbsp;
+					  </div>
+					  <div class="btn-group btn-group-lg">
+					  	<input type="button" class="btn btn-default" onclick="doSearch()" value="검색">
+					  </div>
+			    </div>
+	    	</div>
+		</div>	
     </div>
+					</form>
     	<script type="text/javascript">
 		function searchPage(url,pageNum){
 			alert("url : "+url+" page_num : "+pageNum);

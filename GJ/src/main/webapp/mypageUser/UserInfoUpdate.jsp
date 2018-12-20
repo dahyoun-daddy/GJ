@@ -8,10 +8,14 @@
 <%
 	String context = request.getContextPath();
 	PictureVO profileVO = (PictureVO)session.getAttribute("pictureVO");
+	
+	String usId ="";
 	String fileOrgName = "";
 	String imgPath = "";
 	String projectPath = "";
+	
 	if(null != profileVO){
+		usId = profileVO.getUserId();
 		fileOrgName = profileVO.getpFlNm();
 		int pathNum = profileVO.getpFlPt().indexOf("resources");
 		projectPath = profileVO.getpFlPt().substring(pathNum);
@@ -125,7 +129,7 @@
 		padding: 15px;
 		text-align: left;
 	}
-	
+
 	
 	
 </style>
@@ -156,21 +160,18 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg" >
-				    			<% if(null != imgPath && !imgPath.equals("")){
+				    			<%
+					    		if(!pictureUrl.equals("/gjnull")){
 					    		%>
-					    			<img src="<%=imgPath%>" width=150px, height=180px/>
-					    		<%
-					    		}else if(!pictureUrl.equals("/gjnull")){
-					    		%>
-					    			<img src="<%=pictureUrl%>" width=150px, height=180px/>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
+					    			<input type="hidden" id="usId" value="<%=usId%>"/>
 					    		<%
 					    		}else{
 					    		%>
-					    			<img src="../resources/images/noImage.png" width=150px, height=180px/>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
 					    		<%
 					    		}
 					    		%>
-				    			
 				    			
 				    		</div>
 				    		<div id ="profmain">
@@ -262,13 +263,14 @@
 		         	"userAdd": $("#user_address").val(),
 		         	"userPassQu": $("#passQ option:selected").val(),
 		         	"userPassAn": $("#user_passA").val(),
-		         	"userPhone": $("#user_phone").val()
+		         	"userPhone": $("#user_phone").val(),
+		         	"usId": $('#usId').val()
 		         },
 		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		             var parseData = $.parseJSON(data);
 		         	 if(parseData.flag=="1"){
-		         		 alert(parseData.message);
-		         		location.href="UserMyInfo.do";
+		         		alert(parseData.message);
+		         		location.href="UserMypage.do";
 		         	 }else{
 		         		alert(parseData.message);
 		         	 }

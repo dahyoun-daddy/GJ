@@ -34,6 +34,7 @@ import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.JasoVO;
 import com.sist.gj.vo.LicenseVO;
+import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
@@ -60,7 +61,7 @@ public class UserMypageCtrl {
 	private SignUpSvc userSvc;
 	@Autowired
 	private JasoSvc jasoSvc;
-	
+
 	
 	@RequestMapping(value="mypageUser/UserMypage.do")
 	public String selectUserInfo(@ModelAttribute UserMPViewVO invo, HttpSession ses, Model model) throws ClassNotFoundException, SQLException {
@@ -71,6 +72,17 @@ public class UserMypageCtrl {
 		
 		UserMPViewVO outvo = mypageSvc.selectUserInfo(invo);
 		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
+		
 		int openResume = outvo.getCvCheck();
 		
 		if(openResume == 1) {
@@ -80,6 +92,14 @@ public class UserMypageCtrl {
 		}
 		
 		model.addAttribute("userNick",outvo.getUserNick());
+		
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 		
 		return VIEW_MYPAGE;
 	}
@@ -133,6 +153,19 @@ public class UserMypageCtrl {
 		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
 		String loginId = sessionVO.getUserId();
 		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			String pictureId = pictureVO.getUserId();
+			model.addAttribute("pictureUrl",pictureUrl);
+			model.addAttribute("pictureId",pictureId);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
+		
 		UserVO invo = new UserVO();
 		invo.setUserId(loginId);
 		
@@ -158,8 +191,11 @@ public class UserMypageCtrl {
 	                produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
-	public String updateInfo(@ModelAttribute UserVO invo, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	public String updateInfo(@ModelAttribute UserVO invo,HttpSession ses, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		String upsert_div = req.getParameter("upsert_div");
+//		String pictureId = req.getParameter("usId");
+		
+		PictureVO profileVO = (PictureVO)ses.getAttribute("pictureVO");
 		
 		log.info("2========================");
 		log.info("invo="+invo);
@@ -168,8 +204,25 @@ public class UserMypageCtrl {
 		
 		int flag = 0;
 		
-		//수정		
+		//정보 수정		
 		flag = mypageSvc.updateUser(invo);
+
+		
+		//프로필 수정데이터 존재
+		if(null != profileVO && !profileVO.getUserId().equals("")) {
+			PictureVO outvo = mypageSvc.selectPic(invo);
+			
+			//select값 존재
+			if(null!= outvo && !outvo.getUserId().equals("")) {
+				mypageSvc.deletePic(outvo);
+				mypageSvc.addPic(profileVO);
+			}else {
+				mypageSvc.addPic(profileVO);
+			}
+		}
+		
+		
+		
 		 
 		JSONObject object=new JSONObject();
 		

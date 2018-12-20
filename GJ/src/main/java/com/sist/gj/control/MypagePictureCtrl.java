@@ -161,7 +161,7 @@ public class MypagePictureCtrl {
 		log.info("+++++++++++++++++++++++++=");
 		
 		if(null != list  &&  list.size()>0) {
-			flag = this.mypageSvc.addPic(list.get(0));
+//			flag = this.mypageSvc.addPic(list.get(0));
 		}
 		
 		log.debug("8. do_saveTx flag : "+flag);
