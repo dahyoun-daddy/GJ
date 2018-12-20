@@ -103,7 +103,11 @@
 	
 	
 </style>
+<%
+	String context = request.getContextPath();
+	String pictureUrl = context+request.getAttribute("pictureUrl");
 
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -135,7 +139,17 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-weight: bold;" align="center">
 				    		
 				    		<div id ="profimg">
-				    		이미지 불러오기
+				    			<%
+					    		if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}
+					    		%>
 				    		</div>
 				    		<div id ="profmain">
 				    		<br/>

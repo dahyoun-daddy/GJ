@@ -30,6 +30,9 @@ import com.sist.gj.vo.ApplyVO;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.CvFormVO;
 import com.sist.gj.vo.HireVO;
+import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.LicenseVO;
+import com.sist.gj.vo.PictureVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserMPViewVO;
 import com.sist.gj.vo.UserVO;
@@ -46,6 +49,7 @@ public class CompMypageCtrl {
 	private static final String VIEW_SIGN_OUT="mypageCompany/CompSignOut";
 	private static final String VIEW_OPEN_RESUME="mypageCompany/CompResume";
 	private static final String VIEW_HIRE_LIST="mypageCompany/CompMyHire";
+	private static final String VIEW_RESUME_VIEW="mypageUser/UserResumeView";
 	
 	
 	@Autowired
@@ -63,6 +67,17 @@ public class CompMypageCtrl {
 		invo.setUserId(loginId);
 		
 		UserMPViewVO outvo = mypageSvc.selectCompInfo(invo);
+		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 		
 		model.addAttribute("userNick",outvo.getUserNick());
 		model.addAttribute("hireCount",outvo.getHireCount());
@@ -109,6 +124,85 @@ public class CompMypageCtrl {
 		String jsonData = object.toJSONString();
 		
 		return jsonData;
+	}
+	
+	@RequestMapping(value="/mypageCompany/UserResumeView.do")
+	public String resumeView(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
+		log.info("=====================select Resume=======================");
+		CvFormVO invoResume = new CvFormVO();
+		JasoVO invoJaso = new JasoVO();
+		LicenseVO inLic = new LicenseVO();
+		UserVO inUser = new UserVO();
+		
+		String regId = req.getParameter("regId");
+		
+		invoResume.setRegId(regId);
+		invoJaso.setRegId(regId);
+		inLic.setRegId(regId);
+		inUser.setUserId(regId);
+		
+		CvFormVO outResume = mypageSvc.selectCv(invoResume);
+		JasoVO outJaso = mypageSvc.selectCl(invoJaso);
+		List<LicenseVO> list = mypageSvc.retrieveLic(inLic);
+		for(int i=0; i<list.size(); i++) {
+			String licDate = list.get(i).getLicDate();
+			SimpleDateFormat transeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = transeFormat.parse(licDate);
+			
+			SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
+			licDate = notIncludeTime.format(date);
+			list.get(i).setLicDate(licDate);
+		}
+		UserVO outUser = userSvc.select(inUser);
+		
+		try {
+			model.addAttribute("regId",outResume.getRegId());
+			model.addAttribute("cvDate",outResume.getCvDate());
+			model.addAttribute("cvGrade",outResume.getCvGrade());
+			model.addAttribute("cvCheck",outResume.getCvCheck()); //기업에게 오픈된 이력서 할지 말지,
+			//0이면 오픈하지 않음, 1이면 오픈함
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
+		
+		try {	
+			model.addAttribute("clTitle",outJaso.getClTitle());
+			model.addAttribute("clSungjang",outJaso.getClSungjang());
+			model.addAttribute("clSang",outJaso.getClSang());
+			model.addAttribute("clJangdan",outJaso.getClJangdan());
+			model.addAttribute("clJiwon",outJaso.getClJiwon());
+			model.addAttribute("clCheck",outJaso.getClCheck());//자소서 게시판에 게시 여부
+			model.addAttribute("clNo",outJaso.getClNo());
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
+		
+		try {
+			model.addAttribute("list",list);
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
+		
+		try {	
+			model.addAttribute("userName",outUser.getUserName());
+			model.addAttribute("userPhone",outUser.getUserPhone());
+			model.addAttribute("userId",outUser.getUserId());
+		}catch(Exception e) {
+			log.info(e.toString());;
+		}
+		
+		UserVO picture = new UserVO();
+		picture.setUserId(regId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
+	
+		return VIEW_RESUME_VIEW;
 	}
 	
 	@RequestMapping(value="/mypageCompany/CompMyHire.do")
@@ -232,7 +326,18 @@ public class CompMypageCtrl {
 		model.addAttribute("enterCnt",outvo.getEnterCnt());
 		model.addAttribute("enterHiredate",hireDate);
 		
-		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			String pictureId = pictureVO.getUserId();
+			model.addAttribute("pictureUrl",pictureUrl);
+			model.addAttribute("pictureId",pictureId);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 		
 		return VIEW_UPDATE_COMP;
 	}
@@ -243,8 +348,9 @@ public class CompMypageCtrl {
             produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
-	public String updateInfoComp(@ModelAttribute UserVO invo, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException, ParseException {
+	public String updateInfoComp(@ModelAttribute UserVO invo, HttpSession ses, HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException, ParseException {
 		String upsert_div = req.getParameter("upsert_div");
+		PictureVO profileVO = (PictureVO)ses.getAttribute("pictureVO");
 		
 		log.info("2========================");
 		log.info("invo="+invo);
@@ -264,6 +370,19 @@ public class CompMypageCtrl {
 		hireDate = notIncludeTime.format(date);
 		
 		invo.setEnterHiredate(hireDate);
+		
+		//프로필 수정데이터 존재
+		if(null != profileVO && !profileVO.getUserId().equals("")) {
+			PictureVO outvo = mypageSvc.selectPic(invo);
+			
+			//select값 존재
+			if(null!= outvo && !outvo.getUserId().equals("")) {
+				mypageSvc.deletePic(outvo);
+				mypageSvc.addPic(profileVO);
+			}else {
+				mypageSvc.addPic(profileVO);
+			}
+		}
 		 
 		JSONObject object=new JSONObject();
 		
@@ -303,6 +422,17 @@ public class CompMypageCtrl {
 		
 		SimpleDateFormat notIncludeTime = new SimpleDateFormat("yyyy/MM/dd");
 		hireDate = notIncludeTime.format(date);
+		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 
 		model.addAttribute("userId",outvo.getUserId());
 		model.addAttribute("userNick",outvo.getUserNick());

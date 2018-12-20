@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
 <!DOCTYPE html>
 <html>
@@ -106,6 +107,17 @@
 	
 	
 </style>
+<% 
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	int userLv = 5;
+	
+	if(null != sessionVO){
+		userLv = sessionVO.getUserLevel();
+	}
+	
+	String context = request.getContextPath();//context path
+	String pictureUrl = context+request.getAttribute("pictureUrl");
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -138,29 +150,37 @@
 					    		
 					    		
 					    		<div id ="profimg" style="margin: 10px;" >
-					    		이미지 불러오기
-						    		<div style="float:left; font-size:70%">
-						    		이미지는 나의 정보에서 변경 가능합니다
-						    		</div>
+					    						    			<%
+					    		if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain' title="이미지는 나의 정보에서 변경 가능합니다">
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain' title="이미지는 나의 정보에서 변경 가능합니다">
+					    		<%
+					    		}
+					    		%>
 					    		</div><br/>
+
 					    		<div class="form-group" style="float: left;margin-right:45%;">
 					    			<label for="userName" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="userName" name="userName" value="${userName}"/>
+								    	<input type="text" class="form-control" id="userName" name="userName" value="${userName}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
 					    			<label for="userPhone" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}"/>
+								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
 					    			<label for="regId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
-								    	<input type="text" class="form-control" id="regId" name="regId" value="${userId}"/>
+								    	<input type="text" class="form-control" id="regId" name="regId" value="${userId}" readOnly/>
 							    	</div>
 								</div>
 								

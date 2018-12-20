@@ -401,7 +401,7 @@ public class UserMypageCtrl {
 		return jsonData;
 	}
 	
-	//UserResumeView에 값 뿌려주기
+	//UserResume에 값 뿌려주기
 	@RequestMapping(value="/mypageUser/UserResume.do")
 	public String resume(HttpServletRequest req, HttpSession ses, Model model) throws ClassNotFoundException, SQLException, ParseException {
 		log.info("=====================Resume update prepare=======================");
@@ -448,6 +448,16 @@ public class UserMypageCtrl {
 			log.info(e.toString());
 		}
 
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 		
 		UserVO outUser = userSvc.select(inUser);
 		try {
@@ -560,6 +570,17 @@ public class UserMypageCtrl {
 		}catch(Exception e) {
 			log.info(e.toString());;
 		}
+		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 	
 		return VIEW_RESUME_VIEW;
 	}
@@ -576,6 +597,17 @@ public class UserMypageCtrl {
 		invo.setUserId(loginId);
 		
 		UserVO outvo = userSvc.select(invo);
+		
+		UserVO picture = new UserVO();
+		picture.setUserId(loginId);
+		PictureVO pictureVO = mypageSvc.selectPic(picture);
+		if(null != pictureVO) {
+			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
+			model.addAttribute("pictureUrl",pictureUrl);
+			log.info("==========================");
+			log.info("pictureUrl :"+pictureUrl);
+			log.info("==========================");
+		}
 		
 		model.addAttribute("userId",outvo.getUserId());
 		model.addAttribute("userNick",outvo.getUserNick());

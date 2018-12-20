@@ -150,7 +150,7 @@
 					    	<br/>
 					    	<form name="frm" id="frm" method="get">
 					    	<input type="hidden" name="pageNum" id="pageNum"/>
-					    	<input type="hidden" name="selectNo" id="selectNo">
+					    	<input type="hidden" name="regId" id="regId">
 					    	<!-- --검색영역 -->
 					    	<div class="row" style="float: right;">
 					  		  		<div class="text-right col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -258,8 +258,8 @@
     			}
 				
     			var frm = document.frm;
-        		frm.selectNo.value = regId;
-        		frm.action = "/gj/mypageUser/UserResumeView.do";
+        		frm.regId.value = regId;
+        		frm.action = "UserResumeView.do";
         		frm.submit();
         		
 			});

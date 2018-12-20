@@ -8,10 +8,12 @@
 <%
 	String context = request.getContextPath();
 	PictureVO profileVO = (PictureVO)session.getAttribute("pictureVO");
+	String usId ="";
 	String fileOrgName = "";
 	String imgPath = "";
 	String projectPath = "";
 	if(null != profileVO){
+		usId = profileVO.getUserId();
 		fileOrgName = profileVO.getpFlNm();
 		int pathNum = profileVO.getpFlPt().indexOf("resources");
 		projectPath = profileVO.getpFlPt().substring(pathNum);
@@ -159,22 +161,18 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg">
-				    		<% if(null != imgPath && !imgPath.equals("")){
-				    		%>
-				    			<img src="<%=imgPath%>" width=150px, height=180px/>
-				    		<%
-				    		}else if(!pictureUrl.equals("/gjnull")){
-				    		%>
-				    			<img src="<%=pictureUrl%>" width=150px, height=180px/>
-				    		<%
-				    		}else{
-				    		%>
-				    			<img src="../resources/images/noImage.png" width=150px, height=180px/>
-				    		<%
-				    		}
-				    		%>
-				    			
-				    			이미지 불러오기
+				    			<%
+					    		if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
+					    			<input type="hidden" id="usId" value="<%=usId%>"/>
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}
+					    		%>
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"

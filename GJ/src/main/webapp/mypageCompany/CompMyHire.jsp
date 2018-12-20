@@ -222,12 +222,14 @@
 								  		<input id="smallBtn" type="button" value="등록하기" onclick="location='../hirelist/HireCreate.jsp'">
 								  	</div>
 							  	</div>
-							  	<div class="dorm-inline text-center">
-							  		1
-							  	</div>
+						  	<!--pagenation ---------------------------------------------------->
+						  	<div class="dorm-inline text-center">
+			  			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "CompHireStt.do", "searchPage") %>
+						  	</div>
+						  	<!--// pagenation영역 ----------------------------------------------->
 							  	
 						  	</div>
-				    		
+   				    		<!--// Grid영역 ---------------------------------------------------->
 				    	</div>
 		          </div>
 		     </div>

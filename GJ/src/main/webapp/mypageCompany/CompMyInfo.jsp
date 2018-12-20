@@ -110,7 +110,11 @@
 	
 	
 </style>
+<%
+	String context = request.getContextPath();
+	String pictureUrl = context+request.getAttribute("pictureUrl");
 
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -142,7 +146,17 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg">
-				    			이미지 불러오기
+				    			<%
+					    		if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}
+					    		%>
 				    		</div>
 				    		<div id ="profmain">
 					    		<orange style="color: orange;">회사를 대표할 수 있는 로고 혹은 이미지를 올려 주세요.<br/>기업 정보 및 채용 공고에 보여질 사진입니다.<br/><br/></orange>

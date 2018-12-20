@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
 <!DOCTYPE html>
 <html>
@@ -105,6 +106,18 @@
 	  outline: none;
 	}
 </style>
+<% 
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	int userLv = 5;
+	
+	if(null != sessionVO){
+		userLv = sessionVO.getUserLevel();
+	}
+%>
+<% 
+	String context = request.getContextPath();//context path
+	String pictureUrl = context+request.getAttribute("pictureUrl");
+%>
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
@@ -135,10 +148,17 @@
 					    	<div id="profcontext" style="text-align: center;">
 					    		
 					    		<div id ="profimg" style="margin: 10px;" >
-					    		이미지 불러오기
-						    		<div style="float:left; font-size:70%">
-						    		이미지는 나의 정보에서 변경 가능합니다
-						    		</div>
+					    		<%
+					    		if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain' title="이미지는 나의 정보에서 변경 가능합니다">
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain' title="이미지는 나의 정보에서 변경 가능합니다">
+					    		<%
+					    		}
+					    		%>
 					    		</div><br/>
 	    		<form name="frm" id="frm" class="form-horizontal" method="post" >
 					    		<div class="form-group" style="float: left;margin-right:45%;">
@@ -253,6 +273,8 @@
 					            		</tr>
 					            	</tbody>
 					            </table>
+			             <c:set var="userLv" value="<%=userLv %>"/>
+				    		<c:if test="${userLv eq 1 }">
 					            <div>
 					            	<strong>내 이력서 및 개인정보를 기업이 열람할 수 있게 하고, 기업이 연락할 수 있음에 동의합니다.</strong>
 					            	<div style="text-align: right;">
@@ -275,13 +297,16 @@
 							            	</c:if>
 						            	</div><br/>
 					            </div>
-					            <h6 style="color:red;">변경할 사항이 있다면 수정하기 버튼을 누른 후 수정해 주십시오.<br/>단, 기업에 지원했을 경우 보여지는 이력서는 최근 변경된 이력서이며, 변경 전의 이력서를 기업이 열람했을 수 있습니다.<br/></h6>
+			           		</c:if>
 						    </div>
-				    	<div style="margin: 50px;">
-				    		<input id="smallBtn" type="button" value="수정하기"
-				    		       onclick="location='UserResume.do'">
-				    	</div>	
-				    	
+						    <c:if test="${userLv eq 1 }">
+						   
+							    	<div style="margin: 50px;">
+							    		<input id="smallBtn" type="button" value="수정하기"
+							    		       onclick="location='UserResume.do'"><br/><br/>
+					            		<h6 style="color:red;">변경할 사항이 있다면 수정하기 버튼을 누른 후 수정해 주십시오.<br/>단, 기업에 지원했을 경우 보여지는 이력서는 최근 변경된 이력서이며, 변경 전의 이력서를 기업이 열람했을 수 있습니다.<br/></h6>
+							    	</div>	
+				    		</c:if>	
 				    	</div>
 			    	</div>
 		          </div>
