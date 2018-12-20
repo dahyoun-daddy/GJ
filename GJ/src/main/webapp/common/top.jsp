@@ -45,7 +45,7 @@
 	<!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark cyan">
         <div class="container">
-            <a class="navbar-brand" href="<%=context %>/common/Main.jsp">
+            <a class="navbar-brand" href="<%=context %>/hirelist/Start.do">
             <img src="<%=context %>/resources/images/gj_logo.png" alt="nav-logo">
             </a>
             <form id="topFrm" name="topFrm">
@@ -67,7 +67,7 @@
 						        }
 						%>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=context %>/common/Main.jsp">Home</a>
+                        <a class="nav-link" href="<%=context %>/hirelist/Start.do">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="moveHireList()">채용정보</a>
