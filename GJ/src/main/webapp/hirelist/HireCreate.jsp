@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -31,6 +32,13 @@
 	
 	List<CodeVO> codeSearch = (null == request.getAttribute("codeSearch"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codeSearch");
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
+
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String userId = "";
+	
+	if(null != sessionVO){
+		userId = sessionVO.getUserId();
+	}
 %>
 <head>
 

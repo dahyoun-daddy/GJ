@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,6 +8,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
   String hireNo = StringUtill.nvl(request.getParameter("hireNo"),"");
+
+	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
+	String userId = "";
+	
+	if(null != sessionVO){
+		userId = sessionVO.getUserId();
+	}
 %>
 <!DOCTYPE html>
 <html>
