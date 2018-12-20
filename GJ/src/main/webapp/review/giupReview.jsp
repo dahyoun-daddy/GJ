@@ -88,26 +88,34 @@
 <body>
 	<!--Navbar -->
     <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
-    <%=pictureUrl %>
        <!-- 기업 상세정보 -------------------------------  -->
 	    <div class="container">
 		<div class="col-xl-12 col-lg-12 mx-auto">
-				<div style="border: 1px solid gold; height:40px; float: left; width: 10%;">
+				<div style="height:40px; float: left; width: 10%;">
 				</div>
-				<div style="border: 1px solid red; height:40px; float: left; width: 90%;">
+				<div style="height:40px; float: left; width: 90%;">
 				 <span style="font-size: 1.5em; font-weight: bold; color: green;"></span>
 				</div>
 				
-				<div style="border: 1px solid gold; height:40px; float: left; width: 10%;">
+				<div style="border-top: 5px groove #48BAE4; border-left: 5px groove #48BAE4; height:40px; float: left; width: 10%;">
 				</div>
-				<div style="border: 1px solid red; height:40px; float: left; width: 90%;">
+				<div style="border-top: 5px groove #48BAE4; border-right: 5px groove #48BAE4; height:40px; float: left; width: 90%;">
 				 <span style="font-size: 1.5em; font-weight: bold; color: green;">${company.userNick}</span>
 				</div>
 				
-				<div style="border: 1px solid gold; float: left; height:180px; width: 10%;">
-				<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
+				<div style="border-left: 5px groove #48BAE4; border-bottom: 5px groove #48BAE4; float: left; height:180px; width: 10%;">
+				<%if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl%>" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}else{
+					    		%>
+					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}
+					    		%>
 				</div>
-				<div style="border: 1px solid red; float: left; height:180px; width: 10%;">
+				<div style="border-bottom: 5px groove #48BAE4; float: left; height:180px; width: 10%;">
 					<label style="line-height: 1.5em;">설립일 </label>
 					</br>
 					<label>사원수 </label>
@@ -120,7 +128,7 @@
 					</br>
 					<label>전화번호 </label>				 
 				</div>
-				<div style="border: 1px solid red; float: left; height:100px; width: 10%;">
+				<div style="float: left; height:100px; width: 10%;">
 					<label style="line-height: 1.2em;">2018/11/28 </label>
 					</br>
 					<label>${company.enterCnt}명</label>
@@ -129,10 +137,10 @@
 					</br>
 					<label>${company.userName}</label>	
 				</div>
-				<div style="border: 1px solid red; float: left; height:100px; width: 5%;">
+				<div style="float: left; height:100px; width: 5%;">
 					<label style="line-height:2.3em">리뷰 평점</label>
 				</div>
-				<div style="border-right: 5px double #48BAE4; float: left; height:100px; width: 65%;">
+				<div style="border-right: 5px groove #48BAE4; float: left; height:100px; width: 65%;">
 					<label class="starRev">
 						  <span id="0" class="starR1 on">1</span>
 						  <span id="1" class="starR2">2</span>
@@ -151,17 +159,17 @@
 					
 				</div>
 		
-				<div style="line-height: 1.2em; border-bottom: 5px double #48BAE4; float: left; height:80px; width: 60%;">
+				<div style="line-height: 1.2em; border-bottom: 5px groove #48BAE4; float: left; height:80px; width: 60%;">
 					</br>
 					<label style="line-height: 1.7;">${company.userAdd}</label>
 					</br>
 					<label style="line-height: 0.8;">${company.userPhone} </label>
 					
 				</div>
-				<div style="border-right: 5px double #48BAE4; float: right; height:47px; width: 20%;">	
+				<div style="border-right: 5px groove #48BAE4; float: right; height:44px; width: 20%;">	
 				</div>
 				
-				<div style="border-right: 5px double #48BAE4; border-bottom: 5px double #48BAE4; float: right; height:33px; width: 20%;">
+				<div style="border-right: 5px groove #48BAE4; border-bottom: 5px groove #48BAE4; float: right; height:36px; width: 20%;">
 						<button id="doWrite" name="doWrite" style="float: right;" type="button" class="btn btn-danger btn-sm" value="doWrite" onclick="doWrite();">면접리뷰 작성하기</button>
 				</div>
    			<!-- 면접리뷰 -------------------------------  -->
