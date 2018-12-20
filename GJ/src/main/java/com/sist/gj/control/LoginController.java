@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.omg.CORBA.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -229,6 +230,15 @@ public class LoginController {
 			
 			return jsonData;
 			}
+			
+			@RequestMapping(value="/login/logout.do",produces="application/json;charset=utf8")
+			public String logout(@ModelAttribute UserVO invo, HttpServletRequest req, Model model,HttpSession session) throws ClassNotFoundException, SQLException, ParseException{
+			
+				session.invalidate();
+			   JSONObject object = new JSONObject();
+		   	  String jsonData = object.toJSONString();
+					  return "login/login";
+		}
 
 			
 			
