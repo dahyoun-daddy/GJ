@@ -89,11 +89,11 @@
 			<table id="listTable" class="table table-striped table-bordered table-hover">
   					<colgroup>
 								  			<col width="5%"style="background-color: #FFFFFF;"/>
-								  			<col width="45%"style="background-color: #FFFFFF;"/>
-								  			<col width="10%"style="background-color: #FFFFFF;"/>
-								  			<col width="10%"style="background-color: #FFFFFF;"/>
+								  			<col width="40%"style="background-color: #FFFFFF;"/>
 								  			<col width="15%"style="background-color: #FFFFFF;"/>
 								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="15%"style="background-color: #FFFFFF;"/>
+								  			<col width="10%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 				    	
 				    	<thead class="bg-primary">
