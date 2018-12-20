@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -89,17 +90,18 @@ public class HireController {
  
 	
 	@RequestMapping(value="/hirelist/HireCreate.do")
-	public String create(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
+	public String create(@ModelAttribute HireVO invo, HttpSession ses, HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================INSERT=======================");
 		log.info("invo" + invo);
 		
 		int flag = 0;
 		
-		//-----------------------------------
-		//아이디 나중에 세션으로 받기
-		invo.setUserId("boondll@hanmail.net");
-		invo.setRegId("boondll@hanmail.net");
-		//-----------------------------------
+		//세션 : 로그인 된 상태에서만 등록 가능
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		
+		String loginId = sessionVO.getUserId();
+		invo.setRegId(loginId);
+		//-------------------------------------
 		
 		JSONObject object = new JSONObject();
 		
@@ -161,7 +163,7 @@ public class HireController {
 		model.addAttribute("hireBody", outVO.getHireBody());
 		model.addAttribute("hireDate", hireDate);
 		model.addAttribute("hireDeadline", hireDeadline);
-		model.addAttribute("userId", outVO.getUserId());
+		model.addAttribute("userNick", outVO.getUserNick());
 		model.addAttribute("hireAdd", outVO.getHireAdd());
 		model.addAttribute("hireSalary", outVO.getHireSalary());
 		model.addAttribute("hireEdu", outVO.getHireEdu());
@@ -171,10 +173,17 @@ public class HireController {
 	
 	//수정할 정보 출력
 	@RequestMapping(value="/hirelist/HireUpdate.do",method=RequestMethod.POST)
-	public String update(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
+	public String update(@ModelAttribute HireVO invo, HttpSession ses, HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================UPDATE=======================");
 		String hireNo = req.getParameter("hireNo");
 		log.info("hireNo : "+hireNo);
+		
+		//세션 : 로그인 된 상태에서만 수정가능
+		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+		
+		String loginId = sessionVO.getUserId();
+		invo.setRegId(loginId);
+		//-------------------------------------
 		
 		int num = Integer.parseInt(hireNo);
 		
@@ -207,7 +216,7 @@ public class HireController {
 		return "hirelist/HireUpdate";
 		}
 		
-	//수정기능 실행
+		//수정기능 실행
 		@RequestMapping(value="/hirelist/HireUpdate.do",
 				 produces="application/json;charset=utf8",
 				 method={RequestMethod.GET, RequestMethod.POST}
@@ -287,24 +296,4 @@ public class HireController {
 			return jsonData;
 		}
 		
-		
-		/*
-		@RequestMapping(value="/mypageUser/mypageUser.do",method=RequestMethod.POST)
-		public String apply(@ModelAttribute HireVO invo, HttpServletRequest req, Model model) throws Exception {
-			//기한내의 공고만 지원할 수 있다
-			SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-			Date now = new Date();
-			Date deadline = invo.getHireDeadline();
-			
-			int available = 0;
-			
-			if() {
-				
-			}else if() {
-				
-			}
-			return null;
-		}
-		 */
 }

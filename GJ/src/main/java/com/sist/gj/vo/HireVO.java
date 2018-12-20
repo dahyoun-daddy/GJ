@@ -15,6 +15,7 @@ public class HireVO extends DTO {
 	private String regDt;              // 등록일
 	private String modId;              // 수정자
 	private String modDt;              // 수정일
+	private String userNick;				// 기업명
 	
 	public HireVO() {}
 
@@ -149,6 +150,14 @@ public class HireVO extends DTO {
 		this.modDt = modDt;
 	}
 
+	public String getUserNick() {
+		return userNick;
+	}
 
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+	
  
 }
