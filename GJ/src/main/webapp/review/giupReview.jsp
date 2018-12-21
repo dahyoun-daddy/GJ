@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% 
 	String context = request.getContextPath();
 
@@ -32,6 +33,7 @@
 	List<CodeVO> codePage = (null == request.getAttribute("codePage"))?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("codePage");
 	
 	String pictureUrl = context+request.getAttribute("pictureUrl");
+	pageContext.setAttribute("newLineChar", "\n");
 	
 %>
 
@@ -214,7 +216,7 @@
 							</div>
 							
 							<div style="background-color:#ECF6CE; float: left; height:40px; width: 80%;">
-								${reviewVO.reviewBody}
+								<c:out value="${fn:replace(reviewVO.reviewBody, newLineChar, '<br/>')}" escapeXml="false"/>
 							</div>
 							<div style="background-color:#ECF6CE; float: right; height:20px; width: 20%;">			
 							</div>
