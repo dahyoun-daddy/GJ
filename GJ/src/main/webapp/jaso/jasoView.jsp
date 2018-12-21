@@ -118,7 +118,7 @@
 			  									<td class="text-center"><c:out value="${jasoCVO.regDt}"/>
 			  									<c:set var="CId" value="<%=userId%>" />
 			  									<c:if test="${CId eq jasoCVO.regId}">
-			  										<button type="button" class="btn btn-default btn-sm" id="doCDelete" >삭제</button>
+			  										<button type="button" class="doCDelete btn btn-default btn-sm" id="doCDelete" >삭제</button>
 			  									</c:if>
 			  									</td>
 			  								</tr>
@@ -217,7 +217,7 @@
 	   		   	});
 			});
 			
-			$("#doCDelete").on("click",function(){
+			$(".doCDelete").on("click",function(){
 				if(false == confirm("삭제 하시겠습니까?")){
     				return;
     			}
