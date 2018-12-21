@@ -51,7 +51,18 @@
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	<br/>
-	<br/>
+	
+  <div class="table-responsive" align="center" >
+    
+  
+	<input type="button" class="btn btn-primary btn-lg" value="구직자 관리" id="goUser" name="goUser"
+					onclick="goUser()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-primary btn-lg" value="기업 관리" id="goCom" name=""goCom""
+					onclick="goCom()" />
+</div>
+   
+   
+	
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
 		<input type="hidden" name="pageNum" id="pageNum" value="">
@@ -85,7 +96,10 @@
 	</div>
     <!--// 검색영역----------------------------------------------------->
    
+   
+   
     <!-- Grid영역 -->
+    <br>
 		<div class="table-responsive" align="center" >
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 				<table id="listTable" class="table table-striped table-bordered table-hover" >

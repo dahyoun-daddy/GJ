@@ -23,10 +23,11 @@
 				<br>
 				<br>
 				<br>
-				<br>
-				<br>
+
 				<!-- 이미지 추가 -->
-				<img src="<%=context%>/resources/images/GOOD_JOB_LOGO.png"> <br>
+				<img src="../resources/images/gj_logo_black.png" alt="nav-logo" >
+								<br>
+				
 				<br>
 
 				<table>
@@ -46,7 +47,6 @@
 					value="기업 가입" id="signupC" name="signupC" onclick="compSign()" />
 				<input type="button" value="ID/PW찾기" id="loginBt" name="loginBt"
 					onclick="findIdPass()" />
-
 
 			</form>
 		</div>

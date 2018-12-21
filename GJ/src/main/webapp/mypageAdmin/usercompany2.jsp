@@ -82,7 +82,7 @@
 		</form>
 	</div>
     <!--// 검색영역----------------------------------------------------->
-   
+   <br>
     <!-- Grid영역 --> 
 		<div class="table-responsive" align="center"  >
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">

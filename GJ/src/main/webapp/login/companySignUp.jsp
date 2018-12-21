@@ -79,9 +79,9 @@
 			return regExp.test(phone);
 		}
 		function validatehire(hire) {
-			var pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
-
-			return pattern.test();
+			var pattern = /^\d{4}-\d{2}-\d{2}$/;
+			
+			return pattern.test(hire);
 		}
 
 		$(document).ready(function() {
@@ -225,7 +225,7 @@
 				}
 				var salaychecklength = $("#salay").val().length
 				if (salaychecklength > (10)) {
-					alert("매출액을 50자 미만으로 입력해주세요")
+					alert("매출액을 10자 미만으로 입력해주세요")
 					return;
 				}
 				var cntcheck = $("#cnt").val()
@@ -234,7 +234,7 @@
 					return;
 				}
 				var cntchecklength = $("#cnt").val().length
-				if (cntchecklength > (50)) {
+				if (cntchecklength > (5)) {
 					alert("사원수를 다시 확인해주세요")
 					return;
 				}
