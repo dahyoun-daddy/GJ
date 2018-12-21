@@ -34,9 +34,9 @@
 			<br> <label style="width:100px"><b>회사 주소</b></label> <input type="text" id="ad"
 				name="ad" placeholder="회사 주소를 입력하세요"> <br>
 			<br> <label style="width:100px"><b>매출액</b></label> <input type="text" id="salay"
-				name="salay" placeholder="매출액을 입력하세요"> <br>
+				name="salay" placeholder="ex) 100억 = 100  (단위:억)"> <br>
 			<br> <label style="width:100px"><b>사원수</b></label> <input type="text" id="cnt"
-				name="cnt" placeholder="사원수를 입력하세요"> <br>
+				name="cnt" placeholder="ex) 100명 = 100" > <br>
 			<br> <label style="width:100px"><b>설립일</b></label> <input type="text" id="hire"
 				name="hire" placeholder="ex 1990-05-05"> <br>
 			<br> <label><b>비밀번호 찾기 질문:</b></label> <select id="passQ"
