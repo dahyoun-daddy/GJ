@@ -114,7 +114,7 @@
 					success : function(data) {//통신이 성공적으로 이루어 졌을때 받을 함수
 						var parseData = $.parseJSON(data);
 						if (parseData.result == "") {
-							alert("등록된 아이디가 없습니다.");
+							alert("해당되는 정보가 없습니다.");
 							return;
 						} else {
 							alert("pw는 " + parseData.result + "입니다");
