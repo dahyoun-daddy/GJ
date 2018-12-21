@@ -128,6 +128,8 @@
 		    <div class="about-heading-content" style="height: auto;">
 		          <div class="row" style="width: 80%; height: auto; margin : auto">
 		          	<div style=" float: left; height: 900px; width: 12%; padding:10px;" align="right">
+		          	<c:set var="userLv" value="<%=userLv %>"/>
+  						<c:if test="${userLv eq 1 }">
 				    	<div style=" height: 20%;" align="right">
 					    	<button id ="bubble-float-right" 
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
@@ -139,6 +141,23 @@
 					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 120%;"
 					    	        onclick="location='UserApply.do'">지원 현황</button>
 				    	</div>
+				    	</c:if>
+				    	<c:if test="${userLv eq 3 }">
+ 					    <div style=" height: 20%;" align="right">
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='/gj/mypageCompany/CompMyInfo.do'">기업 정보</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='/gj/mypageCompany/CompMyHire.do'">채용 관리하기</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='/gj/mypageCompany/CompHireStt.do'">지원자 확인하기</button><br/><br/>
+					    	<button id ="bubble-float-right" 
+					    			style="background-color: transparent; border: 0; outline:0; font-weight: bold; font-size: 110%;"
+					    	        onclick="location='/gj/mypageCompany/CompResume.do'">오픈된 이력서<br/>열람하기</button>
+				    	</div>
+				    	</c:if>
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
@@ -273,7 +292,7 @@
 					            		</tr>
 					            	</tbody>
 					            </table>
-			             <c:set var="userLv" value="<%=userLv %>"/>
+			             
 				    		<c:if test="${userLv eq 1 }">
 					            <div>
 					            	<strong>내 이력서 및 개인정보를 기업이 열람할 수 있게 하고, 기업이 연락할 수 있음에 동의합니다.</strong>

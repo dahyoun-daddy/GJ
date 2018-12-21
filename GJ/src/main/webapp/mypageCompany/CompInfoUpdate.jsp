@@ -161,11 +161,14 @@
 				    	<div style="float: left; width: 120%; height: auto; padding:10px; font-size: 75%;" align="center">
 				    		
 				    		<div id ="profimg">
-				    			<%
-					    		if(!pictureUrl.equals("/gjnull")){
+								<% if(null != imgPath && !imgPath.equals("")){
 					    		%>
-					    			<img src="<%=pictureUrl %>" height="180px" style='width: 100%; object-fit: contain'>
-					    			<input type="hidden" id="usId" value="<%=usId%>"/>
+					    			<img src="<%=imgPath%>" height="180px" style='width: 100%; object-fit: contain'>
+					    		<%
+					    		}else if(!pictureUrl.equals("/gjnull")){
+					    		%>
+					    			<img src="<%=pictureUrl%>" height="180px" style='width: 100%; object-fit: contain'>
+					    		
 					    		<%
 					    		}else{
 					    		%>
