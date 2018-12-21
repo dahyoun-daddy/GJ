@@ -23,8 +23,10 @@ import com.sist.gj.service.AdminPageSvcImple;
 import com.sist.gj.service.CodeSvc;
 import com.sist.gj.service.JasoCommentSvc;
 import com.sist.gj.service.JasoSvc;
+import com.sist.gj.service.ReviewSvc;
 import com.sist.gj.vo.CodeVO;
 import com.sist.gj.vo.JasoVO;
+import com.sist.gj.vo.ReviewVO;
 import com.sist.gj.vo.SearchVO;
 import com.sist.gj.vo.UserVO;
 
@@ -39,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	private CodeSvc codeSvc;
+	
+	@Autowired
+	private ReviewSvc reviewSvc;
 	
 	
 	@RequestMapping(value="/mypageAdmin/userList.do")
@@ -327,6 +332,95 @@ public String get(HttpServletRequest req,Model model) throws EmptyResultDataAcce
 				JSONObject object = new JSONObject();
 				
 				flag = adminSvc.deleteUser(invo);
+				
+				if(flag > 0) {
+					object.put("flag",flag);
+					object.put("msg","삭제 되었습니다.");
+				}else {
+					object.put("flag",flag);
+					object.put("msg","삭제 실패.");
+				}
+				
+				String jsonData = object.toJSONString();
+				
+				return jsonData;
+			}
+			
+			@RequestMapping(value="/mypageAdmin/reviewList.do")
+			public String doRetrieve3(@ModelAttribute SearchVO invo, Model model) throws ClassNotFoundException, SQLException {
+				log.info("search : "+invo);
+				
+				if(invo.getPageSize() == 0) {
+					invo.setPageSize(10);
+				}
+				if(invo.getPageNum() == 0){
+					invo.setPageNum(1);
+				}
+				if(null == invo.getSearchDiv()) {
+					invo.setSearchDiv("20");
+				}
+				if(null == invo.getSearchWord()) {
+					invo.setSearchWord("");
+				}				
+				
+				List<ReviewVO> list = reviewSvc.doRetrieve(invo);
+				log.info("list size : "+list.size());
+				 
+				int totalCnt = 0;
+				if(null != list  &&  list.size()>0) {
+					totalCnt = list.get(0).getTotalCnt();
+					
+				}
+				
+			
+				
+				model.addAttribute("list",list);
+				model.addAttribute("totalCnt",totalCnt);
+				model.addAttribute("param",invo);
+			
+				return "/mypageAdmin/review";
+			}
+			
+			@RequestMapping(value="/mypageAdmin/reviewSelect.do",method=RequestMethod.POST
+			        ,produces="application/json;charset=utf8"  
+			)
+		@ResponseBody
+		public String get3(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+			String userId = req.getParameter("reviewNo");
+			log.info("2========================");
+			log.info("get=");
+			log.info("2========================");	
+			ReviewVO userVO=new ReviewVO();
+			userVO.setReviewNo(userId);
+			
+			//JSON Convertor
+			ReviewVO outVO = reviewSvc.select(userVO);
+			JSONObject object=new JSONObject();
+			object.put("reviewNo", outVO.getReviewNo());
+			object.put("reviewTitle", outVO.getReviewTitle());
+			object.put("reviewBody", outVO.getReviewBody());
+			object.put("reviewComplain", outVO.getReviewComplain());
+			 
+			String jsonData = object.toJSONString();
+			
+			log.info("3========================");
+			log.info("jsonData="+jsonData);
+			log.info("3========================");			
+			model.addAttribute("vo", reviewSvc.select(userVO));
+			return jsonData;
+			}
+			
+			@RequestMapping(value="/mypageAdmin/reviewDelete.do",produces="application/json;charset=utf8")
+			@ResponseBody
+			public String doDelete3(@ModelAttribute ReviewVO invo, HttpServletRequest req, Model model) throws ClassNotFoundException, SQLException{
+				log.info("=====================update=======================");
+				log.info("invo" + invo);
+				
+				int flag = 0;
+				
+				JSONObject object = new JSONObject();
+				
+				flag = reviewSvc.delete(invo);
 				
 				if(flag > 0) {
 					object.put("flag",flag);

@@ -58,7 +58,9 @@
 	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="구직자 관리" id="goUser" name="goUser"
 					onclick="goUser()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="기업 관리" id="goCom" name=""goCom""
-					onclick="goCom()" />
+					onclick="goCom()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="리뷰관리" id="goReview" name="goReview"
+					onclick="goReview()" />
 </div>
    
    
@@ -411,6 +413,12 @@
 		$(function() {
 			$("#goCom").click(function() {
 				location.href = "../mypageAdmin/companyList.do";
+			})
+		})
+		
+		$(function() {
+			$("#goReview").click(function() {
+				location.href = "../mypageAdmin/reviewList.do";
 			})
 		})
 	</script>

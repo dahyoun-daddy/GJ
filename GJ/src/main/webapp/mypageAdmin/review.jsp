@@ -1,144 +1,289 @@
+<%@page import="com.sist.gj.common.StringUtill"%>
+<%@page import="com.sist.gj.vo.SearchVO"%>
+<%@page import="com.sist.gj.vo.CodeVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+	String context = request.getContextPath();
+
+	String pageSize = "10";
+	String pageNum = "1";
+	String searchDiv = ""; //검색구분
+	String searchWord = ""; //검색어
+
+	String userPassQu = "";//찾기질문
+
+	searchDiv = StringUtill.nvl(request.getParameter("searchDiv"), "20");
+	searchWord = StringUtill.nvl(request.getParameter("searchWord"), "");
+	pageSize = StringUtill.nvl(request.getParameter("pageSize"), "10");
+	pageNum = StringUtill.nvl(request.getParameter("pageNum"), "1");
+
+	int totalCnt = 0;
+	int bottomCount = 10;
+
+	int oPageSize = Integer.parseInt(pageSize);
+	int oPageNum = Integer.parseInt(pageNum);
+
+	String totalCnts = (null == request.getAttribute("totalCnt")) ? "10"
+			: request.getAttribute("totalCnt").toString();
+	totalCnt = Integer.parseInt(totalCnts);
+	
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content=""> 
-<title>리뷰신고관리</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700|Playfair+Display:400,700,900"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-<link rel="stylesheet" href="../resources/css/animate.css">
-<link rel="stylesheet" href="../resources/css/main.css">
-</head>
+  <title>구직자 관리</title>
+  </head>
 <body>
-	<!--Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-dark cyan fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index.html"> <img
-				src="../resources/images/gj_logo.png" alt="nav-logo">
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent-4"
-				aria-controls="navbarSupportedContent-4" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link">Home</a></li>
-					<li class="nav-item"><a class="nav-link">채용정보</a></li>
-					<li class="nav-item"><a class="nav-link">기업정보 </a></li>
-					<li class="nav-item active"><a class="nav-link">자기소개서 <span
-							class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link">...님 로그인중</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
-	<!-- Custom JavaScript -->
-	<script src="../resources/js/animate.js"></script>
-	<script src="../resources/js/custom.js"></script>
-	<br>
-	<br>
-	<br>
-
-	<div class="page-header">
-		<h1>기업관리</h1>
+	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	<br/>
+	
+  <div class="table-responsive" align="center" >
+    
+   
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="구직자 관리" id="goUser" name="goUser"
+					onclick="goUser()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="기업 관리" id="goCom" name="goCom"
+					onclick="goCom()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="리뷰관리" id="goReview" name="goReview"
+					onclick="goReview()" />
+</div>
+   
+   
+	
+	<div class="container">
+		<form id="frm" name="frm"  method="get">
+		<input type="hidden" name="pageNum" id="pageNum" value="1">
+		<input type="hidden" name="selectClNo" id="selectClNo">
+   		
+   		<h1>신고 리뷰 관리</h1>
+		
+		</form>
 	</div>
-	<!--// Title영역 -->
-
-	<input type="hidden" name="page_num" id="page_num">
-	<!-- 검색영역 -->
-	<div class="row">
-		<div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-
-			<div class="form-group">
-				<select name="search_div" id="search_div"
-					class="form-control input-sm">
-					<option value="">::전체::</option>
-
-				</select> <input type="text" name="search_word" id="search_word"
-					value="${param.search_word}" class="form-control input-sm"
-					placeholder="검색어" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-default btn-sm"
-					onclick="javascript:doSearch();">조회</button>
-
-			</div>
-		</div>
-	</div>
-
-	<!--// 검색영역----------------------------------------------------->
-
-	<!-- Grid영역 -->
-	<div class="table-responsive">
-		<table id="listTable"
-			class="table table-striped table-bordered table-hover">
-			<thead class="bg-primary">
-				<tr>
-					<th class="text-center"><input type="checkbox" id="checkAll"
-						name="checkAll" onclick="checkAll();"></th>
-					<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">리뷰명</th>
-					<th class="text-center col-xs-4 col-sm-4 col-md-4 col-lg-4">신고수</th>
-
-				</tr>
-			</thead>
-			<!-- // Grid영역 -->
-
-			<!-- 입력 Form영역---- ----------------------------------------------->
-
-			<div class="form-group">
-				<label class="col-lg-4 control-label">제목</label>
-				<div class="col-lg-8">
-					<input type="text" name="password" id="제목"
-						class="form-control input-sm" placeholder="제목" maxlength="20" />
+    <!--// 검색영역----------------------------------------------------->
+   
+   
+   
+    <!-- Grid영역 -->
+    <br>
+		<div class="table-responsive" align="center" >
+		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
+				<table id="listTable" class="table table-striped table-bordered table-hover" >
+				    					<colgroup>
+								  			<col width="80%"style="background-color: #FFFFFF;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;"/>
+								  		</colgroup>
+				    	
+				  		<thead class="bg-primary">
+				  		<tr> 
+				       <th class="text-center " style="background-color: #FACC2E;">제목</th>
+						<th class="text-center" style="background-color: #FACC2E;">신고수</th>											
+					</tr>
+				</thead>
+					<tbody> 
+								<c:choose>
+	  						<c:when test="${list.size()>0}">
+	  							<c:forEach var="UserVO" items="${list}">
+	  								<tr id="${UserVO.reviewNo}">
+	  									<td class="text-center"><c:out value="${UserVO.reviewTitle}"/></td>
+	  									<td class="text-center"><c:out value="${UserVO.reviewComplain}"/></td>
+	  								</tr>
+	  							</c:forEach>
+	  						</c:when>
+	 	 					<c:otherwise>
+	 	 						<tr>
+	 	 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+	 	 						</tr>
+	  						</c:otherwise>
+	  					</c:choose>
+					
+					</tbody>
+					</table>
+			
 				</div>
-			</div>
+				
+				  	<div class="dorm-inline text-center">
+	  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "reviewList.do", "searchPage") %>
+	  	</div>
+  	</div><br><br>
+	<!-- // Grid영역 -->
+	
 
+	
+	
+	<!-- 입력 Form영역---- ----------------------------------------------->
+			
+			<div class="table-responsive" align="center" >
+			
 			<div class="form-group">
-				<label class="col-lg-4 control-label">내용</label>
-				<div class="col-lg-8">
-					<input type="text" name="login" id="login"
-						class="form-control input-sm" placeholder="내용" maxlength="4" />
-				</div>
+			<label class="col-lg-4 control-label">제목</label>
+			<div  class="col-lg-3">
+			<input type="hidden" name="reviewNo" id="reviewNo" />						   
+			
+			<input type="text" name="reviewTitle" id="reviewTitle" disabled="disabled"
+						   class="form-control input-sm" placeholder="제목" />						   
 			</div>
+			</div>
+			
+			
+			<div class="form-group">
+					<label class="col-lg-4 control-label">내용</label>
+					<div  class="col-lg-3">
+						<input type="text" name="reviewBody" id="reviewBody"
+						   class="form-control input-sm" placeholder="내용"
+						   maxlength="20" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-4 control-label">신고수</label>
+					<div  class="col-lg-3">
+						<input type="text" name="reviewComplain" id="reviewComplain"
+						   class="form-control input-sm" placeholder="신고수"
+						   maxlength="20" />
+					</div>
+				</div>	
+				  <button type="button" class="btn btn-default btn-sm" id="do_delete">삭제하기</button>			
+			</div>	
+	      					      				
+	      
+				      														
+			</div>
+	<!-- //입력 Form영역---- ----------------------------------------------->			
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+			$("#do_delete").on("click",function(){
+				//alert("ready");
+				if(false == confirm("삭제 하시겠습니까?")){
+    				return;
+    			}
+				
+				
+				$.ajax({
+	   		         type:"POST",
+	   		         url:"reviewDelete.do",
+	   		         dataType:"html",// JSON
+	   		         data:{
+	   		         	"reviewNo": $("#reviewNo").val()
+	   		         },
+	   		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	   		         	var parseData = $.parseJSON(data);
+	   		         	if(parseData.flag > 0){
+	   		         		alert(parseData.msg);
+	   		         		doSearch();
+	   		         	}else{
+	   		         		alert(parseData.msg);
+	   		         	}
+	   		         },
+	   		         complete: function(data){//무조건 수행
+	   		          
+	   		         },
+	   		         error: function(xhr,status,error){
+	   		          
+	   		         }
+	   		   	});
+			});
 
+		$("#listTable>tbody").on("click","tr",function(){
 
-			<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제하기</button>
+			console.log("1 #listTable>tbody");
+	
 
-			</form>
-			<!-- //입력 Form영역---- ----------------------------------------------->
+			var userId = $(this).attr('id');
+			
+
+			if(""==userId)return;
+			
+			//alert("userId"+userId);
+			
+
+	        $.ajax({
+
+	            type:"POST",
+
+	            url:"reviewSelect.do",
+
+	            dataType:"html",// JSON
+
+	            data:{
+
+	            "reviewNo": userId
+
+	            },
+
+	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+
+	              var parseData = $.parseJSON(data);
+     
+	              $("#reviewNo").val(parseData.reviewNo);	
+	            
+	              $("#reviewTitle").val(parseData.reviewTitle);
+
+	              $("#reviewBody").val(parseData.reviewBody);
+
+	              $("#reviewComplain").val(parseData.reviewComplain);
+	            },
+
+	            complete: function(data){//무조건 수행
+          
+	            },
+	            error: function(xhr,status,error){
+           
+	            }
+	       }); //--ajax
+
+		});//--#listTable>tbody
+
+	});  
+	
+</script>
+
+<script type="text/javascript">
+		function doSearch(){
+			var frm = document.frm;
+			frm.action="reviewList.do";
+			frm.submit();
+		}
+	
+		
+		function goUser() {
+			var frm = document.login;
+			frm.action = "usercompany.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goUser").click(function() {
+				location.href = "../mypageAdmin/userList.do";
+			})
+		})
+		
+		function goCom() {
+			var frm = document.login;
+			frm.action = "usercompany2.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goCom").click(function() {
+				location.href = "../mypageAdmin/companyList.do";
+			})
+		})
+		
+		
+		$(function() {
+			$("#goReview").click(function() {
+				location.href = "../mypageAdmin/reviewList.do";
+			})
+		})
+	</script>
+		
+		
+
 </body>
 </html>

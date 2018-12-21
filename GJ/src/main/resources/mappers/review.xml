@@ -33,10 +33,13 @@
 			SELECT hr.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY reg_dt desc ) AS rnum       
 			  FROM Review hr
-			 WHERE user_nick = #{searchWord}
+			 WHERE user_nick like #{searchWord}||'%'
 		  )T
 		    <choose>
   				<when test="10 == searchDiv"> 					
+  				</when>
+  				<when test="20 == searchDiv">
+  				WHERE review_complain>5 					
   				</when>
   				<otherwise>
   						WHERE rnum BETWEEN (#{pageSize} * (#{pageNum}-1)+1) 
@@ -48,7 +51,7 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM Review
-		   WHERE user_nick = #{searchWord}
+		   WHERE user_nick like #{searchWord}||'%'
 		)Y      
     </select>
     
