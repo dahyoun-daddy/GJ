@@ -37,12 +37,21 @@
 	UserVO sessionVO = (UserVO)session.getAttribute("loginVo");
 	String userId = "";
 	
+	int userLv = 5;
+	
 	if(null != sessionVO){
 		userId = sessionVO.getUserId();
+		userLv = sessionVO.getUserLevel();
 	}
+		
 %>
 <head>
-
+		<style type="text/css">
+		#frm {
+			width:800px;
+			margin: 0 auto;
+		}
+		</style>
 </head>
 
 <body>
@@ -51,7 +60,7 @@
 	<!-- 채용정보 목록 -->
 		<div class="row" style="float: left;">&nbsp;&nbsp;&nbsp;
 		<br><br><br>
-			<form id="frm" name="frm" class="form-inline" >
+			<form id="frm" name="frm" style="text-align:center;" class="form-inline" >
 				<input type="hidden" name="pageNum" id="pageNum" value="1">
 				<input type="hidden" name="hireNo" id="hireNo">
 				<%=StringUtill.makeSelectBox(codeSearch, searchDiv, "searchDiv", false) %>
@@ -61,7 +70,10 @@
 			  	&nbsp;&nbsp;
 			  </div>
 			  <button type="submit" class="btn btn-default">검색</button>&nbsp;&nbsp;
+		<c:set var="userLv" value="<%=userLv %>"/>
+		<c:if test="${userLv eq 3}">
 			  <button type="button" class="btn btn-default" id="goCreate">글쓰기</button>
+		</c:if>
 			</form>
 		</div>
 		<br>
@@ -115,6 +127,14 @@
     <script src="../resources/js/animate.js"></script>
     <script src="../resources/js/custom.js"></script>
 <script type="text/javascript">
+	function noList(){
+		var message = document.frm;
+		if(message == "0"){
+			alert("해당 정보가 없습니다.");
+			return;
+		}
+	}
+
 	function searchPage(url,pageNum){
 		alert("url : "+url+" page_num : "+pageNum);
 		var frm = document.frm;

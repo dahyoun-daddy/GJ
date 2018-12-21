@@ -70,26 +70,27 @@ public class HireController {
 		codePage.setCmId("PAGING");
 		
 		List<HireVO> list = hireSvc.search(invo);
+		
 		log.info("list size : "+list.size());
 		
 		int totalCnt = 0;
+		String message = null;
 		if(null != list  &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();
-		}	
+		}
+		
 		model.addAttribute("codeSearch",codeSvc.doRetrieve(codeSearch));
 		model.addAttribute("codePage",codeSvc.doRetrieve(codePage));
 		model.addAttribute("list",list);
 		model.addAttribute("param",invo);
 		model.addAttribute("totalCnt",totalCnt);
 		
-		log.info("=======================");
-		log.info("totalCnt"+list.get(0).getTotalCnt());
-		log.info("=======================");
 		return VIEW_NAME;
 	}
  
 	
-	@RequestMapping(value="/hirelist/HireCreate.do")
+	@RequestMapping(value="/hirelist/HireCreate.do",produces="application/json;charset=utf8")
+	@ResponseBody
 	public String create(@ModelAttribute HireVO invo, HttpSession ses, HttpServletRequest req, Model model) throws Exception {
 		log.info("=====================INSERT=======================");
 		log.info("invo" + invo);
@@ -100,7 +101,10 @@ public class HireController {
 		UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
 		
 		String loginId = sessionVO.getUserId();
+		log.info("=================");
+		log.info("==loginId=============="+loginId);
 		invo.setRegId(loginId);
+		invo.setUserId(loginId);
 		//-------------------------------------
 		
 		JSONObject object = new JSONObject();

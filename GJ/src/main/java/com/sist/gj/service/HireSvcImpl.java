@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sist.gj.common.RandomNum;
 import com.sist.gj.dao.HireDao;
 import com.sist.gj.vo.HireVO;
 import com.sist.gj.vo.JasoVO;
@@ -16,11 +17,15 @@ import com.sist.gj.vo.SearchVO;
 public class HireSvcImpl implements HireSvc {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	private RandomNum random = new RandomNum();
+	
 	@Autowired
 	private HireDao hireDao;
 	
 	@Override
 	public int create(HireVO hireVO) throws Exception {
+			String randomString = random.makeRandom();
+			hireVO.setHireNo(Integer.parseInt(randomString.substring(8)));
 		return hireDao.create(hireVO);
 	}
 

@@ -125,7 +125,7 @@
 			             var parseData = $.parseJSON(data);
 			         	 if(parseData.flag=="1"){
 			         		 alert(parseData.message);
-			         		location.href="UserMyInfo.do";
+			         		location.href="HireList.do";
 			         	 }else{
 			         		alert(parseData.message);
 			         	 }

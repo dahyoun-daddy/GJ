@@ -105,17 +105,25 @@
 	  <br>
 	  <div lass="form-group">
 	    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
-	      <button type="submit" class="btn btn-default" id="historyBack" onclick="historyBack()">취소하기</button>
-	      <button type="submit" class="btn btn-default" id="doCreate">등록하기</button>
+	      <input type="button" class="btn btn-default" id="historyBack" onclick="historyBack()" value="취소하기">
+	      <input type="button" class="btn btn-default" id="doCreate" value="등록하기">
 	    </div><br>
 	  </div>
 	  </form><br>
+	  <form id="frm2" name="frm2">
+		</form>
 	
 	<script type="text/javascript">
 		function historyBack() { 
 			window.history.back(); 
 		}
-
+		
+		function doSearch(){
+			var frm = document.frm2;
+			frm.action="HireList.do";
+			frm.submit();
+		}
+		
 		$(document).ready(function(){
 			//alert("ready");
 			$("#doCreate").on("click",function(){
