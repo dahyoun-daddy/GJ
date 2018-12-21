@@ -61,7 +61,7 @@
 </div>
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
-		<input type="hidden" name="pageNum" id="pageNum" value="">
+		<input type="hidden" name="pageNum" id="pageNum" value="1">
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
    		<h1>기업관리</h1>

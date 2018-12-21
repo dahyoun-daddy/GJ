@@ -65,12 +65,11 @@
 	
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
-		<input type="hidden" name="pageNum" id="pageNum" value="">
+		<input type="hidden" name="pageNum" id="pageNum" value="1">
 		<input type="hidden" name="selectClNo" id="selectClNo">
    		
    		<h1>구직자관리</h1>
         	
-     	 <input type="hidden" name="page_num" id="page_num">
 		<!-- 검색영역 -->
 		
 		
