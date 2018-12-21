@@ -18,6 +18,8 @@
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 
+	<div align="center" style="width:100%; ">
+	<div class="table-responsive" align="center" style="text-align:left; width:50%;">
 	<!--id,pw찾기 폼 -->
 	<br>
 	<br>
@@ -52,7 +54,7 @@
 			name="an" placeholder="10글자 이하 입력"> <br> <br> <input
 			type="button" value="비밀번호 찾기" id="findPw" name="findPw">
 	</form>
-
+	</div></div>
 	<script type="text/javascript">
 		function findId() {
 			var frm = document.frm;

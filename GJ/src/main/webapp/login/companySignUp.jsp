@@ -7,6 +7,8 @@
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	<div align="center" style="width:100%; ">
+	<div class="table-responsive" align="center" style="text-align:left; width:50%;">
 	<!--기업 회원가입 폼 -->
 	<br>
 	<br>
@@ -59,6 +61,7 @@
 			<br> <label><b> 기업은 관리자의 승인 이후의 이용이 가능합니다 .</b></label>
 		
 	</form>
+	</div></div>
 	<br>
 	<!--// 구직자 회원가입 폼 -->
 

@@ -7,6 +7,8 @@
 </head>
 <body>
 	<jsp:include page="../common/top.jsp" flush="false"></jsp:include>
+	<div align="center" style="width:100%; ">
+	<div class="table-responsive" align="center" style="text-align:left; width:50%;">
 	<!--구직자 회원가입 폼 -->
 	<br>
 	<br>
@@ -15,12 +17,12 @@
 	<h2>구직자 회원가입</h2>
 	<form id="frm" name="frm" method="get">
 		<br> <input type="hidden" name="work_div" id="work_div">
-		<div class="form-inline" >
-		<label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label > <input type="text" id="id" name="id"
-			placeholder="이메일을 입력하세요"> <input type="hidden" id="idcheck"
-			name="idcheck" value="0">
-		<div class="form-group">
-			&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId"></div></div>
+		<div class="form-group" >
+		<label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label > 
+		<input type="text" id="id" name="id" placeholder="이메일을 입력하세요"> 
+<!-- 			<input type="hidden" id="idcheck" name="idcheck" value="0"> -->
+		
+			&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId"></div>
 			<br>
 			<br> <label style="width:100px"><b>비밀번호</b></label> <input type="password" id="pw"
 				name="pw" placeholder="비밀번호 입력 조건"> <br>
@@ -55,7 +57,8 @@
 
 		
 	</form>
-
+</div>
+</div>
 
 	<!--// 구직자 회원가입 폼 -->
 	<script type="text/javascript">
@@ -240,5 +243,6 @@
 
 		});
 	</script>
+	
 </body>
 </html>
