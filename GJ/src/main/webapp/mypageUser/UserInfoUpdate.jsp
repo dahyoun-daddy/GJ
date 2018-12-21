@@ -197,35 +197,37 @@
 					    		권장 사진 사이즈는 가로103*세로132 픽셀이며<br/>gif, jpg, jpeg 이미지 파일만 등록 가능합니다.
 				    		</div>
 				    		
+ 			    	<div align="left" style="width:100%; ">
+					<div class="table-responsive" align="center" style="text-align:left; width:50%;">
+					<br/><br/>
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
 				    		<form role="form" id="frmEdit" name="frmEdit" action="infoUpdate.do"
 			  					  method="post" class="form-horizontal">
 					    		<input type="hidden" name="upsert_div" id="upsert_div" value="">
 						    	<input type="hidden" name="work_div" id="work_div"> 
-					     	  	<label><b>이메일</b></label>
+					     	  	<label style="width:100px"><b>이메일</b></label>
 					        	<input type="text" id="user_email" value="${userId}" readOnly>
 					        		<br><br>
-					    	 	<label><b>비밀번호</b></label>
+					    	 	<label style="width:100px"><b>비밀번호</b></label>
 					        	<input type="password" id="user_pw" value="${userPasswd}">
 					        		<br><br>
-					     		<label><b>비밀번호 확인</b></label>
+					     		<label style="width:100px"><b>비밀번호 확인</b></label>
 					       		<input type="password" id="pw_check"
 					              	    placeholder="비밀번호를 다시 입력하세요">
 					      			<br><br>
-					      			<label><b>닉네임</b></label>
+					      			<label style="width:100px"><b>닉네임</b></label>
 						        <input type="text" id="user_nickname" value="${userNick}">
 						        	<br><br>
-						       	<label><b>성함</b></label>
+						       	<label style="width:100px"><b>성함</b></label>
 						        <input type="text" id="user_name" value="${userName}">
 						        	<br><br>
-						        <label><b>전화번호</b></label>
+						        <label style="width:100px"><b>전화번호</b></label>
 						        <input type="text" id="user_phone" value="${userPhone}">
 						       		<br><br>
-						       	<label><b>주소</b></label> 
+						       	<label style="width:100px"><b>주소</b></label> 
 						        <input type="text" id="user_address" value="${userAdd}">
 						       		<br><br>
-						      	<label><b>비밀번호 찾기 질문:</b></label>
+						      	<label style="width:100px"><b>비밀번호 찾기 질문</b></label>
 						      	<c:set var="opt" value="${userPassQu}" />
 						      	<select id="passQ" name="passQ">
 							      	<option value="1"<c:if test="${opt == '1' }">selected</c:if>>기억에 남는 추억은?</option>
@@ -236,13 +238,13 @@
 							      	<option value="6"<c:if test="${opt == '6' }">selected</c:if>>다시 태어나면 되고싶은것은 ?</option>
 						      	</select>
 						      	<br><br>
-						      	<label><b>비밀번호 찾기 답변</b></label> 
+						      	<label style="width:100px"><b>비밀번호 찾기 답변</b></label> 
 						        <input type="text" id="user_passA" value="${userPassAn}">
 						       	<br><br><br>
 					    		<input id="smallBtn" name="do_update" type="button" value="정보 수정하기">
 				    		</form>
-				    		</div>
-					    	
+					  </div>
+					  </div> 
 				    	</div>
 			    	</div>
 		          </div>

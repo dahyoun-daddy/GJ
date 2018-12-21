@@ -159,28 +159,30 @@
 					    		<orange style="color: orange;">자신을 증명할 있는 사진을 사용해 주세요.<br/>이력서 공개 및 채용에 지원했을 시 보여질 사진입니다.<br/><br/></orange>
 					    		내가 작성한 이력서를 기업이 열람 및 연락 가능하게끔 하는 것은<br/>[이력서]메뉴에서 변경 가능합니다.
 				    		</div>
-				    		
+	    			<div align="left" style="width:100%; ">
+					<div class="table-responsive" align="center" style="text-align:left; width:50%;">
+					<br/><br/>
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
+				    		<form id="frm" name="frm">
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	
-					     	  	<label><b>이메일</b></label>
+					     	  	<label style="width:100px"><b>이메일</b></label>
 					        	<input type="text" name="user_email" value="${userId}" readOnly>
 					        		<br><br>
 	
-					      		<label><b>닉네임</b></label>
+					      		<label style="width:100px"><b>닉네임</b></label>
 						        <input type="text" name="user_nickname" value="${userNick}" readOnly>
 						        	<br><br>
 						        	
-						       	<label><b>성함</b></label>
+						       	<label style="width:100px"><b>성함</b></label>
 						        <input type="text" name="user_name" value="${userName}" readOnly>
 						        	<br><br>
 						        	
-						        <label><b>전화번호</b></label>
+						        <label style="width:100px"><b>전화번호</b></label>
 						        <input type="text" name="user_phone" value="${userPhone}" readOnly>
 						       		<br><br>
 						       		
-						       	<label><b>주소</b></label> 
+						       	<label style="width:100px"><b>주소</b></label> 
 						        <input type="text" name="user_address" value="${userAdd}" readOnly>
 						       		<br><br>
 						       		
@@ -188,8 +190,9 @@
 					    		<input id="smallBtn" type="button" value="정보 수정하기"
 		                   			   onclick="location='UserInfoUpdate.do'; return false;">
 				    		
-				    		</div>
-					    	
+				    		</form>
+					  </div>
+					  </div>  	
 				    	</div>
 			    	</div>
 		          </div>

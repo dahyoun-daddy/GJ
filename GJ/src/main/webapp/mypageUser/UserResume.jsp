@@ -145,9 +145,9 @@
 			    	</div>
 			    	
 			    	<div style=" float: left; height: auto; width: 80%;" align="left">
-   		<form name="frm" id="frm" class="form-horizontal" method="post" >
 			    		<div style="float: left; width: 1%; height: auto;" align="center"></div>
 			    		<h5 style="color: orange" align="center"><strong>나의 이력서</strong></h5>
+					    	<form name="frm" id="frm" class="form-horizontal" method="post" >
 				    	<div style="float: left; width: 110%; height: auto; padding:10px;" align="center">
 					    	<div id="profcontext" style="text-align: center;">
 					    		
@@ -165,30 +165,30 @@
 					    		}
 					    		%>
 					    		</div><br/>
-
+						
 					    		<div class="form-group" style="float: left;margin-right:45%;">
-					    			<label for="userName" class="col-sm-4 control-label" style="float: left; text-align: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="userName" class="col-sm-4 control-label" style="width:100px; float: left;"><strong>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="userName" name="userName" value="${userName}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="userPhone" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>전화번호</strong></label>
+					    			<label for="userPhone" class="col-sm-4 control-label" style="width:100px; float: left;"><strong>전화번호</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="userPhone" name="userPhone" value="${userPhone}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-					    			<label for="regId" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
+					    			<label for="regId" class="col-sm-4 control-label" style="width:100px; float: left;"><strong>이메일&nbsp;&nbsp;&nbsp;</strong></label>
 					    			<div class="col-sm-7" style="float: left;">
 								    	<input type="text" class="form-control" id="regId" name="regId" value="${userId}" readOnly/>
 							    	</div>
 								</div>
 								
 								<div class="form-group" style="float: left; margin-right:45%;">
-									<label for="cvGrade" class="col-sm-4 control-label" style="float: left;text-align: left;"><strong>최종학력</strong></label>
+									<label for="cvGrade" class="col-sm-4 control-label" style="width:100px; float: left;"><strong>최종학력</strong></label>
 									<div class="col-sm-7" style="float: left;">
 									    <c:set var="opt" value="${cvGrade}" />
 										<select class="form-control" name="cvGrade" id="cvGrade" style="width:190px;">
@@ -201,7 +201,7 @@
 									</div>
 								</div>
 						    </div>	
-						   
+						  
 						    <div id="profcontext" style="font-size: 80%; text-align: left;">
 						    	<strong style="color: #045FB4; font-size: 130%">자격증/어학</strong><br/>
 						    	성적이 없는 자격증/어학 시험일 경우 성적 부분을 입력하지 않아도 됩니다.<br>
@@ -318,19 +318,19 @@
 					            		</tr>
 					            		<tr>
 					            			<th>성장과정</th>
-					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clSungjang, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clSungjang}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>학교생활</th>
-					            			<td><textarea id="clSang" name="clSang" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clSang, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
+					            			<td><textarea id="clSang" name="clSang" rows="5" style="width:100%; border: 0; resize: none;">${clSang}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>성격장단점</th>
-					            			<td><textarea id="clJangdan" name="clJangdan" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clJangdan, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
+					            			<td><textarea id="clJangdan" name="clJangdan" rows="5" style="width:100%; border: 0; resize: none;">${clJangdan}</textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>지원동기</th>
-					            			<td><textarea id="clJiwon" name="clJiwon" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clJiwon, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
+					            			<td><textarea id="clJiwon" name="clJiwon" rows="5" style="width:100%; border: 0; resize: none;">${clJiwon}</textarea></td>
 					            		</tr>
 					            	</tbody>
 					            </table>
@@ -352,7 +352,7 @@
 				    	</div>	
 				    	
 				    	</div>
-    	</form>
+				    	</form>
 			    	</div>
 		          </div>
 		     </div>

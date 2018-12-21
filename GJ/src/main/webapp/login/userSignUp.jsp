@@ -18,14 +18,13 @@
 	<form id="frm" name="frm" method="get">
 		<br> <input type="hidden" name="work_div" id="work_div">
 		<div class="form-group" >
-		<label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label > 
-		<input type="text" id="id" name="id" placeholder="이메일을 입력하세요"> 
-<!-- 			<input type="hidden" id="idcheck" name="idcheck" value="0"> -->
-		
-			&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId"></div>
+			<label><b>이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label > 
+			<input type="text" id="id" name="id" placeholder="이메일을 입력하세요"> 
+				&nbsp;&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="checkId" name="checkId">
+		</div>
 			<br>
-			<br> <label style="width:100px"><b>비밀번호</b></label> <input type="password" id="pw"
-				name="pw" placeholder="비밀번호 입력 조건"> <br>
+			<br> <label style="width:100px"><b>비밀번호</b></label> 
+				<input type="password" id="pw"name="pw" placeholder="비밀번호 입력 조건"> <br>
 			<br> <label style="width:100px"><b>비밀번호 확인</b></label> <input type="password"
 				id="pw2" name="pw2" placeholder="다시 입력하세요"> <br>
 			<br> <label style="width:100px"><b>닉네임</b></label> <input type="text" id="nick"

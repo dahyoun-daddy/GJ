@@ -163,34 +163,34 @@
 				    		</div>
 				    		
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<div id="profcontext" style="text-align: left;">
+				    		<form id="frm" name="frm">
 						    	<input type="hidden" name="work_div" id="work_div"> 
-					     	  	<label><b>이메일</b></label>
+					     	  	<label style="width:100px"><b>이메일</b></label>
 					        	<input type="text" name="user_email" value="${userId}" readOnly>
 					        		<br><br>
-					      			<label><b>기업명</b></label>
+					      			<label style="width:100px"><b>기업명</b></label>
 						        <input type="text" name="comp_compname" value="${userNick}" readOnly>
 						        	<br><br>
-						       	<label><b>대표성함</b></label>
+						       	<label style="width:100px"><b>대표성함</b></label>
 						        <input type="text" name="comp_name" value="${userName}" readOnly>
 						        	<br><br>
-						        <label><b>회사 전화번호</b></label>
+						        <label style="width:100px"><b>회사 전화번호</b></label>
 						        <input type="text" name="comp_phone" value="${userPhone}" readOnly>
 						       		<br><br>
-						       	<label><b>주소</b></label> 
+						       	<label style="width:100px"><b>주소</b></label> 
 						        <input type="text" name="comp_address" value="${userAdd}" readOnly>
 						       		<br><br>
-						       	<label><b>매출액</b></label> 
+						       	<label style="width:100px"><b>매출액</b></label> 
 						        <input type="text" name="comp_money" value="${enterSalay}" readOnly>
 						       		<br><br>
-						       	<label><b>설립일</b></label> 
+						       	<label style="width:100px"><b>설립일</b></label> 
 						        <input type="text" name="comp_date" value="${enterHiredate}" readOnly>
 						       		<br><br>
 						      	
 					    		<input id="smallBtn" type="button" value="정보 수정하기"
 		                   			   onclick="location='CompInfoUpdate.do'; return false;">
 				    		
-				    		</div>
+				    		</form>
 					    	
 				    	</div>
 			    	</div>
