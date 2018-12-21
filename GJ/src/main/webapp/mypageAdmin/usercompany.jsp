@@ -55,9 +55,9 @@
   <div class="table-responsive" align="center" >
     
   
-	<input type="button" class="btn btn-primary btn-lg" value="구직자 관리" id="goUser" name="goUser"
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="구직자 관리" id="goUser" name="goUser"
 					onclick="goUser()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" class="btn btn-primary btn-lg" value="기업 관리" id="goCom" name=""goCom""
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="기업 관리" id="goCom" name=""goCom""
 					onclick="goCom()" />
 </div>
    
@@ -390,6 +390,30 @@
 	   		   	});
 			});
 		});
+		
+		function goUser() {
+			var frm = document.login;
+			frm.action = "usercompany.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goUser").click(function() {
+				location.href = "../mypageAdmin/userList.do";
+			})
+		})
+		
+		function goCom() {
+			var frm = document.login;
+			frm.action = "usercompany2.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goCom").click(function() {
+				location.href = "../mypageAdmin/companyList.do";
+			})
+		})
 	</script>
 		
 		

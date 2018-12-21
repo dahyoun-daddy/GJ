@@ -51,7 +51,14 @@
 <jsp:include page="../common/top.jsp" flush="false"></jsp:include>
 	
 	<br/>
-	<br/>
+	 <div class="table-responsive" align="center" >
+    
+  
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="구직자 관리" id="goUser" name="goUser"
+					onclick="goUser()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-primary btn-lg" style="background-color: #B5A686;" value="기업 관리" id="goCom" name=""goCom""
+					onclick="goCom()" />
+</div>
 	<div class="container">
 		<form id="frm" name="frm"  method="get">
 		<input type="hidden" name="pageNum" id="pageNum" value="">
@@ -434,6 +441,30 @@
 	   		   	});
 			});
 		});
+		
+		function goUser() {
+			var frm = document.login;
+			frm.action = "usercompany.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goUser").click(function() {
+				location.href = "../mypageAdmin/userList.do";
+			})
+		})
+		
+		function goCom() {
+			var frm = document.login;
+			frm.action = "usercompany2.jsp";
+			frm.submit();
+		}
+		
+		$(function() {
+			$("#goCom").click(function() {
+				location.href = "../mypageAdmin/companyList.do";
+			})
+		})
 		
 	</script>
 			
