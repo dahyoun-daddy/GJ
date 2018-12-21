@@ -79,7 +79,7 @@ public class MainController {
 		model.addAttribute("totalCnt",totalCnt);
 		
 		log.info("=======================");
-		log.info("totalCnt"+list.get(0).getTotalCnt());
+//		log.info("totalCnt"+list.get(0).getTotalCnt());
 		log.info("=======================");
 		
 		return VIEW_NAME;
