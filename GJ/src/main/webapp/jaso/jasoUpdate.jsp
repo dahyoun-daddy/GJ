@@ -75,7 +75,12 @@
 			//alert("ready");
 			$("#doUpdate").on("click",function(){
 				//alert("ready");
-				if(false == confirm("등록 하시곘습니까?")){
+				if(null == $("#jasotitle").val()  ||  $("#jasotitle").val().trim() == ("")){
+					alert("제목을 입력해주세요")
+					return;
+				}
+				
+				if(false == confirm("등록 하시겠습니까?")){
     				return;
     			}
 				

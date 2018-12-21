@@ -48,7 +48,7 @@ public class LoginController {
 		// -----------------------------------
 		JSONObject object = new JSONObject();
 
-		UserVO outVO = signUpSvc.select(invo);
+		UserVO outVO = signUpSvc.login(invo);
 		String result = "";
 
 		if (null == outVO) {

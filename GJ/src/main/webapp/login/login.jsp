@@ -37,8 +37,7 @@
 					</tr>
 					<tr>
 						<td bgcolor="white">비밀번호</td>
-						<td><input type="password" name="password" name="password"
-							maxlength="50"></td>
+						<td><input type="password" id="password" name="password" maxlength="50"></td>
 					</tr>
 				</table>
 				<br> <input type="button" value="로그인" id="loginBt"
@@ -92,10 +91,9 @@
 					success : function(data) {//통신이 성공적으로 이루어 졌을때 받을 함수
 						var parseData = $.parseJSON(data);
 						if (parseData.result == "") {
-							alert("실패");
+							alert("아이디, 비밀번호를 확인하세요");
 							return;
 						} else {
-							alert("성공");
 							doLogin();
 						}
 					},
