@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
@@ -117,6 +118,8 @@
 	
 	String context = request.getContextPath();//context path
 	String pictureUrl = context+request.getAttribute("pictureUrl");
+	
+	pageContext.setAttribute("newLineChar", "\n");
 %>
 </head>
 <body>
@@ -315,19 +318,19 @@
 					            		</tr>
 					            		<tr>
 					            			<th>성장과정</th>
-					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;">${clSungjang}</textarea></td>
+					            			<td><textarea id="clSungjang" name="clSungjang" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clSungjang, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>학교생활</th>
-					            			<td><textarea id="clSang" name="clSang" rows="5" style="width:100%; border: 0; resize: none;">${clSang}</textarea></td>
+					            			<td><textarea id="clSang" name="clSang" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clSang, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>성격장단점</th>
-					            			<td><textarea id="clJangdan" name="clJangdan" rows="5" style="width:100%; border: 0; resize: none;">${clJangdan}</textarea></td>
+					            			<td><textarea id="clJangdan" name="clJangdan" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clJangdan, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
 					            		</tr>
 					            		<tr>
 					            			<th>지원동기</th>
-					            			<td><textarea id="clJiwon" name="clJiwon" rows="5" style="width:100%; border: 0; resize: none;">${clJiwon}</textarea></td>
+					            			<td><textarea id="clJiwon" name="clJiwon" rows="5" style="width:100%; border: 0; resize: none;"><c:out value="${fn:replace(clJiwon, newLineChar, '<br/>')}" escapeXml="false"/></textarea></td>
 					            		</tr>
 					            	</tbody>
 					            </table>

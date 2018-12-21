@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.gj.vo.CodeVO"%>
@@ -113,10 +114,11 @@
 	if(null != sessionVO){
 		userLv = sessionVO.getUserLevel();
 	}
-%>
-<% 
+	
 	String context = request.getContextPath();//context path
 	String pictureUrl = context+request.getAttribute("pictureUrl");
+	
+	pageContext.setAttribute("newLineChar", "\n");
 %>
 </head>
 <body>
@@ -276,19 +278,19 @@
 					            		</tr>
 					            		<tr>
 					            			<th>성장과정</th>
-					            			<td>${clSungjang}</td>
+					            			<td><c:out value="${fn:replace(clSungjang, newLineChar, '<br/>')}" escapeXml="false"/></td>
 					            		</tr>
 					            		<tr>
 					            			<th>학교생활</th>
-					            			<td>${clSang}</td>
+					            			<td><c:out value="${fn:replace(clSang, newLineChar, '<br/>')}" escapeXml="false"/> </td>
 					            		</tr>
 					            		<tr>
 					            			<th>성격장단점</th>
-					            			<td>${clJangdan}</td>
+					            			<td><c:out value="${fn:replace(clJangdan, newLineChar, '<br/>')}" escapeXml="false"/> </td>
 					            		</tr>
 					            		<tr>
 					            			<th>지원동기</th>
-					            			<td>${clJiwon}</td>
+					            			<td><c:out value="${fn:replace(clJiwon, newLineChar, '<br/>')}" escapeXml="false"/> </td>
 					            		</tr>
 					            	</tbody>
 					            </table>
