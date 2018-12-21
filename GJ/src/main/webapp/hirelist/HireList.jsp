@@ -80,12 +80,12 @@
 		<table id="listTable" name="listTable" class="table table-striped">
               <thead>
                 <tr>
-                  <th class="text-center">기업명</th>
-                  <th class="text-center">채용제목</th>
-                  <th class="text-center">시작일자</th>
-                  <th class="text-center">마감일자</th>
-                  <th class="text-center">근무지</th>
-                  <th class="text-center">학력</th>
+                  <th class="text-center" style="background-color: #FACC2E;">기업명</th>
+                  <th class="text-center" style="background-color: #FACC2E;">채용제목</th>
+                  <th class="text-center" style="background-color: #FACC2E;">시작일자</th>
+                  <th class="text-center" style="background-color: #FACC2E;">마감일자</th>
+                  <th class="text-center" style="background-color: #FACC2E;">근무지</th>
+                  <th class="text-center" style="background-color: #FACC2E;">학력</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +94,7 @@
   						<c:when test="${list.size()>0}">
   							<c:forEach var="hireVO" items="${list}">
   								<tr id="${hireVO.hireNo}">
-  									<td class="text-center"><c:out  value="${hireVO.userId}"/></td>
+  									<td class="text-center"><c:out  value="${hireVO.userNick}"/></td>
   									<td class="text-center"><c:out  value="${hireVO.hireTitle}"/></td>
   									<td class="text-center"><c:out  value="${hireVO.hireDate}"/></td>
   									<td class="text-center"><c:out  value="${hireVO.hireDeadline}"/></td>	

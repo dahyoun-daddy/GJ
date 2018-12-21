@@ -105,7 +105,7 @@
 	  <br>
 	  <div lass="form-group">
 	    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
-	      <input type="button" class="btn btn-default" id="historyBack" onclick="historyBack()" value="취소하기">
+	      <input type="button" class="btn btn-default" id="historyBack" onclick="toHireList()" value="취소하기">
 	      <input type="button" class="btn btn-default" id="doCreate" value="등록하기">
 	    </div><br>
 	  </div>
@@ -114,9 +114,9 @@
 		</form>
 	
 	<script type="text/javascript">
-		function historyBack() { 
-			window.history.back(); 
-		}
+	function toHireList() { 
+		location.href="HireList.do";
+	}
 		
 		function doSearch(){
 			var frm = document.frm2;

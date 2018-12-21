@@ -84,17 +84,15 @@
 		  </div>
 		    <br>
 		    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
-		    <button type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()">이전화면</button>
-		    <button type="button" class="btn btn-default" id="goUpdate" name="goUpdate">수정하기</button>
-		    <button type="button" class="btn btn-default" id="apply" name="apply">지원하기</button>
+		    <input type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="toHireList()" value="목록으로">
+		    <input type="button" class="btn btn-default" id="goUpdate" name="goUpdate" value="수정하기">
+		    <input type="button" class="btn btn-default" id="apply" name="apply" value="지원하기">
 		    </div><br>
 	  </form><br>
 	
-	  
-	
 	<script type="text/javascript">
-		function historyBack() { 
-			window.history.back(); 
+		function toHireList() { 
+			location.href="HireList.do";
 		}
 		
 		$(document).ready(function(){
@@ -102,14 +100,12 @@
 			$("#goUpdate").on("click",function(){
 				
 				var frm = document.frm;
-				//alert("수정 페이지로 이동?"+frm.hireNo.value);
 				//var hireNo = document.getElementById("hireNo").value 
 				 frm.action = "HireUpdate.do";
 				 frm.submit();
 			});
 			
 			$("#apply").on("click",function(){
-				//alert("ready");
 				if(false == confirm("지원하시겠습니까?")){
     				return;
     			}
