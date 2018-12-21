@@ -7,7 +7,7 @@
 <%@page import="com.sist.gj.vo.CodeVO"%>
 <%@page import="com.sist.gj.vo.UserVO"%>
 <%@page import="com.sist.gj.common.StringUtill"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
     
