@@ -69,19 +69,19 @@
 	  <div class="form-group">
 	    <label for="location" class="col-sm-2 control-label">채용시작</label>
 	    <div class="col-sm-12">
-	      <input type="text" class="form-control" id="hireDate" value="${hireDate}" placeholder="채용 시작일을 YYYY/MM/DD형식으로 입력해주세요">
+	      <input type="text" class="form-control" id="hireDate" value="${hireDate}" placeholder="채용 시작일을 YYYY-MM-DD형식으로 입력해주세요">
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="location" class="col-sm-2 control-label">채용마감</label>
 	    <div class="col-sm-12">
-	      <input type="text" class="form-control" id="hireDeadline" value="${hireDeadline}" placeholder="채용 마감일을 YYYY/MM/DD형식으로 입력해주세요">
+	      <input type="text" class="form-control" id="hireDeadline" value="${hireDeadline}" placeholder="채용 마감일을 YYYY-MM-DD형식으로 입력해주세요">
 	    </div>
 	  </div>
 	   <div class="form-group">
 	    <label for="location" class="col-sm-2 control-label">기업명</label>
 	    <div class="col-sm-12">
-	      <input type="text" class="form-control" id="hireAdd" value="${userId}" placeholder="기업명을 입력하세요">
+	      <input type="text" class="form-control" id="userId" value="${userId}" placeholder="기업명을 입력하세요">
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -124,10 +124,64 @@
 			frm.submit();
 		}
 		
+		function validatehire(hire) {
+			var pattern = /^\d{4}-\d{2}-\d{2}$/;
+			
+			return pattern.test(hire);
+		}
+		
 		$(document).ready(function(){
-			//alert("ready");
 			$("#doCreate").on("click",function(){
-				//alert("ready");
+				
+				var pwcheck = $("#hireTitle").val().trim()
+				if (pwcheck == "") {
+					alert("채용공고 제목을 입력해주세요")
+					return;
+				}				
+				
+				var pwcheck = $("#hireBody").val().trim()
+				if (pwcheck == "") {
+					alert("채용공고 내용을 입력해주세요")
+					return;
+				}
+				
+				var hirecheck = $("#hireDate").val()
+				if (hirecheck == "" || !validatehire(hirecheck)) {
+					alert("채용시작일을 '1990-09-09' 형식으로 입력해주세요")
+					return;
+				}
+				
+				var hirecheck = $("#hireDeadline").val()
+				if (hirecheck == "" || !validatehire(hirecheck)) {
+					alert("채용마감일을 '1990-09-09' 형식으로 입력해주세요")
+					return;
+				}
+				
+				var pwcheck = $("#userId").val().trim()
+				if (pwcheck == "") {
+					alert("기업명을 입력해주세요")
+					return;
+				}
+				
+				var pwcheck = $("#hireAdd").val().trim()
+				if (pwcheck == "") {
+					alert("사무실 주소를 입력해주세요")
+					return;
+				}
+				
+				var pwcheck = $("#hireSalary").val().trim()
+				if (pwcheck == "") {
+					alert("연봉을 입력해주세요")
+					return;
+				}
+				
+				var pwcheck = $("#hireEdu").val().trim()
+				if (pwcheck == "") {
+					alert("학력조건을 입력해주세요")
+					return;
+				}
+			
+				
 				if(false == confirm("등록하시습니까?")){
     				return;
     			}

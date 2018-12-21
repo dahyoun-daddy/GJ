@@ -169,7 +169,7 @@
 			var hireNo = $(this).attr('id');
 			//alert(hireNo);
 			
-			if("" == hireNo){
+			if("" == hireNo || null == hireNo){
 				return;
 			}
 				var frm = document.frm;
