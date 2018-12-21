@@ -88,6 +88,7 @@ public class UserMypageCtrl {
 			openResume  = outvo.getCvCheck();
 			model.addAttribute("userNick",outvo.getUserNick());
 		}else {
+			openResume = 0;
 			model.addAttribute("userNick",loginId);
 		}
 		

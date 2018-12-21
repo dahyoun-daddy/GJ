@@ -225,12 +225,16 @@
 				}
 				var salaychecklength = $("#salay").val().length
 				if (salaychecklength > (10)) {
-					alert("매출액을 10자 미만으로 입력해주세요")
+					alert("매출액을 10자 이하로 입력해주세요")
 					return;
 				}
 				var cntcheck = $("#cnt").val()
 				if (cntcheck == "") {
 					alert("사원수를 입력해주세요")
+					return;
+				}
+				if (cntcheck.length >5) {
+					alert("사원수를 5자 이하로 입력해주세요")
 					return;
 				}
 				var cntchecklength = $("#cnt").val().length

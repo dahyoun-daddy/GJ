@@ -185,7 +185,7 @@
 								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  			<col width="10%"style="background-color: #FFFFFF;font-size: 80%;"/>
-								  			<col width="15%"style="background-color: #FFFFFF;font-size: 80%;"/>
+								  			<col width="20%"style="background-color: #FFFFFF;font-size: 80%;"/>
 								  		</colgroup>
 								  		<thead class="bg-primary">
 								  		<tr>
