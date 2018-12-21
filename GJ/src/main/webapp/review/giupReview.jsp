@@ -180,6 +180,7 @@
 			      <c:forEach var="reviewVO" items="${list}">
 							<div style="float: left; height:20px; width: 100%;">
 							</div>
+						<div style="border: 3px dotted orange; background-color:#ECF6CE; height:auto; width: 100%; overflow: auto;">
 							<div style="background-color:#ECF6CE; float: left; height:33px; width: 80%;">
 							 <div>
 								 <label style="margin-top: 1%;" class="starRev">
@@ -225,6 +226,7 @@
 							</div>
 							<div style="float: left; height:30px; width: 20%;">
 							</div>
+							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
@@ -232,8 +234,9 @@
 							<td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
 						</tr>
 					</c:otherwise>
+					
 				</c:choose>
-						
+			  		
 			<!-- // 면접리뷰 -------------------------------  -->
    		</div>
    	</div>
