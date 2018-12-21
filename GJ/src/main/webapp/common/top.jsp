@@ -57,6 +57,9 @@
                 </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <ul class="navbar-nav ml-auto">
+                		<li class="nav-item">
+                        <a class="nav-link" onclick="movechart()">차트</a>
+                    	</li>
                 		<%
 						    if(null != userNick && !userNick.equals("")){
 						%>
@@ -104,6 +107,12 @@
     <script src="<%=context %>/resources/js/animate.js"></script>
     <script src="<%=context %>/resources/js/custom.js"></script>
     <script type="text/javascript">
+    	function movechart(){
+    		var frm = document.topFrm;
+    		frm.action="<%=context %>/chart/salaryview.do";
+    		frm.submit(); 
+    	}
+    	
     	function moveMypage(){
     		var frm = document.topFrm;
     		var check = frm.userLevel.value;
