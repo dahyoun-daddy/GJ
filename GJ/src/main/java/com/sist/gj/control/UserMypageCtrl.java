@@ -83,15 +83,21 @@ public class UserMypageCtrl {
 			log.info("==========================");
 		}
 		
-		int openResume = outvo.getCvCheck();
+		int openResume = 0;
+		if(outvo != null) {
+			openResume  = outvo.getCvCheck();
+			model.addAttribute("userNick",outvo.getUserNick());
+		}else {
+			model.addAttribute("userNick",loginId);
+		}
 		
 		if(openResume == 1) {
 			model.addAttribute("cvCheck","있습니다");
-		}else {
+		}else if(openResume ==0){
 			model.addAttribute("cvCheck","없습니다");
 		}
 		
-		model.addAttribute("userNick",outvo.getUserNick());
+		
 		
 		if(null != pictureVO) {
 			String pictureUrl ="/resources/images/"+pictureVO.getpFlPt().substring(pictureVO.getpFlPt().length()-7)+"/"+pictureVO.getpSvNm()+pictureVO.getpFlTp();
@@ -100,6 +106,7 @@ public class UserMypageCtrl {
 			log.info("pictureUrl :"+pictureUrl);
 			log.info("==========================");
 		}
+		
 		
 		return VIEW_MYPAGE;
 	}
