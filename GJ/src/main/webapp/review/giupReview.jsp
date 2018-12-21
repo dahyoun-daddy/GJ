@@ -104,20 +104,20 @@
 				 <span style="font-size: 1.5em; font-weight: bold; color: green;">${company.userNick}</span>
 				</div>
 				
-				<div style="border-left: 5px groove #48BAE4; border-bottom: 5px groove #48BAE4; float: left; height:180px; width: 10%;">
+				<div style="border-left: 5px groove #48BAE4; border-bottom: 5px groove #48BAE4; float: left; height:200px; width: 10%;">
 				<%if(!pictureUrl.equals("/gjnull")){
 					    		%>
-					    			<img src="<%=pictureUrl%>" height="180px" style='width: 100%; object-fit: contain'>
+					    			<img src="<%=pictureUrl%>" height="190px" style='width: 100%; object-fit: contain'>
 					    		<%
 					    		}else{
 					    		%>
-					    			<img src="../resources/images/noImage.png" height="180px" style='width: 100%; object-fit: contain'>
+					    			<img src="../resources/images/noImage.png" height="190px" style='width: 100%; object-fit: contain'>
 					    		<%
 					    		}
 					    		%>
 				</div>
-				<div style="border-bottom: 5px groove #48BAE4; float: left; height:180px; width: 10%;">
-					<label style="line-height: 1.5em;">설립일 </label>
+				<div style="border-bottom: 5px groove #48BAE4; margin-top: 3px; float: left; height:197px; width: 10%;">
+					<label>설립일 </label>
 					</br>
 					<label>사원수 </label>
 					</br>
@@ -129,8 +129,8 @@
 					</br>
 					<label>전화번호 </label>				 
 				</div>
-				<div style="float: left; height:100px; width: 10%;">
-					<label style="line-height: 1.2em;">2018/11/28 </label>
+				<div style="float: left; height:120px; width: 10%;">
+					<label style="margin-top: 3px;">2018/11/28 </label>
 					</br>
 					<label>${company.enterCnt}명</label>
 					</br>
@@ -141,7 +141,7 @@
 				<div style="float: left; height:100px; width: 5%;">
 					<label style="line-height:2.3em">리뷰 평점</label>
 				</div>
-				<div style="border-right: 5px groove #48BAE4; float: left; height:100px; width: 65%;">
+				<div style="border-right: 5px groove #48BAE4; float: left; height:120px; width: 65%;">
 					<label class="starRev">
 						  <span id="0" class="starR1 on">1</span>
 						  <span id="1" class="starR2">2</span>
@@ -162,9 +162,9 @@
 		
 				<div style="line-height: 1.2em; border-bottom: 5px groove #48BAE4; float: left; height:80px; width: 60%;">
 					</br>
-					<label style="line-height: 1.7;">${company.userAdd}</label>
+					<label style="line-height: 1.2;">${company.userAdd}</label>
 					</br>
-					<label style="line-height: 0.8;">${company.userPhone} </label>
+					<label style="line-height: 2.7;">${company.userPhone} </label>
 					
 				</div>
 				<div style="border-right: 5px groove #48BAE4; float: right; height:44px; width: 20%;">	
