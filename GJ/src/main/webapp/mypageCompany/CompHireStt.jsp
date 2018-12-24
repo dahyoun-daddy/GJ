@@ -199,8 +199,8 @@
 								  				<c:when test="${list.size()>0}">
 								  					<c:forEach var="applyVO" items="${list}">
 								  					<tr id="<c:out value="${applyVO.applyNo}"/>">
-								  						<td class="text-center text-capitalize"><input type="checkbox" id="check" name="check"></td> 
-										  				<td class="text-center" id="${applyVO.userId }"><c:out value="${applyVO.userName}"/></td> 
+								  						<td class="text-center"><input type="checkbox" id="check" name="check"></td> 
+										  				<td class="text-center text-capitalize" id="${applyVO.userId }"><c:out value="${applyVO.userName}"/></td> 
 										  				<td class="text-center"><c:out value="${applyVO.hireTitle}"/></td> 
 		 								  				<td class="text-center"><c:out value="${applyVO.applyDate}"/></td>
 		 								  			</tr>
@@ -268,7 +268,7 @@
 				}
 			});
 	    	
-			$("#listTable tr td.text-center").click(function(){
+			$("#listTable tr td.text-capitalize").click(function(){
 				var regId = $(this).attr('id');
 				
 				if("" == regId){
