@@ -114,7 +114,7 @@
 			  							<c:forEach var="jasoCVO" items="${cList}">
 			  								<tr id="${jasoCVO.commentNo}">
 			  									<td class="text-center"><c:out  value="${jasoCVO.userNick}"/></td>
-			  									<td class="text-left"><c:out value="${jasoCVO.commentBody}"/></td>
+			  									<td class="text-left"><c:out value="${fn:replace(jasoCVO.commentBody, newLineChar, '<br/>')}" escapeXml="false"/></td>
 			  									<td class="text-center"><c:out value="${jasoCVO.regDt}"/>
 			  									<c:set var="CId" value="<%=userId%>" />
 			  									<c:if test="${CId eq jasoCVO.regId}">
