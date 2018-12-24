@@ -179,7 +179,7 @@
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"
-		                   			   onclick="PicturePopup()"><br/><br/>
+		                   			   onclick="PicturePopup() return false;"><br/><br/>
 					    		<orange style="color: orange;">회사를 대표할 수 있는 로고 혹은 이미지를 올려 주세요.<br/>기업 정보 및 채용 공고에 보여질 사진입니다.<br/><br/></orange>
 				    		</div>
 				    		
@@ -223,12 +223,11 @@
 						      	<label style="width:100px"><b>비밀번호 찾기 질문:</b></label>
 						      	<c:set var="opt" value="${userPassQu}" />
 						      	<select id="passQ" name="passQ">
-							      	<option value="1"<c:if test="${opt == '1' }">selected</c:if>>기억에 남는 추억은?</option>
-							      	<option value="2"<c:if test="${opt == '2' }">selected</c:if>>자신의 인생 좌우명은 ?</option>
-							      	<option value="3"<c:if test="${opt == '3' }">selected</c:if>>자신의 보물 제 1호는 ?</option>
-							      	<option value="4"<c:if test="${opt == '4' }">selected</c:if>>가장 기억에 남는 선물은 ?</option>
-							      	<option value="5"<c:if test="${opt == '5' }">selected</c:if>>자신의 가장 소중한 친구 이름은 ?</option>
-							      	<option value="6"<c:if test="${opt == '6' }">selected</c:if>>다시 태어나면 되고싶은것은 ?</option>
+							      	<option value="1"<c:if test="${opt == '1' }">selected</c:if>>자신의 인생 좌우명은 ?</option>
+							      	<option value="2"<c:if test="${opt == '2' }">selected</c:if>>자신의 보물 제 1호는 ?</option>
+							      	<option value="3"<c:if test="${opt == '3' }">selected</c:if>>가장 기억에 남는 선물은 ?</option>
+							      	<option value="4"<c:if test="${opt == '4' }">selected</c:if>>자신의 가장 소중한 친구 이름은 ?</option>
+							      	<option value="5"<c:if test="${opt == '5' }">selected</c:if>>다시 태어나면 되고싶은것은 ?</option>
 						      	</select>
 						      	<br><br>
 						      	<label style="width:100px"><b>비밀번호 찾기 답변</b></label> 
@@ -248,24 +247,19 @@
 		 </section>
 
      <script type="text/javascript">
-	     function PicturePopup(){
-	     	var popUrl = "../common/UserPicPopup.jsp";	//팝업창에 출력될 페이지 URL
-	     	var popOption = "width=360, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-	    		window.open(popUrl,"",popOption);
-	     }
-	     
-		function validateEmail(email) {
-			var re = /^([\w-]+(?:.[\w-]+))@((?:[\w-]+.)\w[\w-]{0,66}).([a-z]{2,6}(?:.[a-z]{2})?)$/i;
-			return re.test(email);
-		}
-
+	    function PicturePopup(){
+	    	var popUrl = "../common/UserPicPopup.jsp";	//팝업창에 출력될 페이지 URL
+	    	var popOption = "width=360, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+	   		window.open(popUrl,"",popOption);
+	    }
+		
 		function validatephone(phone) {
 			var regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
 			return regExp.test(phone);
 		}
 		function validatehire(hire) {
-			var pattern = /^(19|20)\d{2}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[0-1])$/;
-			return pattern.test();
+			var pat = /^(19|20)\d{2}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[0-1])$/
+			return pat.test();
 		}
      
 	    $(document).ready(function(){
@@ -393,6 +387,7 @@
 				}
 				if(false==confirm("수정 하시겠습니까?"))return;
 	
+				
 			     $.ajax({
 			         type:"POST", 
 			         url:"infoUpdate.do",

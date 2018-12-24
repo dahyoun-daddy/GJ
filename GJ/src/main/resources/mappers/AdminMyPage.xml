@@ -151,14 +151,18 @@
 			  				</when>
 			  				<when test="3 == searchDiv">
 			  				  WHERE user_id LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<when test="1 == searchDiv">
 			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<when test="2 == searchDiv"> 
 			  				  WHERE user_name LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<otherwise>
+			  				WHERE user_level in (2,3)
 			  				</otherwise>
 			  			</choose>
 						    )T
@@ -176,14 +180,18 @@
 			  				</when>
 			  				<when test="3 == searchDiv">
 			  				  WHERE user_id LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<when test="1 == searchDiv">
 			  				  WHERE user_nick LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<when test="2 == searchDiv"> 
 			  				  WHERE user_name LIKE #{searchWord}||'%'
+			  				  AND user_level in (2,3)
 			  				</when>
 			  				<otherwise>
+			  				WHERE user_level in (2,3)
 			  				</otherwise>
 			  			</choose>
 							)Y

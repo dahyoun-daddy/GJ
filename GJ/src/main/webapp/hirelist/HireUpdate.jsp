@@ -88,15 +88,24 @@
 	  <br>
 	  <div lass="form-group">
 	    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
-	       <button type="submit" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()">취소하기</button>
-	      <button type="submit" class="btn btn-default" id="update" name="update" onclick="update()">수정하기</button>
+	       <input type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="historyBack()" value="취소하기"></input>
+	      <input type="button" class="btn btn-default" id="update" name="update" onclick="update()" value="수정하기"></input>
 	    </div>
 	  </div><br>
 	  </form><br>
+  	  <form id="frm2" name="frm2">
+	</form>
+	
 	
 	<script type="text/javascript">
 		function historyBack() { 
 			window.history.back(); 
+		}
+		
+		function doSearch(){
+			var frm = document.frm2;
+			frm.action="HireList.do";
+			frm.submit();
 		}
 	
 	    $(document).ready(function(){
@@ -108,7 +117,7 @@
 				 console.log("upsert_div:"+upsert_div);
 
 			     $.ajax({
-			         type:"POST",
+			         type:"GET",
 			         url:"HireUpdate.do",
 			         dataType:"html",// JSON
 			         data:{
@@ -120,13 +129,15 @@
 			         	"userId": $("#userId").val(),
 			         	"hireAdd": $("#hireAdd").val(),
 			         	"hireSalary": $("#hireSalary").val(),
-			         	"hireEdu": $("#hireEdu").val()
+			         	"hireEdu": $("#hireEdu").val(),
+			         	"hireNo" : $("#hireNo").val()
 			         },
 			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 			             var parseData = $.parseJSON(data);
 			         	 if(parseData.flag=="1"){
 			         		 alert(parseData.message);
-			         		location.href="HireList.do";
+// 			         		location.href="HireList.do";
+		   		         		doSearch();
 			         	 }else{
 			         		alert(parseData.message);
 			         	 }

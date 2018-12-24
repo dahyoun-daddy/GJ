@@ -161,9 +161,10 @@
 				    		<div id ="profmain">
 					    		<orange style="color: orange;">회사를 대표할 수 있는 로고 혹은 이미지를 올려 주세요.<br/>기업 정보 및 채용 공고에 보여질 사진입니다.<br/><br/></orange>
 				    		</div>
-				    		
+				    		<div align="left" style="width:100%; ">
+							<div class="table-responsive" align="center" style="text-align:left; width:50%;">
 				    		<!-- 가운데로 오게 하려면 text-align center로 주기 -->
-				    		<form id="frm" name="frm">
+				    		<form id="frm" name="frm"><br/>
 						    	<input type="hidden" name="work_div" id="work_div"> 
 					     	  	<label style="width:100px"><b>이메일</b></label>
 					        	<input type="text" name="user_email" value="${userId}" readOnly>
