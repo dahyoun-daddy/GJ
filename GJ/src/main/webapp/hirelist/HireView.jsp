@@ -99,7 +99,10 @@
 	
 	<script type="text/javascript">
 		function toHireList() { 
-			location.href="HireList.do";
+			var frm = document.frm;
+			//var hireNo = document.getElementById("hireNo").value 
+			 frm.action = "HireList.do";
+			 frm.submit();
 		}
 		
 		$(document).ready(function(){
@@ -132,7 +135,7 @@
    		         	var parseData = $.parseJSON(data);
    		         	if(parseData.flag == "1"){
    		         		alert(parseData.msg);
-   		         		doSearch();
+   		         		toHireList();
    		         	}else{
    		         		alert(parseData.msg);
    		         	}

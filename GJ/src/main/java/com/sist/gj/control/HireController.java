@@ -273,7 +273,10 @@ public class HireController {
 			return jsonData;
 			}
 		
-		@RequestMapping(value="/hirelist/HireApply.do")
+		@RequestMapping(value="/hirelist/HireApply.do", produces="application/json;charset=utf8",
+				 method={RequestMethod.GET, RequestMethod.POST}
+	               )		
+			@ResponseBody
 		public String apply(@ModelAttribute ApplyVO invo, HttpSession ses, HttpServletRequest req, Model model) throws Exception {
 			log.info("=====================APPLY=======================");
 			log.info("invo" + invo);
