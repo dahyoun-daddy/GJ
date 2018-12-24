@@ -110,11 +110,12 @@
   						</c:otherwise>
   					</c:choose>
               </tbody>
+              <div class="dorm-inline text-center">
+			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "HireList.do", "searchPage") %>
+			  	</div>
             </table>
             <br><br>
-            <div class="dorm-inline text-center">
-			  		<%=StringUtill.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "HireList.do", "searchPage") %>
-			  </div>
+            
 	<!--// 채용정보 목록 -->
 	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -75,12 +75,14 @@
 		<div class="text-center col-xs-8 col-sm-8 col-md-8 col-lg-8" align="center">
 				<table id="listTable" class="table table-striped table-bordered table-hover" >
 				    					<colgroup>
-								  			<col width="80%"style="background-color: #FFFFFF;"/>
+				    						<col width="20%"style="background-color: #FFFFFF;"/>
+								  			<col width="60%"style="background-color: #FFFFFF;"/>
 								  			<col width="20%"style="background-color: #FFFFFF;"/>
 								  		</colgroup>
 				    	
 				  		<thead class="bg-primary">
-				  		<tr> 
+				  		<tr>
+				  		<th class="text-center " style="background-color: #FACC2E;">회사아이디</th> 
 				       <th class="text-center " style="background-color: #FACC2E;">제목</th>
 						<th class="text-center" style="background-color: #FACC2E;">신고수</th>											
 					</tr>
@@ -90,6 +92,7 @@
 	  						<c:when test="${list.size()>0}">
 	  							<c:forEach var="UserVO" items="${list}">
 	  								<tr id="${UserVO.reviewNo}">
+	  									<td class="text-center"><c:out value="${UserVO.userNick}"/></td>
 	  									<td class="text-center"><c:out value="${UserVO.reviewTitle}"/></td>
 	  									<td class="text-center"><c:out value="${UserVO.reviewComplain}"/></td>
 	  								</tr>
