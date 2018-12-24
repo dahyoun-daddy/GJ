@@ -157,8 +157,11 @@
 			
 			$("#listTable>tbody").on("click","tr",function(){
 				//alert("ready");
+				
 				var clNo = $(this).attr('id');
     			//alert(clNo);
+    			
+    			if(""==clNo || null == clNo)return;
     			
     			if("" == clNo){
     				return;

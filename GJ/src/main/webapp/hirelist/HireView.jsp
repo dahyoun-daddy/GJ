@@ -86,12 +86,11 @@
 		    <br>
 		    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
 		    <input type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="toHireList()" value="목록으로">
-		    <input type="button" class="btn btn-default" id="goUpdate" name="goUpdate" value="수정하기">
 	   	 	<c:set var="LoginId" value="<%=userId%>" />
-          <c:set var="regId" value="${regId}" />
+          <c:set var="regId" value="${userId}" />
             	<c:choose>
             		<c:when test="${LoginId eq regId}">
-            			<textarea class="form-control" id="edit" name="edit" placeholder="Message" rows="5"></textarea>
+            			<input type="button" class="btn btn-default" id="goUpdate" name="goUpdate" value="수정하기">
             		</c:when>
 		    </c:choose>
 		    <input type="button" class="btn btn-default" id="apply" name="apply" value="지원하기">
