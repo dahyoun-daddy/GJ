@@ -43,12 +43,11 @@
 				name="hire" placeholder="ex 1990-05-05"> <br>
 			<br> <label><b>비밀번호 찾기 질문:</b></label> <select id="passQ"
 				name="passQ">
-				<option value="1">기억에 남는 추억은 ?</option>
-				<option value="2">자신의 인생 좌우명은 ?</option>
-				<option value="3">자신의 보물 제 1호는 ?</option>
-				<option value="4">가장 기억에 남는 선물은 ?</option>
-				<option value="5">자신의 가장 소중한 친구 이름은 ?</option>
-				<option value="6">다시 태어나면 되고싶은것은 ?</option>
+				<option value="1">자신의 인생 좌우명은 ?</option>
+				<option value="2">자신의 보물 제 1호는 ?</option>
+				<option value="3">가장 기억에 남는 선물은 ?</option>
+				<option value="4">자신의 가장 소중한 친구 이름은 ?</option>
+				<option value="5">다시 태어나면 되고싶은것은 ?</option>
 			</select> <br>
 			<br> <label><b>비밀번호 찾기 답변</b></label> <input type="text"
 				id="passA" name="passA" placeholder="10글자 이하 입력"> <br>
