@@ -137,7 +137,6 @@
 	}
 
 	function searchPage(url,pageNum){
-		alert("url : "+url+" page_num : "+pageNum);
 		var frm = document.frm;
 		frm.pageNum.value = pageNum;
 		frm.action = url;
