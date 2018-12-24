@@ -112,7 +112,7 @@
 					     <th class="text-center" style="background-color: #FACC2E;">회사명</th>
 						 <th class="text-center" style="background-color: #FACC2E;">대표자</th>
 						<th class="text-center"  style="background-color: #FACC2E;">가입일</th>
-						<th class="text-center"  style="background-color: #FACC2E;">이용가능</th>
+						<th class="text-center"  style="background-color: #FACC2E;">승인여부</th>
 						
 					</tr>
 				</thead>
@@ -230,7 +230,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-lg-4 control-label">이용가능</label>
+					<label class="col-lg-4 control-label">승인여부</label>
 					<div  class="col-lg-3">
 						<select name="userLevel" id="userLevel" class="form-control input-sm">
 							
