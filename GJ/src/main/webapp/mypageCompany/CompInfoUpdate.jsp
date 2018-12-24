@@ -179,7 +179,7 @@
 				    		</div>
 				    		<div id ="profmain">
 				    			<input id="smallBtn" type="button" value="사진 업로드"
-		                   			   onclick="PicturePopup() return false;"><br/><br/>
+		                   			   onclick="PicturePopup1()"><br/><br/>
 					    		<orange style="color: orange;">회사를 대표할 수 있는 로고 혹은 이미지를 올려 주세요.<br/>기업 정보 및 채용 공고에 보여질 사진입니다.<br/><br/></orange>
 				    		</div>
 				    		
@@ -247,7 +247,7 @@
 		 </section>
 
      <script type="text/javascript">
-	    function PicturePopup(){
+	    function PicturePopup1(){
 	    	var popUrl = "../common/UserPicPopup.jsp";	//팝업창에 출력될 페이지 URL
 	    	var popOption = "width=360, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 	   		window.open(popUrl,"",popOption);
@@ -258,8 +258,8 @@
 			return regExp.test(phone);
 		}
 		function validatehire(hire) {
-			var pat = /^(19|20)\d{2}/(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[0-1])$/
-			return pat.test();
+			var pat = /^(19|20)\d{2}\/(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[0-1])$/;
+			return pat.test(hire);
 		}
      
 	    $(document).ready(function(){
