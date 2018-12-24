@@ -17,9 +17,9 @@
   					C.user_nick LIKE '%'||#{searchWord}||'%'
   				</when>
   				<when test="3 == searchDiv">
-  					C.user_nick LIKE '%'||#{searchWord}||'%'
+  					(C.user_nick LIKE '%'||#{searchWord}||'%'
   					OR 
-  					C.cl_title LIKE '%'||#{searchWord}||'%'
+  					C.cl_title LIKE '%'||#{searchWord}||'%')
   					AND
   					C.cl_check = 1
   				</when>
