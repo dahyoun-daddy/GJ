@@ -34,6 +34,7 @@
 			<br><h4 style="text-align:center;">채용공고 상세정보</h4>
 			<input type="hidden" name="hireNo" id="hireNo" value="<%=hireNo%>">
 			<input type="hidden" name="userId" id="userId" value="<%=userId%>">
+			<input type="hidden" name="regId" id="regId" value="${userId}">
 		  <div class="form-group"><br>
 		    <label for="hireTitle" class="col-sm-2 control-label">채용제목</label>
 		    <div class="col-sm-12">
@@ -86,6 +87,13 @@
 		    <div class="col-sm-offset-2 col-sm-12" style="text-align:center;">
 		    <input type="button" class="btn btn-default" id="historyBack" name="historyBack" onclick="toHireList()" value="목록으로">
 		    <input type="button" class="btn btn-default" id="goUpdate" name="goUpdate" value="수정하기">
+	   	 	<c:set var="LoginId" value="<%=userId%>" />
+          <c:set var="regId" value="${regId}" />
+            	<c:choose>
+            		<c:when test="${LoginId eq regId}">
+            			<textarea class="form-control" id="edit" name="edit" placeholder="Message" rows="5"></textarea>
+            		</c:when>
+		    </c:choose>
 		    <input type="button" class="btn btn-default" id="apply" name="apply" value="지원하기">
 		    </div><br>
 	  </form><br>

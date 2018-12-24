@@ -171,6 +171,8 @@ public class HireController {
 		model.addAttribute("hireAdd", outVO.getHireAdd());
 		model.addAttribute("hireSalary", outVO.getHireSalary());
 		model.addAttribute("hireEdu", outVO.getHireEdu());
+		model.addAttribute("userId", outVO.getUserId());
+		
 		
 		return "hirelist/HireView";
 	}
@@ -272,16 +274,18 @@ public class HireController {
 			}
 		
 		@RequestMapping(value="/hirelist/HireApply.do")
-		public String apply(@ModelAttribute ApplyVO invo, HttpServletRequest req, Model model) throws Exception {
+		public String apply(@ModelAttribute ApplyVO invo, HttpSession ses, HttpServletRequest req, Model model) throws Exception {
 			log.info("=====================APPLY=======================");
 			log.info("invo" + invo);
 			
 			int flag = 0;
 			
-			//-----------------------------------
-			//아이디 나중에 세션으로 받기
-			invo.setUserId("boondll@hanmail.net");
-			//-----------------------------------
+			//세션 : 로그인 된 상태에서만 수정가능
+			UserVO sessionVO = (UserVO) ses.getAttribute("loginVo");
+			
+			String loginId = sessionVO.getUserId();
+			invo.setUserId(loginId);
+			//-------------------------------------
 			
 			JSONObject object = new JSONObject();
 			

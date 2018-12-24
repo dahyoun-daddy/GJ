@@ -34,6 +34,7 @@
 	<br><form id="frm" name="frm" class="form-horizontal">
 		<br><h4 style="text-align:center;">채용공고 수정</h4><br>
 		<input type="hidden" name="workDiv" id="workDiv" value="">
+		<input type="hidden" name="regId" id="regId" value="${regId}">
 		<input type="hidden" name="upsert_div" id="upsert_div" value="">
 		<input type="hidden" name="hireNo" id="hireNo" value="${hireNo}">
 	  <div class="form-group">
